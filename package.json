@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsqr": "^1.4.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
