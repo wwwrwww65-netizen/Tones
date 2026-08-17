@@ -339,6 +339,14 @@
                                 <span>اتصال هاتفي</span>
                             </a>
                         </div>
+
+                        <!-- Direct MikroTik Package ZIP Download Button -->
+                        <div style="margin-top: 14px; text-align: center;">
+                            <a href="/download-hotspot" download="mikrotik-hotspot-tunisnet.zip" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 16px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(14, 165, 233, 0.45)); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 12px; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.92rem; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2); transition: all 0.2s ease;">
+                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                                <span>تحميل ملفات المايكروتك كاملة (ZIP)</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Hidden legacy social-login wrapper for compatibility -->
@@ -356,7 +364,7 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
                                 <span>تحديد سرعة الإنترنت</span>
                             </span>
-                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
 
                         <div class="speed-cards-list" id="speedModalList">
@@ -411,7 +419,7 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
                                 <span>مسح رمز QR للكرت</span>
                             </span>
-                            <button class="app-logout modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
                         </div>
                         
                         <div class="qr-scanner-body">
@@ -513,7 +521,7 @@
 
                                 <form id="pointsLoginForm" onsubmit="return false;">
                                     <!-- Login: Phone Number -->
-                                    <div class="input-group-modern" style="margin-top: 14px;">
+                                    <div class="input-group-modern">
                                         <span class="input-label-text">رقم الهاتف (موبايل)</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="رقم الهاتف">
@@ -524,7 +532,7 @@
                                     </div>
 
                                     <!-- Login: Password -->
-                                    <div class="input-group-modern" style="margin-top: 12px;">
+                                    <div class="input-group-modern">
                                         <span class="input-label-text">كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="كلمة المرور">
@@ -543,12 +551,12 @@
                                     </div>
 
                                     <!-- Login Actions -->
-                                    <div class="modal-actions-row" style="margin-top: 18px; display: flex; gap: 10px;">
-                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsLoginBtn" style="flex: 1; margin: 0; min-height: 46px;">
-                                            <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor; margin-left: 6px;"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
+                                    <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
+                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsLoginBtn" style="flex: 1; margin: 0;">
+                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
                                             <span>تسجيل الدخول</span>
                                         </button>
-                                        <button type="button" class="app-logout button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 16px; min-height: 46px;">
+                                        <button type="button" class="button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
                                             إلغاء
                                         </button>
                                     </div>
@@ -574,7 +582,7 @@
 
                                 <form id="pointsSignupForm" onsubmit="return false;">
                                     <!-- Signup: Phone Number -->
-                                    <div class="input-group-modern" style="margin-top: 14px;">
+                                    <div class="input-group-modern">
                                         <span class="input-label-text">رقم الهاتف (موبايل)</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="رقم الهاتف">
@@ -585,7 +593,7 @@
                                     </div>
 
                                     <!-- Signup: Password -->
-                                    <div class="input-group-modern" style="margin-top: 12px;">
+                                    <div class="input-group-modern">
                                         <span class="input-label-text">كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="كلمة المرور">
@@ -599,7 +607,7 @@
                                     </div>
 
                                     <!-- Signup: Confirm Password -->
-                                    <div class="input-group-modern" style="margin-top: 12px;">
+                                    <div class="input-group-modern">
                                         <span class="input-label-text">تأكيد كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="تأكيد كلمة المرور">
@@ -618,12 +626,12 @@
                                     </div>
 
                                     <!-- Signup Actions -->
-                                    <div class="modal-actions-row" style="margin-top: 18px; display: flex; gap: 10px;">
-                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsSignupBtn" style="flex: 1; margin: 0; min-height: 46px;">
-                                            <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor; margin-left: 6px;"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                    <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
+                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsSignupBtn" style="flex: 1; margin: 0;">
+                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                                             <span>إنشاء الحساب والتسجيل</span>
                                         </button>
-                                        <button type="button" class="app-logout button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 16px; min-height: 46px;">
+                                        <button type="button" class="button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
                                             إلغاء
                                         </button>
                                     </div>
@@ -646,7 +654,7 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
                                 <span>أسعار الكروت</span>
                             </span>
-                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
                         <div class="price-div">
                             <div class="wrapper">
@@ -659,7 +667,7 @@
                                     </thead>
                                     <tbody id="profiles"></tbody>
                                 </table>
-                                <button class="app-logout button app-submit">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn">رجوع</button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -677,14 +685,14 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                                 <span>نقاط البيع والتوزيع</span>
                             </span>
-                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
                         <div class="sell-point-div">
                             <div class="wrapper">
                                 <table>
                                     <tbody class="sell-point" id="sell-points"></tbody>
                                 </table>
-                                <button class="app-logout button app-submit">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn">رجوع</button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -702,7 +710,7 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.1 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.1 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
                                 <span>جديدنا والعروض</span>
                             </span>
-                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
                         <div class="price-div">
                             <div class="wrapper">
@@ -718,7 +726,7 @@
                                     <p>استمتع بمشاهدة الاستراحة والبث المباشر للمباريات والدوريات العالمية مجاناً عبر الرابط:</p>
                                     <div class="loan-highlight-badge">t.com</div>
                                 </div>
-                                <button class="app-logout button app-submit">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn">رجوع</button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -736,7 +744,7 @@
                                 <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
                                 <span>تغيير سرعة الإنترنت للكرت</span>
                             </span>
-                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                            <button class="modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
 
                         <div class="speed-cards-list" id="statusSpeedModalList">
@@ -780,7 +788,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="app-logout button app-submit back" style="margin-top: 14px;">إلغاء</button>
+                        <button class="button app-submit modal-cancel-btn back" style="margin-top: 14px;">إلغاء</button>
                     </div>
                 </div>
 
@@ -1211,9 +1219,115 @@
                 startAutoplay();
             }
 
-            // 2. SPEED SELECTOR & MODAL POPUP SYNC
+            // 2. UNIVERSAL MODAL CONTROLLER & POPUP MANAGER
+            window.animating = false;
+
+            function openAppModal(modalId) {
+                window.animating = false;
+                const modal = typeof modalId === 'string' ? document.getElementById(modalId) : modalId;
+                if (!modal) return;
+
+                // Close any other open modals
+                document.querySelectorAll('.app.active').forEach(m => {
+                    if (m !== modal && m.id !== 'status') {
+                        m.classList.remove('active');
+                        m.style.display = 'none';
+                    }
+                });
+
+                const isStatusActive = document.getElementById('status')?.classList.contains('active');
+                const loginEl = document.getElementById('login');
+                if (!isStatusActive && loginEl) {
+                    loginEl.classList.add('inactive');
+                    loginEl.style.display = 'none';
+                }
+
+                modal.style.display = 'block';
+                // Trigger reflow for CSS transition
+                void modal.offsetWidth;
+                modal.classList.add('active');
+            }
+
+            function closeAppModal(modalOrId) {
+                window.animating = false;
+                let target = null;
+                if (typeof modalOrId === 'string') {
+                    target = document.getElementById(modalOrId);
+                } else if (modalOrId instanceof HTMLElement) {
+                    target = modalOrId;
+                }
+
+                if (target) {
+                    target.classList.remove('active');
+                    setTimeout(() => {
+                        if (!target.classList.contains('active')) {
+                            target.style.display = 'none';
+                        }
+                    }, 180);
+                    if (target.id === 'qr-scanner-modal' && typeof stopCamera === 'function') {
+                        stopCamera();
+                    }
+                } else {
+                    document.querySelectorAll('.app.active').forEach(m => {
+                        if (m.id !== 'status') {
+                            m.classList.remove('active');
+                            setTimeout(() => {
+                                if (!m.classList.contains('active')) {
+                                    m.style.display = 'none';
+                                }
+                            }, 180);
+                        }
+                    });
+                }
+
+                const isStatusActive = document.getElementById('status')?.classList.contains('active');
+                const loginEl = document.getElementById('login');
+                if (!isStatusActive && loginEl) {
+                    loginEl.style.display = 'block';
+                    loginEl.style.visibility = 'visible';
+                    loginEl.classList.remove('inactive');
+                }
+            }
+
+            // Expose globally for legacy/inline scripts
+            window.openAppModal = openAppModal;
+            window.closeAppModal = closeAppModal;
+
+            // Universal Click Handler for All Modal Close & Cancel Buttons
+            document.addEventListener('click', function(e) {
+                const closeTrigger = e.target.closest('.modal-close-btn, .modal-cancel-btn, .back, button[data-modal-close]');
+                if (closeTrigger) {
+                    const parentApp = closeTrigger.closest('.app');
+                    if (parentApp && parentApp.id !== 'status') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        closeAppModal(parentApp);
+                        return;
+                    }
+                }
+                
+                // Clicking on dark backdrop outside modal card
+                if (e.target.classList && e.target.classList.contains('app') && e.target.classList.contains('active') && e.target.id !== 'status') {
+                    e.preventDefault();
+                    closeAppModal(e.target);
+                }
+            }, true);
+
+            // Modal Trigger Buttons (parent-id and dedicated IDs)
+            document.querySelectorAll('button[parent-id], [data-open-modal]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const parentId = this.getAttribute('parent-id') || this.getAttribute('data-open-modal');
+                    if (parentId && parentId !== 'status') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openAppModal(parentId);
+                    }
+                }, true);
+            });
+
+            // 3. SPEED SELECTOR & MODAL POPUP SYNC (LOGIN SCREEN)
             const speedSelect = document.getElementById('speed');
-            const speedCards = document.querySelectorAll('.speed-card-option');
+            const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
             const speedLabelMap = {
@@ -1239,18 +1353,21 @@
 
             if (speedCards.length > 0) {
                 speedCards.forEach(card => {
-                    card.addEventListener('click', function() {
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const val = this.getAttribute('data-speed');
-                        updateSpeedSelection(val);
+                        const speedTitle = this.getAttribute('data-speed-title') || speedLabelMap[val] || val;
                         
-                        // Close speed modal and return to login after smooth micro-feedback
+                        updateSpeedSelection(val);
+                        if (selectedSpeedDisplay) {
+                            selectedSpeedDisplay.textContent = speedTitle;
+                        }
+
+                        // Close speed modal and return smoothly to login view
                         setTimeout(() => {
-                            const speedModal = document.getElementById('speed-modal');
-                            if (speedModal) {
-                                const closeBtn = speedModal.querySelector('.app-logout');
-                                if (closeBtn) closeBtn.click();
-                            }
-                        }, 220);
+                            closeAppModal('speed-modal');
+                        }, 180);
                     });
                 });
 
@@ -1267,7 +1384,7 @@
                 }
             }
 
-            // 3. UPDATES BLOCKER TOGGLE STATUS TEXT
+            // 4. UPDATES BLOCKER TOGGLE STATUS TEXT (LOGIN SCREEN)
             const chUpdate = document.getElementById('chupdate');
             const updateStatusText = document.getElementById('updateStatusText');
             if (chUpdate && updateStatusText) {
@@ -1284,15 +1401,20 @@
                 updateToggleState();
             }
 
-            // 4. STATUS SCREEN: SPEED MODAL HANDLER
-            const statusSpeedCards = document.querySelectorAll('[data-status-speed]');
+            // 5. STATUS SCREEN: SPEED MODAL HANDLER (LIVE CONNECTION SPEED CHANGE)
+            const statusSpeedCards = document.querySelectorAll('#status-speed-modal .speed-card-option');
             const statusSpeedTriggerText = document.getElementById('statusSpeedTriggerText');
             if (statusSpeedCards.length > 0) {
                 statusSpeedCards.forEach(card => {
-                    card.addEventListener('click', function() {
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
                         const val = this.getAttribute('data-status-speed');
                         const speedTitle = this.getAttribute('data-speed-title');
                         const speedchange = document.getElementById('speedchange');
+
+                        statusSpeedCards.forEach(c => c.classList.toggle('active', c === this));
+
                         if (statusSpeedTriggerText && speedTitle) {
                             statusSpeedTriggerText.textContent = speedTitle;
                         }
@@ -1301,22 +1423,15 @@
                             const ev = new Event('change', { bubbles: true });
                             speedchange.dispatchEvent(ev);
                         }
+
                         setTimeout(() => {
-                            const modal = document.getElementById('status-speed-modal');
-                            if (modal) {
-                                const closeBtn = modal.querySelector('.app-logout');
-                                if (closeBtn) closeBtn.click();
-                                else {
-                                    modal.classList.remove('active');
-                                    modal.style.display = 'none';
-                                }
-                            }
-                        }, 220);
+                            closeAppModal('status-speed-modal');
+                        }, 180);
                     });
                 });
             }
 
-            // 5. STATUS SCREEN: UPDATES BLOCKER TOGGLE (Identical to Login Screen)
+            // 6. STATUS SCREEN: UPDATES BLOCKER TOGGLE (Identical to Login Screen)
             const statusChupdate = document.getElementById('statusChupdate');
             const statusUpdateStatusText = document.getElementById('statusUpdateStatusText');
             const updatechange = document.getElementById('updatechange');
@@ -1579,26 +1694,28 @@
                 });
             }
 
-            // 7. BOTTOM NAV - HOME BUTTON
+            // 7. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
             const navHome = document.getElementById('navHome');
             if (navHome) {
-                navHome.addEventListener('click', function() {
-                    const activeApps = document.querySelectorAll('.app.active');
-                    activeApps.forEach(app => {
-                        const logoutBtn = app.querySelector('.app-logout');
-                        if (logoutBtn) logoutBtn.click();
-                        else {
-                            app.classList.remove('active');
-                            app.style.display = 'none';
-                        }
-                    });
-                    const loginScreen = document.getElementById('login');
-                    if (loginScreen) {
-                        loginScreen.style.display = 'block';
-                        loginScreen.classList.remove('inactive');
-                    }
+                navHome.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+                    navHome.classList.add('active');
+                    closeAppModal();
                 });
             }
+
+            document.querySelectorAll('.nav-item-btn[parent-id]').forEach(navBtn => {
+                navBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const pid = this.getAttribute('parent-id');
+                    if (pid) {
+                        openAppModal(pid);
+                    }
+                });
+            });
 
             // 4. QR CODE CAMERA SCANNER ENGINE
             const qrScannerModal = document.getElementById('qr-scanner-modal');
