@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title data-network-name>شبكة{{network-name}} اللاسلكيه</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
     <meta name="theme-color" content="#090d16">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
     <link rel="stylesheet" href="css/style.min.css">
     <style>
@@ -128,7 +131,7 @@
                                 </svg>
                             </div>
                             <div class="brand-info">
-                                <span class="brand-name">شبكة تونس نت اللاسلكية</span>
+                                <span class="brand-name" data-network-name>{{network-name}}</span>
                             </div>
                         </div>
 
@@ -139,7 +142,9 @@
                         </button>
                     </header>
 
-                    <!-- Modern CSS Keyframes Ticker / News Bar -->
+                    <!-- ========================================================================= -->
+                    <!-- الشريط الإخباري المتحرك (يبدأ فارغاً ثم يتدفق النص من اليسار إلى اليمين) -->
+                    <!-- ========================================================================= -->
                     <section class="section">
                         <div class="ticker-container">
                             <div class="ticker-content-track">
@@ -147,6 +152,7 @@
                             </div>
                         </div>
                     </section>
+
 
                     <!-- Main Welcome Title -->
                     <h1>مرحبا بك في شبكة تونس نت الاسلكيه</h1>
@@ -156,25 +162,25 @@
                         <div class="carousel-container" id="adCarousel">
                             <div class="carousel-track" id="carouselTrack">
                                 <div class="carousel-slide">
-                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1">
+                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2">
+                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3">
+                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4">
+                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5">
+                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6">
+                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7">
+                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7" loading="lazy" decoding="async">
                                 </div>
                             </div>
                             <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="السابق">❮</button>
@@ -265,12 +271,12 @@
                             <div class="input-group-modern">
                                 <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
                                 <div class="input-wrapper-glass">
-                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn" parent-id="qr-scanner-modal" title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
+                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn" title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
                                         <svg viewBox="0 0 24 24" class="camera-icon-svg">
                                             <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
                                         </svg>
                                     </button>
-                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا" username-field improve-input autocomplete="off">
+                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا" username-field improve-input autocomplete="off" enterkeyhint="go" inputmode="text">
                                     
                                     <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
                                     <div class="input-inner-actions">
@@ -437,8 +443,20 @@
 
                                 <div class="qr-camera-error" id="qrCameraError" style="display: none;">
                                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                    <p id="qrCameraErrorText">يرجى السماح بالوصول إلى الكاميرا لمسح الكود</p>
-                                    <button type="button" class="button" id="qrRetryCamBtn" style="margin-top: 10px; font-size: 0.85rem; padding: 6px 14px;">إعادة المحاولة</button>
+                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا الهاتف مباشرة عبر الزر أدناه.</p>
+                                    
+                                    <div style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
+                                        <!-- Native System Camera Button (bypasses browser permission block) -->
+                                        <button type="button" class="button" id="qrSystemCamFallbackBtn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+                                            <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+                                            <span>📷 مسح بكاميرا الهاتف البديلة</span>
+                                        </button>
+
+                                        <button type="button" class="button" id="qrRetryCamBtn" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة محاولة الكاميرا الحية</button>
+                                    </div>
+                                    
+                                    <!-- Hidden System Camera Capture Input -->
+                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment" style="display: none;">
                                 </div>
                             </div>
 
@@ -706,6 +724,9 @@
                         </div>
                         <div class="price-div">
                             <div class="wrapper">
+                                <!-- ========================================================================= -->
+                                <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن -->
+                                <!-- ========================================================================= -->
                                 <div class="loan-body">
                                     <p style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">زبائننا الكرام</p>
                                     <p>صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة جيب</strong></p>
@@ -718,6 +739,8 @@
                                     <p>استمتع بمشاهدة الاستراحة والبث المباشر للمباريات والدوريات العالمية مجاناً عبر الرابط:</p>
                                     <div class="loan-highlight-badge">t.com</div>
                                 </div>
+                                <!-- ========================================================================= -->
+
                                 <button class="button app-submit modal-cancel-btn">رجوع</button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
@@ -810,11 +833,14 @@
                             </p>
                         </div>
 
-                        <!-- Modern CSS Keyframes Ticker / News Bar in Status -->
+                        <!-- Modern Ticker / News Bar in Status -->
                         <section class="section" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="ticker-container">
                                 <div class="ticker-content-track">
-                                    <p class="marquee" data-news-line>{{news-line}}</p>
+                                    <div class="ticker-track">
+                                        <span class="ticker-item" data-news-line>{{news-line}}</span>
+                                        <span class="ticker-item" data-news-line>{{news-line}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -929,11 +955,11 @@
 
                         <!-- Session Action Controls -->
                         <div class="status-actions-row">
-                            <button class="btn-danger-glass login-submit app-logout" erase-cookie clear-hot-cookie type="button">
+                            <button class="btn-danger-glass app-logout" erase-cookie clear-hot-cookie type="button">
                                 <svg viewBox="0 0 24 24" class="action-btn-icon"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
                                 <span>تسجيل الخروج</span>
                             </button>
-                            <button class="btn-danger-glass login-submit app-logout" type="button">
+                            <button class="btn-secondary-glass app-logout" type="button">
                                 <svg viewBox="0 0 24 24" class="action-btn-icon"><path d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z"/></svg>
                                 <span>قطع الاتصال</span>
                             </button>
@@ -1058,12 +1084,12 @@
     <span style="display: none;" id="winmsg"></span>
 
     <!-- Hotspot System Scripts -->
+    <script src="js/jsqr.min.js"></script>
     <script src="js/init.min.js"></script>
     <script src="js/hotInImprover.min.js"></script>
     <script src="js/hotCookie.min.js"></script>
     <script src="js/hotOptions.min.js"></script>
     <script src="js/hotBlocker.min.js"></script>
-    <script src="js/jsqr.min.js"></script>
     <script src="js/main.min.js"></script>
 
     <!-- 2026 Interactive Enhancements & Swipe Gestures -->
@@ -1231,13 +1257,17 @@
                 const loginEl = document.getElementById('login');
                 if (!isStatusActive && loginEl) {
                     loginEl.classList.add('inactive');
-                    loginEl.style.display = 'none';
                 }
 
                 modal.style.display = 'block';
                 // Trigger reflow for CSS transition
                 void modal.offsetWidth;
                 modal.classList.add('active');
+
+                // If opening QR scanner modal, start camera immediately
+                if (modal.id === 'qr-scanner-modal' && typeof window.startCamera === 'function') {
+                    window.startCamera();
+                }
             }
 
             function closeAppModal(modalOrId) {
@@ -1256,8 +1286,8 @@
                             target.style.display = 'none';
                         }
                     }, 180);
-                    if (target.id === 'qr-scanner-modal' && typeof stopCamera === 'function') {
-                        stopCamera();
+                    if (target.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
+                        window.stopCamera();
                     }
                 } else {
                     document.querySelectorAll('.app.active').forEach(m => {
@@ -1268,6 +1298,9 @@
                                     m.style.display = 'none';
                                 }
                             }, 180);
+                            if (m.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
+                                window.stopCamera();
+                            }
                         }
                     });
                 }
@@ -1308,6 +1341,7 @@
             // Modal Trigger Buttons (parent-id and dedicated IDs)
             document.querySelectorAll('button[parent-id], [data-open-modal]').forEach(btn => {
                 btn.addEventListener('click', function(e) {
+                    if (this.id === 'openQrScannerBtn') return; // Handled specifically with direct camera start
                     const parentId = this.getAttribute('parent-id') || this.getAttribute('data-open-modal');
                     if (parentId && parentId !== 'status') {
                         e.preventDefault();
@@ -1396,6 +1430,8 @@
             // 5. STATUS SCREEN: SPEED MODAL HANDLER (LIVE CONNECTION SPEED CHANGE)
             const statusSpeedCards = document.querySelectorAll('#status-speed-modal .speed-card-option');
             const statusSpeedTriggerText = document.getElementById('statusSpeedTriggerText');
+            const sspeedSpan = document.getElementById('sspeed');
+
             if (statusSpeedCards.length > 0) {
                 statusSpeedCards.forEach(card => {
                     card.addEventListener('click', function(e) {
@@ -1421,6 +1457,29 @@
                         }, 180);
                     });
                 });
+
+                // Synchronize trigger text and active speed card when sspeed updates from MikroTik
+                if (sspeedSpan) {
+                    const syncSpeedFromMikrotik = () => {
+                        const txt = (sspeedSpan.innerText || sspeedSpan.textContent || '').trim();
+                        if (txt && txt !== 'سرعة الكرت') {
+                            if (statusSpeedTriggerText) {
+                                statusSpeedTriggerText.textContent = txt;
+                            }
+                            statusSpeedCards.forEach(card => {
+                                const cardTitle = card.getAttribute('data-speed-title') || '';
+                                if (cardTitle && (txt.includes(cardTitle) || cardTitle.includes(txt))) {
+                                    card.classList.add('active');
+                                } else {
+                                    card.classList.remove('active');
+                                }
+                            });
+                        }
+                    };
+                    const speedObserver = new MutationObserver(syncSpeedFromMikrotik);
+                    speedObserver.observe(sspeedSpan, { childList: true, characterData: true, subtree: true });
+                    syncSpeedFromMikrotik();
+                }
             }
 
             // 6. STATUS SCREEN: UPDATES BLOCKER TOGGLE (Identical to Login Screen)
@@ -1430,7 +1489,9 @@
             const updateSpan = document.getElementById('update');
 
             if (statusChupdate && statusUpdateStatusText) {
+                let isSyncing = false;
                 const updateStatusToggleState = (triggerChange = false) => {
+                    if (isSyncing) return;
                     if (statusChupdate.checked) {
                         statusUpdateStatusText.textContent = 'مفعل';
                         statusUpdateStatusText.classList.add('active');
@@ -1451,12 +1512,12 @@
                 };
 
                 statusChupdate.addEventListener('change', () => updateStatusToggleState(true));
-                updateStatusToggleState(false);
 
                 // Live Sync with MikroTik status query updates
                 if (updateSpan) {
                     const syncFromMikrotik = () => {
                         const text = (updateSpan.innerText || updateSpan.textContent || '').trim();
+                        isSyncing = true;
                         if (text.includes('أيقاف') || text.includes('ايقاف') || text.includes('Uoff')) {
                             statusChupdate.checked = true;
                             statusUpdateStatusText.textContent = 'مفعل';
@@ -1466,6 +1527,7 @@
                             statusUpdateStatusText.textContent = 'متوقف';
                             statusUpdateStatusText.classList.remove('active');
                         }
+                        isSyncing = false;
                     };
 
                     const observer = new MutationObserver(syncFromMikrotik);
@@ -1709,7 +1771,7 @@
                 });
             });
 
-            // 4. QR CODE CAMERA SCANNER ENGINE
+            // 4. QR CODE CAMERA SCANNER ENGINE (2026 ULTRA-COMPATIBLE ENGINE)
             const qrScannerModal = document.getElementById('qr-scanner-modal');
             const openQrBtn = document.getElementById('openQrScannerBtn');
             const qrVideo = document.getElementById('qrVideo');
@@ -1760,7 +1822,7 @@
 
             function extractCardNumberFromQR(raw) {
                 if (!raw) return '';
-                raw = raw.trim();
+                raw = String(raw).trim();
                 
                 // 1. Check if URL
                 if (raw.startsWith('http://') || raw.startsWith('https://')) {
@@ -1797,6 +1859,47 @@
                 return raw;
             }
 
+            function ensureJsQr() {
+                if (typeof window.jsQR === 'function' || barcodeDetectorInstance) {
+                    return Promise.resolve();
+                }
+                return new Promise(function(resolve) {
+                    var s = document.createElement('script');
+                    s.src = 'js/jsqr.min.js';
+                    s.async = true;
+                    s.onload = resolve;
+                    s.onerror = resolve;
+                    document.head.appendChild(s);
+                });
+            }
+
+            // Universal media stream acquisition with progressive degradation
+            async function requestCameraStream(facing) {
+                const constraintTiers = [
+                    { video: { facingMode: { ideal: facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false },
+                    { video: { facingMode: facing }, audio: false },
+                    { video: { facingMode: (facing === 'environment' ? 'user' : 'environment') }, audio: false },
+                    { video: true, audio: false }
+                ];
+
+                const modernApi = navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function';
+
+                for (let i = 0; i < constraintTiers.length; i++) {
+                    try {
+                        if (modernApi) {
+                            return await navigator.mediaDevices.getUserMedia(constraintTiers[i]);
+                        }
+                        const legacyGUM = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                        if (legacyGUM) {
+                            return await new Promise((res, rej) => legacyGUM.call(navigator, constraintTiers[i], res, rej));
+                        }
+                    } catch (err) {
+                        if (i === constraintTiers.length - 1) throw err;
+                    }
+                }
+                throw new Error('متصفحك لا يدعم الوصول المباشر للكاميرا');
+            }
+
             async function startCamera() {
                 stopCamera();
                 if (qrLoading) qrLoading.style.display = 'flex';
@@ -1805,62 +1908,102 @@
                 if (qrStatusText) qrStatusText.textContent = 'وجه الكاميرا نحو رمز QR على الكرت';
                 isScanningActive = true;
 
-                try {
-                    const constraints = {
-                        video: {
-                            facingMode: currentFacingMode,
-                            width: { ideal: 1280 },
-                            height: { ideal: 720 }
-                        },
-                        audio: false
-                    };
+                // Load jsQR in background without delaying camera permission prompt
+                ensureJsQr().catch(() => {});
 
-                    qrMediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+                try {
+                    qrMediaStream = await requestCameraStream(currentFacingMode);
+
                     if (qrVideo) {
+                        qrVideo.muted = true;
+                        qrVideo.playsInline = true;
+                        qrVideo.setAttribute('playsinline', 'true');
+                        qrVideo.setAttribute('webkit-playsinline', 'true');
+                        qrVideo.setAttribute('muted', 'true');
+                        qrVideo.setAttribute('autoplay', 'true');
                         qrVideo.srcObject = qrMediaStream;
-                        await qrVideo.play();
+
+                        // Ensure video starts playing smoothly
+                        qrVideo.onloadedmetadata = function() {
+                            qrVideo.play().catch(function(e) {
+                                console.warn('Autoplay caught:', e);
+                            });
+                            if (qrLoading) qrLoading.style.display = 'none';
+                        };
+
+                        const playPromise = qrVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                if (qrLoading) qrLoading.style.display = 'none';
+                            }).catch(function(e) {
+                                console.warn('Autoplay caught:', e);
+                            });
+                        }
+
+                        qrVideo.onloadeddata = function() {
+                            if (qrLoading) qrLoading.style.display = 'none';
+                        };
                     }
 
-                    if (qrLoading) qrLoading.style.display = 'none';
+                    // Failsafe timeout to hide loading spinner
+                    setTimeout(() => {
+                        if (qrLoading && isScanningActive) {
+                            qrLoading.style.display = 'none';
+                        }
+                    }, 400);
 
                     // Check torch capability
-                    const track = qrMediaStream.getVideoTracks()[0];
-                    if (track && track.getCapabilities && typeof track.getCapabilities === 'function') {
-                        const capabilities = track.getCapabilities();
-                        if (capabilities && capabilities.torch && qrTorchBtn) {
-                            qrTorchBtn.style.display = 'inline-flex';
-                        } else if (qrTorchBtn) {
-                            qrTorchBtn.style.display = 'none';
+                    try {
+                        const track = qrMediaStream.getVideoTracks()[0];
+                        if (track && track.getCapabilities && typeof track.getCapabilities === 'function') {
+                            const capabilities = track.getCapabilities();
+                            if (capabilities && capabilities.torch && qrTorchBtn) {
+                                qrTorchBtn.style.display = 'inline-flex';
+                            } else if (qrTorchBtn) {
+                                qrTorchBtn.style.display = 'none';
+                            }
                         }
-                    }
+                    } catch (e) {}
 
                     // Start Scan Loop
                     requestAnimationFrame(scanVideoFrame);
 
                 } catch (err) {
-                    console.error('Camera access error:', err);
+                    console.warn('Camera access status:', err ? (err.message || err.name || err) : 'Error');
                     if (qrLoading) qrLoading.style.display = 'none';
                     if (qrError) {
                         qrError.style.display = 'flex';
                         if (qrErrorText) {
-                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                                qrErrorText.textContent = 'تم رفض الإذن للكاميرا. يرجى تفعيل إذن الكاميرا من إعدادات المتصفح.';
-                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-                                qrErrorText.textContent = 'لم يتم العثور على كاميرا في هذا الجهاز.';
+                            const errMsg = (err && (err.message || err.name)) ? String(err.message || err.name).toLowerCase() : '';
+                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError' || errMsg.includes('permission') || errMsg.includes('denied') || errMsg.includes('notallowed')) {
+                                qrErrorText.textContent = 'تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا ثم النقر على إعادة المحاولة.';
+                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError' || errMsg.includes('notfound')) {
+                                qrErrorText.textContent = 'لم يتم العثور على جهاز كاميرا متصل.';
                             } else {
-                                qrErrorText.textContent = 'تعذر تشغيل الكاميرا: ' + (err.message || 'خطأ غير معروف');
+                                qrErrorText.textContent = 'تعذر تشغيل الكاميرا حالياً. يرجى التأكد من صلاحيات المتصفح ثم إعادة المحاولة.';
                             }
                         }
                     }
                 }
             }
 
+            // Expose globally
+            window.startCamera = startCamera;
+            window.stopCamera = stopCamera;
+
             async function scanVideoFrame() {
-                if (!isScanningActive || !qrVideo || qrVideo.readyState !== qrVideo.HAVE_ENOUGH_DATA) {
+                if (!isScanningActive || !qrVideo) return;
+
+                if (qrVideo.readyState < 2) {
                     if (isScanningActive) {
                         qrAnimationId = requestAnimationFrame(scanVideoFrame);
                     }
                     return;
+                }
+
+                // If loading is still visible, hide it now
+                if (qrLoading && qrLoading.style.display !== 'none') {
+                    qrLoading.style.display = 'none';
                 }
 
                 let detectedCode = null;
@@ -1875,21 +2018,25 @@
                     } catch (e) {}
                 }
 
-                // Priority 2: jsQR Canvas Decoding (Offline captive portal safe)
-                if (!detectedCode && typeof window.jsQR === 'function' && qrCanvas) {
-                    const ctx = qrCanvas.getContext('2d', { willReadFrequently: true });
-                    if (ctx) {
-                        qrCanvas.width = qrVideo.videoWidth || 640;
-                        qrCanvas.height = qrVideo.videoHeight || 480;
-                        ctx.drawImage(qrVideo, 0, 0, qrCanvas.width, qrCanvas.height);
-                        const imageData = ctx.getImageData(0, 0, qrCanvas.width, qrCanvas.height);
-                        const code = window.jsQR(imageData.data, imageData.width, imageData.height, {
-                            inversionAttempts: "dontInvert"
-                        });
-                        if (code && code.data) {
-                            detectedCode = code.data;
+                // Priority 2: jsQR Canvas Decoding (Fast captive portal safe engine)
+                if (!detectedCode && typeof window.jsQR === 'function' && qrCanvas && qrVideo.videoWidth > 0) {
+                    try {
+                        const ctx = qrCanvas.getContext('2d', { willReadFrequently: true });
+                        if (ctx) {
+                            const w = Math.min(qrVideo.videoWidth, 640);
+                            const h = Math.round(w * (qrVideo.videoHeight / qrVideo.videoWidth));
+                            qrCanvas.width = w;
+                            qrCanvas.height = h;
+                            ctx.drawImage(qrVideo, 0, 0, w, h);
+                            const imageData = ctx.getImageData(0, 0, w, h);
+                            const code = window.jsQR(imageData.data, imageData.width, imageData.height, {
+                                inversionAttempts: "dontInvert"
+                            });
+                            if (code && code.data) {
+                                detectedCode = code.data;
+                            }
                         }
-                    }
+                    } catch (e) {}
                 }
 
                 if (detectedCode) {
@@ -1934,7 +2081,6 @@
                         const logoutBtn = qrScannerModal ? qrScannerModal.querySelector('.app-logout') : null;
                         if (logoutBtn) logoutBtn.click();
                     }
-                    if (usernameInput) usernameInput.focus();
                 }, 600);
             }
 
@@ -1957,11 +2103,17 @@
                 if (qrTorchText) qrTorchText.textContent = 'الكشاف';
             }
 
-            // Open QR Scanner button click
+            // Open QR Scanner button click & immediate camera initialization
             if (openQrBtn) {
-                openQrBtn.addEventListener('click', function() {
+                const handleOpenQr = function(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    openAppModal('qr-scanner-modal');
                     startCamera();
-                });
+                };
+                openQrBtn.addEventListener('click', handleOpenQr);
             }
 
             // Switch Camera
@@ -1989,6 +2141,101 @@
                         } catch (e) {
                             console.error('Torch error:', e);
                         }
+                    }
+                });
+            }
+
+            // System Camera Capture Fallback elements
+            const qrSystemCamFallbackBtn = document.getElementById('qrSystemCamFallbackBtn');
+            const qrSystemCameraInput = document.getElementById('qrSystemCameraInput');
+
+            // Decode QR Code from Native Camera Snapshot
+            async function decodeQrFromImageFile(file) {
+                if (!file) return;
+                if (qrLoading) {
+                    qrLoading.style.display = 'flex';
+                    const span = qrLoading.querySelector('span');
+                    if (span) span.textContent = 'جاري قراءة رمز الكرت...';
+                }
+                if (qrError) qrError.style.display = 'none';
+
+                await ensureJsQr();
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = async function() {
+                        let detectedCode = null;
+
+                        // Native Hardware detector check
+                        if (barcodeDetectorInstance) {
+                            try {
+                                const barcodes = await barcodeDetectorInstance.detect(img);
+                                if (barcodes && barcodes.length > 0) {
+                                    detectedCode = barcodes[0].rawValue;
+                                }
+                            } catch (err) {}
+                        }
+
+                        // jsQR Canvas decode
+                        if (!detectedCode && typeof window.jsQR === 'function') {
+                            const c = qrCanvas || document.createElement('canvas');
+                            const ctx = c.getContext('2d', { willReadFrequently: true });
+                            let maxDim = 1200;
+                            let w = img.naturalWidth || img.width;
+                            let h = img.naturalHeight || img.height;
+                            if (w > maxDim || h > maxDim) {
+                                if (w > h) {
+                                    h = Math.round((h * maxDim) / w);
+                                    w = maxDim;
+                                } else {
+                                    w = Math.round((w * maxDim) / h);
+                                    h = maxDim;
+                                }
+                            }
+                            c.width = w;
+                            c.height = h;
+                            ctx.drawImage(img, 0, 0, w, h);
+                            const imgData = ctx.getImageData(0, 0, w, h);
+                            const code = window.jsQR(imgData.data, imgData.width, imgData.height, {
+                                inversionAttempts: "attemptBoth"
+                            });
+                            if (code && code.data) {
+                                detectedCode = code.data;
+                            }
+                        }
+
+                        if (qrLoading) qrLoading.style.display = 'none';
+
+                        if (detectedCode) {
+                            handleSuccessfulQrScan(detectedCode);
+                        } else {
+                            if (qrError) {
+                                qrError.style.display = 'flex';
+                                if (qrErrorText) {
+                                    qrErrorText.textContent = 'لم يتم العثور على رمز QR واضح في الصورة الملتقطة. يرجى إعادة الالتقاط والتركيز على الكرت.';
+                                }
+                            }
+                        }
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Fallback Native Camera button trigger
+            if (qrSystemCamFallbackBtn && qrSystemCameraInput) {
+                qrSystemCamFallbackBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    qrSystemCameraInput.click();
+                });
+            }
+
+            if (qrSystemCameraInput) {
+                qrSystemCameraInput.addEventListener('change', function(e) {
+                    if (e.target.files && e.target.files[0]) {
+                        decodeQrFromImageFile(e.target.files[0]);
                     }
                 });
             }
@@ -2080,7 +2327,6 @@
                             usernameInput.value = selectedCard;
                             usernameInput.dispatchEvent(new Event('input', { bubbles: true }));
                             usernameInput.dispatchEvent(new Event('change', { bubbles: true }));
-                            usernameInput.focus();
                         }
 
                         // Success button feedback
@@ -2104,13 +2350,34 @@
                 });
             }
 
-            // Save entered username to localStorage for persistent convenience
+            // Save entered username to stored history and localStorage
             const usernameInputField = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
             if (usernameInputField) {
-                usernameInputField.addEventListener('blur', function() {
-                    if (this.value && this.value.trim().length > 1) {
+                const persistCard = function() {
+                    const val = usernameInputField.value ? usernameInputField.value.trim() : '';
+                    if (val.length > 1) {
                         try {
-                            localStorage.setItem('last_user_card', this.value.trim());
+                            localStorage.setItem('last_user_card', val);
+                            if (typeof saveValueToCookie === 'function') {
+                                saveValueToCookie(val, '');
+                            }
+                        } catch (err) {}
+                    }
+                };
+                usernameInputField.addEventListener('blur', persistCard);
+                usernameInputField.addEventListener('change', persistCard);
+            }
+
+            if (document.login) {
+                document.login.addEventListener('submit', function() {
+                    const uInput = document.login.querySelector('input[username-field]') || document.querySelector('input[name="username"]');
+                    if (uInput && uInput.value && uInput.value.trim().length > 1) {
+                        try {
+                            const val = uInput.value.trim();
+                            localStorage.setItem('last_user_card', val);
+                            if (typeof saveValueToCookie === 'function') {
+                                saveValueToCookie(val, '');
+                            }
                         } catch (err) {}
                     }
                 });
@@ -2162,6 +2429,132 @@
                 });
                 observer.observe(toastContainer, { attributes: true, attributeFilter: ['class'] });
             }
+
+            // 8. MOBILE KEYBOARD DETECTION: PREVENT BOTTOM BAR FROM RISING ABOVE KEYBOARD
+            const bNav = document.getElementById('bottomNav');
+            let keyboardTimer = null;
+
+            function hideBottomNavOnKeyboard() {
+                clearTimeout(keyboardTimer);
+                document.body.classList.add('keyboard-open');
+                if (bNav) {
+                    bNav.classList.add('hidden-keyboard');
+                }
+            }
+
+            function restoreBottomNavOnBlur() {
+                clearTimeout(keyboardTimer);
+                keyboardTimer = setTimeout(() => {
+                    const activeElement = document.activeElement;
+                    const isFormInput = activeElement && (
+                        activeElement.tagName === 'INPUT' || 
+                        activeElement.tagName === 'SELECT' || 
+                        activeElement.tagName === 'TEXTAREA' ||
+                        activeElement.isContentEditable
+                    );
+                    
+                    if (!isFormInput) {
+                        document.body.classList.remove('keyboard-open');
+                        if (bNav) {
+                            bNav.classList.remove('hidden-keyboard');
+                        }
+                    }
+                }, 120);
+            }
+
+            // Listen to focus / blur globally across all current and dynamic inputs
+            document.addEventListener('focusin', function(e) {
+                if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+                    hideBottomNavOnKeyboard();
+                }
+            });
+
+            document.addEventListener('focusout', function(e) {
+                restoreBottomNavOnBlur();
+            });
+
+            // Handle visual viewport shrink (Android & iOS virtual keyboard open/close)
+            if (window.visualViewport) {
+                const originalVpHeight = window.visualViewport.height;
+                window.visualViewport.addEventListener('resize', function() {
+                    const currentHeight = window.visualViewport.height;
+                    // If viewport height drops significantly, virtual keyboard is active
+                    if (currentHeight < originalVpHeight - 120 || currentHeight < window.innerHeight * 0.78) {
+                        hideBottomNavOnKeyboard();
+                    } else {
+                        restoreBottomNavOnBlur();
+                    }
+                });
+            }
+            // 9. AUTOMATIC SCROLL-TO-TOP ON PAGE TRANSITIONS & SUCCESSFUL LOGIN
+            function resetWindowScrollToTop() {
+                try {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                } catch (e) {
+                    window.scrollTo(0, 0);
+                }
+                if (document.documentElement) document.documentElement.scrollTop = 0;
+                if (document.body) document.body.scrollTop = 0;
+                if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+                
+                const scrollNodes = document.querySelectorAll('.app, .app-container, .main, #container, .container, body, html');
+                scrollNodes.forEach(el => {
+                    if (el && el.scrollTop > 0) el.scrollTop = 0;
+                });
+            }
+            window.resetWindowScrollToTop = resetWindowScrollToTop;
+
+            // Watch status section for activation
+            const statusSection = document.getElementById('status');
+            if (statusSection) {
+                const statusObserver = new MutationObserver(mutations => {
+                    mutations.forEach(m => {
+                        if (m.type === 'attributes' && (m.attributeName === 'class' || m.attributeName === 'style')) {
+                            if (statusSection.classList.contains('active') || statusSection.style.display === 'block') {
+                                resetWindowScrollToTop();
+                                setTimeout(resetWindowScrollToTop, 50);
+                                setTimeout(resetWindowScrollToTop, 200);
+                                setTimeout(resetWindowScrollToTop, 400);
+                            }
+                        }
+                    });
+                });
+                statusObserver.observe(statusSection, { attributes: true, attributeFilter: ['class', 'style'] });
+            }
+
+            // Hook on login form submission & keyboard "Go" / "Enter" key
+            if (document.login) {
+                const usernameInput = document.login.querySelector("input[name='username']");
+                if (usernameInput) {
+                    usernameInput.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.keyCode === 13) {
+                            e.preventDefault();
+                            const mainBtn = document.getElementById('mainLoginBtn') || document.querySelector('.login-submit');
+                            if (mainBtn) {
+                                mainBtn.click();
+                            } else if (typeof onLoginSubmitted === 'function') {
+                                onLoginSubmitted();
+                            }
+                        }
+                    });
+                }
+
+                document.login.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const mainBtn = document.getElementById('mainLoginBtn') || document.querySelector('.login-submit');
+                    if (mainBtn) {
+                        mainBtn.click();
+                    } else if (typeof onLoginSubmitted === 'function') {
+                        onLoginSubmitted();
+                    }
+                    setTimeout(resetWindowScrollToTop, 100);
+                    setTimeout(resetWindowScrollToTop, 350);
+                });
+            }
+
+            // Reset on page show or hashchange
+            window.addEventListener('pageshow', resetWindowScrollToTop);
+            window.addEventListener('hashchange', resetWindowScrollToTop);
         });
 
         // Friday Greeting Check
@@ -2175,6 +2568,96 @@
                 }
             }
         }
+
+        // =========================================================================
+        // AUTOMATIC DYNAMIC MARQUEE SPEED & EXACT BOUNDARIES ENGINE (FLICKER-FREE)
+        // =========================================================================
+        (function initAutoDynamicMarquee() {
+            let lastAppliedKey = '';
+            let isCalculating = false;
+
+            function setupMarquee() {
+                if (isCalculating) return;
+                const track = document.querySelector('.ticker-content-track');
+                const marquee = document.querySelector('.marquee');
+                if (!track || !marquee) return;
+
+                const text = (marquee.textContent || marquee.innerText || '').trim();
+                if (!text || text.includes('{{news-line}}')) return;
+
+                isCalculating = true;
+
+                // Measure track and text width without resetting animation
+                const trackWidth = track.clientWidth || track.offsetWidth || 380;
+                const textWidth = marquee.scrollWidth || marquee.offsetWidth || 1000;
+
+                // Exact pixel coordinates:
+                // Start: Right edge aligns with track left boundary (first letter enters immediately)
+                const startX = -(trackWidth + 6);
+                // End: Left edge fully clears track right boundary (last letter exits completely)
+                const endX = textWidth + 16;
+                const totalDistance = endX - startX;
+
+                // Constant readable velocity (52px per second regardless of text length)
+                const PIXELS_PER_SECOND = 52;
+                const duration = Math.max(6, (totalDistance / PIXELS_PER_SECOND)).toFixed(2);
+
+                const cacheKey = `${startX}_${endX}_${duration}_${text.length}`;
+                if (lastAppliedKey === cacheKey) {
+                    isCalculating = false;
+                    return; // No layout change -> Do NOT disturb running animation
+                }
+
+                lastAppliedKey = cacheKey;
+
+                let dynamicStyle = document.getElementById('dynamic-marquee-engine-style');
+                if (!dynamicStyle) {
+                    dynamicStyle = document.createElement('style');
+                    dynamicStyle.id = 'dynamic-marquee-engine-style';
+                    document.head.appendChild(dynamicStyle);
+                }
+
+                dynamicStyle.textContent = `
+                    @keyframes marqueeDynamic {
+                        0% { transform: translate3d(${startX}px, 0, 0); }
+                        100% { transform: translate3d(${endX}px, 0, 0); }
+                    }
+                    .marquee {
+                        animation: marqueeDynamic ${duration}s linear infinite !important;
+                    }
+                `;
+
+                isCalculating = false;
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupMarquee);
+            } else {
+                setupMarquee();
+            }
+
+            window.addEventListener('load', setupMarquee, { passive: true });
+            
+            let resizeDebounce = null;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeDebounce);
+                resizeDebounce = setTimeout(setupMarquee, 150);
+            }, { passive: true });
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(setupMarquee);
+            }
+
+            const marqueeEl = document.querySelector('.marquee');
+            if (marqueeEl) {
+                let mutationDebounce = null;
+                const observer = new MutationObserver(function() {
+                    clearTimeout(mutationDebounce);
+                    mutationDebounce = setTimeout(setupMarquee, 60);
+                });
+                observer.observe(marqueeEl, { childList: true, characterData: true, subtree: true });
+            }
+        })();
     </script>
 </body>
 </html>

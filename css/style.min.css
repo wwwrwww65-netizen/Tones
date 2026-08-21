@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
 @import url('../fonts/Almarai.css');
 
 /* ==========================================================================
@@ -45,8 +44,14 @@
   --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.65);
   --shadow-glow: 0 0 35px var(--primary-glow);
   
-  --font-main: 'Cairo', 'Tajawal', 'Almarai', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-main: 'Almarai', 'Tajawal', 'Cairo', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Safe Area Variables for iPhone X/11/12/13/14/15/16 (Notch & Dynamic Island) */
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
 }
 
 *, *::before, *::after {
@@ -54,12 +59,18 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  max-width: 100%;
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
   height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -68,46 +79,90 @@ body {
   color: var(--text-primary);
   direction: rtl;
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
-  overflow-y: auto !important;
-  padding-bottom: 110px !important;
+  overflow-y: auto;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-bottom: 0;
   line-height: 1.6;
   position: relative;
   user-select: none;
+  -webkit-user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Global iOS Input & Button WebKit Reset (Prevents Auto-Zoom and Native Overrides) */
+input,
+select,
+textarea,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  font-size: 16px; /* Essential 16px to prevent iOS Safari auto-zooming viewport */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ==========================================================================
-   MODERN ULTRA-SLEEK GLASS SCROLLBAR (2026 ROYAL DESIGN)
+   DYNAMIC SMART SCROLLBAR (DISCREET & MODERN)
    ========================================================================== */
+/* Desktop: Discreet, track is transparent by default so no side border appears */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(20, 3, 7, 0.4);
-  border-radius: 9999px;
-  margin: 4px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.75) 0%, rgba(136, 19, 55, 0.85) 100%);
+  background: rgba(212, 175, 55, 0.3);
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #E6CA65 0%, #D4AF37 50%, #881337 100%);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+  background: rgba(212, 175, 55, 0.85);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.7) rgba(20, 3, 7, 0.35);
+  scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
 }
+
+/* ==========================================================================
+   MOBILE & TOUCH: COMPLETELY HIDE SCROLLBARS (100% CLEAN VIEW)
+   ========================================================================== */
+@media (max-width: 768px), (pointer: coarse), (hover: none) {
+  html,
+  body,
+  *,
+  .app,
+  .modal-sheet-card,
+  .price-div,
+  .sell-point-div,
+  .status-div {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
 
 /* Common SVG Icon Utilities */
 svg.svg-inline,
@@ -145,9 +200,11 @@ svg.svg-inline,
 
 .screen-background-shape {
   position: absolute;
-  filter: blur(60px);
+  filter: blur(45px);
   opacity: 0.65;
   border-radius: 50%;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
   animation: floatOrb 18s infinite alternate ease-in-out;
 }
 
@@ -208,10 +265,11 @@ svg.svg-inline,
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 500px;
+  max-width: 480px;
   margin: 0 auto;
-  min-height: 100vh;
-  padding: 14px 14px 76px 14px !important;
+  min-height: auto;
+  box-sizing: border-box;
+  padding: 12px 14px calc(88px + env(safe-area-inset-bottom, 0px)) 14px !important;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -324,11 +382,12 @@ svg.svg-inline,
 }
 
 .brand-name {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.22rem;
+  font-weight: 900;
   color: #FFFFFF;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  letter-spacing: 0.2px;
+  line-height: 1.25;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7), 0 0 14px rgba(212, 175, 55, 0.3);
 }
 
 .brand-status {
@@ -427,32 +486,42 @@ button#btn-whats-new .btn-icon {
   fill: #881337;
 }
 
+/* حاوية مسار الشريط */
 .ticker-content-track {
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
+  container-type: inline-size;
   mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
 }
 
+/* النص الإخباري المتحرك */
 .marquee {
   display: inline-block;
   white-space: nowrap;
   font-size: 0.88rem;
   font-weight: 700;
   color: #881337 !important;
-  padding-right: 100%;
-  animation: marqueeScroll 26s linear infinite;
+  direction: rtl;
+  will-change: transform;
+  animation: marqueeDynamic 26s linear infinite;
 }
 
+/* إيقاف الحركة عند التحويم بالماوس أو اللمس */
 .marquee:hover {
   animation-play-state: paused;
 }
 
-@keyframes marqueeScroll {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(100%, 0, 0); }
+/* حركة احتياطية في حال تعذر تشغيل الجافاسكربت */
+@keyframes marqueeDynamic {
+  0% {
+    transform: translate3d(-100vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(100% + 100vw), 0, 0);
+  }
 }
 
 /* Main title styling */
@@ -663,8 +732,8 @@ h1 {
 
 /* Points Registration Trigger Button (Matching Login Submit Button Width & Style Exactly) */
 .points-register-btn {
-  width: calc(100% - 38px);
-  max-width: calc(100% - 38px);
+  width: 100% !important;
+  max-width: 100% !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -673,19 +742,17 @@ h1 {
   overflow: hidden;
   font-family: var(--font-main);
   background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
-  color: #4A1015 !important;
-  font-weight: 800;
-  font-size: 15.5px;
+  color: #2D0509 !important;
+  font-weight: 900 !important;
+  font-size: 16.5px;
   letter-spacing: 0.3px;
-  -webkit-text-stroke: 0.75px #FFFFFF;
-  paint-order: stroke fill;
   border: none !important;
   border-radius: 12px;
   padding: 11px 20px;
   min-height: 46px;
   margin: 0 auto 16px auto;
   box-sizing: border-box;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.28), inset 0 1.5px 3px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
   transition: all 0.25s ease;
   cursor: pointer;
   outline: none;
@@ -728,13 +795,11 @@ h1 {
 .points-register-btn .button-text {
   position: relative;
   z-index: 2;
-  font-size: 15.5px;
-  font-weight: 800;
-  color: #4A1015 !important;
-  letter-spacing: 0.3px;
-  -webkit-text-stroke: 0.75px #FFFFFF;
-  paint-order: stroke fill;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
+  font-size: 16px;
+  font-weight: 900 !important;
+  color: #2D0509 !important;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Points Modal Popup Body & Elements */
@@ -963,17 +1028,16 @@ h1 {
 .points-auth-submit-btn {
   position: relative;
   overflow: hidden;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-  font-size: 0.88rem !important;
-  min-height: 40px !important;
-  height: 40px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.2px;
+  font-size: 0.92rem !important;
+  min-height: 42px !important;
+  height: 42px !important;
   border-radius: 10px !important;
   background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
-  color: #4A1015 !important;
-  -webkit-text-stroke: 0.5px #FFFFFF;
-  paint-order: stroke fill;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3), inset 0 1.5px 3px rgba(255, 255, 255, 0.4) !important;
+  color: #2D0509 !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
 }
 
 .points-auth-submit-btn:hover {
@@ -1684,28 +1748,26 @@ button.login-submit {
   /* تدرج لوني يعطي إيحاء الذهب الفاخر المضيء وليس لوناً مسطحاً */
   background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
   
-  /* نص عنابي داكن داخلي مع حدود بيضاء ناصعة بارزة */
-  color: #4A1015 !important; 
-  font-weight: 800;
-  font-size: 15.5px;
+  /* نص عنابي داكن عريض وواضح جداً */
+  color: #2D0509 !important; 
+  font-weight: 900 !important;
+  font-size: 16.5px;
   letter-spacing: 0.3px;
-  -webkit-text-stroke: 0.75px #FFFFFF;
-  paint-order: stroke fill;
   border: none !important;
   border-radius: 12px; /* حواف ناعمة عصرية بمعايير مريحة */
   padding: 11px 20px; /* مقاس متناسق وفق المعايير العالمية 44-46px */
   min-height: 46px;
   
   /* توهج ذهبي ناعم وواسع الانتشار بدلاً من الظل الكاتم، مع لمعة داخلية (inset) */
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.28), inset 0 1.5px 3px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
   
   transition: all 0.25s ease;
   cursor: pointer;
 }
 
-/* 2. إنشاء طبقة اللمعة المضيئة (شريط ضوئي مائل) */
-.login-submit-btn:not(.processing)::before,
-.button.login-submit:not(.processing)::before {
+/* 2. إنشاء طبقة اللمعة المضيئة (شريط ضوئي مائل فقط لزر تسجيل الدخول الرئيسي) */
+#mainLoginBtn.login-submit-btn:not(.processing)::before,
+#login .button.login-submit:not(.processing)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1718,6 +1780,11 @@ button.login-submit {
   animation: buttonShine 3.5s infinite; /* تشغيل الحركة كل 3.5 ثوانٍ */
   z-index: 1;
   pointer-events: none;
+}
+
+.status-actions-row button::before,
+.btn-danger-glass::before {
+  display: none !important;
 }
 
 /* 3. حركة اللمعان من اليسار لليمين */
@@ -1753,13 +1820,11 @@ button.login-submit {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: #4A1015 !important;
-  font-weight: 800;
-  font-size: 15.5px;
-  letter-spacing: 0.3px;
-  -webkit-text-stroke: 0.75px #FFFFFF;
-  paint-order: stroke fill;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
+  color: #2D0509 !important;
+  font-weight: 900 !important;
+  font-size: 16.5px;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Advanced High-Tech Loading Spinner State */
@@ -1836,7 +1901,7 @@ button.login-submit {
 
 .bottom-nav-bar {
   position: fixed;
-  bottom: 10px;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   right: 50%;
   transform: translateX(50%);
   width: calc(100% - 20px);
@@ -1853,6 +1918,24 @@ button.login-submit {
   justify-content: space-around;
   padding: 4px 6px;
   z-index: 100;
+  box-sizing: border-box;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, visibility 0.25s ease;
+  will-change: transform, opacity;
+}
+
+/* Auto-hide bottom bar when mobile virtual keyboard is open or small landscape height */
+body.keyboard-open .bottom-nav-bar,
+.bottom-nav-bar.hidden-keyboard {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(50%) translateY(120px) !important;
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .bottom-nav-bar {
+    display: none !important;
+  }
 }
 
 .bottom-nav-bar *::before,
@@ -2667,31 +2750,63 @@ body:has(#status.active) #login {
 
 .status-actions-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-top: 16px;
 }
 
-.btn-danger-glass {
+.status-actions-row button,
+.btn-danger-glass,
+.btn-secondary-glass {
   flex: 1;
-  padding: 10px;
-  border-radius: var(--radius-md);
-  background: rgba(136, 19, 55, 0.4);
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #FFFFFF;
+  padding: 11px 16px;
+  min-height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
+  border: none !important;
+  color: #2D0509 !important;
   font-family: var(--font-main);
-  font-weight: 700;
+  font-weight: 900 !important;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
-.btn-danger-glass:hover {
-  background: rgba(136, 19, 55, 0.65);
+.status-actions-row button:hover,
+.btn-danger-glass:hover,
+.btn-secondary-glass:hover {
+  filter: brightness(1.04);
   transform: translateY(-2px);
-  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.38), inset 0 1.5px 3px rgba(255, 255, 255, 0.4) !important;
+  color: #2D0509 !important;
+}
+
+.status-actions-row button:active,
+.btn-danger-glass:active,
+.btn-secondary-glass:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2) !important;
+}
+
+.status-actions-row button svg,
+.btn-danger-glass svg,
+.btn-secondary-glass svg {
+  width: 18px;
+  height: 18px;
+  fill: #2D0509 !important;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
+  flex-shrink: 0;
+}
+
+.app-logout.clicked {
+  opacity: 0.75;
+  transform: scale(0.97);
 }
 
 .action-btn-icon {
@@ -3145,20 +3260,107 @@ body:has(#status.active) #login {
 }
 
 /* ==========================================================================
-   RESPONSIVE ADJUSTMENTS
+   COMPREHENSIVE RESPONSIVE DESIGN FOR ALL DEVICES (IOS / ANDROID / DESKTOP)
    ========================================================================== */
 
-@media (max-width: 380px) {
+/* Universal Fluid Adaptability */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.brand-info,
+.ticker-content-track,
+.notice-content,
+.speed-trigger-text,
+.toggle-info,
+.metric-card-glass,
+.instruction-text,
+.input-wrapper-glass {
+  min-width: 0; /* Prevents WebKit flex-item overflow */
+}
+
+/* 1. Ultra-Compact Phones & iPhone SE / Mini (<= 375px) */
+@media screen and (max-width: 375px) {
   .container {
-    padding: 10px 8px 120px 8px !important;
+    padding: 10px 8px calc(82px + env(safe-area-inset-bottom, 0px)) 8px !important;
   }
   
   .brand-name {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
   
-  .speed-chips {
-    grid-template-columns: repeat(2, 1fr);
+  .brand-icon-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .brand-icon-wrap svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .top-header .m,
+  button#btn-whats-new {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+  
+  .login-card {
+    padding: 16px 12px;
+    border-radius: var(--radius-lg);
+  }
+  
+  .card-header p {
+    font-size: 0.98rem;
+  }
+  
+  .input-wrapper-glass {
+    padding: 3px 8px;
+  }
+  
+  .prev-card-pill-btn {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+  
+  .support-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .support-btn {
+    padding: 9px 12px;
+    font-size: 0.82rem;
+  }
+  
+  .bottom-nav-bar {
+    height: 58px;
+    padding: 3px 4px;
+    width: calc(100% - 12px);
+  }
+  
+  .nav-item-btn {
+    font-size: 0.68rem !important;
+    padding: 4px 2px !important;
+  }
+  
+  .nav-item-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .modal-sheet-card {
+    padding: 14px 10px;
+    border-radius: var(--radius-lg);
+  }
+  
+  .speed-modal-trigger-btn {
+    padding: 8px 10px;
+  }
+  
+  .speed-trigger-selected {
+    font-size: 0.86rem;
   }
   
   .status-grid-metrics {
@@ -3167,5 +3369,29 @@ body:has(#status.active) #login {
   
   .metric-card-glass.full-width {
     grid-column: span 1;
+  }
+}
+
+/* 2. Standard Mobile Devices (376px to 480px: iPhone 12/13/14/15/16 Pro, Galaxy S series) */
+@media screen and (min-width: 376px) and (max-width: 480px) {
+  .container {
+    padding: 12px 14px calc(88px + env(safe-area-inset-bottom, 0px)) 14px !important;
+  }
+}
+
+/* 3. Phablets & Tablets & Desktop (>= 481px) */
+@media screen and (min-width: 481px) {
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 20px 16px calc(95px + env(safe-area-inset-bottom, 0px)) 16px !important;
+  }
+  
+  .bottom-nav-bar {
+    max-width: 460px;
+  }
+  
+  .modal-sheet-card {
+    max-width: 440px;
   }
 }
