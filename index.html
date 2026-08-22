@@ -247,6 +247,7 @@
                                     <option selected value="256k/700k">سرعة عادية</option>
                                     <option value="256k/1M">سرعة متوسطة</option>
                                     <option value="512M/3M">سرعة عالية</option>
+                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا</option>
                                 </select>
 
                                 <!-- Modern Interactive Speed Trigger Button -->
@@ -403,6 +404,16 @@
                                 </div>
                                 <div class="speed-card-info">
                                     <span class="speed-card-name">سرعة عالية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
+                            <div class="speed-card-option" id="card-speed-ultra" data-speed="1M/8M" data-speed-title="سرعة عالية جدا" style="display: none;">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية جدا</span>
                                 </div>
                             </div>
                         </div>
@@ -732,19 +743,19 @@
                         <div class="price-div">
                             <div class="wrapper">
                                 <!-- ========================================================================= -->
-                                <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن -->
+                                <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن (تُقرأ تلقائياً من config.js) -->
                                 <!-- ========================================================================= -->
-                                <div class="loan-body">
-                                    <p style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">زبائننا الكرام</p>
-                                    <p>صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة جيب</strong></p>
-                                    <div class="loan-highlight-badge">رقم كود الشبكة: (21124)</div>
-                                    <br><br>
-                                    <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                <div class="loan-body" id="loan-news-container">
+                                    <p id="loan-news-title" style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">زبائننا الكرام</p>
+                                    <p id="loan-news-content">صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة جيب</strong></p>
+                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (21124)</div>
+                                    <br id="loan-news-break"><br id="loan-news-break-2">
+                                    <div id="loan-news-extra-header" style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
                                         <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent-cyan);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-                                        <strong>البث المباشر والمباريات:</strong>
+                                        <strong id="loan-news-extra-title">البث المباشر والمباريات:</strong>
                                     </div>
-                                    <p>استمتع بمشاهدة الاستراحة والبث المباشر للمباريات والدوريات العالمية مجاناً عبر الرابط:</p>
-                                    <div class="loan-highlight-badge">t.com</div>
+                                    <p id="loan-news-extra-content">استمتع بمشاهدة الاستراحة والبث المباشر للمباريات والدوريات العالمية مجاناً عبر الرابط:</p>
+                                    <div id="loan-news-extra-badge" class="loan-highlight-badge">t.com</div>
                                 </div>
                                 <!-- ========================================================================= -->
 
@@ -810,6 +821,16 @@
                                 </div>
                                 <div class="speed-card-info">
                                     <span class="speed-card-name">سرعة عالية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
+                            <div class="speed-card-option" id="card-status-speed-ultra" data-status-speed="1M/8M" data-speed-title="سرعة عالية جدا" style="display: none;">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية جدا</span>
                                 </div>
                             </div>
                         </div>
@@ -1366,11 +1387,54 @@
             const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
+            // Apply Ultra Speed Option visibility from config.js ("enable-ultra-speed")
+            try {
+                if (typeof hotOption !== 'undefined') {
+                    if (hotOption['enable-ultra-speed']) {
+                        const optUltra = document.getElementById('opt-speed-ultra');
+                        const cardUltra = document.getElementById('card-speed-ultra');
+                        const cardStatusUltra = document.getElementById('card-status-speed-ultra');
+                        if (optUltra) optUltra.style.display = '';
+                        if (cardUltra) cardUltra.style.display = '';
+                        if (cardStatusUltra) cardStatusUltra.style.display = '';
+                    }
+
+                    // Apply News and Offers configuration dynamically
+                    if (hotOption['news-title']) {
+                        const el = document.getElementById('loan-news-title');
+                        if (el) el.textContent = hotOption['news-title'];
+                    }
+                    if (hotOption['news-content']) {
+                        const el = document.getElementById('loan-news-content');
+                        if (el) el.innerHTML = hotOption['news-content'];
+                    }
+                    if (hotOption['news-code']) {
+                        const el = document.getElementById('loan-news-code');
+                        if (el) el.textContent = hotOption['news-code'];
+                    }
+                    if (hotOption['news-extra-title']) {
+                        const el = document.getElementById('loan-news-extra-title');
+                        if (el) el.textContent = hotOption['news-extra-title'];
+                    }
+                    if (hotOption['news-extra-content']) {
+                        const el = document.getElementById('loan-news-extra-content');
+                        if (el) el.textContent = hotOption['news-extra-content'];
+                    }
+                    if (hotOption['news-extra-badge']) {
+                        const el = document.getElementById('loan-news-extra-badge');
+                        if (el) el.textContent = hotOption['news-extra-badge'];
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
             const speedLabelMap = {
                 '128k/512k': 'سرعة اقتصادية',
                 '256k/700k': 'سرعة عادية',
                 '256k/1M': 'سرعة متوسطة',
-                '512M/3M': 'سرعة عالية'
+                '512M/3M': 'سرعة عالية',
+                '1M/8M': 'سرعة عالية جدا'
             };
 
             function updateSpeedSelection(val) {
