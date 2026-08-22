@@ -1,0 +1,329 @@
+﻿<!doctypehtml>
+    <html lang="ar">
+    <meta charset="UTF-8">
+    <title data-network-name>شبكة{{network-name}} اللاسلكيه</title>
+    <meta name="viewport" content="width=100%,initial-scale=1">
+    <meta name="theme-color" content="#074391">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/fontello.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+        
+    <link rel="stylesheet" href="css/loyalty-modal.css">
+
+    <style>
+        .img1::before {
+            content: "خدمة دائمة ";
+        }
+
+        .img2::before {
+            content: "سرعة في النت";
+        }
+
+        .img3::before {
+            content: "رصيد نت أكثر من اي شبكة";
+        }
+
+        .img4::before {
+            content: "وقت أستخدام أطول";
+        }
+
+        .img5::before {
+            content: "الأسرع و الأفضل ";
+        }
+    </style>
+
+    <body translate="no">
+        <div class="bk"></div>
+        <div class="container">
+            <div class="error-container">
+                <div class="error">
+                    <div class="fade-in">
+                        <p id="error">
+                    </div>
+                </div>
+            </div>
+            <div class="data" data-show-date-field><span hot-date></span>,الموافق <span hot-hijri-date></span></div>
+            <div class="screen">
+                <div class="screen-content">
+                    <div class="login" id="login" style="visibility: visible;">
+                        <section class="section">
+                            <p class="marquee" data-news-line>{{news-line}}
+                        </section>
+                        <div class="ads">
+                            <div class="marhinup"></div>
+                            <div class="box"><span style="--i:1">
+                                    <div class="img1 img"></div>
+                                </span><span style="--i:2">
+                                    <div class="img2 img"></div>
+                                </span><span style="--i:3">
+                                    <div class="img3 img "></div>
+                                </span><span style="--i:4">
+                                    <div class="img4 img"></div>
+                                </span><span style="--i:5">
+                                    <div class="img5 img"></div>
+                                </span><span style="--i:6">
+                                    <div class="img1 img"></div>
+                                </span><span style="--i:7">
+                                    <div class="img2 img"></div>
+                                </span><span style="--i:8">
+                                    <div class="img3 img"></div>
+                                </span><span style="--i:9">
+                                    <div class="img4 img"></div>
+                                </span><span style="--i:10">
+                                    <div class="img5 img"></div>
+                                </span></div>
+                            <div class="marhindown"></div>
+                        </div>
+                        <h1 class="network-name"></h1><span
+                            class="screen-background-shape screen-background-shape2"></span>
+                           
+                        <form class="login-form" name="login">
+                            <h4>مرحبا بكم في شبكة هواوي نت </h4>
+                            <h4>قم ب تسجيل الدخول</h4><span
+                            
+                                class="screen-background-shape screen-background-shape0"></span>
+                              
+
+                            <a href="https://huawei.shabakaty.site/" class="loyalty-system-btn"
+                                id="loyaltySystemBtnLogin" data-loyalty-url="">
+                                <span class="icon">🎁</span>
+                                نظام نقاط العملاء
+                                <span class="icon">⭐</span>
+                            </a>
+                            <div class="login-field"><i class="login-icon fas icon-user"></i><input name="username"
+                                    class="login-input" placeholder="ادخل رقم الكرت هنا" username-field improve-input
+                                    autocomplete="off"><select name="" id="se"></select></div>
+                            <div class="login-field password-field"><i class="login-icon fas icon-lock"></i><input
+                                    type="hidden" name="password" class="login-input" placeholder="ادخل كلمة السر هنا"
+                                    improve-input></div>
+                            <div class="speed-form">
+                                <div class="speed-icon"></div><select id="speed" name="domain" speed-field>
+                                    <option value="" selected disabled hidden>أختيار سرعة الإنترنت</option>
+                                    <option value="128K/512K">سرعة أقتصادية </option>
+                                    <option value="512K/2048K">سرعة متوسطة </option>
+                                    <option value="1024K/4096K">سرعة سرعة عالية</option>
+                                    <option value="2048K/8192K">سرعة عالية جدا</option>
+                                    <option value="2048K/8193K">سرعة ألعاب أون لاين</option>
+                                </select>
+                            </div>
+                            <div class="togswith">
+                                <div class="btnu">
+                                    <div>
+                                        <div>
+                                            <h3>ايقاف التحديثات</h3>
+                                        </div>
+                                        <div class="switch"><input id="chupdate" value="_Uon"
+                                                class="check-toggle check-toggle-round-flat" type="checkbox"><label
+                                                for="chupdate"></label><span class="on">لا </span><span class="off">نعم
+                                            </span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="social">
+                                <div><button class="price-icon" parent-id="price" data-price-button><i
+                                            class="icon-dollar"></i><br>الأسعار</button><button class="loan-icon"
+                                        style="margin-left: 25px;" parent-id="app-store"><i
+                                            class="icon-cog"></i><br>تعليمات </button><button style="font-size: 16px;"
+                                        class="button login-submit loginbtn" parent-id="status" enable-hot-cookie><span
+                                            class="button-text">تسجيل الدخول</span></i></button><button
+                                        style="margin-right: 25px;" class="loan-icon" parent-id="loan"
+                                        data-loan-button><i class="icon-whatsapp"></i><br>التواصل</button><button
+                                        class="sellpoint" parent-id="sell-point" data-sell-point-button><i
+                                            class="icon-location"></i><br>نقاط البيع </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="app" id="price">
+                        <div class="price-div">
+                            <div class="wrapper">
+                                <div class="bks"></div>
+                                <p class="title">الاسعار
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">الفئة
+                                            <th scope="col">الوقت
+                                            <th scope="col">الرصيد
+                                            <th scope="col">الصلاحية
+                                    <tbody id="profiles">
+                                </table><button class="app-logout button app-submit">رجوع</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app" id="sell-point">
+                        <div class="sell-point-div">
+                            <div class="wrapper">
+                                <div class="bks"></div>
+                                <p class="title">نقاط البيع
+                                <table>
+                                    <tbody class="sell-point" id="sell-points">
+                                </table><button class="app-logout button app-submit">رجوع</button><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app" id="status">
+                        <div class="status-div">
+                            <div class="wrapper">
+                                <div class="bks"></div>
+                                <p class="title status-title" style="font-size: 20px; ">مرحبا بك في شبكة هواوي نت </p>
+                                <div class="userstatus"><i class="icon-user"></i></div>
+                                <p>إذا لم يتم الأتصال تلقائيا أضغط <a
+                                        style="text-decoration: none; color: #182a54; padding: 5px;border: 1px solid; border-radius: 10px;"
+                                        href="status.html">هنا</a></p><br>
+                                <p>يمكنكم مشاهدة احدث الافلام والمسلسلات على استراحة الشبكه مجانا بدون اي كمية تحميل
+                                    للتوجه للاستراحه اضغط زر الأستراحة </p><a
+                                    style="text-decoration:none;display: block;margin: 5px auto;"
+                                    href="http://199.168.2.100/ng" target="_blank"><button class="login-submit"><img
+                                            style="right: -10px; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt=""><img
+                                            style="left: 0; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt="">الاستراحة</button></a><a
+                                    style="text-decoration:none;display: block;margin: 5px auto;"
+                                    href="http://199.168.2.101:8000/mubasher" target="_blank"><button
+                                        class="login-submit"><img
+                                            style="right: -10px; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt=""><img
+                                            style="left: 0; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt="">البث هواوي</button></a><a
+                                    style="text-decoration:none;display: block;margin: 5px auto;"
+                                    href="http://199.168.2.100:8090/" target="_blank"><button class="login-submit"><img
+                                            style="right: -10px; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt=""><img
+                                            style="left: 0; top: 5px; position: absolute; height: 50px;width: 50px;"
+                                            src="img/es.svg" alt="">البث الاستراحة</button></a>
+                                <div class="suchange">
+                                    <div class="speeds">
+                                        <p>سرعة الكرت</p>
+                                        <p id="sspeed">سرعة متوسطة </p><select id="speedchange" class="tcs">
+                                            <option value="ns" disabled hidden selected>تغيير </option>
+                                        </select>
+                                    </div>
+                                    <div class="updatec">
+                                        <p>التحديثات </p>
+                                        <p id="update">تم تفعيلها </p><select id="updatechange" class="tcs">
+                                            <option value="ns" disabled hidden selected>تغيير </option>
+                                            <option value="_Uon">تفعيل التحديثات </option>
+                                            <option value="_Uoff">أيقاف التحديثات</option>
+                                            <option value="cancel">إلغاء</option>
+                                        </select>
+                                    </div>
+                                </div><br>
+                                <table>
+                                    <tr>
+                                        <td>التحميل
+                                        <td id="bytes_out">
+                                    <tr>
+                                        <td style="width: 100px;">الرفع
+                                        <td id="bytes_in">
+                                    <tr remain_bytes_total>
+                                        <td style="width: 100px;">التحميل المتبقي
+                                        <td id="remain_bytes_total">مفتوح
+                                    <tr>
+                                        <td style="width: 100px;">الوقت المستهلك
+                                        <td id="uptime">
+                                    <tr session_time_left>
+                                        <td style="width: 100px;">الوقت المتبقي
+                                        <td id="session_time_left">مفتوح
+                                </table><br>خدمة العملاء : 772877987 <br>
+                                <div class="outbtn"><button class=" login-submit app-logout" erase-cookie
+                                        clear-hot-cookie>تسجيل الخروج</button><button
+                                        class="login-submit app-logout">قطع الاتصال</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app" id="block">
+                        <div class="status-div">
+                            <div class="wrapper">
+                                <div class="bks"></div>
+                                <p class="title">انت محظور
+                                <div style="padding: 25px">
+                                    <p class="contact-text">لقد تم حظرك بسبب محاولات تسجيل الدخول الكثيرة الخاطئة
+                                    <div class="app-user"><span>بقي على فك الحظر: </span><span count-down-span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app" id="app-store">
+                        <div class="price-div">
+                            <div class="bks"></div>
+                            <div class="wrapper">
+                                <p class="title">شبكة هواوي </p>
+                                <h1 class=copyright
+                                    style=font-size:14px;background:#990000;color:#FFFFFF;text-shadow:none>بعض الإرشادات
+                                    لتجنب إستهلاك البيانات ( الميجا ) :</h1>
+                                <p>1- ننصح باختيار تعطيل التحديثات التلقائي لتجنب استهلاك البيانات .
+                                <p>2- ننصح باختيار سرعات أقل لمنع انتهاء رصيد الكرت بسرعة .
+                                <p>3-• تطبيق <strong><span style=color:#0000db>( Facebook ) الازرق
+                                        </span></strong>يستهلك البيانات إستهلاك كبير ، لمن يريد إستهلاك أقل يستخدم
+                                    التطبيق الاخر الذي من نفس الشركه ولكنه أخف إسمه <strong><span style=color:gray>(
+                                            Facebook Lite الابيض )</span></strong>
+                                <p>4- تطبيقات <strong><span style=color:#CC0000>يوتيوب ( YouTube ) </span></strong>يعرض
+                                    جودة الفيديوهات بشكل تلقائي حسب سرعة العميل <strong><span style=color:#CC0000>مما
+                                            يؤدي الى استهلاك البيانات (الرصيد) </span></strong>لمن يريد إستهلاك أقل
+                                    (جودة فيديو متوسطة) يقوم بـ تغيير من الاعدادات جودة الفيديو من تلقائية الى مثلا 360
+                                    بيكسل او ( حسب الدقة المطلوبة وكذالك الحال في تطبيق الفيسبوك والفيدميت والسنابتوب
+                                    وغيرها.
+                                <p>5- • تأكد من<strong><span style=color:#CC0000>إغلاق خاصية التحميل التلقائي للفيديوهات
+                                            والصور والملفات </span></strong></p>الموجوده في تطبيقات : <table
+                                    style=margin-top:25px>
+                                    <tbody>
+                                        <tr>
+                                            <td>• تطبيق <strong><span style=color:#aa6e00>( Google Play ) قووقل
+                                                        بلاي</span></strong>. </td>
+                                        </tr>
+                                        <tr>
+                                            <td>• تطبيق <strong><span style=color:#aa6e00>( Whatsapp ) واتس
+                                                        اب</span></strong>.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>• تطبيق <strong><span style=color:#aa6e00>( Facebook ) فيس
+                                                        بوك</span></strong>.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>• تطبيق <strong><span style=color:#aa6e00>( Teleram )
+                                                        تلقرام</span></strong>.</td>
+                                        </tr>
+                                </table><button class="app-logout button app-submit">رجوع</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app" id="loan">
+                        <div class="price-div">
+                            <div class="bks"></div>
+                            <div class="wrapper">
+                                <p class="title">شبكة هواوي </p><br><br>
+                                <h1>مرحبا بك في شبكة هواوي </h1><br>
+                                <h3>لا تتردد في التواصل معنا</h3><br><a href="https://wa.me/967772877987"
+                                    style="text-decoration: none;color:#165072 ;">
+                                    <div
+                                        style="justify-content: center; align-items: center; display: flex;height: 50px; margin: 10px;">
+                                        <h2 style="display: inline-block; direction: ltr;">772877987 </h2><img
+                                            src="img/w.svg" width="60px" alt="">
+                                    </div>
+                                </a><br><br><button class="app-logout button app-submit">رجوع</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-background"><span
+                        class="screen-background-shape screen-background-shape8"></span><span
+                        class="screen-background-shape screen-background-shape7"></span><span
+                        class="screen-background-shape screen-background-shape6"></span><span
+                        class="screen-background-shape screen-background-shape5"></span><span
+                        class="screen-background-shape screen-background-shape4"></span><span
+                        class="screen-background-shape screen-background-shape3"></span><span
+                        class="screen-background-shape screen-background-shape1"></span></div>
+            </div><span style="display: none;" id="winmsg"></span>
+        </div>
+        </div>
+        <script src="js/init.min.js"></script>
+        <script src="js/hotInImprover.min.js"></script>
+        <script src="js/hotCookie.min.js"></script>
+        <script src="js/hotOptions.min.js"></script>
+        <script src="js/hotBlocker.min.js"></script>
+        <script src="js/main.min.js"></script>
+        <script src="js/hotCookie.min.js"></script>
+        <script src="js/hotOptions.min.js"></script>
+      
+ 

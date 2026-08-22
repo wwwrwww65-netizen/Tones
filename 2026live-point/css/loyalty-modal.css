@@ -1,0 +1,330 @@
+/* ===== Loyalty System Modal Styles ===== */
+
+/* ===== Root Variables - Customize Colors Here ===== */
+:root {
+  /* Primary Colors */
+  --loyalty-primary-color: #1668ba;
+  --loyalty-primary-dark: #0d47a1;
+  --loyalty-accent-color: #ff9800;         /* اللون الأساسي الفاتح */
+     --loyalty-text-success: #1b345e;           /* نص أخضر داكن */
+  /* Highlight Colors */
+  --loyalty-highlight-bg-start: #e8ecf5;     /* بداية تدرج الصندوق المميز */
+  --loyalty-highlight-bg-end: #c8dbe6;       /* نهاية تدرج الصندوق المميز */
+  
+  /* Accent Colors */
+  --loyalty-accent-color: #d4af37;           /* لون التمييز (ذهبي) */
+  --loyalty-accent-dark: #b8941f;            /* لون التمييز الداكن */
+  
+  /* Background Colors */
+  --loyalty-bg-white: #ffffff;               /* خلفية بيضاء */
+  --loyalty-bg-gray: #f8f9fa;                /* خلفية رمادية فاتحة */
+  --loyalty-overlay-bg: rgba(0, 0, 0, 0.75); /* خلفية الأوفرلاي */
+  
+  /* Text Colors */
+  --loyalty-text-dark: #333;                 /* نص داكن */
+  --loyalty-text-white: #ffffff;             /* نص أبيض */
+ 
+  
+  /* Border & Divider Colors */
+  --loyalty-border-color: #e0e0e0;           /* لون الحدود */
+  --loyalty-divider-color: #ddd;             /* لون الفواصل */
+
+  /* Shadow & Effects */
+  --loyalty-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --loyalty-shadow-medium: 0 3px 10px rgba(0, 0, 0, 0.08);
+  --loyalty-shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.3);
+  
+  /* Button Shadows */
+  --loyalty-btn-primary-shadow: 0 4px 15px rgba(45, 156, 88, 0.3);
+  --loyalty-btn-accent-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  
+  /* Scrollbar Colors */
+  --loyalty-scrollbar-track: #f1f1f1;        /* مسار السكرول */
+  --loyalty-scrollbar-thumb: #2d689c;        /* السكرول */
+  
+  /* Close Button */
+  --loyalty-close-hover-bg: #ff4444;         /* لون زر الإغلاق عند التمرير */
+}
+
+/* ===== Modal Overlay ===== */
+/* .loyalty-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--loyalty-overlay-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  font-family: 'Almarai', 'Tajawal', sans-serif;
+  direction: rtl;
+  padding: 20px;
+} */
+/* 
+.loyalty-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+} */
+
+/* .loyalty-modal {
+  background: linear-gradient(135deg, var(--loyalty-bg-white) 0%, var(--loyalty-bg-gray) 100%);
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--loyalty-shadow-heavy);
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+} */
+
+.loyalty-modal-close:hover {
+  background: var(--loyalty-close-hover-bg);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Header */
+.loyalty-modal-header {
+  background: linear-gradient(135deg, var(--loyalty-primary-color) 0%, var(--loyalty-primary-dark) 100%);
+  color: var(--loyalty-text-white);
+  padding: 30px 20px 25px;
+  text-align: center;
+  position: relative;
+  border-bottom: 3px solid var(--loyalty-accent-color);
+}
+
+.loyalty-modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.loyalty-modal-header .icon {
+  font-size: 28px;
+  margin: 0 5px;
+}
+
+
+.loyalty-page-content p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--loyalty-text-dark);
+  margin: 0 0 20px;
+  text-align: right;
+  padding: 0 10px;
+}
+
+.loyalty-page-content strong {
+  color: var(--loyalty-primary-color);
+  font-weight: 700;
+}
+
+/* Footer */
+.loyalty-modal-footer {
+  padding: 20px 25px;
+  background: var(--loyalty-bg-gray);
+  border-top: 1px solid var(--loyalty-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Progress Dots */
+.loyalty-progress {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.loyalty-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--loyalty-divider-color);
+  transition: all 0.3s ease;
+}
+
+.loyalty-progress-dot.active {
+  background: var(--loyalty-primary-color);
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.loyalty-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Almarai', sans-serif;
+  white-space: nowrap;
+}
+
+.loyalty-btn-next {
+  background: linear-gradient(135deg, var(--loyalty-primary-color) 0%, var(--loyalty-primary-dark) 100%);
+  color: var(--loyalty-text-white);
+  box-shadow: var(--loyalty-btn-primary-shadow);
+}
+
+.loyalty-btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 156, 88, 0.4);
+}
+
+.loyalty-btn-prev {
+  background: var(--loyalty-text-white);
+  color: var(--loyalty-primary-color);
+  border: 2px solid var(--loyalty-primary-color);
+}
+
+.loyalty-btn-prev:hover {
+  background: #f0f0f0;
+}
+
+.loyalty-btn-finish {
+  background: linear-gradient(135deg, var(--loyalty-accent-color) 0%, var(--loyalty-accent-dark) 100%);
+  color: var(--loyalty-text-white);
+  box-shadow: var(--loyalty-btn-accent-shadow);
+  flex: 1;
+}
+
+.loyalty-btn-finish:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Highlight Box */
+.loyalty-highlight {
+  background: linear-gradient(135deg, var(--loyalty-highlight-bg-start) 0%, var(--loyalty-highlight-bg-end) 100%);
+  border-right: 4px solid var(--loyalty-primary-color);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: var(--loyalty-shadow-medium);
+}
+
+.loyalty-highlight p {
+  margin: 0;
+  color: var(--loyalty-text-success);
+  font-weight: 600;
+  text-align: center;
+  font-size: 16px;
+}
+
+
+.loyalty-icon {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* ===== Loyalty System Button Styles ===== */
+.loyalty-system-btn {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  padding:4px 30px !important;
+  margin: 12px 0;
+  background: linear-gradient(135deg, #1969d2 0%, #0d5fa1 50%, #1985d2 100%);
+  background-size: 200% 100%;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 8px 25px rgba(210, 152, 25, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Almarai', 'Tajawal', sans-serif;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.loyalty-system-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s ease-in-out infinite;
+}
+
+.loyalty-system-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(210, 152, 25, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.4);
+  background-position: 100% 0;
+}
+
+.loyalty-system-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.loyalty-system-btn .icon {
+  display: inline-block;
+  margin: 0 8px;
+  font-size: 24px;
+  vertical-align: middle;
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Button in status page - special styling */
+.status-div .loyalty-system-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .loyalty-system-btn {
+    font-size: 16px;
+    padding: 15px 25px;
+  }
+  
+  .loyalty-system-btn .icon {
+    font-size: 20px;
+  }
+}
