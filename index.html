@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <title data-network-name>شبكة{{network-name}} اللاسلكيه</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
@@ -14,28 +16,60 @@
     <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/loyalty-system.css">
+    <link rel="stylesheet" href="css/loyalty-modal.css">
+    <link rel="stylesheet" href="css/loyalty-modal-notifaction.css">
+    <script src="js/loyalty-button.js"></script>
+    <link rel="stylesheet" href="css/notifications-system.css">
+    <!-- Announcements System CSS -->
+    <link rel="stylesheet" href="css/announcements-style.css">
     <style>
-        .im1::before { content: "سرعة في النت"; }
-        .im2::before { content: "سرعة في النت"; }
-        .im3::before { content: "رصيد نت أكثر من اي شبكة"; }
-        .im4::before { content: "وقت أستخدام أطول"; }
-        .im5::before { content: "سرعة في النت"; }
-        
+        .im1::before {
+            content: "سرعة في النت";
+        }
+
+        .im2::before {
+            content: "سرعة في النت";
+        }
+
+        .im3::before {
+            content: "رصيد نت أكثر من اي شبكة";
+        }
+
+        .im4::before {
+            content: "وقت أستخدام أطول";
+        }
+
+        .im5::before {
+            content: "سرعة في النت";
+        }
+
         /* Anti-Copy & Anti-Inspection Shield */
-        body, .container, .screen, .login, .app, .floating-icons, .screen-background {
+        body,
+        .container,
+        .screen,
+        .login,
+        .app,
+        .floating-icons,
+        .screen-background {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
             -webkit-touch-callout: none;
         }
+
         /* Ensure all inputs and editable fields remain fully accessible and easy to type into */
-        input, textarea, [contenteditable="true"], .login-input {
+        input,
+        textarea,
+        [contenteditable="true"],
+        .login-input {
             -webkit-user-select: text !important;
             -moz-user-select: text !important;
             -ms-user-select: text !important;
             user-select: text !important;
         }
+
         img {
             -webkit-user-drag: none;
             user-drag: none;
@@ -43,65 +77,101 @@
     </style>
     <script src="js/security.min.js"></script>
 </head>
+
 <body translate="no">
 
     <!-- حاوية الأيقونات المتجهة (SVG) الفاخرة العائمة في الخلفية -->
     <ul class="floating-icons">
         <!-- 1. Wifi Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z" />
+            </svg>
         </li>
         <!-- 2. Royal Star Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 1.5l3.09 6.26L22 8.77l-5 4.87 1.18 6.88L12 17.27l-6.18 3.25L7 13.64 2 8.77l6.91-1.01L12 1.5z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 1.5l3.09 6.26L22 8.77l-5 4.87 1.18 6.88L12 17.27l-6.18 3.25L7 13.64 2 8.77l6.91-1.01L12 1.5z" />
+            </svg>
         </li>
         <!-- 3. Sparkle Diamond Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+            </svg>
         </li>
         <!-- 4. Global Network Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+            </svg>
         </li>
         <!-- 5. Modern Gem Diamond Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6zM5.3 5h13.4l1.5 3H3.8l1.5-3zm6.7 13.5L5.4 10h13.2L12 18.5z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M19 3H5L2 9l10 12L22 9l-3-6zM5.3 5h13.4l1.5 3H3.8l1.5-3zm6.7 13.5L5.4 10h13.2L12 18.5z" />
+            </svg>
         </li>
         <!-- 6. Wifi High Wave Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z" />
+            </svg>
         </li>
         <!-- 7. High-Speed Lightning Bolt Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M7 2v11h3v9l7-12h-4l4-8H7z" />
+            </svg>
         </li>
         <!-- 8. Four Point Star Burst Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 0l2.6 8.4L23 11l-8.4 2.6L12 22l-2.6-8.4L1 11l8.4-2.6L12 0z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 0l2.6 8.4L23 11l-8.4 2.6L12 22l-2.6-8.4L1 11l8.4-2.6L12 0z" />
+            </svg>
         </li>
         <!-- 9. Wifi Strong Signal Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z" />
+            </svg>
         </li>
         <!-- 10. Royal Star Outline Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
         </li>
         <!-- 11. Diamond Sparkle Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+            </svg>
         </li>
         <!-- 12. Wifi Full Wave Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z" />
+            </svg>
         </li>
         <!-- 13. Fast Flash Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M7 2v11h3v9l7-12h-4l4-8H7z" />
+            </svg>
         </li>
         <!-- 14. Crown Star Gem Icon -->
         <li>
-            <svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M19 3H5L2 9l10 12L22 9l-3-6z" />
+            </svg>
         </li>
     </ul>
 
@@ -121,7 +191,10 @@
     <div class="error-container">
         <div class="error" id="error-toast">
             <div class="toast-icon-wrap">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                </svg>
             </div>
             <div class="fade-in">
                 <p id="error"></p>
@@ -135,20 +208,23 @@
 
                 <!-- MAIN LOGIN VIEW -->
                 <div class="login" id="login">
-                    
+
                     <!-- Top Modern Header -->
                     <header class="top-header">
                         <div class="network-brand">
                             <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
                                 <svg class="wifi-animated-icon" viewBox="0 0 24 24">
                                     <!-- Wave 3 (Outer signal) -->
-                                    <path class="wifi-sig wifi-sig-3" d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z"/>
+                                    <path class="wifi-sig wifi-sig-3"
+                                        d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
                                     <!-- Wave 2 (Middle signal) -->
-                                    <path class="wifi-sig wifi-sig-2" d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z"/>
+                                    <path class="wifi-sig wifi-sig-2"
+                                        d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z" />
                                     <!-- Wave 1 (Inner signal) -->
-                                    <path class="wifi-sig wifi-sig-1" d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z"/>
+                                    <path class="wifi-sig wifi-sig-1"
+                                        d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z" />
                                     <!-- Dot (Base signal) -->
-                                    <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8"/>
+                                    <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
                                 </svg>
                             </div>
                             <div class="brand-info">
@@ -158,7 +234,10 @@
 
                         <!-- "جديدنا" Notification Pill Button -->
                         <button class="m" parent-id="loan" data-loan-button id="btn-whats-new" type="button">
-                            <svg viewBox="0 0 24 24" class="btn-icon"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                            <svg viewBox="0 0 24 24" class="btn-icon">
+                                <path
+                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
+                            </svg>
                             <span>جديدنا</span>
                         </button>
                     </header>
@@ -183,7 +262,8 @@
                         <div class="carousel-container" id="adCarousel">
                             <div class="carousel-track" id="carouselTrack">
                                 <div class="carousel-slide">
-                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high" decoding="async">
+                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high"
+                                        decoding="async">
                                 </div>
                                 <div class="carousel-slide">
                                     <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
@@ -234,29 +314,39 @@
                     <!-- Notice / Points System Alert Box -->
                     <div class="points-notice-alert" role="alert">
                         <div class="notice-icon-wrap">
-                            <svg viewBox="0 0 24 24" class="notice-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                            <svg viewBox="0 0 24 24" class="notice-icon">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                            </svg>
                         </div>
                         <div class="notice-content">
                             <strong class="notice-tag">تنبيه:</strong>
-                            <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند تسجيل الدخول..</span>
+                            <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
+                                تسجيل الدخول..</span>
                         </div>
                     </div>
 
                     <!-- Points Registration Trigger Button (Matching Primary Gold Button Style) -->
-                    <button type="button" class="button points-register-btn" id="openPointsRegisterBtn" parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
-                        <svg viewBox="0 0 24 24" class="points-btn-icon"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <button type="button" class="button points-register-btn" id="openPointsRegisterBtn"
+                        parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
+                        <svg viewBox="0 0 24 24" class="points-btn-icon">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
                         <span class="button-text">انقر للتسجيل في نظام النقاط</span>
                     </button>
 
                     <!-- Glassmorphic Login Card -->
                     <div class="login-card">
                         <form class="login-form" name="login" onsubmit="return false;">
-                            
+
                             <!-- Speed Selector Group (Modern Button Trigger) -->
                             <div class="speed-selector-group" style="margin-bottom: 14px;">
                                 <div class="speed-header">
                                     <span class="speed-title">
-                                        <svg viewBox="0 0 24 24" class="section-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="section-icon">
+                                            <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                        </svg>
                                         <span>أختر سرعتك المناسبة</span>
                                     </span>
                                 </div>
@@ -268,23 +358,30 @@
                                     <option selected value="256k/700k">سرعة عادية</option>
                                     <option value="256k/1M">سرعة متوسطة</option>
                                     <option value="512M/3M">سرعة عالية</option>
-                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا</option>
+                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا
+                                    </option>
                                 </select>
 
                                 <!-- Modern Interactive Speed Trigger Button -->
-                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn" parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
+                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn"
+                                    parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
                                     <div class="speed-trigger-left">
                                         <span class="speed-trigger-icon">
-                                            <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                            </svg>
                                         </span>
                                         <div class="speed-trigger-text">
                                             <span class="speed-trigger-label">السرعة المختارة:</span>
-                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة عادية</span>
+                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة
+                                                عادية</span>
                                         </div>
                                     </div>
                                     <div class="speed-trigger-badge">
                                         <span>تغيير</span>
-                                        <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                                        </svg>
                                     </div>
                                 </button>
                             </div>
@@ -293,16 +390,21 @@
                             <div class="input-group-modern">
                                 <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
                                 <div class="input-wrapper-glass">
-                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn" title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
+                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn"
+                                        title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
                                         <svg viewBox="0 0 24 24" class="camera-icon-svg">
-                                            <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                                            <path
+                                                d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
                                         </svg>
                                     </button>
-                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا" username-field improve-input autocomplete="off" enterkeyhint="go" inputmode="text">
-                                    
+                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
+                                        username-field improve-input autocomplete="off" enterkeyhint="go"
+                                        inputmode="text">
+
                                     <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
                                     <div class="input-inner-actions">
-                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn" title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
+                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
+                                            title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
                                             <span>دخول بكرت سابق</span>
                                         </button>
                                         <select id="se" style="display: none;" aria-hidden="true">
@@ -316,14 +418,18 @@
                             <!-- Hidden Password Field -->
                             <div class="login-field password-field">
                                 <i class="login-icon fas icon-lock"></i>
-                                <input type="hidden" name="password" class="login-input" placeholder="ادخل كلمة السر هنا" improve-input>
+                                <input type="hidden" name="password" class="login-input"
+                                    placeholder="ادخل كلمة السر هنا" improve-input>
                             </div>
 
                             <!-- Updates & App Store Blocker Toggle -->
                             <div class="toggle-container-modern">
                                 <div class="toggle-info">
                                     <span class="toggle-title">
-                                        <svg viewBox="0 0 24 24" class="section-icon"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="section-icon">
+                                            <path
+                                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                                        </svg>
                                         <span>إيقاف التحديثات والمتجر</span>
                                     </span>
                                     <span class="toggle-desc">التحديثات والمتجر تستهلك الرصيد بسرعة</span>
@@ -338,7 +444,8 @@
                             </div>
 
                             <!-- Primary Glow Login Submit Button -->
-                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie type="button" id="mainLoginBtn">
+                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
+                                type="button" id="mainLoginBtn">
                                 <span class="button-text">تسجيل الدخول</span>
                             </button>
                         </form>
@@ -347,14 +454,19 @@
                     <!-- Customer Support Section -->
                     <div class="customer-support-section">
                         <div class="support-header">
-                            <svg viewBox="0 0 24 24" class="support-header-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                            <svg viewBox="0 0 24 24" class="support-header-icon">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                            </svg>
                             <span class="support-title">خدمة العملاء</span>
                         </div>
                         <div class="support-actions-grid">
                             <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                            <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9" class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
+                            <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z"/>
+                                    <path
+                                        d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z" />
                                 </svg>
                                 <span>مراسلة واتساب</span>
                             </a>
@@ -362,7 +474,8 @@
                             <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
                             <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z"/>
+                                    <path
+                                        d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
                                 </svg>
                                 <span>اتصال هاتفي</span>
                             </a>
@@ -375,13 +488,16 @@
                         <button class="sellpoint" parent-id="sell-point" data-sell-point-button>نقاط البيع</button>
                     </div>
                 </div>
-
+                <div id="announcements-container"></div>
+                <div class="banner-container" style="background: rgb(184, 24, 24);border-radius: 10px;"> </div>
                 <!-- 2026 MODAL BOTTOM SHEET: SPEED SELECTOR POPUP (#speed-modal) -->
                 <div class="app" id="speed-modal">
                     <div class="modal-sheet-card compact-speed-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                </svg>
                                 <span>تحديد سرعة الإنترنت</span>
                             </span>
                             <button class="modal-close-btn" type="button">✕ إغلاق</button>
@@ -429,7 +545,8 @@
                             </div>
 
                             <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
-                            <div class="speed-card-option" id="card-speed-ultra" data-speed="1M/8M" data-speed-title="سرعة عالية جدا" style="display: none;">
+                            <div class="speed-card-option" id="card-speed-ultra" data-speed="1M/8M"
+                                data-speed-title="سرعة عالية جدا" style="display: none;">
                                 <div class="speed-card-indicator">
                                     <div class="speed-radio-dot"></div>
                                 </div>
@@ -446,18 +563,21 @@
                     <div class="modal-sheet-card qr-scanner-sheet">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                </svg>
                                 <span>مسح رمز QR للكرت</span>
                             </span>
                             <button class="modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
                         </div>
-                        
+
                         <div class="qr-scanner-body">
                             <!-- Camera Viewport Box -->
                             <div class="qr-viewport-container" id="qrViewportContainer">
                                 <video id="qrVideo" playsinline autoplay muted></video>
                                 <canvas id="qrCanvas" style="display: none;"></canvas>
-                                
+
                                 <!-- Scanner Reticle Overlay & Laser -->
                                 <div class="qr-overlay-box">
                                     <div class="qr-reticle-corner top-left"></div>
@@ -474,32 +594,52 @@
                                 </div>
 
                                 <div class="qr-camera-error" id="qrCameraError" style="display: none;">
-                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا الهاتف مباشرة عبر الزر أدناه.</p>
-                                    
-                                    <div style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                    </svg>
+                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على
+                                        أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا
+                                        الهاتف مباشرة عبر الزر أدناه.</p>
+
+                                    <div
+                                        style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
                                         <!-- Native System Camera Button (bypasses browser permission block) -->
-                                        <button type="button" class="button" id="qrSystemCamFallbackBtn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
-                                            <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+                                        <button type="button" class="button" id="qrSystemCamFallbackBtn"
+                                            style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+                                            <svg viewBox="0 0 24 24"
+                                                style="width: 18px; height: 18px; fill: currentColor;">
+                                                <path
+                                                    d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                            </svg>
                                             <span>📷 مسح بكاميرا الهاتف البديلة</span>
                                         </button>
 
-                                        <button type="button" class="button" id="qrRetryCamBtn" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة محاولة الكاميرا الحية</button>
+                                        <button type="button" class="button" id="qrRetryCamBtn"
+                                            style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة
+                                            محاولة الكاميرا الحية</button>
                                     </div>
-                                    
+
                                     <!-- Hidden System Camera Capture Input -->
-                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment" style="display: none;">
+                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment"
+                                        style="display: none;">
                                 </div>
                             </div>
 
                             <!-- Camera Controls (Torch / Switch Camera) -->
                             <div class="qr-controls-row">
-                                <button type="button" class="qr-tool-btn" id="qrTorchBtn" title="تشغيل الكشاف" style="display: none;">
-                                    <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                <button type="button" class="qr-tool-btn" id="qrTorchBtn" title="تشغيل الكشاف"
+                                    style="display: none;">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    </svg>
                                     <span id="qrTorchText">الكشاف</span>
                                 </button>
                                 <button type="button" class="qr-tool-btn" id="qrSwitchCameraBtn" title="تبديل الكاميرا">
-                                    <svg viewBox="0 0 24 24"><path d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z"/></svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z" />
+                                    </svg>
                                     <span>تبديل الكاميرا</span>
                                 </button>
                             </div>
@@ -511,15 +651,21 @@
                             </div>
 
                             <div id="qrScanSuccessCard" class="qr-success-card" style="display: none;">
-                                <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #10b981;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #10b981;">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                </svg>
                                 <div>
-                                    <strong style="color: #34d399; font-size: 0.95rem; display: block;">تم مسح الكرت بنجاح!</strong>
-                                    <span id="qrScannedResultDisplay" style="color: #ffffff; font-family: monospace; font-size: 1.1rem; font-weight: 800;"></span>
+                                    <strong style="color: #34d399; font-size: 0.95rem; display: block;">تم مسح الكرت
+                                        بنجاح!</strong>
+                                    <span id="qrScannedResultDisplay"
+                                        style="color: #ffffff; font-family: monospace; font-size: 1.1rem; font-weight: 800;"></span>
                                 </div>
                             </div>
 
                             <button type="button" class="button app-submit modal-cancel-btn" style="margin-top: 14px;">
-                                <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                <svg viewBox="0 0 24 24" class="btn-icon">
+                                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                </svg>
                                 <span>رجوع</span>
                             </button>
                         </div>
@@ -531,21 +677,32 @@
                     <div class="modal-sheet-card points-auth-modal-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
                                 <span>نظام النقاط والمكافآت</span>
                             </span>
                             <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
-                        
+
                         <div class="points-modal-body">
                             <!-- Auth Segmented Switcher Tabs -->
                             <div class="points-auth-tabs" role="tablist">
-                                <button type="button" class="points-tab-btn active" id="tabPointsLogin" role="tab" aria-selected="true" aria-controls="pointsLoginFormView">
-                                    <svg viewBox="0 0 24 24"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
+                                <button type="button" class="points-tab-btn active" id="tabPointsLogin" role="tab"
+                                    aria-selected="true" aria-controls="pointsLoginFormView">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
+                                    </svg>
                                     <span>تسجيل الدخول</span>
                                 </button>
-                                <button type="button" class="points-tab-btn" id="tabPointsSignup" role="tab" aria-selected="false" aria-controls="pointsSignupFormView">
-                                    <svg viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <button type="button" class="points-tab-btn" id="tabPointsSignup" role="tab"
+                                    aria-selected="false" aria-controls="pointsSignupFormView">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
                                     <span>إنشاء حساب جديد</span>
                                 </button>
                             </div>
@@ -554,7 +711,10 @@
                             <div class="points-tab-content active" id="pointsLoginFormView" role="tabpanel">
                                 <div class="points-instruction-box">
                                     <div class="instruction-icon-wrap">
-                                        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                        </svg>
                                     </div>
                                     <div class="instruction-text">
                                         <strong>تسجيل الدخول لنظام النقاط</strong>
@@ -568,9 +728,13 @@
                                         <span class="input-label-text">رقم الهاتف (موبايل)</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="رقم الهاتف">
-                                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                                                </svg>
                                             </span>
-                                            <input type="tel" id="pointsLoginPhone" class="login-input" placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
+                                            <input type="tel" id="pointsLoginPhone" class="login-input"
+                                                placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
                                         </div>
                                     </div>
 
@@ -579,43 +743,64 @@
                                         <span class="input-label-text">كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                                </svg>
                                             </span>
-                                            <input type="password" id="pointsLoginPassword" class="login-input" placeholder="أدخل كلمة المرور" autocomplete="current-password">
-                                            <button type="button" class="password-toggle-btn" id="togglePointsLoginPw" aria-label="إظهار/إخفاء كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                                            <input type="password" id="pointsLoginPassword" class="login-input"
+                                                placeholder="أدخل كلمة المرور" autocomplete="current-password">
+                                            <button type="button" class="password-toggle-btn" id="togglePointsLoginPw"
+                                                aria-label="إظهار/إخفاء كلمة المرور">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                                </svg>
                                             </button>
                                         </div>
                                     </div>
 
                                     <div id="pointsLoginAlert" class="points-success-badge" style="display: none;">
-                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                        </svg>
                                         <span id="pointsLoginMsg">تم تسجيل الدخول بنجاح!</span>
                                     </div>
 
                                     <!-- Login Actions -->
                                     <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
-                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsLoginBtn" style="flex: 1; margin: 0;">
-                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
+                                        <button type="button" class="button app-submit points-auth-submit-btn"
+                                            id="submitPointsLoginBtn" style="flex: 1; margin: 0;">
+                                            <svg viewBox="0 0 24 24"
+                                                style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;">
+                                                <path
+                                                    d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
+                                            </svg>
                                             <span>تسجيل الدخول</span>
                                         </button>
-                                        <button type="button" class="button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
+                                        <button type="button" class="button modal-cancel-btn"
+                                            style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
                                             إلغاء
                                         </button>
                                     </div>
-                                    
+
                                     <div class="points-switch-prompt">
                                         <span>ليس لديك حساب؟</span>
-                                        <button type="button" class="points-link-btn" id="goToSignupTabBtn">إنشاء حساب جديد الآن</button>
+                                        <button type="button" class="points-link-btn" id="goToSignupTabBtn">إنشاء حساب
+                                            جديد الآن</button>
                                     </div>
                                 </form>
                             </div>
 
                             <!-- 2. SIGNUP TAB VIEW -->
-                            <div class="points-tab-content" id="pointsSignupFormView" role="tabpanel" style="display: none;">
+                            <div class="points-tab-content" id="pointsSignupFormView" role="tabpanel"
+                                style="display: none;">
                                 <div class="points-instruction-box">
                                     <div class="instruction-icon-wrap">
-                                        <svg viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                        </svg>
                                     </div>
                                     <div class="instruction-text">
                                         <strong>إنشاء حساب في نظام النقاط</strong>
@@ -629,9 +814,13 @@
                                         <span class="input-label-text">رقم الهاتف (موبايل)</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="رقم الهاتف">
-                                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                                                </svg>
                                             </span>
-                                            <input type="tel" id="pointsSignupPhone" class="login-input" placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
+                                            <input type="tel" id="pointsSignupPhone" class="login-input"
+                                                placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
                                         </div>
                                     </div>
 
@@ -640,11 +829,19 @@
                                         <span class="input-label-text">كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                                </svg>
                                             </span>
-                                            <input type="password" id="pointsSignupPassword" class="login-input" placeholder="أنشئ كلمة مرور قوية" autocomplete="new-password">
-                                            <button type="button" class="password-toggle-btn" id="togglePointsSignupPw" aria-label="إظهار/إخفاء كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                                            <input type="password" id="pointsSignupPassword" class="login-input"
+                                                placeholder="أنشئ كلمة مرور قوية" autocomplete="new-password">
+                                            <button type="button" class="password-toggle-btn" id="togglePointsSignupPw"
+                                                aria-label="إظهار/إخفاء كلمة المرور">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                                </svg>
                                             </button>
                                         </div>
                                     </div>
@@ -654,34 +851,51 @@
                                         <span class="input-label-text">تأكيد كلمة المرور</span>
                                         <div class="input-wrapper-glass">
                                             <span class="input-icon-badge" title="تأكيد كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                                <svg viewBox="0 0 24 24">
+                                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                                </svg>
                                             </span>
-                                            <input type="password" id="pointsSignupConfirmPassword" class="login-input" placeholder="أعد إدخال كلمة المرور" autocomplete="new-password">
-                                            <button type="button" class="password-toggle-btn" id="togglePointsSignupConfirmPw" aria-label="إظهار/إخفاء تأكيد كلمة المرور">
-                                                <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                                            <input type="password" id="pointsSignupConfirmPassword" class="login-input"
+                                                placeholder="أعد إدخال كلمة المرور" autocomplete="new-password">
+                                            <button type="button" class="password-toggle-btn"
+                                                id="togglePointsSignupConfirmPw"
+                                                aria-label="إظهار/إخفاء تأكيد كلمة المرور">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                                </svg>
                                             </button>
                                         </div>
                                     </div>
 
                                     <div id="pointsSignupAlert" class="points-success-badge" style="display: none;">
-                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                        </svg>
                                         <span id="pointsSignupMsg">تم إنشاء الحساب وتسجيل الدخول بنجاح!</span>
                                     </div>
 
                                     <!-- Signup Actions -->
                                     <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
-                                        <button type="button" class="button app-submit points-auth-submit-btn" id="submitPointsSignupBtn" style="flex: 1; margin: 0;">
-                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                        <button type="button" class="button app-submit points-auth-submit-btn"
+                                            id="submitPointsSignupBtn" style="flex: 1; margin: 0;">
+                                            <svg viewBox="0 0 24 24"
+                                                style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;">
+                                                <path
+                                                    d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                            </svg>
                                             <span>إنشاء الحساب والتسجيل</span>
                                         </button>
-                                        <button type="button" class="button modal-cancel-btn" style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
+                                        <button type="button" class="button modal-cancel-btn"
+                                            style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
                                             إلغاء
                                         </button>
                                     </div>
 
                                     <div class="points-switch-prompt">
                                         <span>لديك حساب بالفعل؟</span>
-                                        <button type="button" class="points-link-btn" id="goToLoginTabBtn">تسجيل الدخول</button>
+                                        <button type="button" class="points-link-btn" id="goToLoginTabBtn">تسجيل
+                                            الدخول</button>
                                     </div>
                                 </form>
                             </div>
@@ -694,7 +908,10 @@
                     <div class="modal-sheet-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                                </svg>
                                 <span>أسعار الكروت</span>
                             </span>
                             <button class="modal-close-btn" type="button">✕ إغلاق</button>
@@ -711,11 +928,16 @@
                                     <tbody id="profiles"></tbody>
                                 </table>
                                 <button class="button app-submit modal-cancel-btn" type="button">
-                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="btn-icon">
+                                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                    </svg>
                                     <span>رجوع</span>
                                 </button>
                                 <a href="tel:772131004" class="fab-support">
-                                    <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
+                                    </svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
@@ -728,7 +950,10 @@
                     <div class="modal-sheet-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                </svg>
                                 <span>نقاط البيع والتوزيع</span>
                             </span>
                             <button class="modal-close-btn" type="button">✕ إغلاق</button>
@@ -739,11 +964,16 @@
                                     <tbody class="sell-point" id="sell-points"></tbody>
                                 </table>
                                 <button class="button app-submit modal-cancel-btn" type="button">
-                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="btn-icon">
+                                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                    </svg>
                                     <span>رجوع</span>
                                 </button>
                                 <a href="tel:772131004" class="fab-support">
-                                    <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
+                                    </svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
@@ -756,7 +986,10 @@
                     <div class="modal-sheet-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.1 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.1 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.1 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.1 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z" />
+                                </svg>
                                 <span>جديدنا والعروض</span>
                             </span>
                             <button class="modal-close-btn" type="button">✕ إغلاق</button>
@@ -767,25 +1000,39 @@
                                 <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن (تُقرأ تلقائياً من config.js) -->
                                 <!-- ========================================================================= -->
                                 <div class="loan-body" id="loan-news-container">
-                                    <p id="loan-news-title" style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">زبائننا الكرام</p>
-                                    <p id="loan-news-content">صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة جيب</strong></p>
+                                    <p id="loan-news-title"
+                                        style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
+                                        زبائننا الكرام</p>
+                                    <p id="loan-news-content">صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة
+                                            جيب</strong></p>
                                     <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (21124)</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
-                                    <div id="loan-news-extra-header" style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
-                                        <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent-cyan);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                                    <div id="loan-news-extra-header"
+                                        style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                        <svg viewBox="0 0 24 24"
+                                            style="width: 18px; height: 18px; fill: var(--accent-cyan);">
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+                                        </svg>
                                         <strong id="loan-news-extra-title">البث المباشر والمباريات:</strong>
                                     </div>
-                                    <p id="loan-news-extra-content">استمتع بمشاهدة الاستراحة والبث المباشر للمباريات والدوريات العالمية مجاناً عبر الرابط:</p>
+                                    <p id="loan-news-extra-content">استمتع بمشاهدة الاستراحة والبث المباشر للمباريات
+                                        والدوريات العالمية مجاناً عبر الرابط:</p>
                                     <div id="loan-news-extra-badge" class="loan-highlight-badge">t.com</div>
                                 </div>
                                 <!-- ========================================================================= -->
 
                                 <button class="button app-submit modal-cancel-btn" type="button">
-                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="btn-icon">
+                                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                    </svg>
                                     <span>رجوع</span>
                                 </button>
                                 <a href="tel:772131004" class="fab-support">
-                                    <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
+                                    </svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
@@ -798,7 +1045,9 @@
                     <div class="modal-sheet-card compact-speed-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                </svg>
                                 <span>تغيير سرعة الإنترنت للكرت</span>
                             </span>
                             <button class="modal-close-btn" type="button">✕ إغلاق</button>
@@ -806,7 +1055,8 @@
 
                         <div class="speed-cards-list" id="statusSpeedModalList">
                             <!-- Speed Option 1 -->
-                            <div class="speed-card-option" data-status-speed="128k/512k" data-speed-title="سرعة اقتصادية">
+                            <div class="speed-card-option" data-status-speed="128k/512k"
+                                data-speed-title="سرعة اقتصادية">
                                 <div class="speed-card-indicator">
                                     <div class="speed-radio-dot"></div>
                                 </div>
@@ -846,7 +1096,8 @@
                             </div>
 
                             <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
-                            <div class="speed-card-option" id="card-status-speed-ultra" data-status-speed="1M/8M" data-speed-title="سرعة عالية جدا" style="display: none;">
+                            <div class="speed-card-option" id="card-status-speed-ultra" data-status-speed="1M/8M"
+                                data-speed-title="سرعة عالية جدا" style="display: none;">
                                 <div class="speed-card-indicator">
                                     <div class="speed-radio-dot"></div>
                                 </div>
@@ -856,7 +1107,9 @@
                             </div>
                         </div>
                         <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
-                            <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                            <svg viewBox="0 0 24 24" class="btn-icon">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                            </svg>
                             <span>رجوع</span>
                         </button>
                     </div>
@@ -865,7 +1118,7 @@
                 <!-- 2026 STATUS DASHBOARD SCREEN (#status) -->
                 <div class="app" id="status">
                     <div class="modal-sheet-card" style="max-height: none;">
-                        
+
                         <div class="status-header-card">
                             <div class="status-badge-live">
                                 <span class="status-live-pulse-dot">
@@ -873,18 +1126,24 @@
                                     <span class="status-pulse-core"></span>
                                 </span>
                                 <span class="status-wifi-wave-icon">
-                                    <svg viewBox="0 0 24 24" class="wifi-svg-animated" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg viewBox="0 0 24 24" class="wifi-svg-animated" width="18" height="18"
+                                        fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                        stroke-linejoin="round">
                                         <path class="wifi-arc wifi-arc-3" d="M4 7.5C7.4 4.5 12.6 4.5 16 7.5" />
                                         <path class="wifi-arc wifi-arc-2" d="M6.5 10.5C8.8 8.5 13.2 8.5 15.5 10.5" />
                                         <path class="wifi-arc wifi-arc-1" d="M9.5 13.5C10.5 12.5 12.5 12.5 13.5 13.5" />
-                                        <circle class="wifi-dot" cx="11.5" cy="16.5" r="1.5" fill="currentColor" stroke="none" />
+                                        <circle class="wifi-dot" cx="11.5" cy="16.5" r="1.5" fill="currentColor"
+                                            stroke="none" />
                                     </svg>
                                 </span>
                                 <span class="status-badge-text">متصل بالإنترنت الآن</span>
                             </div>
-                            <h2 class="title" id="status-title" style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">تم تسجيل دخولك بنجاح!</h2>
+                            <h2 class="title" id="status-title"
+                                style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">تم تسجيل دخولك بنجاح!</h2>
                             <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">
-                                إذا لم يتم الأتصال تلقائيا أضغط <a style="text-decoration: underline; color: #fde047; font-weight: 700;" href="status.html">هنا</a>
+                                إذا لم يتم الأتصال تلقائيا أضغط <a
+                                    style="text-decoration: underline; color: #fde047; font-weight: 700;"
+                                    href="status.html">هنا</a>
                             </p>
                         </div>
 
@@ -900,32 +1159,49 @@
                         <!-- Entertainment Direct Links -->
                         <div class="entertainment-links">
                             <a class="stream-card-link" href="http://30.10.10.10" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
+                                    <path
+                                        d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
+                                </svg>
                                 <span>الاستراحة</span>
                             </a>
                             <a class="stream-card-link" href="http://30.10.10.10:88" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-11-2l6-4-6-4v8z"/></svg>
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
+                                    <path
+                                        d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-11-2l6-4-6-4v8z" />
+                                </svg>
                                 <span>البث المباشر</span>
                             </a>
                         </div>
 
                         <!-- Speed Change Card with White Background & Maroon Text -->
                         <div class="statusdiv">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                                 <span class="status-metric-label">
-                                    <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: var(--accent-cyan);"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                    <svg viewBox="0 0 24 24"
+                                        style="width: 16px; height: 16px; fill: var(--accent-cyan);">
+                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    </svg>
                                     <span>سرعة الكرت الحالية:</span>
                                 </span>
-                                <span id="sspeed" style="font-size: 0.95rem; font-weight: 800; color: var(--accent-cyan);"></span>
+                                <span id="sspeed"
+                                    style="font-size: 0.95rem; font-weight: 800; color: var(--accent-cyan);"></span>
                             </div>
-                            <p style="font-size: 0.78rem; color: #f1f5f9; margin-bottom: 8px;">أختر سرعة أقل للحفاظ على رصيد الكرت</p>
-                            
-                            <button type="button" class="status-select-trigger" id="statusSpeedTrigger" parent-id="status-speed-modal">
+                            <p style="font-size: 0.78rem; color: #f1f5f9; margin-bottom: 8px;">أختر سرعة أقل للحفاظ على
+                                رصيد الكرت</p>
+
+                            <button type="button" class="status-select-trigger" id="statusSpeedTrigger"
+                                parent-id="status-speed-modal">
                                 <div class="status-trigger-content">
-                                    <svg viewBox="0 0 24 24" class="status-trigger-icon"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="status-trigger-icon">
+                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    </svg>
                                     <span id="statusSpeedTriggerText">أضغط هنا لتغيير سرعة الإنترنت</span>
                                 </div>
-                                <svg viewBox="0 0 24 24" class="status-trigger-chevron"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                <svg viewBox="0 0 24 24" class="status-trigger-chevron">
+                                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                                </svg>
                             </button>
 
                             <select id="speedchange" class="tcs" style="display: none;">
@@ -937,7 +1213,10 @@
                         <div class="toggle-container-modern" style="margin: 12px 0;">
                             <div class="toggle-info">
                                 <span class="toggle-title">
-                                    <svg viewBox="0 0 24 24" class="section-icon"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="section-icon">
+                                        <path
+                                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                                    </svg>
                                     <span>إيقاف التحديثات والمتجر</span>
                                 </span>
                                 <span class="toggle-desc">التحديثات والمتجر تستهلك الرصيد بسرعة</span>
@@ -963,41 +1242,60 @@
                         <!-- Live Metrics Dashboard -->
                         <div style="margin-top: 14px;">
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent-gold);"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                                <span style="font-size: 0.95rem; font-weight: 800; color: #ffffff;">معلومات واستهلاك الكرت</span>
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent-gold);">
+                                    <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+                                </svg>
+                                <span style="font-size: 0.95rem; font-weight: 800; color: #ffffff;">معلومات واستهلاك
+                                    الكرت</span>
                             </div>
                             <div class="status-grid-metrics">
                                 <div class="metric-card-glass">
                                     <span class="metric-title">
-                                        <svg viewBox="0 0 24 24" class="metric-icon"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="metric-icon">
+                                            <path
+                                                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
+                                        </svg>
                                         <span>التنزيل (Download)</span>
                                     </span>
                                     <span class="metric-val cyan" id="bytes_out">-</span>
                                 </div>
                                 <div class="metric-card-glass">
                                     <span class="metric-title">
-                                        <svg viewBox="0 0 24 24" class="metric-icon"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="metric-icon">
+                                            <path
+                                                d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
+                                        </svg>
                                         <span>الرفع (Upload)</span>
                                     </span>
                                     <span class="metric-val emerald" id="bytes_in">-</span>
                                 </div>
                                 <div class="metric-card-glass full-width" remain_bytes_total>
                                     <span class="metric-title">
-                                        <svg viewBox="0 0 24 24" class="metric-icon"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.24l6 3.75v7.52l-6 3.75-6-3.75V7.99l6-3.75z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="metric-icon">
+                                            <path
+                                                d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.24l6 3.75v7.52l-6 3.75-6-3.75V7.99l6-3.75z" />
+                                        </svg>
                                         <span>التحميل المتبقي</span>
                                     </span>
                                     <span class="metric-val gold" id="remain_bytes_total">مفتوح</span>
                                 </div>
                                 <div class="metric-card-glass">
                                     <span class="metric-title">
-                                        <svg viewBox="0 0 24 24" class="metric-icon"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="metric-icon">
+                                            <path
+                                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                                        </svg>
                                         <span>الوقت المستهلك</span>
                                     </span>
                                     <span class="metric-val" id="uptime">-</span>
                                 </div>
                                 <div class="metric-card-glass" session_time_left>
                                     <span class="metric-title">
-                                        <svg viewBox="0 0 24 24" class="metric-icon"><path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zM12 11.5l-4-4V4h8v3.5l-4 4z"/></svg>
+                                        <svg viewBox="0 0 24 24" class="metric-icon">
+                                            <path
+                                                d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zM12 11.5l-4-4V4h8v3.5l-4 4z" />
+                                        </svg>
                                         <span>الوقت المتبقي</span>
                                     </span>
                                     <span class="metric-val gold" id="session_time_left">مفتوح</span>
@@ -1008,28 +1306,40 @@
                         <!-- Session Action Controls -->
                         <div class="status-actions-row">
                             <button class="btn-danger-glass app-logout" erase-cookie clear-hot-cookie type="button">
-                                <svg viewBox="0 0 24 24" class="action-btn-icon"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                                <svg viewBox="0 0 24 24" class="action-btn-icon">
+                                    <path
+                                        d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                </svg>
                                 <span>تسجيل الخروج</span>
                             </button>
                             <button class="btn-secondary-glass app-logout" type="button">
-                                <svg viewBox="0 0 24 24" class="action-btn-icon"><path d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z"/></svg>
+                                <svg viewBox="0 0 24 24" class="action-btn-icon">
+                                    <path
+                                        d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z" />
+                                </svg>
                                 <span>قطع الاتصال</span>
                             </button>
                         </div>
 
-                        <button class="button app-submit sell-point-icon app-store" parent-id="app-store" data-app-store-status-button style="display: none;">متجر البرامج</button>
+                        <button class="button app-submit sell-point-icon app-store" parent-id="app-store"
+                            data-app-store-status-button style="display: none;">متجر البرامج</button>
 
                         <!-- Customer Support Section (Identical to Main Login Page) -->
                         <div class="customer-support-section" style="margin-top: 18px;">
                             <div class="support-header">
-                                <svg viewBox="0 0 24 24" class="support-header-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                                <svg viewBox="0 0 24 24" class="support-header-icon">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                                </svg>
                                 <span class="support-title">خدمة العملاء</span>
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9" class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
+                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                    class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z"/>
+                                        <path
+                                            d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z" />
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
@@ -1037,7 +1347,8 @@
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
                                 <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z"/>
+                                        <path
+                                            d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
                                     </svg>
                                     <span>اتصال هاتفي</span>
                                 </a>
@@ -1051,9 +1362,14 @@
                     <div class="modal-sheet-card">
                         <div class="block-card-warning">
                             <div class="block-icon-pulse">
-                                <svg viewBox="0 0 24 24" style="width: 34px; height: 34px; fill: #f43f5e;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                <svg viewBox="0 0 24 24" style="width: 34px; height: 34px; fill: #f43f5e;">
+                                    <path
+                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                </svg>
                             </div>
-                            <h2 class="title" style="color: #fda4af; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">أنت محظور مؤقتاً</h2>
+                            <h2 class="title"
+                                style="color: #fda4af; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">أنت
+                                محظور مؤقتاً</h2>
                             <p class="contact-text" style="color: #fecdd3; font-size: 0.95rem; line-height: 1.6;">
                                 لقد تم حظرك بسبب محاولات تسجيل الدخول الكثيرة الخاطئة لحماية حسابك
                             </p>
@@ -1065,20 +1381,26 @@
                         <!-- Customer Support Section (Identical to Main Login Page) -->
                         <div class="customer-support-section" style="margin-top: 18px;">
                             <div class="support-header">
-                                <svg viewBox="0 0 24 24" class="support-header-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                                <svg viewBox="0 0 24 24" class="support-header-icon">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                                </svg>
                                 <span class="support-title">خدمة العملاء</span>
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9" class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
+                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                    class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z"/>
+                                        <path
+                                            d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z" />
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
                                 <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z"/>
+                                        <path
+                                            d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
                                     </svg>
                                     <span>اتصال هاتفي</span>
                                 </a>
@@ -1092,7 +1414,10 @@
                     <div class="modal-sheet-card">
                         <div class="modal-header">
                             <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/></svg>
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z" />
+                                </svg>
                                 <span>متجر البرامج</span>
                             </span>
                             <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
@@ -1102,7 +1427,10 @@
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
                         <a href="tel:772131004" class="fab-support">
-                            <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
+                            </svg>
                             <span class="contact back" data-service-number>خدمة العملاء: {{service-number}}</span>
                         </a>
                     </div>
@@ -1115,19 +1443,30 @@
     <!-- 2026 FIXED GLASSMORPHIC BOTTOM NAVIGATION BAR -->
     <nav class="bottom-nav-bar" id="bottomNav">
         <button class="nav-item-btn active" id="navHome" type="button">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
             <span>الرئيسية</span>
         </button>
         <button class="nav-item-btn price-icon" parent-id="price" data-price-button type="button">
-            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+            </svg>
             <span>الأسعار</span>
         </button>
         <button class="nav-item-btn sellpoint" parent-id="sell-point" data-sell-point-button type="button">
-            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
             <span>نقاط البيع</span>
         </button>
         <button class="nav-item-btn" parent-id="loan" data-loan-button type="button">
-            <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.1 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.1 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.1 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.1 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z" />
+            </svg>
             <span>العروض</span>
         </button>
     </nav>
@@ -1146,15 +1485,15 @@
 
     <!-- 2026 Interactive Enhancements & Swipe Gestures -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
+        document.addEventListener('DOMContentLoaded', function () {
+
             // 1. CAROUSEL SEAMLESS INFINITE LOOP & AUTOPLAY
             const track = document.getElementById('carouselTrack');
             const dots = document.querySelectorAll('.carousel-dot');
             const prevBtn = document.getElementById('carouselPrev');
             const nextBtn = document.getElementById('carouselNext');
             const carouselContainer = document.getElementById('adCarousel');
-            
+
             if (track) {
                 const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
                 const totalSlides = originalSlides.length;
@@ -1169,7 +1508,7 @@
                     const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
                     firstClone.classList.add('carousel-clone');
                     lastClone.classList.add('carousel-clone');
-                    
+
                     track.insertBefore(lastClone, track.firstElementChild);
                     track.appendChild(firstClone);
 
@@ -1253,7 +1592,7 @@
 
                 if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
                 if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
-                
+
                 dots.forEach((dot, idx) => {
                     dot.addEventListener('click', () => {
                         if (isTransitioning) return;
@@ -1371,7 +1710,7 @@
             window.closeAppModal = closeAppModal;
 
             // Universal Click Handler for All Modal Close & Cancel Buttons
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 const closeTrigger = e.target.closest('.modal-close-btn, .modal-cancel-btn, .back, button[data-modal-close]');
                 if (closeTrigger) {
                     const parentApp = closeTrigger.closest('.app');
@@ -1382,7 +1721,7 @@
                         return;
                     }
                 }
-                
+
                 // Clicking on dark backdrop outside modal card
                 if (e.target.classList && e.target.classList.contains('app') && e.target.classList.contains('active') && e.target.id !== 'status') {
                     e.preventDefault();
@@ -1392,7 +1731,7 @@
 
             // Modal Trigger Buttons (parent-id and dedicated IDs)
             document.querySelectorAll('button[parent-id], [data-open-modal]').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     if (this.id === 'openQrScannerBtn') return; // Handled specifically with direct camera start
                     const parentId = this.getAttribute('parent-id') || this.getAttribute('data-open-modal');
                     if (parentId && parentId !== 'status') {
@@ -1474,12 +1813,12 @@
 
             if (speedCards.length > 0) {
                 speedCards.forEach(card => {
-                    card.addEventListener('click', function(e) {
+                    card.addEventListener('click', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         const val = this.getAttribute('data-speed');
                         const speedTitle = this.getAttribute('data-speed-title') || speedLabelMap[val] || val;
-                        
+
                         updateSpeedSelection(val);
                         if (selectedSpeedDisplay) {
                             selectedSpeedDisplay.textContent = speedTitle;
@@ -1493,7 +1832,7 @@
                 });
 
                 if (speedSelect) {
-                    speedSelect.addEventListener('change', function() {
+                    speedSelect.addEventListener('change', function () {
                         const val = speedSelect.value;
                         if (selectedSpeedDisplay && speedLabelMap[val]) {
                             selectedSpeedDisplay.textContent = speedLabelMap[val];
@@ -1529,7 +1868,7 @@
 
             if (statusSpeedCards.length > 0) {
                 statusSpeedCards.forEach(card => {
-                    card.addEventListener('click', function(e) {
+                    card.addEventListener('click', function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         const val = this.getAttribute('data-status-speed');
@@ -1680,12 +2019,12 @@
             // Password Visibility Toggles
             function setupPasswordToggle(toggleBtn, inputField) {
                 if (!toggleBtn || !inputField) return;
-                toggleBtn.addEventListener('click', function(e) {
+                toggleBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     const isPass = inputField.type === 'password';
                     inputField.type = isPass ? 'text' : 'password';
                     toggleBtn.classList.toggle('active', isPass);
-                    toggleBtn.innerHTML = isPass 
+                    toggleBtn.innerHTML = isPass
                         ? `<svg viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>`
                         : `<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
                 });
@@ -1702,11 +2041,11 @@
                     if (pointsLoginPhone) pointsLoginPhone.value = savedPhone;
                     if (pointsSignupPhone) pointsSignupPhone.value = savedPhone;
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             // Open Points Modal Handler
             if (openPointsRegisterBtn && pointsModal) {
-                openPointsRegisterBtn.addEventListener('click', function() {
+                openPointsRegisterBtn.addEventListener('click', function () {
                     pointsModal.classList.add('active');
                     pointsModal.style.display = 'block';
                     const loginEl = document.getElementById('login');
@@ -1721,7 +2060,7 @@
             if (pointsModal) {
                 const closeBtns = pointsModal.querySelectorAll('.app-logout, .modal-close-btn, .modal-cancel-btn');
                 closeBtns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
+                    btn.addEventListener('click', function (e) {
                         pointsModal.classList.remove('active');
                         pointsModal.style.display = 'none';
                         const loginEl = document.getElementById('login');
@@ -1734,7 +2073,7 @@
 
             // Handle Login Form Submission
             if (submitPointsLoginBtn) {
-                submitPointsLoginBtn.addEventListener('click', function() {
+                submitPointsLoginBtn.addEventListener('click', function () {
                     const phone = pointsLoginPhone ? pointsLoginPhone.value.trim() : '';
                     const password = pointsLoginPassword ? pointsLoginPassword.value.trim() : '';
                     const errElem = document.getElementById('error');
@@ -1758,7 +2097,7 @@
                     try {
                         localStorage.setItem('points_user_phone', phone);
                         localStorage.setItem('points_user_logged_in', 'true');
-                    } catch (e) {}
+                    } catch (e) { }
 
                     if (pointsLoginAlert) {
                         pointsLoginAlert.style.display = 'flex';
@@ -1785,7 +2124,7 @@
 
             // Handle Signup Form Submission
             if (submitPointsSignupBtn) {
-                submitPointsSignupBtn.addEventListener('click', function() {
+                submitPointsSignupBtn.addEventListener('click', function () {
                     const phone = pointsSignupPhone ? pointsSignupPhone.value.trim() : '';
                     const password = pointsSignupPassword ? pointsSignupPassword.value.trim() : '';
                     const confirmPassword = pointsSignupConfirmPassword ? pointsSignupConfirmPassword.value.trim() : '';
@@ -1818,7 +2157,7 @@
                     try {
                         localStorage.setItem('points_user_phone', phone);
                         localStorage.setItem('points_user_logged_in', 'true');
-                    } catch (e) {}
+                    } catch (e) { }
 
                     if (pointsSignupAlert) {
                         pointsSignupAlert.style.display = 'flex';
@@ -1846,7 +2185,7 @@
             // 7. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
             const navHome = document.getElementById('navHome');
             if (navHome) {
-                navHome.addEventListener('click', function(e) {
+                navHome.addEventListener('click', function (e) {
                     e.preventDefault();
                     document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
                     navHome.classList.add('active');
@@ -1855,7 +2194,7 @@
             }
 
             document.querySelectorAll('.nav-item-btn[parent-id]').forEach(navBtn => {
-                navBtn.addEventListener('click', function(e) {
+                navBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
@@ -1912,13 +2251,13 @@
                     gain.connect(ctx.destination);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.25);
-                } catch (e) {}
+                } catch (e) { }
             }
 
             function extractCardNumberFromQR(raw) {
                 if (!raw) return '';
                 raw = String(raw).trim();
-                
+
                 // 1. Check if URL
                 if (raw.startsWith('http://') || raw.startsWith('https://')) {
                     try {
@@ -1933,7 +2272,7 @@
                         if (url.hash && url.hash.length > 1) {
                             return url.hash.substring(1).trim();
                         }
-                    } catch (e) {}
+                    } catch (e) { }
                 }
 
                 // 2. Check if JSON
@@ -1942,7 +2281,7 @@
                         const obj = JSON.parse(raw);
                         const val = obj.username || obj.user || obj.card || obj.code || obj.pin;
                         if (val) return String(val).trim();
-                    } catch (e) {}
+                    } catch (e) { }
                 }
 
                 // 3. Check for PREFIX:VALUE (e.g. USER:12345 or CARD:12345)
@@ -1958,7 +2297,7 @@
                 if (typeof window.jsQR === 'function' || barcodeDetectorInstance) {
                     return Promise.resolve();
                 }
-                return new Promise(function(resolve) {
+                return new Promise(function (resolve) {
                     var s = document.createElement('script');
                     s.src = 'js/jsqr.min.js';
                     s.async = true;
@@ -2004,7 +2343,7 @@
                 isScanningActive = true;
 
                 // Load jsQR in background without delaying camera permission prompt
-                ensureJsQr().catch(() => {});
+                ensureJsQr().catch(() => { });
 
                 try {
                     qrMediaStream = await requestCameraStream(currentFacingMode);
@@ -2019,8 +2358,8 @@
                         qrVideo.srcObject = qrMediaStream;
 
                         // Ensure video starts playing smoothly
-                        qrVideo.onloadedmetadata = function() {
-                            qrVideo.play().catch(function(e) {
+                        qrVideo.onloadedmetadata = function () {
+                            qrVideo.play().catch(function (e) {
                                 console.warn('Autoplay caught:', e);
                             });
                             if (qrLoading) qrLoading.style.display = 'none';
@@ -2030,12 +2369,12 @@
                         if (playPromise !== undefined) {
                             playPromise.then(() => {
                                 if (qrLoading) qrLoading.style.display = 'none';
-                            }).catch(function(e) {
+                            }).catch(function (e) {
                                 console.warn('Autoplay caught:', e);
                             });
                         }
 
-                        qrVideo.onloadeddata = function() {
+                        qrVideo.onloadeddata = function () {
                             if (qrLoading) qrLoading.style.display = 'none';
                         };
                     }
@@ -2058,7 +2397,7 @@
                                 qrTorchBtn.style.display = 'none';
                             }
                         }
-                    } catch (e) {}
+                    } catch (e) { }
 
                     // Start Scan Loop
                     requestAnimationFrame(scanVideoFrame);
@@ -2110,7 +2449,7 @@
                         if (barcodes && barcodes.length > 0) {
                             detectedCode = barcodes[0].rawValue;
                         }
-                    } catch (e) {}
+                    } catch (e) { }
                 }
 
                 // Priority 2: jsQR Canvas Decoding (Fast captive portal safe engine)
@@ -2131,7 +2470,7 @@
                                 detectedCode = code.data;
                             }
                         }
-                    } catch (e) {}
+                    } catch (e) { }
                 }
 
                 if (detectedCode) {
@@ -2150,7 +2489,7 @@
 
                 playBeepSound();
                 if (navigator.vibrate) {
-                    try { navigator.vibrate([80, 40, 80]); } catch (e) {}
+                    try { navigator.vibrate([80, 40, 80]); } catch (e) { }
                 }
 
                 if (qrSuccessCard && qrResultDisplay) {
@@ -2187,7 +2526,7 @@
                 }
                 if (qrMediaStream) {
                     qrMediaStream.getTracks().forEach(track => {
-                        try { track.stop(); } catch (e) {}
+                        try { track.stop(); } catch (e) { }
                     });
                     qrMediaStream = null;
                 }
@@ -2200,7 +2539,7 @@
 
             // Open QR Scanner button click & immediate camera initialization
             if (openQrBtn) {
-                const handleOpenQr = function(e) {
+                const handleOpenQr = function (e) {
                     if (e) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -2213,7 +2552,7 @@
 
             // Switch Camera
             if (qrSwitchCamBtn) {
-                qrSwitchCamBtn.addEventListener('click', function() {
+                qrSwitchCamBtn.addEventListener('click', function () {
                     currentFacingMode = (currentFacingMode === 'environment') ? 'user' : 'environment';
                     startCamera();
                 });
@@ -2221,7 +2560,7 @@
 
             // Torch Toggle
             if (qrTorchBtn) {
-                qrTorchBtn.addEventListener('click', async function() {
+                qrTorchBtn.addEventListener('click', async function () {
                     if (!qrMediaStream) return;
                     const track = qrMediaStream.getVideoTracks()[0];
                     if (track && track.applyConstraints) {
@@ -2257,9 +2596,9 @@
                 await ensureJsQr();
 
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const img = new Image();
-                    img.onload = async function() {
+                    img.onload = async function () {
                         let detectedCode = null;
 
                         // Native Hardware detector check
@@ -2269,7 +2608,7 @@
                                 if (barcodes && barcodes.length > 0) {
                                     detectedCode = barcodes[0].rawValue;
                                 }
-                            } catch (err) {}
+                            } catch (err) { }
                         }
 
                         // jsQR Canvas decode
@@ -2320,7 +2659,7 @@
 
             // Fallback Native Camera button trigger
             if (qrSystemCamFallbackBtn && qrSystemCameraInput) {
-                qrSystemCamFallbackBtn.addEventListener('click', function(e) {
+                qrSystemCamFallbackBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     qrSystemCameraInput.click();
@@ -2328,7 +2667,7 @@
             }
 
             if (qrSystemCameraInput) {
-                qrSystemCameraInput.addEventListener('change', function(e) {
+                qrSystemCameraInput.addEventListener('change', function (e) {
                     if (e.target.files && e.target.files[0]) {
                         decodeQrFromImageFile(e.target.files[0]);
                     }
@@ -2337,7 +2676,7 @@
 
             // Retry Camera
             if (qrRetryBtn) {
-                qrRetryBtn.addEventListener('click', function() {
+                qrRetryBtn.addEventListener('click', function () {
                     startCamera();
                 });
             }
@@ -2346,7 +2685,7 @@
             if (qrScannerModal) {
                 const closeBtns = qrScannerModal.querySelectorAll('.modal-close-btn, .modal-cancel-btn, .app-logout');
                 closeBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function () {
                         stopCamera();
                     });
                 });
@@ -2357,7 +2696,7 @@
             let prevCardCycleIndex = 0;
 
             if (prevCardBtn) {
-                prevCardBtn.addEventListener('click', function(e) {
+                prevCardBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -2410,7 +2749,7 @@
                         if (singleLocal && !cardsList.includes(singleLocal.trim())) {
                             cardsList.push(singleLocal.trim());
                         }
-                    } catch (err) {}
+                    } catch (err) { }
 
                     const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
 
@@ -2431,7 +2770,7 @@
                         }, 500);
 
                         if (navigator.vibrate) {
-                            try { navigator.vibrate(50); } catch (err) {}
+                            try { navigator.vibrate(50); } catch (err) { }
                         }
                     } else {
                         const errEl = document.getElementById('error');
@@ -2448,7 +2787,7 @@
             // Save entered username to stored history and localStorage
             const usernameInputField = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
             if (usernameInputField) {
-                const persistCard = function() {
+                const persistCard = function () {
                     const val = usernameInputField.value ? usernameInputField.value.trim() : '';
                     if (val.length > 1) {
                         try {
@@ -2456,7 +2795,7 @@
                             if (typeof saveValueToCookie === 'function') {
                                 saveValueToCookie(val, '');
                             }
-                        } catch (err) {}
+                        } catch (err) { }
                     }
                 };
                 usernameInputField.addEventListener('blur', persistCard);
@@ -2464,7 +2803,7 @@
             }
 
             if (document.login) {
-                document.login.addEventListener('submit', function() {
+                document.login.addEventListener('submit', function () {
                     const uInput = document.login.querySelector('input[username-field]') || document.querySelector('input[name="username"]');
                     if (uInput && uInput.value && uInput.value.trim().length > 1) {
                         try {
@@ -2473,7 +2812,7 @@
                             if (typeof saveValueToCookie === 'function') {
                                 saveValueToCookie(val, '');
                             }
-                        } catch (err) {}
+                        } catch (err) { }
                     }
                 });
             }
@@ -2486,18 +2825,18 @@
             const waWebUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMsg}`;
 
             waButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                    
+
                     if (isMobile) {
                         // Trigger universal mobile URI scheme (Prompts Android "Complete action using" if both are installed)
                         const start = Date.now();
                         window.location.href = waSchemeUrl;
 
                         // Fallback to web link if neither app is installed
-                        setTimeout(function() {
+                        setTimeout(function () {
                             const elapsed = Date.now() - start;
                             if (elapsed < 2000 && !document.hidden && !document.webkitHidden) {
                                 window.location.href = waWebUrl;
@@ -2563,13 +2902,13 @@
             }
 
             // Listen to focus / blur globally only for text-entry fields (avoids hiding on checkboxes/toggles/switches)
-            document.addEventListener('focusin', function(e) {
+            document.addEventListener('focusin', function (e) {
                 if (isTextualKeyboardInput(e.target)) {
                     hideBottomNavOnKeyboard();
                 }
             });
 
-            document.addEventListener('focusout', function(e) {
+            document.addEventListener('focusout', function (e) {
                 if (isTextualKeyboardInput(e.target)) {
                     restoreBottomNavOnBlur();
                 }
@@ -2578,7 +2917,7 @@
             // Handle visual viewport shrink (Android & iOS virtual keyboard open/close)
             if (window.visualViewport) {
                 const originalVpHeight = window.visualViewport.height;
-                window.visualViewport.addEventListener('resize', function() {
+                window.visualViewport.addEventListener('resize', function () {
                     const currentHeight = window.visualViewport.height;
                     // If viewport height drops significantly AND active element is a text input, virtual keyboard is active
                     if (isTextualKeyboardInput(document.activeElement) && (currentHeight < originalVpHeight - 120 || currentHeight < window.innerHeight * 0.78)) {
@@ -2598,7 +2937,7 @@
                 if (document.documentElement) document.documentElement.scrollTop = 0;
                 if (document.body) document.body.scrollTop = 0;
                 if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
-                
+
                 const scrollNodes = document.querySelectorAll('.app, .app-container, .main, #container, .container, body, html');
                 scrollNodes.forEach(el => {
                     if (el && el.scrollTop > 0) el.scrollTop = 0;
@@ -2628,7 +2967,7 @@
             if (document.login) {
                 const usernameInput = document.login.querySelector("input[name='username']");
                 if (usernameInput) {
-                    usernameInput.addEventListener('keydown', function(e) {
+                    usernameInput.addEventListener('keydown', function (e) {
                         if (e.key === 'Enter' || e.keyCode === 13) {
                             e.preventDefault();
                             const mainBtn = document.getElementById('mainLoginBtn') || document.querySelector('.login-submit');
@@ -2641,7 +2980,7 @@
                     });
                 }
 
-                document.login.addEventListener('submit', function(e) {
+                document.login.addEventListener('submit', function (e) {
                     e.preventDefault();
                     const mainBtn = document.getElementById('mainLoginBtn') || document.querySelector('.login-submit');
                     if (mainBtn) {
@@ -2739,9 +3078,9 @@
             }
 
             window.addEventListener('load', setupMarquee, { passive: true });
-            
+
             let resizeDebounce = null;
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 clearTimeout(resizeDebounce);
                 resizeDebounce = setTimeout(setupMarquee, 150);
             }, { passive: true });
@@ -2753,7 +3092,7 @@
             const marqueeEl = document.querySelector('.marquee');
             if (marqueeEl) {
                 let mutationDebounce = null;
-                const observer = new MutationObserver(function() {
+                const observer = new MutationObserver(function () {
                     clearTimeout(mutationDebounce);
                     mutationDebounce = setTimeout(setupMarquee, 60);
                 });
@@ -2761,5 +3100,9 @@
             }
         })();
     </script>
+    <script src="js/loyalty-system/loyalty-integration.js"></script>
+
+    <script src="js/notifications-system/notifications-integration.js"></script>
 </body>
+
 </html>
