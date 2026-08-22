@@ -486,8 +486,9 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="app-logout button modal-cancel-btn" style="margin-top: 14px; width: 100%; min-height: 44px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff;">
-                                إلغاء والعودة
+                            <button type="button" class="button app-submit modal-cancel-btn" style="margin-top: 14px;">
+                                <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                <span>رجوع</span>
                             </button>
                         </div>
                     </div>
@@ -677,7 +678,10 @@
                                     </thead>
                                     <tbody id="profiles"></tbody>
                                 </table>
-                                <button class="button app-submit modal-cancel-btn">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn" type="button">
+                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <span>رجوع</span>
+                                </button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -702,7 +706,10 @@
                                 <table>
                                     <tbody class="sell-point" id="sell-points"></tbody>
                                 </table>
-                                <button class="button app-submit modal-cancel-btn">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn" type="button">
+                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <span>رجوع</span>
+                                </button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -741,7 +748,10 @@
                                 </div>
                                 <!-- ========================================================================= -->
 
-                                <button class="button app-submit modal-cancel-btn">رجوع</button>
+                                <button class="button app-submit modal-cancel-btn" type="button">
+                                    <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    <span>رجوع</span>
+                                </button>
                                 <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
                                     <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
@@ -803,7 +813,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="button app-submit modal-cancel-btn back" style="margin-top: 14px;">إلغاء</button>
+                        <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
+                            <svg viewBox="0 0 24 24" class="btn-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                            <span>رجوع</span>
+                        </button>
                     </div>
                 </div>
 
@@ -2427,9 +2440,21 @@
                 observer.observe(toastContainer, { attributes: true, attributeFilter: ['class'] });
             }
 
-            // 8. MOBILE KEYBOARD DETECTION: PREVENT BOTTOM BAR FROM RISING ABOVE KEYBOARD
+            // 8. MOBILE KEYBOARD DETECTION: PREVENT BOTTOM BAR FROM RISING ABOVE KEYBOARD (TEXT INPUTS ONLY)
             const bNav = document.getElementById('bottomNav');
             let keyboardTimer = null;
+
+            function isTextualKeyboardInput(el) {
+                if (!el || !el.tagName) return false;
+                const tag = el.tagName.toUpperCase();
+                if (tag === 'TEXTAREA') return true;
+                if (el.isContentEditable) return true;
+                if (tag === 'INPUT') {
+                    const type = (el.type || 'text').toLowerCase();
+                    return ['text', 'password', 'number', 'tel', 'email', 'search', 'url'].includes(type);
+                }
+                return false;
+            }
 
             function hideBottomNavOnKeyboard() {
                 clearTimeout(keyboardTimer);
@@ -2443,31 +2468,26 @@
                 clearTimeout(keyboardTimer);
                 keyboardTimer = setTimeout(() => {
                     const activeElement = document.activeElement;
-                    const isFormInput = activeElement && (
-                        activeElement.tagName === 'INPUT' || 
-                        activeElement.tagName === 'SELECT' || 
-                        activeElement.tagName === 'TEXTAREA' ||
-                        activeElement.isContentEditable
-                    );
-                    
-                    if (!isFormInput) {
+                    if (!isTextualKeyboardInput(activeElement)) {
                         document.body.classList.remove('keyboard-open');
                         if (bNav) {
                             bNav.classList.remove('hidden-keyboard');
                         }
                     }
-                }, 120);
+                }, 100);
             }
 
-            // Listen to focus / blur globally across all current and dynamic inputs
+            // Listen to focus / blur globally only for text-entry fields (avoids hiding on checkboxes/toggles/switches)
             document.addEventListener('focusin', function(e) {
-                if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+                if (isTextualKeyboardInput(e.target)) {
                     hideBottomNavOnKeyboard();
                 }
             });
 
             document.addEventListener('focusout', function(e) {
-                restoreBottomNavOnBlur();
+                if (isTextualKeyboardInput(e.target)) {
+                    restoreBottomNavOnBlur();
+                }
             });
 
             // Handle visual viewport shrink (Android & iOS virtual keyboard open/close)
@@ -2475,10 +2495,10 @@
                 const originalVpHeight = window.visualViewport.height;
                 window.visualViewport.addEventListener('resize', function() {
                     const currentHeight = window.visualViewport.height;
-                    // If viewport height drops significantly, virtual keyboard is active
-                    if (currentHeight < originalVpHeight - 120 || currentHeight < window.innerHeight * 0.78) {
+                    // If viewport height drops significantly AND active element is a text input, virtual keyboard is active
+                    if (isTextualKeyboardInput(document.activeElement) && (currentHeight < originalVpHeight - 120 || currentHeight < window.innerHeight * 0.78)) {
                         hideBottomNavOnKeyboard();
-                    } else {
+                    } else if (!isTextualKeyboardInput(document.activeElement)) {
                         restoreBottomNavOnBlur();
                     }
                 });

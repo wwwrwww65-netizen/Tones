@@ -2261,30 +2261,116 @@ body.keyboard-open .bottom-nav-bar,
   fill: var(--accent-gold);
 }
 
-.modal-close-btn,
-.app-logout.button,
-button.app-logout {
-  padding: 5px 14px;
+.modal-close-btn {
+  padding: 6px 14px;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.45);
   color: #FFFFFF;
   font-family: var(--font-main);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   transition: var(--transition-smooth);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.modal-close-btn:hover,
-.app-logout:hover {
+.modal-close-btn:hover {
   background: rgba(212, 175, 55, 0.25);
   border-color: var(--accent-gold);
   color: #FFFFFF;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.modal-close-btn:active {
+  transform: scale(0.96);
+}
+
+/* 2026 Modern Luxury Modal Back & Cancel Buttons */
+.modal-cancel-btn,
+.modal-sheet-card .button.modal-cancel-btn,
+.app .button.modal-cancel-btn,
+.app button.modal-cancel-btn,
+.app-logout.button.app-submit {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-main);
+  background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
+  color: #2D0509 !important;
+  font-weight: 900 !important;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  border: none !important;
+  border-radius: 12px;
+  padding: 11px 20px;
+  min-height: 46px;
+  margin: 14px 0 10px 0;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.modal-cancel-btn:hover,
+.modal-sheet-card .button.modal-cancel-btn:hover,
+.app .button.modal-cancel-btn:hover,
+.app button.modal-cancel-btn:hover,
+.app-logout.button.app-submit:hover {
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.38), inset 0 1.5px 3px rgba(255, 255, 255, 0.4) !important;
+  color: #2D0509 !important;
+}
+
+.modal-cancel-btn:active,
+.modal-sheet-card .button.modal-cancel-btn:active,
+.app .button.modal-cancel-btn:active,
+.app button.modal-cancel-btn:active,
+.app-logout.button.app-submit:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.2) !important;
+}
+
+.modal-cancel-btn svg,
+.app-logout.button.app-submit svg {
+  width: 18px;
+  height: 18px;
+  fill: #2D0509 !important;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
+  flex-shrink: 0;
+}
+
+/* Secondary cancel buttons inside horizontal action rows */
+.modal-actions-row .modal-cancel-btn {
+  width: auto !important;
+  min-height: 40px !important;
+  height: 40px !important;
+  padding: 0 16px !important;
+  margin: 0 !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 10px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+}
+
+.modal-actions-row .modal-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: var(--accent-gold) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
 }
 
 /* ==========================================================================
