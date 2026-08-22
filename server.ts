@@ -148,7 +148,10 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// Serve static assets from project root
+// Serve static assets from project root and specific subfolders
+app.use('/adimg', express.static(path.join(__dirname, 'adimg')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/2024', express.static(path.join(__dirname, '2024')));
 app.use(express.static(__dirname));
 
 // Fallback route to index.html
