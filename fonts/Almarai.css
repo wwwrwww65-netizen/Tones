@@ -38,3 +38,19 @@
     font-display: swap;
     src: url(Almarai.woff2) format('woff2');
 }
+
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url(cairo.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url(tajawal.woff2) format('woff2');
+}
