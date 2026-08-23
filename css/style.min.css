@@ -2178,6 +2178,17 @@ body.keyboard-open .bottom-nav-bar,
   user-select: none;
 }
 
+/* ==========================================================================
+   UNIVERSAL MODAL SCROLL LOCK (PREVENTS BACKGROUND SCROLLING ON MODALS)
+   ========================================================================== */
+html.modal-scroll-locked,
+body.modal-scroll-locked {
+  overflow: hidden !important;
+  height: 100% !important;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+}
+
 .app {
   display: none;
   position: fixed;
@@ -2189,6 +2200,8 @@ body.keyboard-open .bottom-nav-bar,
   backdrop-filter: blur(6px); /* تأثير تمويه وتغبيش إضافي على كامل الشاشة */
   -webkit-backdrop-filter: blur(6px);
   overflow-y: auto;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y;
   padding: 14px 14px 85px 14px; /* مساحة أمان مريحة تمنع أي تداخل مع الشريط السفلي */
 }
 
@@ -2197,6 +2210,14 @@ body.keyboard-open .bottom-nav-bar,
   align-items: center !important; /* تظهر في منتصف الصفحة عمودياً */
   justify-content: center !important; /* تظهر في منتصف الصفحة أفقياً */
   animation: fadeInBackdrop 0.25s ease forwards;
+  overscroll-behavior: contain !important;
+}
+
+.loyalty-modal.active,
+.nt-modal-overlay,
+.nt-card-overlay {
+  overscroll-behavior: contain !important;
+  touch-action: pan-y;
 }
 
 @keyframes fadeInBackdrop {
@@ -2472,13 +2493,18 @@ tbody td:last-child {
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  padding: 0 0 85px 0 !important;
+  padding: 0 0 95px 0 !important;
   z-index: 10 !important;
+  overflow-y: visible !important;
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 #status.active {
   display: block !important;
   animation: fadeInStatusPage 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  overflow-y: visible !important;
+  touch-action: pan-y !important;
 }
 
 @keyframes fadeInStatusPage {

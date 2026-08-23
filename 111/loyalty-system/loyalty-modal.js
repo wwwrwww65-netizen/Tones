@@ -44,6 +44,8 @@ window.LoyaltyModal = {
     this.init();
     this.showLoginView(); // Start with Login view
     this.modalElement.classList.add('active');
+    if (window.ModalScrollLock) window.ModalScrollLock.lock();
+    else document.body.style.overflow = 'hidden';
   },
 
   /**
@@ -53,6 +55,8 @@ window.LoyaltyModal = {
     if (this.modalElement) {
       this.modalElement.classList.remove('active');
     }
+    if (window.ModalScrollLock) window.ModalScrollLock.unlock();
+    else document.body.style.overflow = '';
   },
 
   /**

@@ -26,12 +26,16 @@ window.LoyaltyModal = {
         this.init();
         this.showLoginView();
         this.modalElement.classList.add("active");
+        if (window.ModalScrollLock) window.ModalScrollLock.lock();
+        else document.body.style.overflow = "hidden";
     },
 
     close() {
         if (this.modalElement) {
             this.modalElement.classList.remove("active");
         }
+        if (window.ModalScrollLock) window.ModalScrollLock.unlock();
+        else document.body.style.overflow = "";
     },
 
     showToast(message, type = "info", duration = 4000) {
@@ -501,6 +505,8 @@ window.LoyaltyModal = {
     showSavedCards() {
         this.init();
         this.modalElement.classList.add("active");
+        if (window.ModalScrollLock) window.ModalScrollLock.lock();
+        else document.body.style.overflow = "hidden";
         const list = this.getSavedCards();
 
         if (list.length === 0) {

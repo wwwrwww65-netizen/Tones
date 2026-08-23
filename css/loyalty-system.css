@@ -19,11 +19,14 @@
   direction: rtl;
   padding: 16px;
   box-sizing: border-box;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y;
 }
 
 .loyalty-modal.active {
   display: flex !important;
   animation: fadeInBackdrop 0.25s ease forwards;
+  overscroll-behavior: contain !important;
 }
 
 .loyalty-modal-content {
@@ -36,6 +39,9 @@
   max-height: 86vh;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y;
   position: relative;
   font-family: 'Almarai', sans-serif;
   direction: rtl;

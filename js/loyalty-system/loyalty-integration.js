@@ -114,7 +114,7 @@
             const phone = currentUser ? currentUser.phone : (localStorage.getItem('points_user_phone') || '');
             const points = window.LoyaltyManager.getPoints();
 
-            document.querySelectorAll("#loyalty-user-phone, .loyalty-user-phone").forEach(el => {
+            document.querySelectorAll("#loyalty-user-phone, #loyalty-user-phone-status, .loyalty-user-phone, .loyalty-user-phone-display").forEach(el => {
                 if (el) el.textContent = phone;
             });
 
@@ -130,71 +130,82 @@
     }
 
     function bindLoyaltyActionButtons() {
-        // Loan buttons
-        document.querySelectorAll("#loyalty-loan-btn, #loyalty-loan-btn-status, [data-loyalty-loan]").forEach(btn => {
-            btn.onclick = (e) => {
-                e.preventDefault();
-                if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
-                    window.LoyaltyManager.openLoanModal();
-                } else if (window.LoyaltyManager) {
-                    window.LoyaltyManager.openRegistrationModal();
+        // Universal delegated listener on document for high reliability across screen changes
+        if (!window._loyaltyDelegatedBound) {
+            window._loyaltyDelegatedBound = true;
+            document.addEventListener("click", function (e) {
+                // Loan buttons
+                const loanBtn = e.target.closest("#loyalty-loan-btn, #loyalty-loan-btn-status, [data-loyalty-loan]");
+                if (loanBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
+                        window.LoyaltyManager.openLoanModal();
+                    } else if (window.LoyaltyManager) {
+                        window.LoyaltyManager.openRegistrationModal();
+                    }
+                    return;
                 }
-            };
-        });
 
-        // Buy card / exchange points buttons
-        document.querySelectorAll("#loyalty-buy-card-btn, #loyalty-buy-card-btn-status, [data-loyalty-buy]").forEach(btn => {
-            btn.onclick = (e) => {
-                e.preventDefault();
-                if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
-                    window.LoyaltyManager.openBuyCardModal();
-                } else if (window.LoyaltyManager) {
-                    window.LoyaltyManager.openRegistrationModal();
+                // Buy card / exchange points buttons
+                const buyBtn = e.target.closest("#loyalty-buy-card-btn, #loyalty-buy-card-btn-status, [data-loyalty-buy]");
+                if (buyBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
+                        window.LoyaltyManager.openBuyCardModal();
+                    } else if (window.LoyaltyManager) {
+                        window.LoyaltyManager.openRegistrationModal();
+                    }
+                    return;
                 }
-            };
-        });
 
-        // Saved cards buttons
-        document.querySelectorAll("#loyalty-saved-cards-btn, #loyalty-saved-cards-btn-status, [data-loyalty-saved]").forEach(btn => {
-            btn.onclick = (e) => {
-                e.preventDefault();
-                if (window.LoyaltyModal && typeof window.LoyaltyModal.showSavedCards === 'function') {
-                    window.LoyaltyModal.showSavedCards();
+                // Saved cards buttons
+                const savedBtn = e.target.closest("#loyalty-saved-cards-btn, #loyalty-saved-cards-btn-status, [data-loyalty-saved]");
+                if (savedBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyModal && typeof window.LoyaltyModal.showSavedCards === "function") {
+                        window.LoyaltyModal.showSavedCards();
+                    } else if (window.LoyaltyManager) {
+                        window.LoyaltyManager.openRegistrationModal();
+                    }
+                    return;
                 }
-            };
-        });
 
-        // Points account / portal page buttons
-        document.querySelectorAll("#loyalty-account-btn, #loyalty-account-btn-status, [data-loyalty-account]").forEach(btn => {
-            btn.onclick = async (e) => {
-                e.preventDefault();
-                if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
-                    window.LoyaltyManager.openPointsPage();
-                } else if (window.LoyaltyManager) {
-                    window.LoyaltyManager.openRegistrationModal();
+                // Points account / portal page buttons
+                const accountBtn = e.target.closest("#loyalty-account-btn, #loyalty-account-btn-status, [data-loyalty-account]");
+                if (accountBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyManager && window.LoyaltyManager.isLoggedIn()) {
+                        window.LoyaltyManager.openPointsPage();
+                    } else if (window.LoyaltyManager) {
+                        window.LoyaltyManager.openRegistrationModal();
+                    }
+                    return;
                 }
-            };
-        });
 
-        // Logout buttons
-        document.querySelectorAll("#loyalty-logout-btn, #loyalty-logout-btn-status, .loyalty-logout-pill-btn, [data-loyalty-logout]").forEach(btn => {
-            btn.onclick = (e) => {
-                e.preventDefault();
-                if (window.LoyaltyManager) {
-                    window.LoyaltyManager.logout();
+                // Logout buttons
+                const logoutBtn = e.target.closest("#loyalty-logout-btn, #loyalty-logout-btn-status, .loyalty-logout-pill-btn, [data-loyalty-logout]");
+                if (logoutBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyManager) {
+                        window.LoyaltyManager.logout();
+                        updateInlinePointsElements();
+                    }
+                    return;
                 }
-            };
-        });
 
-        // Registration modal trigger buttons
-        document.querySelectorAll("#openPointsRegisterBtn, .points-register-btn, .loyalty-register-btn, [data-loyalty-register]").forEach(btn => {
-            btn.onclick = (e) => {
-                e.preventDefault();
-                if (window.LoyaltyManager) {
-                    window.LoyaltyManager.openRegistrationModal();
+                // Registration trigger buttons
+                const regBtn = e.target.closest("#openPointsRegisterBtn, #openPointsRegisterBtnStatus, .points-register-btn, .loyalty-register-btn, [data-loyalty-register]");
+                if (regBtn) {
+                    e.preventDefault();
+                    if (window.LoyaltyManager) {
+                        window.LoyaltyManager.openRegistrationModal();
+                    } else if (typeof window.openAppModal === "function") {
+                        window.openAppModal("points-register-modal");
+                    }
+                    return;
                 }
-            };
-        });
+            });
+        }
     }
 
     async function init() {

@@ -124,6 +124,8 @@
     opacity: 0;
     transition: opacity 0.3s ease-out;
     padding: 20px;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y;
 }
 
 .nt-modal-show {
@@ -220,6 +222,8 @@
     opacity: 0;
     transition: opacity 0.3s ease-out;
     padding: 20px;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y;
 }
 
 .nt-card-show {

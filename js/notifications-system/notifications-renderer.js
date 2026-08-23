@@ -172,6 +172,8 @@ window.NotificationsRenderer = {
         const modal = document.createElement('div');
         modal.className = 'nt-modal-overlay';
         modal.setAttribute('data-notification-id', id);
+        if (window.ModalScrollLock) window.ModalScrollLock.lock();
+        else document.body.style.overflow = 'hidden';
 
         let innerHTML = `
       <div class="nt-modal" style="background-color: ${bg_color} !important; color: ${text_color} !important; ">
@@ -235,6 +237,8 @@ window.NotificationsRenderer = {
         const card = document.createElement('div');
         card.className = 'nt-card-overlay';
         card.setAttribute('data-notification-id', id);
+        if (window.ModalScrollLock) window.ModalScrollLock.lock();
+        else document.body.style.overflow = 'hidden';
 
         let innerHTML = `
       <div class="nt-card" style="background-color: ${bg_color} !important; color: ${text_color} !important;">
@@ -303,6 +307,8 @@ window.NotificationsRenderer = {
                 modal.parentNode.removeChild(modal);
             }
         // }, 300);
+        if (window.ModalScrollLock) window.ModalScrollLock.unlock();
+        else document.body.style.overflow = '';
     },
 
     /**
@@ -316,6 +322,8 @@ window.NotificationsRenderer = {
                 card.parentNode.removeChild(card);
             }
         // }, 300);
+        if (window.ModalScrollLock) window.ModalScrollLock.unlock();
+        else document.body.style.overflow = '';
     },
 
     /**

@@ -1109,6 +1109,102 @@
                             </div>
                         </section>
 
+                        <!-- Unregistered Loyalty Section in Status Screen -->
+                        <div id="loyalty-unregistered-section-status">
+                            <!-- Notice / Points System Alert Box -->
+                            <div class="points-notice-alert" role="alert">
+                                <div class="notice-icon-wrap">
+                                    <svg viewBox="0 0 24 24" class="notice-icon">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                    </svg>
+                                </div>
+                                <div class="notice-content">
+                                    <strong class="notice-tag">تنبيه:</strong>
+                                    <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
+                                        تسجيل الدخول..</span>
+                                </div>
+                            </div>
+
+                            <!-- Points Registration Trigger Button -->
+                            <button type="button" class="button points-register-btn loyalty-register-btn" id="openPointsRegisterBtnStatus"
+                                parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
+                                <svg viewBox="0 0 24 24" class="points-btn-icon">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <span class="button-text">انقر للتسجيل في نظام النقاط</span>
+                            </button>
+                        </div>
+
+                        <!-- Registered Loyalty Section (User Dashboard Card) in Status Screen -->
+                        <div id="loyalty-registered-section-status" style="display: none;">
+                            <div class="loyalty-user-card">
+                                <!-- User Header -->
+                                <div class="loyalty-user-header">
+                                    <div class="loyalty-user-profile-info">
+                                        <div class="loyalty-user-avatar">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="loyalty-user-details">
+                                            <span class="loyalty-user-title">حساب نظام النقاط</span>
+                                            <span class="loyalty-user-phone-number loyalty-user-phone-display" id="loyalty-user-phone-status">77XXXXXXX</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="loyalty-logout-btn-status" class="loyalty-logout-pill-btn" title="تسجيل الخروج من نظام النقاط">
+                                        <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;">
+                                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                        </svg>
+                                        <span>خروج</span>
+                                    </button>
+                                </div>
+
+                                <!-- Points Display Banner -->
+                                <div class="loyalty-points-display-banner">
+                                    <div class="loyalty-points-label">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                        </svg>
+                                        <span>رصيد نقاطك الحالي:</span>
+                                    </div>
+                                    <div class="loyalty-points-count-badge">
+                                        <span class="loyalty-points-value">0</span>
+                                        <span class="loyalty-points-unit">نقطة</span>
+                                    </div>
+                                </div>
+
+                                <!-- Loyalty Action Buttons Grid -->
+                                <div class="loyalty-actions-grid">
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-loan-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                        </svg>
+                                        <span>طلب سلفة</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-buy-card-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                                        </svg>
+                                        <span>استبدال كرت</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-saved-cards-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                        </svg>
+                                        <span>الكروت المحفوظة</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-account-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                        </svg>
+                                        <span>الدخول الى حسابي</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Entertainment Direct Links -->
                         <div class="entertainment-links">
                             <a class="stream-card-link" href="http://30.10.10.10" target="_blank">
@@ -1581,8 +1677,91 @@
                 startAutoplay();
             }
 
-            // 2. UNIVERSAL MODAL CONTROLLER & POPUP MANAGER
+            // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
             window.animating = false;
+
+            window.ModalScrollLock = {
+                lockCount: 0,
+
+                isAnyModalOpen: function () {
+                    var appModal = document.querySelector('.app.active:not(#status)');
+                    var loyaltyModal = document.querySelector('.loyalty-modal.active');
+                    var ntModal = document.querySelector('.nt-modal-overlay:not(.nt-modal-hide), .nt-card-overlay:not(.nt-card-hide)');
+                    var pointsModal = document.querySelector('#points-register-modal.active');
+                    return !!(appModal || loyaltyModal || ntModal || pointsModal);
+                },
+
+                lock: function () {
+                    this.lockCount++;
+                    document.documentElement.classList.add('modal-scroll-locked');
+                    document.body.classList.add('modal-scroll-locked');
+                    document.body.style.overflow = 'hidden';
+                    document.documentElement.style.overflow = 'hidden';
+                },
+
+                unlock: function (force) {
+                    if (force) {
+                        this.lockCount = 0;
+                    } else {
+                        this.lockCount = Math.max(0, this.lockCount - 1);
+                    }
+
+                    if (this.lockCount === 0 || !this.isAnyModalOpen()) {
+                        this.lockCount = 0;
+                        document.documentElement.classList.remove('modal-scroll-locked');
+                        document.body.classList.remove('modal-scroll-locked');
+                        document.body.style.overflow = '';
+                        document.documentElement.style.overflow = '';
+                    }
+                },
+
+                sync: function () {
+                    if (this.isAnyModalOpen()) {
+                        this.lock();
+                    } else {
+                        this.unlock(true);
+                    }
+                },
+
+                init: function () {
+                    var self = this;
+                    // Prevent background scrolling on touch gestures outside scrollable modal containers
+                    document.addEventListener('touchmove', function (e) {
+                        if (document.body.classList.contains('modal-scroll-locked')) {
+                            var scrollable = e.target.closest('.modal-sheet-card, .loyalty-modal-content, .nt-modal, .nt-card, .price-div, .sell-point-div, .points-modal-body, .loyalty-modal-body, .loan-body');
+                            if (!scrollable) {
+                                e.preventDefault();
+                            }
+                        }
+                    }, { passive: false });
+
+                    // Prevent wheel scroll bleed-through to underlying background
+                    document.addEventListener('wheel', function (e) {
+                        if (document.body.classList.contains('modal-scroll-locked')) {
+                            var scrollable = e.target.closest('.modal-sheet-card, .loyalty-modal-content, .nt-modal, .nt-card, .price-div, .sell-point-div, .points-modal-body, .loyalty-modal-body, .loan-body');
+                            if (!scrollable) {
+                                e.preventDefault();
+                            }
+                        }
+                    }, { passive: false });
+
+                    // Auto-sync observer to maintain accurate state
+                    try {
+                        var observer = new MutationObserver(function () {
+                            var anyOpen = self.isAnyModalOpen();
+                            if (anyOpen && !document.body.classList.contains('modal-scroll-locked')) {
+                                self.lock();
+                            } else if (!anyOpen && document.body.classList.contains('modal-scroll-locked')) {
+                                self.unlock(true);
+                            }
+                        });
+                        if (document.body) {
+                            observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class', 'style'], childList: true });
+                        }
+                    } catch (err) {}
+                }
+            };
+            window.ModalScrollLock.init();
 
             function openAppModal(modalId) {
                 window.animating = false;
@@ -1607,6 +1786,13 @@
                 // Trigger reflow for CSS transition
                 void modal.offsetWidth;
                 modal.classList.add('active');
+
+                // Lock background scroll
+                if (window.ModalScrollLock) {
+                    window.ModalScrollLock.lock();
+                } else {
+                    document.body.style.overflow = 'hidden';
+                }
 
                 // If opening QR scanner modal, start camera immediately
                 if (modal.id === 'qr-scanner-modal' && typeof window.startCamera === 'function') {
@@ -1655,6 +1841,13 @@
                     loginEl.style.display = 'block';
                     loginEl.style.visibility = 'visible';
                     loginEl.classList.remove('inactive');
+                }
+
+                // Unlock background scroll
+                if (window.ModalScrollLock) {
+                    window.ModalScrollLock.unlock();
+                } else {
+                    document.body.style.overflow = '';
                 }
             }
 
