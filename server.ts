@@ -149,8 +149,12 @@ app.get('/logout', (req, res) => {
 });
 
 // Serve static assets from project root and specific subfolders
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 app.use('/adimg', express.static(path.join(__dirname, 'adimg')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/config', express.static(path.join(__dirname, 'config')));
 app.use('/2024', express.static(path.join(__dirname, '2024')));
 app.use(express.static(__dirname));
 
