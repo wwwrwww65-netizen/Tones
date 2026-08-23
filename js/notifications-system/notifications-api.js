@@ -1,6 +1,6 @@
 /**
  * Notifications API Manager
- * Handles fetching notifications and announcements from server
+ * Handles fetching notifications and announcements from server safely
  */
 
 window.NotificationsAPI = {
@@ -11,7 +11,7 @@ window.NotificationsAPI = {
      */
     async fetchContent(options = {}) {
         const config = window.NotificationsConfig?.api || {};
-        const baseURL = typeof config.baseURL === 'function' ? config.baseURL() : config.baseURL;
+        const baseURL = typeof config.baseURL === 'function' ? config.baseURL() : (config.baseURL || 'https://tunisnet.shabakaty.site');
         const endpoint = config.endpoint || '/api/v1/public/content';
 
         // Build URL with query parameters
@@ -51,7 +51,8 @@ window.NotificationsAPI = {
             const response = await this._fetchWithTimeout(url, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 }
             }, config.timeout || 10000);
 
@@ -71,16 +72,21 @@ window.NotificationsAPI = {
             };
 
         } catch (error) {
-            console.error('[NotificationsAPI] Fetch error:', error);
+            // Gracefully handle abort or network errors without spamming console.error
+            if (window.NotificationsConfig?.debug) {
+                console.warn('[NotificationsAPI] Fetch warning/error:', error.name === 'AbortError' ? 'Request timed out or aborted' : error.message);
+            }
 
-            // Retry logic
+            // Retry logic only for standard retries if requested
             if (options._retryCount === undefined) {
                 options._retryCount = 0;
             }
 
             const maxRetries = config.retries || 0;
-            if (options._retryCount < maxRetries) {
-                console.log(`[NotificationsAPI] Retrying... (${options._retryCount + 1}/${maxRetries})`);
+            if (options._retryCount < maxRetries && error.name !== 'AbortError') {
+                if (window.NotificationsConfig?.debug) {
+                    console.log(`[NotificationsAPI] Retrying... (${options._retryCount + 1}/${maxRetries})`);
+                }
                 await this._delay(config.retryDelay || 1000);
                 options._retryCount++;
                 return this.fetchContent(options);
@@ -88,18 +94,37 @@ window.NotificationsAPI = {
 
             return {
                 success: false,
-                error: error.message
+                error: error.name === 'AbortError' ? 'انتهت مهلة الاتصال بالخادم' : error.message
             };
         }
     },
 
     /**
-     * Fetch with timeout
+     * Fetch with timeout using AbortSignal.timeout when available
      * @private
      */
-    async _fetchWithTimeout(url, options, timeout) {
+    async _fetchWithTimeout(url, options, timeout = 10000) {
+        if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+            try {
+                return await fetch(url, {
+                    ...options,
+                    signal: AbortSignal.timeout(timeout)
+                });
+            } catch (err) {
+                throw err;
+            }
+        }
+
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeout);
+        let isTimedOut = false;
+        const timeoutId = setTimeout(() => {
+            isTimedOut = true;
+            try {
+                controller.abort('timeout');
+            } catch (e) {
+                controller.abort();
+            }
+        }, timeout);
 
         try {
             const response = await fetch(url, {
@@ -110,6 +135,11 @@ window.NotificationsAPI = {
             return response;
         } catch (error) {
             clearTimeout(timeoutId);
+            if (isTimedOut || error.name === 'AbortError') {
+                const timeoutErr = new Error('Request timed out');
+                timeoutErr.name = 'AbortError';
+                throw timeoutErr;
+            }
             throw error;
         }
     },

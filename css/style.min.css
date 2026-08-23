@@ -961,8 +961,18 @@ h1 {
 
 .points-modal-body .login-input {
   font-size: 0.88rem;
-  padding: 4px 6px;
+  padding: 4px 8px;
   text-align: right;
+  direction: rtl;
+}
+
+.points-modal-body .login-input::placeholder {
+  text-align: right;
+  direction: rtl;
+  color: #881337 !important;
+  opacity: 0.65;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .password-toggle-btn {
@@ -3481,3 +3491,451 @@ img, svg, video, canvas {
     max-width: 440px;
   }
 }
+
+/* ==========================================================================
+   2026 LOYALTY SYSTEM USER DASHBOARD CARD (.loyalty-user-card)
+   ========================================================================== */
+
+#loyalty-registered-section,
+#loyalty-registered-section-status {
+  width: 100%;
+  margin: 10px 0 16px 0;
+  animation: fadeInDown 0.35s ease-out;
+}
+
+.loyalty-user-card {
+  background: rgba(80, 20, 25, 0.28);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loyalty-user-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding-bottom: 10px;
+}
+
+.loyalty-user-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loyalty-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2D0509;
+  font-weight: 900;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+  flex-shrink: 0;
+}
+
+.loyalty-user-avatar svg {
+  width: 20px;
+  height: 20px;
+  fill: #2D0509;
+}
+
+.loyalty-user-details {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.loyalty-user-title {
+  font-size: 0.78rem;
+  color: #E2D9D2;
+  font-weight: 600;
+}
+
+.loyalty-user-phone-number {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+  direction: ltr;
+  text-align: right;
+}
+
+.loyalty-logout-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(244, 63, 94, 0.2);
+  border: 1px solid rgba(244, 63, 94, 0.45);
+  color: #fda4af;
+  font-family: var(--font-main);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.loyalty-logout-pill-btn:hover {
+  background: rgba(244, 63, 94, 0.35);
+  border-color: #f43f5e;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.loyalty-points-display-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.loyalty-points-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffd166;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.loyalty-points-label svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffd166;
+}
+
+.loyalty-points-count-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.loyalty-points-value {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: monospace;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+.loyalty-points-unit {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffd166;
+}
+
+.loyalty-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.loyalty-action-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.loyalty-action-card-btn:hover {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.loyalty-action-card-btn:active {
+  transform: scale(0.97);
+}
+
+.loyalty-action-card-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   LOYALTY MODALS OVERHAUL (.loyalty-modal & Loyalty System Dialogs)
+   100% Harmonized with Royal Maroon & Gold Theme
+   ========================================================================== */
+
+.loyalty-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 2, 6, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  font-family: var(--font-main) !important;
+}
+
+.loyalty-modal.active {
+  display: flex !important;
+  animation: fadeInBackdrop 0.25s ease forwards;
+}
+
+.loyalty-modal-content {
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+  background: linear-gradient(165deg, #6c0e22 0%, #4a0716 50%, #2e040e 100%) !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.55) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: 20px 16px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.25) !important;
+  position: relative;
+  animation: zoomModalCenter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 86vh;
+  overflow-y: auto;
+  color: #FFFFFF !important;
+  font-family: var(--font-main) !important;
+}
+
+.loyalty-modal-close {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  z-index: 10;
+}
+
+.loyalty-modal-close:hover {
+  background: rgba(212, 175, 55, 0.3);
+  border-color: var(--accent-gold);
+  transform: scale(1.08);
+}
+
+.loyalty-modal-header {
+  text-align: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.loyalty-modal-header h2,
+.loyalty-modal-header .text-text-primary {
+  font-size: 1.18rem !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  margin: 0 0 4px 0 !important;
+  letter-spacing: 0.2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.loyalty-modal-header p,
+.loyalty-modal-header .text-text-secondary {
+  font-size: 0.84rem !important;
+  color: #E2D9D2 !important;
+  margin: 0 !important;
+}
+
+.loyalty-modal-body {
+  font-family: var(--font-main) !important;
+  color: #FFFFFF !important;
+}
+
+.loyalty-modal-body .loan-card {
+  background: rgba(80, 20, 25, 0.45) !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.loyalty-btn,
+button.loyalty-btn,
+.loan-request-btn,
+.buy-card-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
+  color: #2D0509 !important;
+  font-family: var(--font-main) !important;
+  font-weight: 900 !important;
+  font-size: 15px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 11px 16px !important;
+  min-height: 44px !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
+  transition: all 0.2s ease !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.loyalty-btn:hover,
+button.loyalty-btn:hover,
+.loan-request-btn:hover,
+.buy-card-btn:hover {
+  filter: brightness(1.05) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4) !important;
+}
+
+.loyalty-btn:active,
+button.loyalty-btn:active,
+.loan-request-btn:active,
+.buy-card-btn:active {
+  transform: scale(0.97) !important;
+}
+
+.loyalty-btn[disabled],
+.loan-request-btn[disabled],
+.buy-card-btn[disabled] {
+  opacity: 0.55 !important;
+  filter: grayscale(0.8) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Card list styling in Buy Card modal */
+.card-types-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.card-type-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(80, 20, 25, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  transition: var(--transition-smooth);
+}
+
+.card-type-item:hover {
+  background: rgba(100, 25, 32, 0.5);
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.card-type-item .card-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.card-type-item .card-name {
+  font-weight: 800;
+  font-size: 0.94rem;
+  color: #FFFFFF;
+}
+
+.card-type-item .card-points {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #fde047;
+  white-space: nowrap;
+}
+
+.card-type-item .buy-card-btn {
+  width: auto !important;
+  min-height: 36px !important;
+  padding: 6px 14px !important;
+  font-size: 0.82rem !important;
+  flex-shrink: 0;
+}
+
+/* Saved Cards Items in Modal */
+.saved-card-item {
+  background: rgba(80, 20, 25, 0.35) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 12px 14px !important;
+  margin-bottom: 10px !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.saved-card-item:hover {
+  border-color: var(--accent-gold) !important;
+  background: rgba(100, 25, 32, 0.5) !important;
+}
+
+.card-code {
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px dashed rgba(212, 175, 55, 0.6) !important;
+  color: #ffd166 !important;
+  font-family: monospace !important;
+  font-weight: 800 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  user-select: all !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.card-code:hover {
+  background: rgba(212, 175, 55, 0.2) !important;
+  border-color: var(--accent-gold) !important;
+}
+
+.loader {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-top-color: var(--accent-gold);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 20px auto;
+}
+
+

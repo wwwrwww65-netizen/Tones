@@ -311,30 +311,101 @@
                         </div>
                     </div>
 
-                    <!-- Notice / Points System Alert Box -->
-                    <div class="points-notice-alert" role="alert">
-                        <div class="notice-icon-wrap">
-                            <svg viewBox="0 0 24 24" class="notice-icon">
+                    <!-- Unregistered Loyalty Section -->
+                    <div id="loyalty-unregistered-section">
+                        <!-- Notice / Points System Alert Box -->
+                        <div class="points-notice-alert" role="alert">
+                            <div class="notice-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="notice-icon">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                </svg>
+                            </div>
+                            <div class="notice-content">
+                                <strong class="notice-tag">تنبيه:</strong>
+                                <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
+                                    تسجيل الدخول..</span>
+                            </div>
+                        </div>
+
+                        <!-- Points Registration Trigger Button (Matching Primary Gold Button Style) -->
+                        <button type="button" class="button points-register-btn loyalty-register-btn" id="openPointsRegisterBtn"
+                            parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
+                            <svg viewBox="0 0 24 24" class="points-btn-icon">
                                 <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                             </svg>
-                        </div>
-                        <div class="notice-content">
-                            <strong class="notice-tag">تنبيه:</strong>
-                            <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
-                                تسجيل الدخول..</span>
-                        </div>
+                            <span class="button-text">انقر للتسجيل في نظام النقاط</span>
+                        </button>
                     </div>
 
-                    <!-- Points Registration Trigger Button (Matching Primary Gold Button Style) -->
-                    <button type="button" class="button points-register-btn" id="openPointsRegisterBtn"
-                        parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
-                        <svg viewBox="0 0 24 24" class="points-btn-icon">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                        </svg>
-                        <span class="button-text">انقر للتسجيل في نظام النقاط</span>
-                    </button>
+                    <!-- Registered Loyalty Section (User Dashboard Card) -->
+                    <div id="loyalty-registered-section" style="display: none;">
+                        <div class="loyalty-user-card">
+                            <!-- User Header -->
+                            <div class="loyalty-user-header">
+                                <div class="loyalty-user-profile-info">
+                                    <div class="loyalty-user-avatar">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="loyalty-user-details">
+                                        <span class="loyalty-user-title">حساب نظام النقاط</span>
+                                        <span class="loyalty-user-phone-number" id="loyalty-user-phone">77XXXXXXX</span>
+                                    </div>
+                                </div>
+                                <button type="button" id="loyalty-logout-btn" class="loyalty-logout-pill-btn" title="تسجيل الخروج من نظام النقاط">
+                                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;">
+                                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                    </svg>
+                                    <span>خروج</span>
+                                </button>
+                            </div>
+
+                            <!-- Points Display Banner -->
+                            <div class="loyalty-points-display-banner">
+                                <div class="loyalty-points-label">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                    </svg>
+                                    <span>رصيد نقاطك الحالي:</span>
+                                </div>
+                                <div class="loyalty-points-count-badge">
+                                    <span class="loyalty-points-value">0</span>
+                                    <span class="loyalty-points-unit">نقطة</span>
+                                </div>
+                            </div>
+
+                            <!-- Loyalty Action Buttons Grid -->
+                            <div class="loyalty-actions-grid">
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-loan-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                    </svg>
+                                    <span>طلب سلفة</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-buy-card-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                                    </svg>
+                                    <span>استبدال كرت</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-saved-cards-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                    </svg>
+                                    <span>الكروت المحفوظة</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-account-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                    </svg>
+                                    <span>الدخول الى حسابي</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Glassmorphic Login Card -->
                     <div class="login-card">
@@ -681,34 +752,14 @@
                                     <path
                                         d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                 </svg>
-                                <span>نظام النقاط والمكافآت</span>
+                                <span>تسجيل الدخول لنظام النقاط</span>
                             </span>
                             <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
                         </div>
 
                         <div class="points-modal-body">
-                            <!-- Auth Segmented Switcher Tabs -->
-                            <div class="points-auth-tabs" role="tablist">
-                                <button type="button" class="points-tab-btn active" id="tabPointsLogin" role="tab"
-                                    aria-selected="true" aria-controls="pointsLoginFormView">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
-                                    </svg>
-                                    <span>تسجيل الدخول</span>
-                                </button>
-                                <button type="button" class="points-tab-btn" id="tabPointsSignup" role="tab"
-                                    aria-selected="false" aria-controls="pointsSignupFormView">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                    </svg>
-                                    <span>إنشاء حساب جديد</span>
-                                </button>
-                            </div>
-
-                            <!-- 1. LOGIN TAB VIEW -->
-                            <div class="points-tab-content active" id="pointsLoginFormView" role="tabpanel">
+                            <!-- LOGIN VIEW -->
+                            <div class="points-tab-content active" id="pointsLoginFormView">
                                 <div class="points-instruction-box">
                                     <div class="instruction-icon-wrap">
                                         <svg viewBox="0 0 24 24">
@@ -734,7 +785,7 @@
                                                 </svg>
                                             </span>
                                             <input type="tel" id="pointsLoginPhone" class="login-input"
-                                                placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
+                                                placeholder="أدخل رقم الهاتف (مثل 77xxxxxxx)" inputmode="numeric" autocomplete="tel" dir="rtl">
                                         </div>
                                     </div>
 
@@ -784,118 +835,17 @@
                                         </button>
                                     </div>
 
-                                    <div class="points-switch-prompt">
-                                        <span>ليس لديك حساب؟</span>
-                                        <button type="button" class="points-link-btn" id="goToSignupTabBtn">إنشاء حساب
-                                            جديد الآن</button>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <!-- 2. SIGNUP TAB VIEW -->
-                            <div class="points-tab-content" id="pointsSignupFormView" role="tabpanel"
-                                style="display: none;">
-                                <div class="points-instruction-box">
-                                    <div class="instruction-icon-wrap">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                        </svg>
-                                    </div>
-                                    <div class="instruction-text">
-                                        <strong>إنشاء حساب في نظام النقاط</strong>
-                                        <p>سجل رقمك بكلمة مرور لتجميع النقاط واستبدالها بكروت وإنترنت مجاني.</p>
-                                    </div>
-                                </div>
-
-                                <form id="pointsSignupForm" onsubmit="return false;">
-                                    <!-- Signup: Phone Number -->
-                                    <div class="input-group-modern">
-                                        <span class="input-label-text">رقم الهاتف (موبايل)</span>
-                                        <div class="input-wrapper-glass">
-                                            <span class="input-icon-badge" title="رقم الهاتف">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                                                </svg>
-                                            </span>
-                                            <input type="tel" id="pointsSignupPhone" class="login-input"
-                                                placeholder="مثال: 77XXXXXXX" inputmode="numeric" autocomplete="tel">
-                                        </div>
-                                    </div>
-
-                                    <!-- Signup: Password -->
-                                    <div class="input-group-modern">
-                                        <span class="input-label-text">كلمة المرور</span>
-                                        <div class="input-wrapper-glass">
-                                            <span class="input-icon-badge" title="كلمة المرور">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
-                                                </svg>
-                                            </span>
-                                            <input type="password" id="pointsSignupPassword" class="login-input"
-                                                placeholder="أنشئ كلمة مرور قوية" autocomplete="new-password">
-                                            <button type="button" class="password-toggle-btn" id="togglePointsSignupPw"
-                                                aria-label="إظهار/إخفاء كلمة المرور">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Signup: Confirm Password -->
-                                    <div class="input-group-modern">
-                                        <span class="input-label-text">تأكيد كلمة المرور</span>
-                                        <div class="input-wrapper-glass">
-                                            <span class="input-icon-badge" title="تأكيد كلمة المرور">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                                </svg>
-                                            </span>
-                                            <input type="password" id="pointsSignupConfirmPassword" class="login-input"
-                                                placeholder="أعد إدخال كلمة المرور" autocomplete="new-password">
-                                            <button type="button" class="password-toggle-btn"
-                                                id="togglePointsSignupConfirmPw"
-                                                aria-label="إظهار/إخفاء تأكيد كلمة المرور">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div id="pointsSignupAlert" class="points-success-badge" style="display: none;">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                        </svg>
-                                        <span id="pointsSignupMsg">تم إنشاء الحساب وتسجيل الدخول بنجاح!</span>
-                                    </div>
-
-                                    <!-- Signup Actions -->
-                                    <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
-                                        <button type="button" class="button app-submit points-auth-submit-btn"
-                                            id="submitPointsSignupBtn" style="flex: 1; margin: 0;">
-                                            <svg viewBox="0 0 24 24"
-                                                style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;">
-                                                <path
-                                                    d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    <div class="points-switch-prompt" style="margin-top: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                        <span style="color: #cbd5e1; font-size: 0.85rem;">ليس لديك حساب في نظام النقاط؟</span>
+                                        <a href="https://tunisnet.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
+                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #ffd700;">
+                                                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                             </svg>
-                                            <span>إنشاء الحساب والتسجيل</span>
-                                        </button>
-                                        <button type="button" class="button modal-cancel-btn"
-                                            style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
-                                            إلغاء
-                                        </button>
-                                    </div>
-
-                                    <div class="points-switch-prompt">
-                                        <span>لديك حساب بالفعل؟</span>
-                                        <button type="button" class="points-link-btn" id="goToLoginTabBtn">تسجيل
-                                            الدخول</button>
+                                            <span>إنشاء حساب جديد الآن</span>
+                                            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: #38bdf8; transform: rotate(180deg);">
+                                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                            </svg>
+                                        </a>
                                     </div>
                                 </form>
                             </div>
@@ -1973,12 +1923,8 @@
             // 6. POINTS SYSTEM AUTH & REGISTRATION HANDLER
             const pointsModal = document.getElementById('points-register-modal');
             const openPointsRegisterBtn = document.getElementById('openPointsRegisterBtn');
-            const tabPointsLogin = document.getElementById('tabPointsLogin');
-            const tabPointsSignup = document.getElementById('tabPointsSignup');
             const pointsLoginFormView = document.getElementById('pointsLoginFormView');
-            const pointsSignupFormView = document.getElementById('pointsSignupFormView');
             const goToSignupTabBtn = document.getElementById('goToSignupTabBtn');
-            const goToLoginTabBtn = document.getElementById('goToLoginTabBtn');
 
             const pointsLoginPhone = document.getElementById('pointsLoginPhone');
             const pointsLoginPassword = document.getElementById('pointsLoginPassword');
@@ -1987,34 +1933,97 @@
             const pointsLoginAlert = document.getElementById('pointsLoginAlert');
             const pointsLoginMsg = document.getElementById('pointsLoginMsg');
 
-            const pointsSignupPhone = document.getElementById('pointsSignupPhone');
-            const pointsSignupPassword = document.getElementById('pointsSignupPassword');
-            const pointsSignupConfirmPassword = document.getElementById('pointsSignupConfirmPassword');
-            const togglePointsSignupPw = document.getElementById('togglePointsSignupPw');
-            const togglePointsSignupConfirmPw = document.getElementById('togglePointsSignupConfirmPw');
-            const submitPointsSignupBtn = document.getElementById('submitPointsSignupBtn');
-            const pointsSignupAlert = document.getElementById('pointsSignupAlert');
-            const pointsSignupMsg = document.getElementById('pointsSignupMsg');
+            // Global modern redirect loader function
+            window.showRedirectLoader = function (options = {}) {
+                const url = options.url || 'https://tunisnet.shabakaty.site/auth/register';
+                const title = options.title || 'جاري الانتقال لصفحة إنشاء الحساب...';
+                const subtitle = options.subtitle || 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت';
+                const delay = options.delay || 950;
 
-            // Switch between Login and Signup Tabs
-            function switchPointsTab(tabName) {
-                if (tabName === 'login') {
-                    if (tabPointsLogin) tabPointsLogin.classList.add('active');
-                    if (tabPointsSignup) tabPointsSignup.classList.remove('active');
-                    if (pointsLoginFormView) pointsLoginFormView.style.display = 'block';
-                    if (pointsSignupFormView) pointsSignupFormView.style.display = 'none';
-                } else {
-                    if (tabPointsSignup) tabPointsSignup.classList.add('active');
-                    if (tabPointsLogin) tabPointsLogin.classList.remove('active');
-                    if (pointsSignupFormView) pointsSignupFormView.style.display = 'block';
-                    if (pointsLoginFormView) pointsLoginFormView.style.display = 'none';
+                let overlay = document.getElementById('redirectLoadingOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'redirectLoadingOverlay';
+                    overlay.className = 'redirect-loading-overlay';
+                    overlay.innerHTML = `
+                        <div class="redirect-ambient-glow-burgundy"></div>
+                        <div class="redirect-ambient-glow-cyan"></div>
+                        <div class="redirect-loading-card">
+                            <div class="redirect-brand-connector">
+                                <span class="redirect-brand-tag burgundy">تونس نت</span>
+                                <div class="redirect-connector-line">
+                                    <div class="redirect-connector-dot"></div>
+                                    <div class="redirect-connector-dot"></div>
+                                    <div class="redirect-connector-dot"></div>
+                                </div>
+                                <span class="redirect-brand-tag cyan">بوابة شبكتي</span>
+                            </div>
+                            <div class="redirect-icon-container">
+                                <div class="redirect-pulse-ring"></div>
+                                <div class="redirect-spinner-outer"></div>
+                                <div class="redirect-spinner-inner"></div>
+                                <div class="redirect-center-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="redirect-loading-title" id="redirectLoadingTitle"></div>
+                            <div class="redirect-loading-subtitle" id="redirectLoadingSubtitle"></div>
+                            <div class="redirect-progress-track">
+                                <div class="redirect-progress-bar" id="redirectProgressBar"></div>
+                            </div>
+                            <div class="redirect-loading-footer">
+                                <span class="redirect-badge-secure">
+                                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                    بوابة رسمية موثقة وآمنة
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(overlay);
                 }
-            }
 
-            if (tabPointsLogin) tabPointsLogin.addEventListener('click', () => switchPointsTab('login'));
-            if (tabPointsSignup) tabPointsSignup.addEventListener('click', () => switchPointsTab('signup'));
-            if (goToSignupTabBtn) goToSignupTabBtn.addEventListener('click', () => switchPointsTab('signup'));
-            if (goToLoginTabBtn) goToLoginTabBtn.addEventListener('click', () => switchPointsTab('login'));
+                const titleEl = document.getElementById('redirectLoadingTitle');
+                const subtitleEl = document.getElementById('redirectLoadingSubtitle');
+                const barEl = document.getElementById('redirectProgressBar');
+
+                if (titleEl) titleEl.innerText = title;
+                if (subtitleEl) subtitleEl.innerText = subtitle;
+                if (barEl) barEl.style.width = '0%';
+
+                // Activate overlay
+                overlay.classList.add('active');
+
+                // Trigger smooth progress bar animation
+                setTimeout(() => {
+                    if (barEl) barEl.style.width = '100%';
+                }, 60);
+
+                // Execute navigation after satisfying smooth animation
+                setTimeout(() => {
+                    window.location.href = url;
+                }, delay);
+            };
+
+            if (goToSignupTabBtn) {
+                goToSignupTabBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    goToSignupTabBtn.style.opacity = '0.75';
+                    goToSignupTabBtn.innerHTML = `
+                        <span style="display:inline-flex;align-items:center;gap:7px;">
+                            <span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#ffd700;border-radius:50%;animation:redirectSpin 0.6s linear infinite;display:inline-block;"></span>
+                            <span>جاري التوجيه...</span>
+                        </span>
+                    `;
+                    window.showRedirectLoader({
+                        url: 'https://tunisnet.shabakaty.site/auth/register',
+                        title: 'جاري الانتقال لصفحة إنشاء الحساب...',
+                        subtitle: 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت',
+                        delay: 950
+                    });
+                });
+            }
 
             // Password Visibility Toggles
             function setupPasswordToggle(toggleBtn, inputField) {
@@ -2031,15 +2040,12 @@
             }
 
             setupPasswordToggle(togglePointsLoginPw, pointsLoginPassword);
-            setupPasswordToggle(togglePointsSignupPw, pointsSignupPassword);
-            setupPasswordToggle(togglePointsSignupConfirmPw, pointsSignupConfirmPassword);
 
             // Load saved user phone if exists
             try {
                 const savedPhone = localStorage.getItem('points_user_phone');
                 if (savedPhone) {
                     if (pointsLoginPhone) pointsLoginPhone.value = savedPhone;
-                    if (pointsSignupPhone) pointsSignupPhone.value = savedPhone;
                 }
             } catch (e) { }
 
@@ -2051,8 +2057,6 @@
                     const loginEl = document.getElementById('login');
                     if (loginEl) loginEl.classList.add('inactive');
                     if (pointsLoginAlert) pointsLoginAlert.style.display = 'none';
-                    if (pointsSignupAlert) pointsSignupAlert.style.display = 'none';
-                    switchPointsTab('login');
                 });
             }
 
@@ -2073,7 +2077,7 @@
 
             // Handle Login Form Submission
             if (submitPointsLoginBtn) {
-                submitPointsLoginBtn.addEventListener('click', function () {
+                submitPointsLoginBtn.addEventListener('click', async function () {
                     const phone = pointsLoginPhone ? pointsLoginPhone.value.trim() : '';
                     const password = pointsLoginPassword ? pointsLoginPassword.value.trim() : '';
                     const errElem = document.getElementById('error');
@@ -2094,91 +2098,68 @@
                         return;
                     }
 
-                    try {
-                        localStorage.setItem('points_user_phone', phone);
-                        localStorage.setItem('points_user_logged_in', 'true');
-                    } catch (e) { }
+                    const originalBtnText = submitPointsLoginBtn.innerHTML;
+                    submitPointsLoginBtn.innerHTML = '<span>جاري التحقق...</span>';
+                    submitPointsLoginBtn.disabled = true;
 
-                    if (pointsLoginAlert) {
-                        pointsLoginAlert.style.display = 'flex';
+                    let loginSuccess = false;
+                    let resultMsg = "";
+
+                    if (window.LoyaltyManager && typeof window.LoyaltyManager.login === 'function') {
+                        const res = await window.LoyaltyManager.login(phone, password);
+                        if (res && res.success) {
+                            loginSuccess = true;
+                            resultMsg = res.message || "تم تسجيل الدخول لنظام النقاط بنجاح!";
+                        } else {
+                            loginSuccess = false;
+                            resultMsg = (res && (res.error || res.message)) || "رقم الهاتف أو كلمة المرور غير صحيحة";
+                        }
+                    } else {
+                        try {
+                            localStorage.setItem('points_user_phone', phone);
+                            localStorage.setItem('points_user_logged_in', 'true');
+                            loginSuccess = true;
+                            resultMsg = "تم تسجيل الدخول بنجاح";
+                        } catch (e) { }
                     }
 
-                    if (errElem) {
-                        errElem.innerText = 'تم تسجيل الدخول لنظام النقاط بنجاح!';
-                        if (typeof showErrorPopup === 'function') showErrorPopup();
+                    if (typeof window.updateInlinePointsElements === 'function') {
+                        window.updateInlinePointsElements();
                     }
 
-                    setTimeout(() => {
-                        if (pointsModal) {
-                            pointsModal.classList.remove('active');
-                            pointsModal.style.display = 'none';
-                            const loginEl = document.getElementById('login');
-                            if (loginEl && !document.querySelector('.app.active')) {
-                                loginEl.classList.remove('inactive');
+                    submitPointsLoginBtn.innerHTML = originalBtnText;
+                    submitPointsLoginBtn.disabled = false;
+
+                    if (loginSuccess) {
+                        if (pointsLoginAlert) {
+                            pointsLoginAlert.style.display = 'flex';
+                        }
+
+                        if (errElem) {
+                            errElem.innerText = resultMsg;
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
+                        }
+
+                        setTimeout(() => {
+                            if (pointsModal) {
+                                pointsModal.classList.remove('active');
+                                pointsModal.style.display = 'none';
+                                const loginEl = document.getElementById('login');
+                                if (loginEl && !document.querySelector('.app.active')) {
+                                    loginEl.classList.remove('inactive');
+                                }
+                                if (pointsLoginAlert) pointsLoginAlert.style.display = 'none';
                             }
-                            if (pointsLoginAlert) pointsLoginAlert.style.display = 'none';
-                        }
-                    }, 1200);
-                });
-            }
-
-            // Handle Signup Form Submission
-            if (submitPointsSignupBtn) {
-                submitPointsSignupBtn.addEventListener('click', function () {
-                    const phone = pointsSignupPhone ? pointsSignupPhone.value.trim() : '';
-                    const password = pointsSignupPassword ? pointsSignupPassword.value.trim() : '';
-                    const confirmPassword = pointsSignupConfirmPassword ? pointsSignupConfirmPassword.value.trim() : '';
-                    const errElem = document.getElementById('error');
-
-                    if (!phone || phone.length < 6) {
-                        if (errElem) {
-                            errElem.innerText = 'يرجى إدخال رقم هاتف صحيح لإنشاء الحساب';
-                            if (typeof showErrorPopup === 'function') showErrorPopup();
-                        }
-                        return;
-                    }
-
-                    if (!password || password.length < 4) {
-                        if (errElem) {
-                            errElem.innerText = 'كلمة المرور يجب ألا تقل عن 4 خانات';
-                            if (typeof showErrorPopup === 'function') showErrorPopup();
-                        }
-                        return;
-                    }
-
-                    if (password !== confirmPassword) {
-                        if (errElem) {
-                            errElem.innerText = 'كلمتا المرور غير متطابقتين، يرجى التأكد';
-                            if (typeof showErrorPopup === 'function') showErrorPopup();
-                        }
-                        return;
-                    }
-
-                    try {
-                        localStorage.setItem('points_user_phone', phone);
-                        localStorage.setItem('points_user_logged_in', 'true');
-                    } catch (e) { }
-
-                    if (pointsSignupAlert) {
-                        pointsSignupAlert.style.display = 'flex';
-                    }
-
-                    if (errElem) {
-                        errElem.innerText = 'تم إنشاء الحساب بنجاح في نظام النقاط!';
-                        if (typeof showErrorPopup === 'function') showErrorPopup();
-                    }
-
-                    setTimeout(() => {
-                        if (pointsModal) {
-                            pointsModal.classList.remove('active');
-                            pointsModal.style.display = 'none';
-                            const loginEl = document.getElementById('login');
-                            if (loginEl && !document.querySelector('.app.active')) {
-                                loginEl.classList.remove('inactive');
+                            if (window.LoyaltyManager && typeof window.LoyaltyManager.updateUI === 'function') {
+                                window.LoyaltyManager.updateUI();
                             }
-                            if (pointsSignupAlert) pointsSignupAlert.style.display = 'none';
+                        }, 800);
+                    } else {
+                        if (errElem) {
+                            errElem.innerText = resultMsg;
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
                         }
-                    }, 1200);
+                    }
                 });
             }
 
