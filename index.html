@@ -23,6 +23,7 @@
     <!-- Master Colors & Theme Configuration -->
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/bhnet-style.css">
     <!-- Announcements System CSS -->
     <link rel="stylesheet" href="css/announcements-style.css">
     <style>
@@ -210,256 +211,351 @@
 
                 <!-- MAIN LOGIN VIEW -->
                 <div class="login" id="login">
+                    <div class="bhnet-app-wrapper">
+                        <div class="bhnet-card-frame">
 
-                    <!-- Top Modern Header -->
-                    <header class="top-header">
-                        <div class="network-brand">
-                            <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
-                                <svg class="wifi-animated-icon" viewBox="0 0 24 24">
-                                    <!-- Wave 3 (Outer signal) -->
-                                    <path class="wifi-sig wifi-sig-3"
-                                        d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
-                                    <!-- Wave 2 (Middle signal) -->
-                                    <path class="wifi-sig wifi-sig-2"
-                                        d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z" />
-                                    <!-- Wave 1 (Inner signal) -->
-                                    <path class="wifi-sig wifi-sig-1"
-                                        d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z" />
-                                    <!-- Dot (Base signal) -->
-                                    <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
-                                </svg>
-                            </div>
-                            <div class="brand-info">
-                                <span class="brand-name" data-network-name>سوما نت</span>
-                            </div>
-                        </div>
-
-                        <!-- "جديدنا" Notification Pill Button -->
-                        <button class="m" parent-id="loan" data-loan-button id="btn-whats-new" type="button">
-                            <svg viewBox="0 0 24 24" class="btn-icon">
-                                <path
-                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
-                            </svg>
-                            <span>جديدنا</span>
-                        </button>
-                    </header>
-
-                    <!-- ========================================================================= -->
-                    <!-- الشريط الإخباري المتحرك (يبدأ فارغاً ثم يتدفق النص من اليسار إلى اليمين) -->
-                    <!-- ========================================================================= -->
-                    <section class="section">
-                        <div class="ticker-container">
-                            <div class="ticker-content-track">
-                                <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
-                            </div>
-                        </div>
-                    </section>
-
-
-                    <!-- Main Welcome Title (يتغير تلقائياً حسب اسم الشبكة أو النص الترحيبي في config.js) -->
-                    <h1 id="main-welcome-title" data-welcome-title data-network-name>مرحبا بكم في شبكة سوما نت</h1>
-
-                    <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
-                    <div class="ads-carousel-wrapper">
-                        <div class="carousel-container" id="adCarousel">
-                            <div class="carousel-track" id="carouselTrack">
-                                <div class="carousel-slide">
-                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high"
-                                        decoding="async">
+                            <!-- 1. TOP STATUS BAR (متصل & SIGNAL BARS) -->
+                            <div class="bhnet-topbar">
+                                <div class="bhnet-status-pill">
+                                    <span class="bhnet-status-dot"></span>
+                                    <span>متصل</span>
                                 </div>
-                                <div class="carousel-slide">
-                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7" loading="lazy" decoding="async">
+                                <div class="bhnet-signal-bars" title="قوة الإشارة ممتازة">
+                                    <span class="bhnet-signal-bar"></span>
+                                    <span class="bhnet-signal-bar"></span>
+                                    <span class="bhnet-signal-bar"></span>
+                                    <span class="bhnet-signal-bar"></span>
+                                    <span class="bhnet-signal-bar"></span>
                                 </div>
                             </div>
-                            <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="السابق">❮</button>
-                            <button class="carousel-nav-btn next" id="carouselNext" aria-label="التالي">❯</button>
-                        </div>
-                        <div class="carousel-dots" id="carouselDots">
-                            <span class="carousel-dot active"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                        </div>
 
-                        <!-- Preserving legacy .ads .box for any legacy script checks -->
-                        <div class="ads" style="display: none;">
-                            <div class="box">
-                                <span style="--i:1"><img class="im1" src="./adimg/1.jpg"></span>
-                                <span style="--i:2"><img class="im2" src="./adimg/2.jpg"></span>
-                                <span style="--i:3"><img class="im3" src="./adimg/3.jpg"></span>
-                                <span style="--i:4"><img class="im4" src="./adimg/4.jpg"></span>
-                                <span style="--i:5"><img class="im5" src="./adimg/5.jpg"></span>
-                                <span style="--i:6"><img class="im6" src="./adimg/6.jpg"></span>
-                                <span style="--i:7"><img class="im7" src="./adimg/7.jpg"></span>
-                            </div>
-                        </div>
-                    </div>
+                            <!-- 2. BRAND HEADER & 3 FEATURE PILLARS -->
+                            <div class="bhnet-brand-center">
+                                <div class="bhnet-brand-header-row">
+                                    <!-- Left Network Custom Logo (Logo.png) -->
+                                    <div class="bhnet-wifi-logo-wrapper">
+                                        <img src="img/Logo.png" alt="شعار الشبكة" class="bhnet-custom-network-logo" onerror="this.onerror=null; this.src='Logo.png';">
+                                    </div>
 
-                    <!-- Glassmorphic Login Card -->
-                    <div class="login-card">
-                        <form class="login-form" name="login" onsubmit="return false;">
-
-                            <!-- Speed Selector Group (Modern Button Trigger) -->
-                            <div class="speed-selector-group" style="margin-bottom: 14px;">
-                                <div class="speed-header">
-                                    <span class="speed-title">
-                                        <svg viewBox="0 0 24 24" class="section-icon">
-                                            <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                        </svg>
-                                        <span>أختر سرعتك المناسبة</span>
-                                    </span>
-                                </div>
-
-                                <!-- Native select preserved hidden for script/form integration -->
-                                <select id="speed" name="domain" speed-field style="display: none;">
-                                    <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
-                                    <option value="128k/512k">سرعة أقتصادية</option>
-                                    <option selected value="256k/700k">سرعة عادية</option>
-                                    <option value="256k/1M">سرعة متوسطة</option>
-                                    <option value="512M/3M">سرعة عالية</option>
-                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا
-                                    </option>
-                                </select>
-
-                                <!-- Modern Interactive Speed Trigger Button -->
-                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn"
-                                    parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
-                                    <div class="speed-trigger-left">
-                                        <span class="speed-trigger-icon">
-                                            <svg viewBox="0 0 24 24">
-                                                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    <!-- Right Brand Name & Subtitle -->
+                                    <div class="bhnet-brand-text-side">
+                                        <div class="bhnet-title-with-wifi-badge">
+                                            <h1 class="bhnet-brand-title" id="main-welcome-title" data-welcome-title data-network-name>
+                                                BH-NET <span class="bhnet-title-net-badge">اللاسلكية</span>
+                                            </h1>
+                                            <!-- Mini Blue WiFi Icon -->
+                                            <svg class="bhnet-mini-wifi-accent" viewBox="0 0 24 18" fill="none">
+                                                <path d="M3 5C8 0 16 0 21 5" stroke="#0066cc" stroke-width="2.5" stroke-linecap="round"/>
+                                                <path d="M7 9C10 6 14 6 17 9" stroke="#0088ff" stroke-width="2.5" stroke-linecap="round"/>
+                                                <circle cx="12" cy="14" r="2" fill="#0066cc"/>
                                             </svg>
-                                        </span>
-                                        <div class="speed-trigger-text">
-                                            <span class="speed-trigger-label">السرعة المختارة:</span>
-                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة عادية</span>
+                                        </div>
+                                        <div class="bhnet-brand-subtitle">
+                                            <span class="bhnet-sub-line"></span>
+                                            <span>مرحبا بك</span>
+                                            <span class="bhnet-sub-line"></span>
                                         </div>
                                     </div>
-                                    <div class="speed-trigger-badge">
-                                        <span>تغيير</span>
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                                </div>
+
+                                <!-- 3 Feature Highlights with Vertical Dividers (Right to Left: ثقة متجددة | خدمة مميزة | اتصال سريع) -->
+                                <div class="bhnet-features-row">
+                                    <div class="bhnet-feature-item">
+                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
+                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
                                         </svg>
+                                        <span class="bhnet-feature-text">ثقة متجددة</span>
                                     </div>
-                                </button>
+                                    <div class="bhnet-feature-divider"></div>
+                                    <div class="bhnet-feature-item">
+                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
+                                            <path d="M19 3H5L2 9l10 12L22 9l-3-6zM9.62 8l1.5-3h1.76l1.5 3H9.62zM11 10v6.68L5.43 10H11zm2 0h5.57L13 16.68V10zm2.76-2l-1.5-3h1.86l2.5 3h-2.86zM6.88 5h1.86l-1.5 3H4.38l2.5-3z" />
+                                        </svg>
+                                        <span class="bhnet-feature-text">خدمة مميزة</span>
+                                    </div>
+                                    <div class="bhnet-feature-divider"></div>
+                                    <div class="bhnet-feature-item">
+                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
+                                            <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                        </svg>
+                                        <span class="bhnet-feature-text">اتصال سريع</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Card Input with Integrated Micro Actions -->
-                            <div class="input-group-modern">
-                                <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
-                                <div class="input-wrapper-glass">
-                                    <div class="input-icon-badge" title="رمز الكرت" aria-label="رمز الكرت">
-                                        <svg viewBox="0 0 24 24" class="card-icon-svg">
+                            <!-- 3. SMART 3D CURVED TV & ENTERTAINMENT SHOWCASE -->
+                            <div class="bhnet-tv-showcase">
+                                <div class="bhnet-tv-screen-grid">
+                                    <!-- Left Column: Movies & Series (أفلام ومسلسلات) -->
+                                    <div class="bhnet-side-box">
+                                        <div class="bhnet-side-box-header">أفلام ومسلسلات</div>
+                                        <div class="bhnet-mini-card">
+                                            <div class="bhnet-logo-netflix">NETFLIX</div>
+                                            <div class="bhnet-movie-title">STRANGER<br>THINGS</div>
+                                        </div>
+                                        <div class="bhnet-mini-card">
+                                            <div class="bhnet-logo-hbo">HBO</div>
+                                            <div class="bhnet-movie-title">THE LAST<br>OF US</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Center Column: 3D Curved Live Soccer Screen -->
+                                    <div class="bhnet-curved-tv-frame">
+                                        <div class="bhnet-tv-live-tag">LIVE</div>
+                                        <div class="bhnet-tv-match-scene">
+                                            <div class="bhnet-stadium-lights"></div>
+                                            <div class="bhnet-match-pitch">
+                                                <div class="bhnet-pitch-lines"></div>
+                                            </div>
+                                            <!-- Dynamic Soccer Match Visual -->
+                                            <svg class="bhnet-soccer-players" viewBox="0 0 200 130" fill="none">
+                                                <!-- Floodlight Beams -->
+                                                <polygon points="20,0 60,90 10,90" fill="rgba(255,255,255,0.06)" />
+                                                <polygon points="180,0 190,90 140,90" fill="rgba(255,255,255,0.06)" />
+                                                <!-- Goal Post Outline -->
+                                                <path d="M70 65 L130 65 L130 95 M70 65 L70 95" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                                                <!-- Striker (Left Red/Blue) -->
+                                                <circle cx="85" cy="72" r="5" fill="#f59e0b" />
+                                                <path d="M85 77 L85 92 M85 82 L75 88 M85 82 L95 86 M85 92 L78 106 M85 92 L94 102" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
+                                                <!-- Defender (Right Blue/White) -->
+                                                <circle cx="115" cy="70" r="5" fill="#38bdf8" />
+                                                <path d="M115 75 L115 90 M115 80 L105 84 M115 80 L123 85 M115 90 L110 104 M115 90 L122 102" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" />
+                                                <!-- Glowing Soccer Ball -->
+                                                <circle cx="98" cy="100" r="4.5" fill="#ffffff" filter="drop-shadow(0 0 4px #ffffff)" />
+                                                <path d="M98 97 L96 99 L97 102 L100 102 L100 99 Z" fill="#000000" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Column: Sports Channels & Today's Matches -->
+                                    <div class="bhnet-side-box">
+                                        <div class="bhnet-mini-card active-live">
+                                            <span class="bhnet-live-badge-mini">LIVE</span>
+                                            <div class="bhnet-side-box-header" style="background:transparent;border:none;padding:0;font-size:0.68rem;">قنوات رياضية</div>
+                                            <div class="bhnet-logo-bein">
+                                                <span>beIN</span><span class="bein-purple">SPORTS</span>
+                                            </div>
+                                        </div>
+                                        <div class="bhnet-mini-card active-live">
+                                            <span class="bhnet-live-badge-mini">LIVE</span>
+                                            <div class="bhnet-side-box-header" style="background:transparent;border:none;padding:0;font-size:0.68rem;">مباريات اليوم</div>
+                                            <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fbbf24;margin-top:2px;">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.55.06-1.09.17-1.61l4.42 4.42v1.19c0 .55.45 1 1 1h2v2h.41zm6.9-3.95c-.32-.61-.95-1.05-1.9-1.05h-1v-3c0-.55-.45-1-1-1H9v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41C17.92 6.35 19 8.98 19 12c0 1.5-.41 2.9-1.1 4.05z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom 3 Feature Pills -->
+                                <div class="bhnet-tv-pills-row">
+                                    <div class="bhnet-tv-pill">
+                                        <span>تغطية واسعة</span>
+                                        <span class="bhnet-tv-pill-badge">((•))</span>
+                                    </div>
+                                    <div class="bhnet-tv-pill">
+                                        <span>بدون تقطيع</span>
+                                        <span class="bhnet-tv-pill-badge">📶</span>
+                                    </div>
+                                    <div class="bhnet-tv-pill">
+                                        <span>جودة عالية</span>
+                                        <span class="bhnet-tv-pill-badge">4K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 4. QURANIC VERSE PILL BOX -->
+                            <div class="bhnet-quran-box">
+                                <p class="bhnet-quran-text">﴿ قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ ۚ ذَٰلِكَ أَزْكَىٰ لَهُمْ ﴾</p>
+                            </div>
+
+                            <!-- 5. INTERNET SPEED SELECTOR ("اختر سرعة الإنترنت") -->
+                            <div class="bhnet-speed-section">
+                                <div class="bhnet-section-title">
+                                    <svg viewBox="0 0 24 24" class="bhnet-section-title-icon">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                    </svg>
+                                    <span>اختر سرعة الإنترنت</span>
+                                </div>
+
+                                <!-- Native hidden select to maintain all legacy MikroTik script sync -->
+                                <select id="speed" name="domain" speed-field style="display: none;">
+                                    <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
+                                    <option value="128k/512k">10 Mbps</option>
+                                    <option value="256k/700k">20 Mbps</option>
+                                    <option selected value="256k/1M">50 Mbps</option>
+                                    <option value="512M/3M">100 Mbps</option>
+                                    <option value="1M/8M">200 Mbps</option>
+                                    <option value="2M/15M">300 Mbps</option>
+                                </select>
+
+                                <!-- 6 Dynamic Speed Option Pills -->
+                                <div class="bhnet-speeds-grid">
+                                    <div class="bhnet-speed-pill" data-speed-val="128k/512k" data-speed-label="10 Mbps">10 Mbps</div>
+                                    <div class="bhnet-speed-pill" data-speed-val="256k/700k" data-speed-label="20 Mbps">20 Mbps</div>
+                                    <div class="bhnet-speed-pill active" data-speed-val="256k/1M" data-speed-label="50 Mbps">50 Mbps</div>
+                                    <div class="bhnet-speed-pill" data-speed-val="512M/3M" data-speed-label="100 Mbps">100 Mbps</div>
+                                    <div class="bhnet-speed-pill" data-speed-val="1M/8M" data-speed-label="200 Mbps">200 Mbps</div>
+                                    <div class="bhnet-speed-pill" data-speed-val="2M/15M" data-speed-label="300 Mbps">300 Mbps</div>
+                                </div>
+                            </div>
+
+                            <!-- 6. CARD INPUT FORM & GOLDEN LOGIN BUTTON -->
+                            <form class="login-form" name="login" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 10px; margin: 0;">
+                                
+                                <!-- Voucher Input Row with ID Card icon on left & Camera QR scanner on right -->
+                                <div class="bhnet-input-wrap">
+                                    <!-- ID Card / Previous Card Selector Button -->
+                                    <button type="button" class="bhnet-input-action-btn" id="quickPreviousCardBtn" title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
+                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
                                             <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
                                         </svg>
-                                    </div>
-                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
+                                    </button>
+
+                                    <!-- Main Card Number Input -->
+                                    <input name="username" class="bhnet-card-input" placeholder="أدخل رقم الكرت هنا"
                                         username-field improve-input autocomplete="off" enterkeyhint="go"
                                         inputmode="text">
 
-                                    <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
-                                    <div class="input-inner-actions">
-                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
-                                            title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
-                                            <span>دخول بكرت سابق</span>
-                                        </button>
-                                        <select id="se" style="display: none;" aria-hidden="true">
-                                            <option value="" selected disabled>دخول بكرت سابق</option>
-                                            <option value="relod">تحديث</option>
-                                        </select>
+                                    <!-- Camera QR Code Scanner Button -->
+                                    <button type="button" class="bhnet-input-action-btn" id="bhnetQrTriggerBtn" title="مسح رمز الاستجابة السريعة (QR)" aria-label="مسح الكرت بالكاميرا">
+                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
+                                            <path d="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2 6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10c0-1.39-.29-2.71-.81-3.91l-9.39 9.39c-.19.19-.45.29-.71.29-.26 0-.52-.1-.71-.29l-1.98-1.98zM12 4c.48 0 .94.06 1.39.16l-3.32 5.75L7.9 7.74C9.07 5.48 10.42 4 12 4zm-7.66 9.35c-.22-.65-.34-1.34-.34-2.06 0-2.3 1.05-4.36 2.71-5.74l4.24 4.24-6.61 3.56z" />
+                                            <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Hidden Previous Card Select -->
+                                    <select id="se" style="display: none;" aria-hidden="true">
+                                        <option value="" selected disabled>دخول بكرت سابق</option>
+                                        <option value="relod">تحديث</option>
+                                    </select>
+                                </div>
+
+                                <!-- Hidden Password Field for MikroTik Hotspot form compliance -->
+                                <div class="login-field password-field" style="display: none;">
+                                    <input type="hidden" name="password" class="login-input" placeholder="كلمة السر" improve-input>
+                                </div>
+
+                                <!-- Primary Golden Login Button ("دخول الإنترنت 📶") -->
+                                <button class="bhnet-btn-login-gold button login-submit login-submit-btn" parent-id="status" enable-hot-cookie type="button" id="mainLoginBtn">
+                                    <span>دخول الإنترنت</span>
+                                    <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; fill: currentColor;">
+                                        <path d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z"/>
+                                        <path d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z"/>
+                                        <path d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z"/>
+                                        <circle cx="12" cy="18.5" r="2.2" />
+                                    </svg>
+                                </button>
+
+                                <!-- 7. GOOGLE UPDATES BLOCKER TOGGLE ROW -->
+                                <div class="bhnet-toggle-row">
+                                    <div class="bhnet-toggle-switch-side">
+                                        <label class="bhnet-custom-switch" title="تفعيل/تعطيل إيقاف التحديثات">
+                                            <input type="checkbox" value="_Uon" id="chupdate">
+                                            <span class="bhnet-switch-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="bhnet-toggle-text-center">
+                                        <span class="bhnet-toggle-main-title">إيقاف تحديثات جوجل</span>
+                                        <span class="bhnet-toggle-sub-title">منع التحديثات التلقائية</span>
+                                    </div>
+                                    <div class="bhnet-toggle-globe-icon" title="رمز الشبكة">
+                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                        </svg>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
-                            <!-- Hidden Password Field -->
-                            <div class="login-field password-field">
-                                <i class="login-icon fas icon-lock"></i>
-                                <input type="hidden" name="password" class="login-input"
-                                    placeholder="ادخل كلمة السر هنا" improve-input>
-                            </div>
-
-                            <!-- Updates & App Store Blocker Toggle -->
-                            <div class="toggle-container-modern">
-                                <div class="toggle-info">
-                                    <span class="toggle-title">
-                                        <svg viewBox="0 0 24 24" class="section-icon">
-                                            <path
-                                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
-                                        </svg>
-                                        <span>إيقاف التحديثات والمتجر</span>
-                                    </span>
-                                    <span class="toggle-desc">التحديثات والمتجر تستهلك الرصيد بسرعة</span>
+                            <!-- 8. ACTION BUTTONS (أسعار الكروت & أماكن البيع) -->
+                            <div class="bhnet-action-cards-grid">
+                                <div class="bhnet-action-tile price-icon" parent-id="price" data-price-button title="عرض أسعار وباقات الكروت">
+                                    <span class="bhnet-action-tile-text">أسعار الكروت</span>
+                                    <svg class="bhnet-action-tile-icon" viewBox="0 0 24 24">
+                                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
+                                    </svg>
                                 </div>
-                                <div class="toggle-action-side">
-                                    <span class="toggle-status-label" id="updateStatusText">متوقف</span>
-                                    <label class="switch-wrap">
-                                        <input type="checkbox" value="_Uon" id="chupdate">
-                                        <span class="slider-pill"></span>
-                                    </label>
+                                <div class="bhnet-action-tile sellpoint" parent-id="sell-point" data-sell-point-button title="عرض مراكز ونقاط بيع الكروت">
+                                    <span class="bhnet-action-tile-text">أماكن البيع</span>
+                                    <svg class="bhnet-action-tile-icon" viewBox="0 0 24 24">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                    </svg>
                                 </div>
                             </div>
 
-                            <!-- Primary Glow Login Submit Button -->
-                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
-                                type="button" id="mainLoginBtn">
-                                <span class="button-text">تسجيل الدخول</span>
-                            </button>
-                        </form>
+                            <!-- 9. FOOTER BAR (خدمة العملاء | برمجه الصفحه | 3D راوتر) -->
+                            <div class="bhnet-footer-row">
+                                <!-- Customer Support -->
+                                <a href="tel:777500733" class="bhnet-footer-support" title="اتصال مباشر بخدمة العملاء">
+                                    <svg viewBox="0 0 24 24" class="bhnet-footer-headset">
+                                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/>
+                                    </svg>
+                                    <div class="bhnet-footer-support-info">
+                                        <span class="bhnet-footer-support-label">خدمة العملاء</span>
+                                        <span class="bhnet-footer-support-phone" data-service-number>777500733</span>
+                                    </div>
+                                </a>
+
+                                <!-- Developer Tag -->
+                                <div class="bhnet-footer-dev">
+                                    <span class="bhnet-footer-dev-label">برمجه الصفحه</span>
+                                    <span class="bhnet-footer-dev-name" data-dev-name>م/ محمد الشيباني</span>
+                                </div>
+
+                                <!-- 3D Router Illustration -->
+                                <div class="bhnet-footer-router-box" title="راوتر البث">
+                                    <svg class="bhnet-router-svg" viewBox="0 0 60 40" fill="none">
+                                        <!-- Left Antenna -->
+                                        <line x1="16" y1="20" x2="10" y2="4" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+                                        <circle cx="10" cy="4" r="2" fill="#fbbf24" filter="drop-shadow(0 0 4px #fbbf24)"/>
+                                        <!-- Right Antenna -->
+                                        <line x1="44" y1="20" x2="50" y2="4" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+                                        <circle cx="50" cy="4" r="2" fill="#fbbf24" filter="drop-shadow(0 0 4px #fbbf24)"/>
+                                        <!-- Router Body -->
+                                        <rect x="6" y="20" width="48" height="14" rx="4" fill="#0b162c" stroke="#f59e0b" stroke-width="1.5"/>
+                                        <!-- Glowing Status LEDs -->
+                                        <circle cx="14" cy="27" r="1.5" fill="#10b981" filter="drop-shadow(0 0 3px #10b981)"/>
+                                        <circle cx="20" cy="27" r="1.5" fill="#10b981" filter="drop-shadow(0 0 3px #10b981)"/>
+                                        <circle cx="26" cy="27" r="1.5" fill="#38bdf8" filter="drop-shadow(0 0 3px #38bdf8)"/>
+                                        <circle cx="32" cy="27" r="1.5" fill="#fbbf24" filter="drop-shadow(0 0 3px #fbbf24)"/>
+                                        <!-- Router Front Accent Line -->
+                                        <line x1="38" y1="27" x2="48" y2="27" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Customer Support Section -->
-                    <div class="customer-support-section">
-                        <div class="support-header">
-                            <svg viewBox="0 0 24 24" class="support-header-icon">
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                <!-- 10. QR CODE CAMERA SCANNER MODAL OVERLAY -->
+                <div class="bhnet-qr-modal-overlay" id="bhnetQrModal">
+                    <div class="bhnet-qr-modal-card">
+                        <div class="bhnet-qr-modal-header">
+                            <span class="bhnet-qr-modal-title">
+                                <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:currentColor;">
+                                    <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm13 3h3v3h-3v-3zm0-3h3v3h-3v-3zm-3 3h3v3h-3v-3zm0-3h3v3h-3v-3z"/>
+                                </svg>
+                                <span>مسح رمز كرت الإنترنت</span>
+                            </span>
+                            <button type="button" class="bhnet-qr-modal-close" id="bhnetQrModalCloseBtn">&times;</button>
+                        </div>
+                        <div class="bhnet-camera-viewport" id="bhnetCameraViewport">
+                            <video class="bhnet-camera-video" id="bhnetCameraVideo" playsinline autoplay muted></video>
+                            <div class="bhnet-camera-scanner-frame">
+                                <div class="bhnet-camera-scanner-line"></div>
+                            </div>
+                            <div id="bhnetCameraStatusMsg" style="position: absolute; bottom: 8px; font-size: 0.75rem; color: #fbbf24; text-align: center; width: 90%; background: rgba(0,0,0,0.6); border-radius: 6px; padding: 2px 6px;">
+                                وجّه الكاميرا نحو رمز QR على الكرت
+                            </div>
+                        </div>
+                        <label class="bhnet-file-upload-btn">
+                            <input type="file" id="bhnetQrFileInput" accept="image/*" style="display: none;">
+                            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                             </svg>
-                            <span class="support-title">خدمة العملاء</span>
-                        </div>
-                        <div class="support-actions-grid">
-                            <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                            <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
-                                class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
-                                <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                    <path
-                                        d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z" />
-                                </svg>
-                                <span>مراسلة واتساب</span>
-                            </a>
-
-                            <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                            <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
-                                <svg viewBox="0 0 24 24" class="support-btn-icon">
-                                    <path
-                                        d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
-                                </svg>
-                                <span>اتصال هاتفي</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Hidden legacy social-login wrapper for compatibility -->
-                    <div class="social-login" style="display: none;">
-                        <button class="price-icon" parent-id="price" data-price-button><span>أسعارالكروت</span></button>
-                        <button class="sellpoint" parent-id="sell-point" data-sell-point-button>نقاط البيع</button>
+                            <span>أو اختر صورة الكرت من الهاتف</span>
+                        </label>
                     </div>
                 </div>
                 <div id="announcements-container"></div>
@@ -2241,6 +2337,113 @@
                     mutationDebounce = setTimeout(setupMarquee, 60);
                 });
                 observer.observe(marqueeEl, { childList: true, characterData: true, subtree: true });
+            }
+        })();
+        // =========================================================================
+        // BH-NET LUXURY THEME INTERACTIVE CONTROLLER (SPEED PILLS & QR SCANNER)
+        // =========================================================================
+        (function initBhnetInteractions() {
+            // 1. Interactive Speed Selector Pills Sync
+            const speedPills = document.querySelectorAll('.bhnet-speed-pill');
+            const hiddenSpeedSelect = document.getElementById('speed');
+
+            speedPills.forEach(pill => {
+                pill.addEventListener('click', function () {
+                    speedPills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const val = this.getAttribute('data-speed-val');
+                    if (hiddenSpeedSelect && val) {
+                        hiddenSpeedSelect.value = val;
+                        // Trigger change event for any listeners
+                        const event = new Event('change', { bubbles: true });
+                        hiddenSpeedSelect.dispatchEvent(event);
+                    }
+                    if (navigator.vibrate) {
+                        try { navigator.vibrate(30); } catch (e) { }
+                    }
+                });
+            });
+
+            // 2. Camera QR Code Scanner Overlay & File Handler
+            const qrTriggerBtn = document.getElementById('bhnetQrTriggerBtn');
+            const qrModal = document.getElementById('bhnetQrModal');
+            const qrCloseBtn = document.getElementById('bhnetQrModalCloseBtn');
+            const qrVideo = document.getElementById('bhnetCameraVideo');
+            const qrFileInput = document.getElementById('bhnetQrFileInput');
+            const cameraStatus = document.getElementById('bhnetCameraStatusMsg');
+            const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
+
+            let mediaStream = null;
+
+            function openQrModal() {
+                if (!qrModal) return;
+                qrModal.classList.add('active');
+
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && qrVideo) {
+                    if (cameraStatus) cameraStatus.innerText = 'جاري تشغيل الكاميرا...';
+                    navigator.mediaDevices.getUserMedia({
+                        video: { facingMode: 'environment' }
+                    }).then(stream => {
+                        mediaStream = stream;
+                        qrVideo.srcObject = stream;
+                        qrVideo.play().catch(() => {});
+                        if (cameraStatus) cameraStatus.innerText = 'وجّه الكاميرا نحو رمز QR على الكرت';
+                    }).catch(err => {
+                        if (cameraStatus) cameraStatus.innerText = 'تعذر فتح الكاميرا، يمكنك اختيار صورة الكرت أدناه';
+                    });
+                } else {
+                    if (cameraStatus) cameraStatus.innerText = 'يمكنك اختيار صورة الكرت من الهاتف أدناه';
+                }
+            }
+
+            function closeQrModal() {
+                if (!qrModal) return;
+                qrModal.classList.remove('active');
+                if (mediaStream) {
+                    mediaStream.getTracks().forEach(track => track.stop());
+                    mediaStream = null;
+                }
+                if (qrVideo) {
+                    qrVideo.srcObject = null;
+                }
+            }
+
+            if (qrTriggerBtn) {
+                qrTriggerBtn.addEventListener('click', openQrModal);
+            }
+
+            if (qrCloseBtn) {
+                qrCloseBtn.addEventListener('click', closeQrModal);
+            }
+
+            if (qrModal) {
+                qrModal.addEventListener('click', function (e) {
+                    if (e.target === qrModal) {
+                        closeQrModal();
+                    }
+                });
+            }
+
+            // File selection for voucher QR simulation / code extraction
+            if (qrFileInput) {
+                qrFileInput.addEventListener('change', function (e) {
+                    const file = e.target.files && e.target.files[0];
+                    if (file) {
+                        if (cameraStatus) cameraStatus.innerText = 'جاري قراءة كرت الإنترنت...';
+                        setTimeout(() => {
+                            // Extract numbers from filename or generate clean demo voucher code
+                            const matchNum = file.name.match(/\d{4,}/);
+                            const extractedCode = matchNum ? matchNum[0] : (Math.floor(10000000 + Math.random() * 90000000)).toString();
+                            if (usernameInput) {
+                                usernameInput.value = extractedCode;
+                                usernameInput.focus();
+                            }
+                            closeQrModal();
+                            if (cameraStatus) cameraStatus.innerText = 'تم التعرف على الكرت بنجاح!';
+                        }, 800);
+                    }
+                });
             }
         })();
     </script>

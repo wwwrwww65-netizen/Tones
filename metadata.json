@@ -1,7 +1,9 @@
 {
-  "name": "سوما نت - MikroTik Hotspot",
-  "description": "بوابة تسجيل الدخول لشبكة سوما نت اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع إدارة السرعات، فحص الكروت، والأسعار",
-  "requestFramePermissions": [],
+  "name": "BH-NET - بوابة شبكة المايكروتك",
+  "description": "بوابة تسجيل الدخول لشبكة BH-NET اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع تصميم عصري فاخر، اختيار سرعات الإنترنت، فحص الكروت، والأسعار",
+  "requestFramePermissions": [
+    "camera"
+  ],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]

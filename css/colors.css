@@ -1,265 +1,185 @@
 @charset "UTF-8";
 
 /* =============================================================================
-   🎨 ملف التحكم بجميع ألوان التطبيق | MASTER THEME COLORS CONFIGURATION
-   =============================================================================
-   مرحباً بك! من هذا الملف المبسط والصغير، يمكنك تغيير أي لون في التطبيق بالكامل
-   بسهولة تامة. فقط قم بتعديل كود اللون (Hex مثل #FF7F50 أو RGB) وسينعكس فوراً
-   على كل الواجهات، الأزرار، الخلفيات، والبطاقات.
+   👑 SHAYBANI NET ROYAL BLUE & HIGH-TECH LIGHT THEME | ألوان وتصميم شبكة الشيباني نت
    ============================================================================= */
 
 :root {
 
   /* ---------------------------------------------------------------------------
-     1️⃣ الألوان الأساسية وتدرج الهوية (PRIMARY ACCENT & GRADIENTS)
+     1️⃣ الألوان الأساسية وتدرج الهوية (PRIMARY ROYAL BLUE ACCENT & GRADIENTS)
      --------------------------------------------------------------------------- */
-  /* اللون الرئيسي التفاعلي (الأزرار، الأيقونات النشطة، التحديد، التوهج) */
-  --primary-color: #FF7F50;
+  /* اللون الأزرق الملكي الرئيسي */
+  --primary-color: #0066cc;
   
-  /* الدرجة الفاتحة من اللون الرئيسي (تستخدم في تدرج الأزرار والإضاءة) */
-  --primary-color-light: #FFA07A;
+  /* الدرجة الفاتحة والبراقة من الأزرق */
+  --primary-color-light: #0088ff;
   
-  /* الدرجة الأكثر دفئاً أو لمعاناً من اللون الرئيسي */
-  --primary-color-dark: #FF4500;
+  /* الدرجة العميقة من الأزرق */
+  --primary-color-dark: #004bb5;
   
-  /* التدرج اللوني الأساسي الفاخر للأزرار الرئيسية وشريط الدخول */
-  --primary-gradient: linear-gradient(135deg, var(--primary-color-light) 0%, var(--primary-color) 50%, var(--primary-color-dark) 100%);
+  /* التدرج الأزرق الملكي للأزرار والبطاقات المميزة */
+  --primary-gradient: linear-gradient(135deg, #0088ff 0%, #0066cc 50%, #004bb5 100%);
+  --gold-gradient: linear-gradient(135deg, #0088ff 0%, #0066cc 50%, #004bb5 100%);
+  --gold-btn-gradient: linear-gradient(135deg, #0088ff 0%, #0066cc 50%, #004bb5 100%);
   
-  /* لون توهج الإضاءة حول العناصر والأزرار المتفاعلة */
-  --primary-glow: rgba(255, 127, 80, 0.35);
+  /* لون توهج الإضاءة الزرقاء حول العناصر */
+  --primary-glow: rgba(0, 102, 204, 0.35);
+  --gold-glow: rgba(0, 102, 204, 0.25);
   
-  /* لون النص داخل الأزرار الرئيسية الملونة (#0B1120 كحلي داكن عالي الوضوح، أو #FFFFFF) */
-  --primary-btn-text: #0B1120;
+  /* لون النص داخل الأزرار الرئيسية الزرقاء (أبيض ناصع عالي التباين) */
+  --primary-btn-text: #ffffff;
 
 
   /* ---------------------------------------------------------------------------
      2️⃣ خلفيات التطبيق والبيئة العامة (PAGE & SPATIAL BACKGROUNDS)
      --------------------------------------------------------------------------- */
-  /* لون خلفية الصفحة الرئيسي الثابت */
-  --bg-page: #1a2b4c;
+  /* لون خلفية الصفحة الرئيسي الفاتح فائق النقاء */
+  --bg-page: #edf3fa;
   
-  /* تدرج خلفية الصفحة العام (كحلي ليلي زجاجي) */
-  --bg-page-gradient: linear-gradient(150deg, #2a4365 0%, #1a2b4c 45%, #0f172a 100%);
+  /* تدرج خلفية الصفحة العام */
+  --bg-page-gradient: linear-gradient(180deg, #edf3fa 0%, #f4f8fc 40%, #e6eff8 100%);
   
-  /* ألوان الكرات الضوئية الزجاجية العائمة في الخلفية (Spatial Orbs) */
-  --bg-orb-1: #3b82f6;                          /* الكرة الضوئية العلوية (أزرق سماوي مضيء) */
-  --bg-orb-2: #60a5fa;                          /* الكرة الضوئية السفلية (أزرق فاتح ناعم) */
-  --bg-orb-3: rgba(255, 127, 80, 0.32);         /* الكرة الضوئية الجانبية (توهج مرجاني خفيف) */
+  /* ألوان الكرات الضوئية في الخلفية */
+  --bg-orb-1: rgba(0, 102, 204, 0.12);
+  --bg-orb-2: rgba(0, 153, 255, 0.15);
+  --bg-orb-3: rgba(2, 132, 199, 0.1);
 
-  /* خلفية البطاقات والحاويات الزجاجية */
-  --card-glass-bg: rgba(26, 43, 76, 0.28);
+  /* خلفية البطاقات والحاويات (أبيض ناصع وظلال ناعمة) */
+  --card-glass-bg: #ffffff;
   
-  /* خلفية البطاقات عند لمسها أو تمرير الماوس فوقها */
-  --card-glass-hover-bg: rgba(59, 130, 246, 0.25);
+  /* خلفية البطاقات عند التمرير */
+  --card-glass-hover-bg: #f8fafc;
   
-  /* حدود البطاقات والزجاج (Glass Borders) */
-  --glass-border: rgba(255, 127, 80, 0.35);
-  
-  /* حدود البطاقات عند التركيز أو التفعيل */
-  --glass-border-focus: rgba(255, 127, 80, 0.8);
+  /* حدود البطاقات الأنيقة */
+  --glass-border: #dbe4f0;
+  --glass-border-focus: #0066cc;
 
 
   /* ---------------------------------------------------------------------------
      3️⃣ حقول إدخال الكروت والبيانات (CARD INPUT & INPUT CONTROLS)
      --------------------------------------------------------------------------- */
-  /* خلفية صندوق إدخال الكرت (أبيض ناصع لوضوح فائق وسهولة قراءة) */
-  --input-box-bg: #FFFFFF;
-  
-  /* لون الأرقام والحروف المكتوبة داخل حقل الإدخال */
-  --input-text-color: #1e3a8a;
-  
-  /* لون نص التلميح الخفيف (Placeholder) داخل حقل الإدخال */
-  --input-placeholder-color: #1e3a8a;
-  
-  /* حدود حقل الإدخال العادية */
-  --input-border-color: rgba(255, 127, 80, 0.55);
-  
-  /* حدود حقل الإدخال عند النقر والتركيز (Focus) */
-  --input-border-focus: #FF7F50;
-  
-  /* توهج حقل الإدخال عند الكتابة */
-  --input-glow-focus: rgba(255, 127, 80, 0.4);
-  
-  /* خلفية الأيقونات وأزرار اللصق السريع داخل حقل الإدخال */
-  --input-action-bg: rgba(42, 67, 101, 0.08);
-  
-  /* لون أيقونات الحقل وزر الكاميرا ولصق الكرت */
-  --input-action-icon: #1e3a8a;
+  --input-box-bg: #ffffff;
+  --input-text-color: #0f2942;
+  --input-placeholder-color: #94a3b8;
+  --input-border-color: #cbd5e1;
+  --input-border-focus: #0066cc;
+  --input-glow-focus: rgba(0, 102, 204, 0.3);
+  --input-action-bg: #eff6ff;
+  --input-action-icon: #0066cc;
 
 
   /* ---------------------------------------------------------------------------
      4️⃣ شريط التنقل السفلي (BOTTOM NAVIGATION BAR)
      --------------------------------------------------------------------------- */
-  /* خلفية شريط التنقل السفلي الزجاجي */
-  --nav-bar-bg: rgba(26, 43, 76, 0.55);
-  
-  /* حدود شريط التنقل السفلي */
-  --nav-bar-border: rgba(255, 127, 80, 0.35);
-  
-  /* لون الأيقونات والنصوص غير النشطة في الشريط */
-  --nav-item-inactive: #FFFFFF;
-  
-  /* لون الأيقونة والنص المختار (النشط حالياً) */
-  --nav-item-active: #FF7F50;
-  
-  /* خلفية الزر النشط في الشريط السفلي */
-  --nav-item-active-bg: rgba(255, 127, 80, 0.18);
-  
-  /* حدود الزر النشط */
-  --nav-item-active-border: rgba(255, 127, 80, 0.45);
+  --nav-bar-bg: rgba(255, 255, 255, 0.95);
+  --nav-bar-border: #dbe4f0;
+  --nav-item-inactive: #64748b;
+  --nav-item-active: #0066cc;
+  --nav-item-active-bg: #eff6ff;
+  --nav-item-active-border: #bfdbfe;
 
 
   /* ---------------------------------------------------------------------------
      5️⃣ النوافذ المنبثقة والمنزلقة (MODALS, SHEETS & DIALOGS)
      --------------------------------------------------------------------------- */
-  /* لون تعتيم وتغبيش شاشة الخلفية عند فتح أي نافذة منبثقة */
-  --modal-backdrop-bg: rgba(15, 23, 42, 0.65);
-  
-  /* تدرج خلفية جسم النافذة المنبثقة الداخلي (كحلي ملكي عميق) */
-  --modal-card-gradient: linear-gradient(165deg, #1e3a8a 0%, #172554 50%, #0f172a 100%);
-  
-  /* حدود النوافذ المنبثقة */
-  --modal-border: rgba(255, 127, 80, 0.55);
-  
-  /* توهج وظلال النوافذ المنبثقة */
-  --modal-shadow-glow: rgba(255, 127, 80, 0.25);
-  
-  /* خلفية زر إغلاق النافذة (X) */
-  --modal-close-bg: rgba(255, 255, 255, 0.12);
-  
-  /* حدود زر الإغلاق ولونه */
-  --modal-close-border: rgba(255, 127, 80, 0.45);
-  --modal-close-color: #FFFFFF;
+  --modal-backdrop-bg: rgba(15, 23, 42, 0.6);
+  --modal-card-gradient: #ffffff;
+  --modal-border: #cbd5e1;
+  --modal-shadow-glow: rgba(0, 102, 204, 0.2);
+  --modal-close-bg: #eff6ff;
+  --modal-close-border: #bfdbfe;
+  --modal-close-color: #0066cc;
 
 
   /* ---------------------------------------------------------------------------
      6️⃣ الشريط الإخباري المتحرك (NEWS TICKER / MARQUEE)
      --------------------------------------------------------------------------- */
-  /* خلفية الشريط الإخباري (أبيض ناصع لسهولة القراءة والوضوح التام) */
-  --ticker-bg: #FFFFFF;
-  
-  /* حدود الشريط الإخباري */
-  --ticker-border: rgba(255, 127, 80, 0.5);
-  
-  /* لون النص الإخباري المتحرك */
-  --ticker-text-color: #1e3a8a;
-  
-  /* لون أيقونة الإعلان بجانب النص */
-  --ticker-icon-color: #1e3a8a;
+  --ticker-bg: #ffffff;
+  --ticker-border: #dbe4f0;
+  --ticker-text-color: #0f2942;
+  --ticker-icon-color: #0066cc;
 
 
   /* ---------------------------------------------------------------------------
      7️⃣ خيارات السرعات والأسعار ونقاط البيع (SPEEDS, PRICING & POS)
      --------------------------------------------------------------------------- */
-  /* زر فتح نافذة اختيار السرعة */
-  --speed-trigger-bg: rgba(42, 67, 101, 0.25);
-  --speed-trigger-border: rgba(255, 255, 255, 0.7);
-  --speed-trigger-text: #FFFFFF;
+  --speed-trigger-bg: #ffffff;
+  --speed-trigger-border: #dbe4f0;
+  --speed-trigger-text: #0f2942;
   
-  /* بطاقات خيارات السرعة داخل النافذة */
-  --speed-option-bg: #FFFFFF;
-  --speed-option-border: rgba(255, 127, 80, 0.45);
-  --speed-option-text: #1e3a8a;
+  --speed-option-bg: #f8fafc;
+  --speed-option-border: #dbe4f0;
+  --speed-option-text: #0f2942;
   
-  /* خيار السرعة المحدد والنشط */
-  --speed-option-active-border: #1e3a8a;
-  --speed-option-active-badge-bg: #1e3a8a;
-  --speed-option-active-badge-text: #FFFFFF;
+  --speed-option-active-border: #0066cc;
+  --speed-option-active-badge-bg: #0066cc;
+  --speed-option-active-badge-text: #ffffff;
 
-  /* جداول الأسعار ونقاط البيع */
-  --table-head-bg: rgba(42, 67, 101, 0.35);
-  --table-head-border: rgba(255, 127, 80, 0.25);
-  --table-row-hover-bg: rgba(42, 67, 101, 0.45);
+  --table-head-bg: #eff6ff;
+  --table-head-border: #bfdbfe;
+  --table-row-hover-bg: #f0f7ff;
 
 
   /* ---------------------------------------------------------------------------
      8️⃣ أزرار خدمة العملاء والدعم الفني (CUSTOMER SUPPORT & WHATSAPP)
      --------------------------------------------------------------------------- */
-  /* خلفية وتدرج زر الواتساب */
-  --whatsapp-btn-gradient: linear-gradient(135deg, rgba(37, 211, 102, 0.28) 0%, rgba(18, 140, 126, 0.45) 100%);
-  --whatsapp-btn-border: rgba(37, 211, 102, 0.6);
-  --whatsapp-btn-icon: #25D366;
+  --whatsapp-btn-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --whatsapp-btn-border: #86efac;
+  --whatsapp-btn-icon: #ffffff;
   
-  /* خلفية وتدرج زر الاتصال الهاتفي */
-  --call-btn-gradient: linear-gradient(135deg, rgba(255, 127, 80, 0.22) 0%, rgba(255, 69, 0, 0.38) 100%);
-  --call-btn-border: rgba(255, 127, 80, 0.6);
-  --call-btn-icon: #FF7F50;
+  --call-btn-gradient: linear-gradient(135deg, #0088ff 0%, #0066cc 100%);
+  --call-btn-border: #93c5fd;
+  --call-btn-icon: #ffffff;
 
 
   /* ---------------------------------------------------------------------------
      9️⃣ نظام نقاط ومكافآت الولاء (LOYALTY & REWARDS SYSTEM)
      --------------------------------------------------------------------------- */
-  /* خلفية بطاقة معلومات رصيد نقاط المشترك */
-  --loyalty-card-bg: rgba(42, 67, 101, 0.28);
-  --loyalty-card-border: rgba(255, 127, 80, 0.55);
-  
-  /* صندوق رصيد النقاط المميز */
-  --loyalty-points-box-bg: rgba(255, 127, 80, 0.14);
-  --loyalty-points-box-border: rgba(255, 127, 80, 0.4);
-  --loyalty-points-number-color: #FFA07A;
-  
-  /* أزرار الإجراءات لنقاط الولاء (شراء كرت، استرجاع الكروت، السجل) */
-  --loyalty-action-card-bg: rgba(255, 255, 255, 0.08);
-  --loyalty-action-card-border: rgba(255, 127, 80, 0.35);
+  --loyalty-card-bg: #ffffff;
+  --loyalty-card-border: #dbe4f0;
+  --loyalty-points-box-bg: #eff6ff;
+  --loyalty-points-box-border: #bfdbfe;
+  --loyalty-points-number-color: #0066cc;
+  --loyalty-action-card-bg: #f8fafc;
+  --loyalty-action-card-border: #e2e8f0;
 
 
   /* ---------------------------------------------------------------------------
      🔟 لوحة بيانات ومقاييس الحالة (STATUS & USAGE DASHBOARD)
      --------------------------------------------------------------------------- */
-  /* بطاقات المقاييس (الرصيد، الوقت، الاستهلاك) */
-  --metric-card-bg: rgba(42, 67, 101, 0.25);
-  --metric-card-hover-border: #FF7F50;
-  --metric-card-hover-bg: rgba(59, 130, 246, 0.35);
-  
-  /* أزرار وروابط البث المباشر والترفيه في صفحة الحالة */
-  --status-stream-link-bg: rgba(255, 127, 80, 0.15);
-  --status-stream-link-border: rgba(255, 127, 80, 0.4);
+  --metric-card-bg: #ffffff;
+  --metric-card-hover-border: #0066cc;
+  --metric-card-hover-bg: #f0f7ff;
+  --status-stream-link-bg: #eff6ff;
+  --status-stream-link-border: #bfdbfe;
 
 
   /* ---------------------------------------------------------------------------
      1️⃣1️⃣ نصوص وعناوين التطبيق (TYPOGRAPHY & TEXT COLORS)
      --------------------------------------------------------------------------- */
-  /* النصوص الرئيسية والعناوين البيضاء عالية الوضوح */
-  --text-main-white: #FFFFFF;
-  
-  /* النصوص الثانوية الفاتحة */
-  --text-sub-light: #F1F5F9;
-  
-  /* النصوص التوضيحية الخافتة */
-  --text-sub-muted: #E2E8F0;
-  
-  /* النصوص البارزة بلون الثيم المرجاني */
-  --text-accent-highlight: #FF7F50;
-  
-  /* النصوص الداكنة داخل العناصر البيضاء (مثل الأزرار والحقول البيضاء) */
-  --text-contrast-dark: #0B1120;
+  --text-main-white: #0f2942;
+  --text-sub-light: #334155;
+  --text-sub-muted: #64748b;
+  --text-accent-highlight: #0066cc;
+  --text-contrast-dark: #ffffff;
 
 
   /* ---------------------------------------------------------------------------
      1️⃣2️⃣ ألوان الحالات والتنبيهات (SYSTEM STATUS COLORS)
      --------------------------------------------------------------------------- */
-  /* النجاح والاتصال والسرعة (أخضر زمردي) */
   --color-status-success: #10b981;
-  
-  /* الحظر والأخطاء والتحذير الشديد (أحمر وردي) */
-  --color-status-danger: #f43f5e;
-  
-  /* التنبيهات ولفت الانتباه (برتقالي دافئ) */
+  --color-status-danger: #ef4444;
   --color-status-warning: #f59e0b;
-  
-  /* المعلومات والإرشادات (أزرق سماوي) */
-  --color-status-info: #38bdf8;
+  --color-status-info: #0066cc;
 
 
   /* ---------------------------------------------------------------------------
      1️⃣3️⃣ شريط التمرير ومؤشر التحميل (SCROLLBAR & LOADERS)
      --------------------------------------------------------------------------- */
-  /* لون مقبض شريط التمرير للكمبيوتر */
-  --scrollbar-thumb: rgba(255, 127, 80, 0.35);
-  --scrollbar-thumb-hover: rgba(255, 127, 80, 0.85);
-  
-  /* مؤشر التحميل الدوار */
-  --spinner-outer-color: #FFA07A;
-  --spinner-inner-color: #38bdf8;
+  --scrollbar-thumb: rgba(0, 102, 204, 0.4);
+  --scrollbar-thumb-hover: rgba(0, 102, 204, 0.85);
+  --spinner-outer-color: #0088ff;
+  --spinner-inner-color: #0066cc;
 
 }

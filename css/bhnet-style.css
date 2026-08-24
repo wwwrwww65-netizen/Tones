@@ -1,0 +1,1080 @@
+@charset "UTF-8";
+
+/* =============================================================================
+   👑 SHAYBANI NET ROYAL BLUE THEME STYLESHEET | تصميم شبكة الشيباني نت طبق الأصل
+   ============================================================================= */
+
+/* Main Container Frame */
+.bhnet-app-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 4px 0 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.bhnet-card-frame {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bhnet-card-frame::before {
+  display: none;
+}
+
+/* =============================================================================
+   1. TOP STATUS BAR (متصل & SIGNAL BARS)
+   ============================================================================= */
+.bhnet-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+}
+
+.bhnet-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f2942;
+  box-shadow: 0 2px 8px rgba(0, 50, 120, 0.06);
+}
+
+.bhnet-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  display: inline-block;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.85); }
+}
+
+.bhnet-signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.bhnet-signal-bar {
+  width: 4px;
+  background-color: #0066cc;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0, 102, 204, 0.35);
+}
+.bhnet-signal-bar:nth-child(1) { height: 6px; }
+.bhnet-signal-bar:nth-child(2) { height: 9px; }
+.bhnet-signal-bar:nth-child(3) { height: 12px; }
+.bhnet-signal-bar:nth-child(4) { height: 15px; }
+.bhnet-signal-bar:nth-child(5) { height: 18px; }
+
+/* =============================================================================
+   2. BRAND HEADER & 3 FEATURE PILLARS (مطابق تماماً للصورة)
+   ============================================================================= */
+.bhnet-brand-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 4px 0 8px 0;
+}
+
+.bhnet-brand-header-row {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 12px 10px 12px;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 50, 120, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background wave graphic in the left corner */
+.bhnet-brand-header-row::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  bottom: -20px;
+  width: 130px;
+  height: 90px;
+  background: radial-gradient(ellipse at bottom left, rgba(0, 153, 255, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* Left 3D Neumorphic White Circle Badge with Royal Blue WiFi Waves */
+.bhnet-wifi-logo-wrapper {
+  flex-shrink: 0;
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bhnet-neumorphic-circle-badge {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f4f8fc 65%, #e2eaf5 100%);
+  box-shadow: 
+    0 8px 20px rgba(0, 70, 160, 0.16),
+    inset 0 3px 6px #ffffff,
+    inset 0 -3px 6px rgba(0, 40, 100, 0.08);
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bhnet-neumorphic-circle-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 80, 180, 0.22);
+}
+
+.bhnet-inner-rim {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1.5px solid #dce6f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 5px rgba(0, 40, 100, 0.05);
+}
+
+.bhnet-wifi-3d-blue {
+  width: 52px;
+  height: 44px;
+}
+
+/* Custom Network Logo */
+.bhnet-custom-network-logo {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 4px;
+  border: 1.5px solid #dce6f2;
+  box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bhnet-custom-network-logo:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.22);
+}
+
+/* Right Brand Text & Subtitle */
+.bhnet-brand-text-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  text-align: right;
+  z-index: 1;
+}
+
+.bhnet-title-with-wifi-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bhnet-brand-title {
+  font-size: 2.35rem;
+  font-weight: 900;
+  color: #0a2540;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 30, 80, 0.08);
+}
+
+.bhnet-title-net-badge {
+  color: #0a2540;
+  margin-right: 2px;
+}
+
+.bhnet-mini-wifi-accent {
+  position: absolute;
+  top: -12px;
+  right: 68px;
+  width: 22px;
+  height: 18px;
+  filter: drop-shadow(0 1px 4px rgba(0, 102, 204, 0.4));
+}
+
+.bhnet-brand-subtitle {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0284c7;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.bhnet-sub-line {
+  display: inline-block;
+  width: 26px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0284c7, transparent);
+}
+
+.bhnet-features-row {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 8px;
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(0, 50, 120, 0.05);
+}
+
+.bhnet-feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  text-align: center;
+}
+
+.bhnet-feature-icon {
+  width: 24px;
+  height: 24px;
+  fill: #0066cc;
+  filter: drop-shadow(0 1px 4px rgba(0, 102, 204, 0.35));
+}
+
+.bhnet-feature-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  white-space: nowrap;
+}
+
+.bhnet-feature-divider {
+  width: 1.5px;
+  height: 28px;
+  background: linear-gradient(180deg, transparent, #dbe4f0, transparent);
+}
+
+/* =============================================================================
+   3. SMART 3D CURVED TV & ENTERTAINMENT SHOWCASE
+   ============================================================================= */
+.bhnet-tv-showcase {
+  width: 100%;
+  background: #080e1c;
+  border: 1.5px solid rgba(0, 102, 204, 0.35);
+  border-radius: 20px;
+  padding: 10px 8px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 6px 20px rgba(0, 50, 120, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.bhnet-tv-screen-grid {
+  display: grid;
+  grid-template-columns: 95px 1fr 95px;
+  gap: 6px;
+  align-items: stretch;
+  min-height: 155px;
+}
+
+@media (max-width: 380px) {
+  .bhnet-tv-screen-grid {
+    grid-template-columns: 82px 1fr 82px;
+    gap: 4px;
+  }
+}
+
+.bhnet-side-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.bhnet-side-box-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(0, 102, 204, 0.3);
+  border-radius: 8px;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+.bhnet-mini-card {
+  background: rgba(11, 20, 44, 0.9);
+  border: 1px solid rgba(0, 102, 204, 0.25);
+  border-radius: 10px;
+  padding: 5px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 58px;
+}
+
+.bhnet-mini-card.active-live {
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.bhnet-live-badge-mini {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.55rem;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 4px;
+  letter-spacing: 0.4px;
+}
+
+.bhnet-logo-netflix {
+  color: #e50914;
+  font-weight: 900;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.bhnet-movie-title {
+  color: #ffffff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+.bhnet-logo-hbo {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  border: 1px solid #ffffff;
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.bhnet-logo-bein {
+  color: #ffffff;
+  font-size: 0.66rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.bhnet-logo-bein span.bein-purple {
+  color: #a855f7;
+  font-weight: 900;
+}
+
+.bhnet-curved-tv-frame {
+  background: radial-gradient(circle at 50% 30%, #1e3a8a 0%, #0b152d 70%, #030712 100%);
+  border: 2px solid #1e293b;
+  border-top-color: #38bdf8;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.bhnet-tv-stand-base {
+  width: 48px;
+  height: 4px;
+  background: #334155;
+  border-radius: 2px;
+  margin: -4px auto 0 auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+}
+
+.bhnet-tv-live-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  z-index: 2;
+}
+
+.bhnet-tv-match-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bhnet-match-pitch {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, #15803d 0%, #166534 60%, #14532d 100%);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.4);
+  transform: perspective(100px) rotateX(20deg);
+}
+
+.bhnet-pitch-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 50% 100%, transparent 40px, rgba(255,255,255,0.4) 41px, rgba(255,255,255,0.4) 43px, transparent 44px),
+    linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.4) 50%, transparent 51%);
+}
+
+.bhnet-stadium-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: radial-gradient(circle at 50% -20%, #38bdf8 0%, #1e3a8a 40%, transparent 80%);
+  opacity: 0.85;
+}
+
+.bhnet-soccer-players {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bhnet-tv-pills-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
+
+.bhnet-tv-pill {
+  flex: 1;
+  background: rgba(11, 20, 44, 0.85);
+  border: 1px solid rgba(0, 102, 204, 0.35);
+  border-radius: 8px;
+  padding: 5px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  white-space: nowrap;
+}
+
+.bhnet-tv-pill-badge {
+  background: #0066cc;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+/* =============================================================================
+   4. QURANIC VERSE PILL BOX
+   ============================================================================= */
+.bhnet-quran-box {
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 14px;
+  padding: 10px 14px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0, 50, 120, 0.05);
+}
+
+.bhnet-quran-text {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #004bb5;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =============================================================================
+   5. INTERNET SPEED SELECTOR ("اختر سرعة الإنترنت")
+   ============================================================================= */
+.bhnet-speed-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 18px;
+  padding: 12px 10px;
+  box-shadow: 0 4px 18px rgba(0, 50, 120, 0.06);
+}
+
+.bhnet-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #0f2942;
+  text-align: center;
+}
+
+.bhnet-section-title-icon {
+  width: 18px;
+  height: 18px;
+  fill: #0066cc;
+}
+
+.bhnet-speeds-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+@media (max-width: 420px) {
+  .bhnet-speeds-grid {
+    gap: 4px;
+  }
+}
+
+.bhnet-speed-pill {
+  background: #f8fafc;
+  border: 1px solid #d8e2ee;
+  border-radius: 10px;
+  padding: 8px 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f2942;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0, 40, 100, 0.04);
+}
+
+.bhnet-speed-pill:hover {
+  border-color: #0066cc;
+  color: #0066cc;
+  background: #eff6ff;
+  transform: translateY(-1px);
+}
+
+.bhnet-speed-pill.active {
+  background: linear-gradient(135deg, #0077ff 0%, #0066cc 50%, #0052cc 100%) !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  border-color: #004bb5 !important;
+  box-shadow: 0 4px 14px rgba(0, 102, 204, 0.38) !important;
+}
+
+/* =============================================================================
+   6. CARD INPUT & ROYAL BLUE LOGIN BUTTON
+   ============================================================================= */
+.bhnet-input-wrap {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 40, 100, 0.05);
+}
+
+.bhnet-input-wrap:focus-within {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.18), 0 2px 8px rgba(0, 40, 100, 0.05);
+}
+
+.bhnet-input-action-btn {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #0066cc;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.bhnet-input-action-btn:hover {
+  background: #dbeafe;
+  border-color: #0066cc;
+  transform: scale(1.05);
+}
+
+.bhnet-card-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f2942;
+  text-align: center;
+  padding: 8px 4px;
+}
+
+.bhnet-card-input::placeholder {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Primary Royal Blue Login Button */
+.bhnet-btn-login-gold {
+  background: linear-gradient(135deg, #0077ff 0%, #0066cc 50%, #004bb5 100%);
+  color: #ffffff;
+  font-size: 1.18rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 14px;
+  padding: 13px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 6px 22px rgba(0, 102, 204, 0.38);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.bhnet-btn-login-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 102, 204, 0.5);
+}
+
+.bhnet-btn-login-gold:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 10px rgba(0, 102, 204, 0.3);
+}
+
+/* =============================================================================
+   7. GOOGLE UPDATES BLOCKER TOGGLE ROW
+   ============================================================================= */
+.bhnet-toggle-row {
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0, 50, 120, 0.05);
+}
+
+.bhnet-toggle-switch-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bhnet-custom-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.bhnet-custom-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bhnet-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 9999px;
+  border: 1px solid #94a3b8;
+}
+
+.bhnet-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #ffffff;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+.bhnet-custom-switch input:checked + .bhnet-switch-slider {
+  background: linear-gradient(135deg, #0077ff, #0052cc);
+  border-color: #004bb5;
+}
+
+.bhnet-custom-switch input:checked + .bhnet-switch-slider:before {
+  transform: translateX(22px);
+  background-color: #ffffff;
+}
+
+.bhnet-toggle-text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.bhnet-toggle-main-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f2942;
+}
+
+.bhnet-toggle-sub-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.bhnet-toggle-globe-icon {
+  width: 32px;
+  height: 32px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   8. ACTION BUTTONS (أسعار الكروت & أماكن البيع)
+   ============================================================================= */
+.bhnet-action-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bhnet-action-tile {
+  background: #ffffff;
+  border: 1.5px solid #dce6f2;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  box-shadow: 0 3px 12px rgba(0, 50, 120, 0.05);
+}
+
+.bhnet-action-tile:hover {
+  border-color: #0066cc;
+  background: #f0f7ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 102, 204, 0.15);
+}
+
+.bhnet-action-tile-text {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #0f2942;
+}
+
+.bhnet-action-tile-icon {
+  width: 24px;
+  height: 24px;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   9. FOOTER BAR (خدمة العملاء | برمجة الصفحة | 3D راوتر)
+   ============================================================================= */
+.bhnet-footer-row {
+  background: #ffffff;
+  border: 1px solid #dce6f2;
+  border-radius: 16px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 65px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  box-shadow: 0 3px 12px rgba(0, 50, 120, 0.05);
+}
+
+.bhnet-footer-support {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bhnet-footer-headset {
+  width: 32px;
+  height: 32px;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+.bhnet-footer-support-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bhnet-footer-support-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.bhnet-footer-support-phone {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #0066cc;
+  letter-spacing: 0.5px;
+  direction: ltr;
+}
+
+.bhnet-footer-dev {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-right: 1px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+  padding: 0 4px;
+}
+
+.bhnet-footer-dev-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.bhnet-footer-dev-name {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #0f2942;
+}
+
+.bhnet-footer-router-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bhnet-router-svg {
+  width: 58px;
+  height: 38px;
+  filter: drop-shadow(0 2px 5px rgba(0, 50, 120, 0.15));
+}
+
+/* =============================================================================
+   10. QR CODE CAMERA SCANNER MODAL
+   ============================================================================= */
+.bhnet-qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.bhnet-qr-modal-overlay.active {
+  display: flex;
+}
+
+.bhnet-qr-modal-card {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 16px 40px rgba(0, 50, 120, 0.18);
+}
+
+.bhnet-qr-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bhnet-qr-modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f2942;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bhnet-qr-modal-close {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  color: #0066cc;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.bhnet-camera-viewport {
+  width: 100%;
+  height: 220px;
+  background: #0f172a;
+  border: 1.5px solid #0066cc;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bhnet-camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bhnet-camera-scanner-frame {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 2px solid #0066cc;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.bhnet-camera-scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #0088ff;
+  box-shadow: 0 0 8px #0088ff;
+  animation: scanLine 2s infinite ease-in-out;
+}
+
+@keyframes scanLine {
+  0%, 100% { top: 0; }
+  50% { top: 148px; }
+}
+
+.bhnet-file-upload-btn {
+  background: #f8fafc;
+  border: 1px dashed #0066cc;
+  border-radius: 10px;
+  padding: 10px;
+  color: #0f2942;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
