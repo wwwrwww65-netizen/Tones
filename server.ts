@@ -50,7 +50,7 @@ function getUptimeString(startTime: number): string {
 }
 
 // MikroTik Hotspot /login endpoint
-app.get('/login', (req, res) => {
+app.get(['/login', '/login.html'], (req, res) => {
   const isCallBack = req.query.var === 'callBack';
   const username = req.query.username as string;
   const domain = (req.query.domain as string) || '256k/700k';
@@ -91,7 +91,7 @@ app.get('/login', (req, res) => {
       link_login_only: '/login',
       link_logout: '/logout',
       link_status: '/status',
-      nas_id: 'TunisNet-MikroTik',
+      nas_id: 'SomaNet-MikroTik',
       ip: sessionState.ip,
       mac: sessionState.mac,
       trial: 'no',
@@ -105,7 +105,7 @@ app.get('/login', (req, res) => {
 });
 
 // MikroTik Hotspot /status endpoint
-app.get('/status', (req, res) => {
+app.get(['/status', '/status.html'], (req, res) => {
   const isCallBack = req.query.var === 'callBack';
 
   if (isCallBack) {
@@ -133,8 +133,35 @@ app.get('/status', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// MikroTik Hotspot /alogin endpoint
+app.get(['/alogin', '/alogin.html'], (req, res) => {
+  const isCallBack = req.query.var === 'callBack';
+  if (isCallBack) {
+    return res.json({
+      logged_in: sessionState.isLoggedIn ? 'yes' : 'no',
+      username: sessionState.username,
+      mac: sessionState.mac,
+      link_login_only: '/login',
+      sspeed: `${sessionState.speed}_`,
+      update: sessionState.updateOption,
+      ip: sessionState.ip,
+      bytes_in: String(sessionState.bytesIn),
+      bytes_out: String(sessionState.bytesOut),
+      remain_bytes_total: String(sessionState.remainBytes),
+      session_time_left: '4h30m',
+      uptime: getUptimeString(sessionState.startTime),
+      session_time_left_secs: '16200',
+      uptime_secs: '300',
+      trial: 'no',
+      login_by: 'username',
+      action: 'onLoggedIn',
+    });
+  }
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // MikroTik Hotspot /logout endpoint
-app.get('/logout', (req, res) => {
+app.get(['/logout', '/logout.html'], (req, res) => {
   sessionState.isLoggedIn = false;
   const isCallBack = req.query.var === 'callBack';
 

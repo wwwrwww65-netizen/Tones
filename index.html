@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title data-network-name>شبكة{{network-name}} اللاسلكيه</title>
+    <title data-network-name>شبكة سوما نت اللاسلكية</title>
+    <script>
+        var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
+        function Config(a) { hotspotConfig = a; }
+    </script>
+    <script src="config/config.js"></script>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,6 +20,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
+    <!-- Master Colors & Theme Configuration -->
+    <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/style.min.css">
     <!-- Announcements System CSS -->
     <link rel="stylesheet" href="css/announcements-style.css">
@@ -223,7 +230,7 @@
                                 </svg>
                             </div>
                             <div class="brand-info">
-                                <span class="brand-name" data-network-name>{{network-name}}</span>
+                                <span class="brand-name" data-network-name>سوما نت</span>
                             </div>
                         </div>
 
@@ -243,14 +250,14 @@
                     <section class="section">
                         <div class="ticker-container">
                             <div class="ticker-content-track">
-                                <p class="marquee" data-news-line>{{news-line}}</p>
+                                <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
                             </div>
                         </div>
                     </section>
 
 
-                    <!-- Main Welcome Title -->
-                    <h1>مرحبا بك في شبكة تونس نت الاسلكيه</h1>
+                    <!-- Main Welcome Title (يتغير تلقائياً حسب اسم الشبكة أو النص الترحيبي في config.js) -->
+                    <h1 id="main-welcome-title" data-welcome-title data-network-name>مرحبا بكم في شبكة سوما نت</h1>
 
                     <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
                     <div class="ads-carousel-wrapper">
@@ -343,8 +350,7 @@
                                         </span>
                                         <div class="speed-trigger-text">
                                             <span class="speed-trigger-label">السرعة المختارة:</span>
-                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة
-                                                عادية</span>
+                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة عادية</span>
                                         </div>
                                     </div>
                                     <div class="speed-trigger-badge">
@@ -360,13 +366,11 @@
                             <div class="input-group-modern">
                                 <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
                                 <div class="input-wrapper-glass">
-                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn"
-                                        title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
-                                        <svg viewBox="0 0 24 24" class="camera-icon-svg">
-                                            <path
-                                                d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                    <div class="input-icon-badge" title="رمز الكرت" aria-label="رمز الكرت">
+                                        <svg viewBox="0 0 24 24" class="card-icon-svg">
+                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
                                         </svg>
-                                    </button>
+                                    </div>
                                     <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
                                         username-field improve-input autocomplete="off" enterkeyhint="go"
                                         inputmode="text">
@@ -528,120 +532,6 @@
                     </div>
                 </div>
 
-                <!-- 2026 MODAL BOTTOM SHEET: QR CODE CAMERA SCANNER (#qr-scanner-modal) -->
-                <div class="app" id="qr-scanner-modal">
-                    <div class="modal-sheet-card qr-scanner-sheet">
-                        <div class="modal-header">
-                            <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon">
-                                    <path
-                                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                                </svg>
-                                <span>مسح رمز QR للكرت</span>
-                            </span>
-                            <button class="modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
-                        </div>
-
-                        <div class="qr-scanner-body">
-                            <!-- Camera Viewport Box -->
-                            <div class="qr-viewport-container" id="qrViewportContainer">
-                                <video id="qrVideo" playsinline autoplay muted></video>
-                                <canvas id="qrCanvas" style="display: none;"></canvas>
-
-                                <!-- Scanner Reticle Overlay & Laser -->
-                                <div class="qr-overlay-box">
-                                    <div class="qr-reticle-corner top-left"></div>
-                                    <div class="qr-reticle-corner top-right"></div>
-                                    <div class="qr-reticle-corner bottom-left"></div>
-                                    <div class="qr-reticle-corner bottom-right"></div>
-                                    <div class="qr-scanner-laser"></div>
-                                </div>
-
-                                <!-- Camera Loading / Permission Fallback -->
-                                <div class="qr-camera-loading" id="qrCameraLoading">
-                                    <div class="qr-spinner"></div>
-                                    <span>جاري تشغيل الكاميرا...</span>
-                                </div>
-
-                                <div class="qr-camera-error" id="qrCameraError" style="display: none;">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-                                    </svg>
-                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على
-                                        أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا
-                                        الهاتف مباشرة عبر الزر أدناه.</p>
-
-                                    <div
-                                        style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
-                                        <!-- Native System Camera Button (bypasses browser permission block) -->
-                                        <button type="button" class="button" id="qrSystemCamFallbackBtn"
-                                            style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
-                                            <svg viewBox="0 0 24 24"
-                                                style="width: 18px; height: 18px; fill: currentColor;">
-                                                <path
-                                                    d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                                            </svg>
-                                            <span>📷 مسح بكاميرا الهاتف البديلة</span>
-                                        </button>
-
-                                        <button type="button" class="button" id="qrRetryCamBtn"
-                                            style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة
-                                            محاولة الكاميرا الحية</button>
-                                    </div>
-
-                                    <!-- Hidden System Camera Capture Input -->
-                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment"
-                                        style="display: none;">
-                                </div>
-                            </div>
-
-                            <!-- Camera Controls (Torch / Switch Camera) -->
-                            <div class="qr-controls-row">
-                                <button type="button" class="qr-tool-btn" id="qrTorchBtn" title="تشغيل الكشاف"
-                                    style="display: none;">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                    </svg>
-                                    <span id="qrTorchText">الكشاف</span>
-                                </button>
-                                <button type="button" class="qr-tool-btn" id="qrSwitchCameraBtn" title="تبديل الكاميرا">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z" />
-                                    </svg>
-                                    <span>تبديل الكاميرا</span>
-                                </button>
-                            </div>
-
-                            <!-- Instruction / Status Badge -->
-                            <div class="qr-status-badge" id="qrScanStatus">
-                                <span class="status-pulse-dot"></span>
-                                <span id="qrStatusText">وجه الكاميرا نحو رمز QR على الكرت</span>
-                            </div>
-
-                            <div id="qrScanSuccessCard" class="qr-success-card" style="display: none;">
-                                <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #10b981;">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                </svg>
-                                <div>
-                                    <strong style="color: #34d399; font-size: 0.95rem; display: block;">تم مسح الكرت
-                                        بنجاح!</strong>
-                                    <span id="qrScannedResultDisplay"
-                                        style="color: #ffffff; font-family: monospace; font-size: 1.1rem; font-weight: 800;"></span>
-                                </div>
-                            </div>
-
-                            <button type="button" class="button app-submit modal-cancel-btn" style="margin-top: 14px;">
-                                <svg viewBox="0 0 24 24" class="btn-icon">
-                                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                                </svg>
-                                <span>رجوع</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- 2026 MODAL BOTTOM SHEET: PRICING (#price) -->
                 <div class="app" id="price">
                     <div class="modal-sheet-card">
@@ -672,12 +562,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:772131004" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -708,12 +598,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:772131004" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -742,9 +632,9 @@
                                     <p id="loan-news-title"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
                                         زبائننا الكرام</p>
-                                    <p id="loan-news-content">صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة
+                                    <p id="loan-news-content">صارت كروت شبكة سوما نت متوفرة عبر <strong>محفظة
                                             جيب</strong></p>
-                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (21124)</div>
+                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (22481)</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
                                     <div id="loan-news-extra-header"
                                         style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
@@ -767,12 +657,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:772131004" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -879,18 +769,30 @@
                             </div>
                             <h2 class="title" id="status-title"
                                 style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">تم تسجيل دخولك بنجاح!</h2>
-                            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">
-                                إذا لم يتم الأتصال تلقائيا أضغط <a
-                                    style="text-decoration: underline; color: #fde047; font-weight: 700;"
-                                    href="status.html">هنا</a>
+                            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
+                                <span>إذا لم يتم الأتصال تلقائياً أضغط</span>
+                                <a
+                                    id="manualStatusRefreshLink"
+                                    role="button"
+                                    tabindex="0"
+                                    style="text-decoration: underline; color: #fde047; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 6px; transition: all 0.2s ease;"
+                                    href="javascript:void(0);">
+                                    <span>هنا</span>
+                                    <svg id="statusRefreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; transition: transform 0.4s ease;">
+                                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3L21.5 8M22 12.5a10 10 0 0 1-18.8 4.2L2.5 16"/>
+                                    </svg>
+                                </a>
                             </p>
+                            <div id="status-refresh-toast" style="display: none; font-size: 0.76rem; color: #86efac; margin-top: 4px; font-weight: 600; opacity: 0; transition: opacity 0.3s ease;">
+                                <span>✓ تم التحقق وتحديث حالة الاتصال بنجاح</span>
+                            </div>
                         </div>
 
                         <!-- Modern Ticker / News Bar in Status -->
                         <section class="section" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="ticker-container">
                                 <div class="ticker-content-track">
-                                    <p class="marquee" data-news-line>{{news-line}}</p>
+                                    <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
                                 </div>
                             </div>
                         </section>
@@ -1074,7 +976,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1084,7 +986,7 @@
                                 </a>
 
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                                <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1128,7 +1030,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1136,7 +1038,7 @@
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
-                                <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1165,12 +1067,12 @@
                             <div class="wrapper" id="grid"></div>
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
-                        <a href="tel:772131004" class="fab-support">
+                        <a href="tel:776590171" class="fab-support">
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                             </svg>
-                            <span class="contact back" data-service-number>خدمة العملاء: {{service-number}}</span>
+                            <span class="contact back" data-service-number>خدمة العملاء: 776590171</span>
                         </a>
                     </div>
                 </div>
@@ -1580,43 +1482,54 @@
             const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
-            // Apply Ultra Speed Option visibility from config.js ("enable-ultra-speed")
+            // Apply Ultra Speed Option & Dynamic Config Elements (Welcome title, News, etc.)
             try {
-                if (typeof hotOption !== 'undefined') {
-                    if (hotOption['enable-ultra-speed']) {
-                        const optUltra = document.getElementById('opt-speed-ultra');
-                        const cardUltra = document.getElementById('card-speed-ultra');
-                        const cardStatusUltra = document.getElementById('card-status-speed-ultra');
-                        if (optUltra) optUltra.style.display = '';
-                        if (cardUltra) cardUltra.style.display = '';
-                        if (cardStatusUltra) cardStatusUltra.style.display = '';
-                    }
+                const cfg = (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : (typeof hotOption !== 'undefined' ? hotOption : {});
+                
+                if (cfg['enable-ultra-speed']) {
+                    const optUltra = document.getElementById('opt-speed-ultra');
+                    const cardUltra = document.getElementById('card-speed-ultra');
+                    const cardStatusUltra = document.getElementById('card-status-speed-ultra');
+                    if (optUltra) optUltra.style.display = '';
+                    if (cardUltra) cardUltra.style.display = '';
+                    if (cardStatusUltra) cardStatusUltra.style.display = '';
+                }
 
-                    // Apply News and Offers configuration dynamically
-                    if (hotOption['news-title']) {
-                        const el = document.getElementById('loan-news-title');
-                        if (el) el.textContent = hotOption['news-title'];
+                // Dynamic Welcome Title
+                const netName = (cfg['network-name'] || 'تونس نت').toString().trim();
+                const welcomeTitleEl = document.getElementById('main-welcome-title');
+                if (welcomeTitleEl) {
+                    if (cfg['welcome-title']) {
+                        welcomeTitleEl.innerHTML = cfg['welcome-title'];
+                    } else {
+                        welcomeTitleEl.innerHTML = `مرحبا بك في شبكة ${netName} اللاسلكية`;
                     }
-                    if (hotOption['news-content']) {
-                        const el = document.getElementById('loan-news-content');
-                        if (el) el.innerHTML = hotOption['news-content'];
-                    }
-                    if (hotOption['news-code']) {
-                        const el = document.getElementById('loan-news-code');
-                        if (el) el.textContent = hotOption['news-code'];
-                    }
-                    if (hotOption['news-extra-title']) {
-                        const el = document.getElementById('loan-news-extra-title');
-                        if (el) el.textContent = hotOption['news-extra-title'];
-                    }
-                    if (hotOption['news-extra-content']) {
-                        const el = document.getElementById('loan-news-extra-content');
-                        if (el) el.textContent = hotOption['news-extra-content'];
-                    }
-                    if (hotOption['news-extra-badge']) {
-                        const el = document.getElementById('loan-news-extra-badge');
-                        if (el) el.textContent = hotOption['news-extra-badge'];
-                    }
+                }
+
+                // Apply News and Offers configuration dynamically
+                if (cfg['news-title']) {
+                    const el = document.getElementById('loan-news-title');
+                    if (el) el.textContent = cfg['news-title'];
+                }
+                if (cfg['news-content']) {
+                    const el = document.getElementById('loan-news-content');
+                    if (el) el.innerHTML = cfg['news-content'];
+                }
+                if (cfg['news-code']) {
+                    const el = document.getElementById('loan-news-code');
+                    if (el) el.textContent = cfg['news-code'];
+                }
+                if (cfg['news-extra-title']) {
+                    const el = document.getElementById('loan-news-extra-title');
+                    if (el) el.textContent = cfg['news-extra-title'];
+                }
+                if (cfg['news-extra-content']) {
+                    const el = document.getElementById('loan-news-extra-content');
+                    if (el) el.textContent = cfg['news-extra-content'];
+                }
+                if (cfg['news-extra-badge']) {
+                    const el = document.getElementById('loan-news-extra-badge');
+                    if (el) el.textContent = cfg['news-extra-badge'];
                 }
             } catch (err) {
                 console.error(err);
@@ -1826,493 +1739,7 @@
                 });
             });
 
-            // 4. QR CODE CAMERA SCANNER ENGINE (2026 ULTRA-COMPATIBLE ENGINE)
-            const qrScannerModal = document.getElementById('qr-scanner-modal');
-            const openQrBtn = document.getElementById('openQrScannerBtn');
-            const qrVideo = document.getElementById('qrVideo');
-            const qrCanvas = document.getElementById('qrCanvas');
-            const qrLoading = document.getElementById('qrCameraLoading');
-            const qrError = document.getElementById('qrCameraError');
-            const qrErrorText = document.getElementById('qrCameraErrorText');
-            const qrRetryBtn = document.getElementById('qrRetryCamBtn');
-            const qrTorchBtn = document.getElementById('qrTorchBtn');
-            const qrTorchText = document.getElementById('qrTorchText');
-            const qrSwitchCamBtn = document.getElementById('qrSwitchCameraBtn');
-            const qrStatusText = document.getElementById('qrStatusText');
-            const qrSuccessCard = document.getElementById('qrScanSuccessCard');
-            const qrResultDisplay = document.getElementById('qrScannedResultDisplay');
-
-            let qrMediaStream = null;
-            let qrAnimationId = null;
-            let currentFacingMode = 'environment';
-            let isTorchActive = false;
-            let isScanningActive = false;
-            let barcodeDetectorInstance = null;
-
-            // Initialize native barcode detector if available
-            if ('BarcodeDetector' in window) {
-                try {
-                    barcodeDetectorInstance = new BarcodeDetector({ formats: ['qr_code'] });
-                } catch (e) {
-                    barcodeDetectorInstance = null;
-                }
-            }
-
-            function playBeepSound() {
-                try {
-                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.08);
-                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.25);
-                } catch (e) { }
-            }
-
-            function extractCardNumberFromQR(raw) {
-                if (!raw) return '';
-                raw = String(raw).trim();
-
-                // 1. Check if URL
-                if (raw.startsWith('http://') || raw.startsWith('https://')) {
-                    try {
-                        const url = new URL(raw);
-                        const params = ['username', 'user', 'card', 'code', 'u', 'pin', 'id'];
-                        for (let i = 0; i < params.length; i++) {
-                            if (url.searchParams.has(params[i])) {
-                                const val = url.searchParams.get(params[i]);
-                                if (val) return val.trim();
-                            }
-                        }
-                        if (url.hash && url.hash.length > 1) {
-                            return url.hash.substring(1).trim();
-                        }
-                    } catch (e) { }
-                }
-
-                // 2. Check if JSON
-                if (raw.startsWith('{') && raw.endsWith('}')) {
-                    try {
-                        const obj = JSON.parse(raw);
-                        const val = obj.username || obj.user || obj.card || obj.code || obj.pin;
-                        if (val) return String(val).trim();
-                    } catch (e) { }
-                }
-
-                // 3. Check for PREFIX:VALUE (e.g. USER:12345 or CARD:12345)
-                const match = raw.match(/^(?:user|username|card|pin|code)[\s:=_-]+([a-zA-Z0-9_-]+)/i);
-                if (match && match[1]) {
-                    return match[1].trim();
-                }
-
-                return raw;
-            }
-
-            function ensureJsQr() {
-                if (typeof window.jsQR === 'function' || barcodeDetectorInstance) {
-                    return Promise.resolve();
-                }
-                return new Promise(function (resolve) {
-                    var s = document.createElement('script');
-                    s.src = 'js/jsqr.min.js';
-                    s.async = true;
-                    s.onload = resolve;
-                    s.onerror = resolve;
-                    document.head.appendChild(s);
-                });
-            }
-
-            // Universal media stream acquisition with progressive degradation
-            async function requestCameraStream(facing) {
-                const constraintTiers = [
-                    { video: { facingMode: { ideal: facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false },
-                    { video: { facingMode: facing }, audio: false },
-                    { video: { facingMode: (facing === 'environment' ? 'user' : 'environment') }, audio: false },
-                    { video: true, audio: false }
-                ];
-
-                const modernApi = navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function';
-
-                for (let i = 0; i < constraintTiers.length; i++) {
-                    try {
-                        if (modernApi) {
-                            return await navigator.mediaDevices.getUserMedia(constraintTiers[i]);
-                        }
-                        const legacyGUM = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-                        if (legacyGUM) {
-                            return await new Promise((res, rej) => legacyGUM.call(navigator, constraintTiers[i], res, rej));
-                        }
-                    } catch (err) {
-                        if (i === constraintTiers.length - 1) throw err;
-                    }
-                }
-                throw new Error('متصفحك لا يدعم الوصول المباشر للكاميرا');
-            }
-
-            async function startCamera() {
-                stopCamera();
-                if (qrLoading) qrLoading.style.display = 'flex';
-                if (qrError) qrError.style.display = 'none';
-                if (qrSuccessCard) qrSuccessCard.style.display = 'none';
-                if (qrStatusText) qrStatusText.textContent = 'وجه الكاميرا نحو رمز QR على الكرت';
-                isScanningActive = true;
-
-                // Load jsQR in background without delaying camera permission prompt
-                ensureJsQr().catch(() => { });
-
-                try {
-                    qrMediaStream = await requestCameraStream(currentFacingMode);
-
-                    if (qrVideo) {
-                        qrVideo.muted = true;
-                        qrVideo.playsInline = true;
-                        qrVideo.setAttribute('playsinline', 'true');
-                        qrVideo.setAttribute('webkit-playsinline', 'true');
-                        qrVideo.setAttribute('muted', 'true');
-                        qrVideo.setAttribute('autoplay', 'true');
-                        qrVideo.srcObject = qrMediaStream;
-
-                        // Ensure video starts playing smoothly
-                        qrVideo.onloadedmetadata = function () {
-                            qrVideo.play().catch(function (e) {
-                                console.warn('Autoplay caught:', e);
-                            });
-                            if (qrLoading) qrLoading.style.display = 'none';
-                        };
-
-                        const playPromise = qrVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise.then(() => {
-                                if (qrLoading) qrLoading.style.display = 'none';
-                            }).catch(function (e) {
-                                console.warn('Autoplay caught:', e);
-                            });
-                        }
-
-                        qrVideo.onloadeddata = function () {
-                            if (qrLoading) qrLoading.style.display = 'none';
-                        };
-                    }
-
-                    // Failsafe timeout to hide loading spinner
-                    setTimeout(() => {
-                        if (qrLoading && isScanningActive) {
-                            qrLoading.style.display = 'none';
-                        }
-                    }, 400);
-
-                    // Check torch capability
-                    try {
-                        const track = qrMediaStream.getVideoTracks()[0];
-                        if (track && track.getCapabilities && typeof track.getCapabilities === 'function') {
-                            const capabilities = track.getCapabilities();
-                            if (capabilities && capabilities.torch && qrTorchBtn) {
-                                qrTorchBtn.style.display = 'inline-flex';
-                            } else if (qrTorchBtn) {
-                                qrTorchBtn.style.display = 'none';
-                            }
-                        }
-                    } catch (e) { }
-
-                    // Start Scan Loop
-                    requestAnimationFrame(scanVideoFrame);
-
-                } catch (err) {
-                    console.warn('Camera access status:', err ? (err.message || err.name || err) : 'Error');
-                    if (qrLoading) qrLoading.style.display = 'none';
-                    if (qrError) {
-                        qrError.style.display = 'flex';
-                        if (qrErrorText) {
-                            const errMsg = (err && (err.message || err.name)) ? String(err.message || err.name).toLowerCase() : '';
-                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError' || errMsg.includes('permission') || errMsg.includes('denied') || errMsg.includes('notallowed')) {
-                                qrErrorText.textContent = 'تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا ثم النقر على إعادة المحاولة.';
-                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError' || errMsg.includes('notfound')) {
-                                qrErrorText.textContent = 'لم يتم العثور على جهاز كاميرا متصل.';
-                            } else {
-                                qrErrorText.textContent = 'تعذر تشغيل الكاميرا حالياً. يرجى التأكد من صلاحيات المتصفح ثم إعادة المحاولة.';
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Expose globally
-            window.startCamera = startCamera;
-            window.stopCamera = stopCamera;
-
-            async function scanVideoFrame() {
-                if (!isScanningActive || !qrVideo) return;
-
-                if (qrVideo.readyState < 2) {
-                    if (isScanningActive) {
-                        qrAnimationId = requestAnimationFrame(scanVideoFrame);
-                    }
-                    return;
-                }
-
-                // If loading is still visible, hide it now
-                if (qrLoading && qrLoading.style.display !== 'none') {
-                    qrLoading.style.display = 'none';
-                }
-
-                let detectedCode = null;
-
-                // Priority 1: Native Hardware BarcodeDetector
-                if (barcodeDetectorInstance) {
-                    try {
-                        const barcodes = await barcodeDetectorInstance.detect(qrVideo);
-                        if (barcodes && barcodes.length > 0) {
-                            detectedCode = barcodes[0].rawValue;
-                        }
-                    } catch (e) { }
-                }
-
-                // Priority 2: jsQR Canvas Decoding (Fast captive portal safe engine)
-                if (!detectedCode && typeof window.jsQR === 'function' && qrCanvas && qrVideo.videoWidth > 0) {
-                    try {
-                        const ctx = qrCanvas.getContext('2d', { willReadFrequently: true });
-                        if (ctx) {
-                            const w = Math.min(qrVideo.videoWidth, 640);
-                            const h = Math.round(w * (qrVideo.videoHeight / qrVideo.videoWidth));
-                            qrCanvas.width = w;
-                            qrCanvas.height = h;
-                            ctx.drawImage(qrVideo, 0, 0, w, h);
-                            const imageData = ctx.getImageData(0, 0, w, h);
-                            const code = window.jsQR(imageData.data, imageData.width, imageData.height, {
-                                inversionAttempts: "dontInvert"
-                            });
-                            if (code && code.data) {
-                                detectedCode = code.data;
-                            }
-                        }
-                    } catch (e) { }
-                }
-
-                if (detectedCode) {
-                    handleSuccessfulQrScan(detectedCode);
-                    return;
-                }
-
-                if (isScanningActive) {
-                    qrAnimationId = requestAnimationFrame(scanVideoFrame);
-                }
-            }
-
-            function handleSuccessfulQrScan(rawData) {
-                isScanningActive = false;
-                const cleanCard = extractCardNumberFromQR(rawData);
-
-                playBeepSound();
-                if (navigator.vibrate) {
-                    try { navigator.vibrate([80, 40, 80]); } catch (e) { }
-                }
-
-                if (qrSuccessCard && qrResultDisplay) {
-                    qrResultDisplay.textContent = cleanCard;
-                    qrSuccessCard.style.display = 'flex';
-                }
-
-                // Auto-fill username field in login form
-                const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
-                if (usernameInput) {
-                    usernameInput.value = cleanCard;
-                    usernameInput.dispatchEvent(new Event('input', { bubbles: true }));
-                    usernameInput.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-
-                // Auto-close modal after brief visual confirmation
-                setTimeout(() => {
-                    stopCamera();
-                    const closeBtn = document.getElementById('closeQrScannerBtn');
-                    if (closeBtn) {
-                        closeBtn.click();
-                    } else {
-                        const logoutBtn = qrScannerModal ? qrScannerModal.querySelector('.app-logout') : null;
-                        if (logoutBtn) logoutBtn.click();
-                    }
-                }, 600);
-            }
-
-            function stopCamera() {
-                isScanningActive = false;
-                if (qrAnimationId) {
-                    cancelAnimationFrame(qrAnimationId);
-                    qrAnimationId = null;
-                }
-                if (qrMediaStream) {
-                    qrMediaStream.getTracks().forEach(track => {
-                        try { track.stop(); } catch (e) { }
-                    });
-                    qrMediaStream = null;
-                }
-                if (qrVideo) {
-                    qrVideo.srcObject = null;
-                }
-                isTorchActive = false;
-                if (qrTorchText) qrTorchText.textContent = 'الكشاف';
-            }
-
-            // Open QR Scanner button click & immediate camera initialization
-            if (openQrBtn) {
-                const handleOpenQr = function (e) {
-                    if (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                    openAppModal('qr-scanner-modal');
-                    startCamera();
-                };
-                openQrBtn.addEventListener('click', handleOpenQr);
-            }
-
-            // Switch Camera
-            if (qrSwitchCamBtn) {
-                qrSwitchCamBtn.addEventListener('click', function () {
-                    currentFacingMode = (currentFacingMode === 'environment') ? 'user' : 'environment';
-                    startCamera();
-                });
-            }
-
-            // Torch Toggle
-            if (qrTorchBtn) {
-                qrTorchBtn.addEventListener('click', async function () {
-                    if (!qrMediaStream) return;
-                    const track = qrMediaStream.getVideoTracks()[0];
-                    if (track && track.applyConstraints) {
-                        try {
-                            isTorchActive = !isTorchActive;
-                            await track.applyConstraints({
-                                advanced: [{ torch: isTorchActive }]
-                            });
-                            if (qrTorchText) {
-                                qrTorchText.textContent = isTorchActive ? 'إطفاء الكشاف' : 'الكشاف';
-                            }
-                        } catch (e) {
-                            console.error('Torch error:', e);
-                        }
-                    }
-                });
-            }
-
-            // System Camera Capture Fallback elements
-            const qrSystemCamFallbackBtn = document.getElementById('qrSystemCamFallbackBtn');
-            const qrSystemCameraInput = document.getElementById('qrSystemCameraInput');
-
-            // Decode QR Code from Native Camera Snapshot
-            async function decodeQrFromImageFile(file) {
-                if (!file) return;
-                if (qrLoading) {
-                    qrLoading.style.display = 'flex';
-                    const span = qrLoading.querySelector('span');
-                    if (span) span.textContent = 'جاري قراءة رمز الكرت...';
-                }
-                if (qrError) qrError.style.display = 'none';
-
-                await ensureJsQr();
-
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = new Image();
-                    img.onload = async function () {
-                        let detectedCode = null;
-
-                        // Native Hardware detector check
-                        if (barcodeDetectorInstance) {
-                            try {
-                                const barcodes = await barcodeDetectorInstance.detect(img);
-                                if (barcodes && barcodes.length > 0) {
-                                    detectedCode = barcodes[0].rawValue;
-                                }
-                            } catch (err) { }
-                        }
-
-                        // jsQR Canvas decode
-                        if (!detectedCode && typeof window.jsQR === 'function') {
-                            const c = qrCanvas || document.createElement('canvas');
-                            const ctx = c.getContext('2d', { willReadFrequently: true });
-                            let maxDim = 1200;
-                            let w = img.naturalWidth || img.width;
-                            let h = img.naturalHeight || img.height;
-                            if (w > maxDim || h > maxDim) {
-                                if (w > h) {
-                                    h = Math.round((h * maxDim) / w);
-                                    w = maxDim;
-                                } else {
-                                    w = Math.round((w * maxDim) / h);
-                                    h = maxDim;
-                                }
-                            }
-                            c.width = w;
-                            c.height = h;
-                            ctx.drawImage(img, 0, 0, w, h);
-                            const imgData = ctx.getImageData(0, 0, w, h);
-                            const code = window.jsQR(imgData.data, imgData.width, imgData.height, {
-                                inversionAttempts: "attemptBoth"
-                            });
-                            if (code && code.data) {
-                                detectedCode = code.data;
-                            }
-                        }
-
-                        if (qrLoading) qrLoading.style.display = 'none';
-
-                        if (detectedCode) {
-                            handleSuccessfulQrScan(detectedCode);
-                        } else {
-                            if (qrError) {
-                                qrError.style.display = 'flex';
-                                if (qrErrorText) {
-                                    qrErrorText.textContent = 'لم يتم العثور على رمز QR واضح في الصورة الملتقطة. يرجى إعادة الالتقاط والتركيز على الكرت.';
-                                }
-                            }
-                        }
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-
-            // Fallback Native Camera button trigger
-            if (qrSystemCamFallbackBtn && qrSystemCameraInput) {
-                qrSystemCamFallbackBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    qrSystemCameraInput.click();
-                });
-            }
-
-            if (qrSystemCameraInput) {
-                qrSystemCameraInput.addEventListener('change', function (e) {
-                    if (e.target.files && e.target.files[0]) {
-                        decodeQrFromImageFile(e.target.files[0]);
-                    }
-                });
-            }
-
-            // Retry Camera
-            if (qrRetryBtn) {
-                qrRetryBtn.addEventListener('click', function () {
-                    startCamera();
-                });
-            }
-
-            // Stop camera on modal close / logout
-            if (qrScannerModal) {
-                const closeBtns = qrScannerModal.querySelectorAll('.modal-close-btn, .modal-cancel-btn, .app-logout');
-                closeBtns.forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        stopCamera();
-                    });
-                });
-            }
-
-            // 5. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
+            // 4. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
             const prevCardBtn = document.getElementById('quickPreviousCardBtn');
             let prevCardCycleIndex = 0;
 
@@ -2438,34 +1865,84 @@
                 });
             }
 
-            // 6. UNIVERSAL WHATSAPP INTENT DISPATCHER (WHATSAPP & WHATSAPP BUSINESS)
-            const waButtons = document.querySelectorAll('.support-btn-whatsapp');
-            const waPhone = '967772131004';
-            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة تونس نت اللاسلكية');
-            const waSchemeUrl = `whatsapp://send?phone=${waPhone}&text=${waMsg}`;
-            const waWebUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMsg}`;
+            // 6. UNIVERSAL WHATSAPP & CONTACT DISPATCHER (DYNAMIC FROM CONFIG.JS)
+            function getActiveHotspotConfig() {
+                return (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) 
+                    ? hotspotConfig 
+                    : (typeof hotOption !== 'undefined' ? hotOption : {});
+            }
 
+            function getDynamicWaDetails() {
+                const cfg = getActiveHotspotConfig();
+                const netName = (cfg['network-name'] || 'سوما نت').toString().trim();
+                let phone = (cfg['whatsapp-number'] || cfg['service-number'] || '776590171').toString().trim();
+                
+                // Format clean digits with country code (+967 for Yemen by default if 9 digits)
+                let cleanDigits = phone.replace(/\D/g, '');
+                if (cleanDigits.length === 9 && (cleanDigits.startsWith('7') || cleanDigits.startsWith('1'))) {
+                    cleanDigits = '967' + cleanDigits;
+                } else if (cleanDigits.startsWith('0') && cleanDigits.length === 10) {
+                    cleanDigits = '967' + cleanDigits.substring(1);
+                }
+
+                const customMsg = cfg['whatsapp-text'] || `مرحبا خدمة عملاء شبكة ${netName} اللاسلكية`;
+                const customWaUrl = cfg['whatsapp-url'] || '';
+
+                const waScheme = customWaUrl || `whatsapp://send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
+                const waWeb = customWaUrl || `https://api.whatsapp.com/send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
+
+                return {
+                    phone: cleanDigits,
+                    msg: customMsg,
+                    schemeUrl: waScheme,
+                    webUrl: waWeb
+                };
+            }
+
+            function applyDynamicContactLinks() {
+                const cfg = getActiveHotspotConfig();
+                const sNum = (cfg['service-number'] || '776590171').toString().trim();
+                const wa = getDynamicWaDetails();
+
+                // Update all tel: links
+                document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+                    el.setAttribute('href', 'tel:' + sNum);
+                });
+
+                // Update all WhatsApp href attributes
+                document.querySelectorAll('.support-btn-whatsapp').forEach(el => {
+                    el.setAttribute('href', wa.schemeUrl);
+                });
+            }
+
+            // Apply immediately and on periodic check
+            applyDynamicContactLinks();
+            setTimeout(applyDynamicContactLinks, 300);
+            setTimeout(applyDynamicContactLinks, 1000);
+
+            const waButtons = document.querySelectorAll('.support-btn-whatsapp');
             waButtons.forEach(btn => {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
 
+                    const wa = getDynamicWaDetails();
                     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
                     if (isMobile) {
                         // Trigger universal mobile URI scheme (Prompts Android "Complete action using" if both are installed)
                         const start = Date.now();
-                        window.location.href = waSchemeUrl;
+                        window.location.href = wa.schemeUrl;
 
                         // Fallback to web link if neither app is installed
                         setTimeout(function () {
                             const elapsed = Date.now() - start;
                             if (elapsed < 2000 && !document.hidden && !document.webkitHidden) {
-                                window.location.href = waWebUrl;
+                                window.location.href = wa.webUrl;
                             }
                         }, 1400);
                     } else {
                         // Desktop browser -> Open WhatsApp Web directly
-                        window.open(waWebUrl, '_blank', 'noopener,noreferrer');
+                        window.open(wa.webUrl, '_blank', 'noopener,noreferrer');
                     }
                 });
             });
@@ -2611,6 +2088,52 @@
                     }
                     setTimeout(resetWindowScrollToTop, 100);
                     setTimeout(resetWindowScrollToTop, 350);
+                });
+            }
+
+            // Smooth Status Link Handling - تحديث بيانات الاتصال والرصيد في نفس الصفحة مع تفاعل مرئي فوري
+            const manualRefreshLink = document.getElementById('manualStatusRefreshLink');
+            if (manualRefreshLink) {
+                const triggerRefresh = function(e) {
+                    if (e) e.preventDefault();
+                    
+                    // Rotate icon on click
+                    const icon = document.getElementById('statusRefreshIcon');
+                    if (icon) {
+                        icon.style.transform = 'rotate(360deg)';
+                        setTimeout(() => { if (icon) icon.style.transform = 'rotate(0deg)'; }, 500);
+                    }
+
+                    // Button active flash
+                    manualRefreshLink.style.opacity = '0.7';
+                    setTimeout(() => { manualRefreshLink.style.opacity = '1'; }, 250);
+
+                    // Show Toast Notification
+                    const toast = document.getElementById('status-refresh-toast');
+                    if (toast) {
+                        toast.style.display = 'block';
+                        setTimeout(() => { toast.style.opacity = '1'; }, 10);
+                        clearTimeout(manualRefreshLink._toastTimer);
+                        manualRefreshLink._toastTimer = setTimeout(() => {
+                            toast.style.opacity = '0';
+                            setTimeout(() => { toast.style.display = 'none'; }, 300);
+                        }, 2500);
+                    }
+
+                    // Perform Status Request
+                    if (typeof getRequest === 'function') {
+                        getRequest('/status?var=callBack');
+                    }
+                    if (typeof startStatusQuery === 'function') {
+                        startStatusQuery();
+                    }
+                };
+
+                manualRefreshLink.addEventListener('click', triggerRefresh);
+                manualRefreshLink.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        triggerRefresh(e);
+                    }
                 });
             }
 
