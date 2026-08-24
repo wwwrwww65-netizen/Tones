@@ -1,6 +1,6 @@
 {
-  "name": "BH-NET - بوابة شبكة المايكروتك",
-  "description": "بوابة تسجيل الدخول لشبكة BH-NET اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع تصميم عصري فاخر، اختيار سرعات الإنترنت، فحص الكروت، والأسعار",
+  "name": "تونس نت - MikroTik Hotspot",
+  "description": "بوابة تسجيل الدخول لشبكة تونس نت اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع إدارة السرعات، فحص الكروت، والأسعار",
   "requestFramePermissions": [
     "camera"
   ],

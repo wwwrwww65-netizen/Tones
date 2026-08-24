@@ -3,12 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title data-network-name>شبكة سوما نت اللاسلكية</title>
-    <script>
-        var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
-        function Config(a) { hotspotConfig = a; }
-    </script>
-    <script src="config/config.js"></script>
+    <title data-network-name>شبكة{{network-name}} اللاسلكيه</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,10 +15,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
-    <!-- Master Colors & Theme Configuration -->
-    <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/bhnet-style.css">
+    <link rel="stylesheet" href="css/loyalty-system.css">
+    <link rel="stylesheet" href="css/loyalty-modal.css">
+    <link rel="stylesheet" href="css/loyalty-modal-notifaction.css">
+    <script src="js/loyalty-button.js"></script>
+    <link rel="stylesheet" href="css/notifications-system.css">
     <!-- Announcements System CSS -->
     <link rel="stylesheet" href="css/announcements-style.css">
     <style>
@@ -211,351 +208,355 @@
 
                 <!-- MAIN LOGIN VIEW -->
                 <div class="login" id="login">
-                    <div class="bhnet-app-wrapper">
-                        <div class="bhnet-card-frame">
 
-                            <!-- 1. TOP STATUS BAR (متصل & SIGNAL BARS) -->
-                            <div class="bhnet-topbar">
-                                <div class="bhnet-status-pill">
-                                    <span class="bhnet-status-dot"></span>
-                                    <span>متصل</span>
+                    <!-- Top Modern Header -->
+                    <header class="top-header">
+                        <div class="network-brand">
+                            <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
+                                <svg class="wifi-animated-icon" viewBox="0 0 24 24">
+                                    <!-- Wave 3 (Outer signal) -->
+                                    <path class="wifi-sig wifi-sig-3"
+                                        d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
+                                    <!-- Wave 2 (Middle signal) -->
+                                    <path class="wifi-sig wifi-sig-2"
+                                        d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z" />
+                                    <!-- Wave 1 (Inner signal) -->
+                                    <path class="wifi-sig wifi-sig-1"
+                                        d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z" />
+                                    <!-- Dot (Base signal) -->
+                                    <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
+                                </svg>
+                            </div>
+                            <div class="brand-info">
+                                <span class="brand-name" data-network-name>{{network-name}}</span>
+                            </div>
+                        </div>
+
+                        <!-- "جديدنا" Notification Pill Button -->
+                        <button class="m" parent-id="loan" data-loan-button id="btn-whats-new" type="button">
+                            <svg viewBox="0 0 24 24" class="btn-icon">
+                                <path
+                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
+                            </svg>
+                            <span>جديدنا</span>
+                        </button>
+                    </header>
+
+                    <!-- ========================================================================= -->
+                    <!-- الشريط الإخباري المتحرك (يبدأ فارغاً ثم يتدفق النص من اليسار إلى اليمين) -->
+                    <!-- ========================================================================= -->
+                    <section class="section">
+                        <div class="ticker-container">
+                            <div class="ticker-content-track">
+                                <p class="marquee" data-news-line>{{news-line}}</p>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <!-- Main Welcome Title -->
+                    <h1>مرحبا بك في شبكة تونس نت الاسلكيه</h1>
+
+                    <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
+                    <div class="ads-carousel-wrapper">
+                        <div class="carousel-container" id="adCarousel">
+                            <div class="carousel-track" id="carouselTrack">
+                                <div class="carousel-slide">
+                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high"
+                                        decoding="async">
                                 </div>
-                                <div class="bhnet-signal-bars" title="قوة الإشارة ممتازة">
-                                    <span class="bhnet-signal-bar"></span>
-                                    <span class="bhnet-signal-bar"></span>
-                                    <span class="bhnet-signal-bar"></span>
-                                    <span class="bhnet-signal-bar"></span>
-                                    <span class="bhnet-signal-bar"></span>
+                                <div class="carousel-slide">
+                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3" loading="lazy" decoding="async">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4" loading="lazy" decoding="async">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5" loading="lazy" decoding="async">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6" loading="lazy" decoding="async">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                            <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="السابق">❮</button>
+                            <button class="carousel-nav-btn next" id="carouselNext" aria-label="التالي">❯</button>
+                        </div>
+                        <div class="carousel-dots" id="carouselDots">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+
+                        <!-- Preserving legacy .ads .box for any legacy script checks -->
+                        <div class="ads" style="display: none;">
+                            <div class="box">
+                                <span style="--i:1"><img class="im1" src="./adimg/1.jpg"></span>
+                                <span style="--i:2"><img class="im2" src="./adimg/2.jpg"></span>
+                                <span style="--i:3"><img class="im3" src="./adimg/3.jpg"></span>
+                                <span style="--i:4"><img class="im4" src="./adimg/4.jpg"></span>
+                                <span style="--i:5"><img class="im5" src="./adimg/5.jpg"></span>
+                                <span style="--i:6"><img class="im6" src="./adimg/6.jpg"></span>
+                                <span style="--i:7"><img class="im7" src="./adimg/7.jpg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unregistered Loyalty Section -->
+                    <div id="loyalty-unregistered-section">
+                        <!-- Notice / Points System Alert Box -->
+                        <div class="points-notice-alert" role="alert">
+                            <div class="notice-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="notice-icon">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                </svg>
+                            </div>
+                            <div class="notice-content">
+                                <strong class="notice-tag">تنبيه:</strong>
+                                <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
+                                    تسجيل الدخول..</span>
+                            </div>
+                        </div>
+
+                        <!-- Points Registration Trigger Button (Matching Primary Gold Button Style) -->
+                        <button type="button" class="button points-register-btn loyalty-register-btn" id="openPointsRegisterBtn"
+                            parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
+                            <svg viewBox="0 0 24 24" class="points-btn-icon">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                            <span class="button-text">انقر للتسجيل في نظام النقاط</span>
+                        </button>
+                    </div>
+
+                    <!-- Registered Loyalty Section (User Dashboard Card) -->
+                    <div id="loyalty-registered-section" style="display: none;">
+                        <div class="loyalty-user-card">
+                            <!-- User Header -->
+                            <div class="loyalty-user-header">
+                                <div class="loyalty-user-profile-info">
+                                    <div class="loyalty-user-avatar">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="loyalty-user-details">
+                                        <span class="loyalty-user-title">حساب نظام النقاط</span>
+                                        <span class="loyalty-user-phone-number" id="loyalty-user-phone">77XXXXXXX</span>
+                                    </div>
+                                </div>
+                                <button type="button" id="loyalty-logout-btn" class="loyalty-logout-pill-btn" title="تسجيل الخروج من نظام النقاط">
+                                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;">
+                                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                    </svg>
+                                    <span>خروج</span>
+                                </button>
+                            </div>
+
+                            <!-- Points Display Banner -->
+                            <div class="loyalty-points-display-banner">
+                                <div class="loyalty-points-label">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                    </svg>
+                                    <span>رصيد نقاطك الحالي:</span>
+                                </div>
+                                <div class="loyalty-points-count-badge">
+                                    <span class="loyalty-points-value">0</span>
+                                    <span class="loyalty-points-unit">نقطة</span>
                                 </div>
                             </div>
 
-                            <!-- 2. BRAND HEADER & 3 FEATURE PILLARS -->
-                            <div class="bhnet-brand-center">
-                                <div class="bhnet-brand-header-row">
-                                    <!-- Left Network Custom Logo (Logo.png) -->
-                                    <div class="bhnet-wifi-logo-wrapper">
-                                        <img src="img/Logo.png" alt="شعار الشبكة" class="bhnet-custom-network-logo" onerror="this.onerror=null; this.src='Logo.png';">
-                                    </div>
+                            <!-- Loyalty Action Buttons Grid -->
+                            <div class="loyalty-actions-grid">
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-loan-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                    </svg>
+                                    <span>طلب سلفة</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-buy-card-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                                    </svg>
+                                    <span>استبدال كرت</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-saved-cards-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                    </svg>
+                                    <span>الكروت المحفوظة</span>
+                                </button>
+                                <button type="button" class="loyalty-action-card-btn" id="loyalty-account-btn">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                    </svg>
+                                    <span>الدخول الى حسابي</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <!-- Right Brand Name & Subtitle -->
-                                    <div class="bhnet-brand-text-side">
-                                        <div class="bhnet-title-with-wifi-badge">
-                                            <h1 class="bhnet-brand-title" id="main-welcome-title" data-welcome-title data-network-name>
-                                                BH-NET <span class="bhnet-title-net-badge">اللاسلكية</span>
-                                            </h1>
-                                            <!-- Mini Blue WiFi Icon -->
-                                            <svg class="bhnet-mini-wifi-accent" viewBox="0 0 24 18" fill="none">
-                                                <path d="M3 5C8 0 16 0 21 5" stroke="#0066cc" stroke-width="2.5" stroke-linecap="round"/>
-                                                <path d="M7 9C10 6 14 6 17 9" stroke="#0088ff" stroke-width="2.5" stroke-linecap="round"/>
-                                                <circle cx="12" cy="14" r="2" fill="#0066cc"/>
-                                            </svg>
-                                        </div>
-                                        <div class="bhnet-brand-subtitle">
-                                            <span class="bhnet-sub-line"></span>
-                                            <span>مرحبا بك</span>
-                                            <span class="bhnet-sub-line"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Glassmorphic Login Card -->
+                    <div class="login-card">
+                        <form class="login-form" name="login" onsubmit="return false;">
 
-                                <!-- 3 Feature Highlights with Vertical Dividers (Right to Left: ثقة متجددة | خدمة مميزة | اتصال سريع) -->
-                                <div class="bhnet-features-row">
-                                    <div class="bhnet-feature-item">
-                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
-                                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
-                                        </svg>
-                                        <span class="bhnet-feature-text">ثقة متجددة</span>
-                                    </div>
-                                    <div class="bhnet-feature-divider"></div>
-                                    <div class="bhnet-feature-item">
-                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
-                                            <path d="M19 3H5L2 9l10 12L22 9l-3-6zM9.62 8l1.5-3h1.76l1.5 3H9.62zM11 10v6.68L5.43 10H11zm2 0h5.57L13 16.68V10zm2.76-2l-1.5-3h1.86l2.5 3h-2.86zM6.88 5h1.86l-1.5 3H4.38l2.5-3z" />
-                                        </svg>
-                                        <span class="bhnet-feature-text">خدمة مميزة</span>
-                                    </div>
-                                    <div class="bhnet-feature-divider"></div>
-                                    <div class="bhnet-feature-item">
-                                        <svg viewBox="0 0 24 24" class="bhnet-feature-icon">
+                            <!-- Speed Selector Group (Modern Button Trigger) -->
+                            <div class="speed-selector-group" style="margin-bottom: 14px;">
+                                <div class="speed-header">
+                                    <span class="speed-title">
+                                        <svg viewBox="0 0 24 24" class="section-icon">
                                             <path d="M7 2v11h3v9l7-12h-4l4-8z" />
                                         </svg>
-                                        <span class="bhnet-feature-text">اتصال سريع</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 3. SMART 3D CURVED TV & ENTERTAINMENT SHOWCASE -->
-                            <div class="bhnet-tv-showcase">
-                                <div class="bhnet-tv-screen-grid">
-                                    <!-- Left Column: Movies & Series (أفلام ومسلسلات) -->
-                                    <div class="bhnet-side-box">
-                                        <div class="bhnet-side-box-header">أفلام ومسلسلات</div>
-                                        <div class="bhnet-mini-card">
-                                            <div class="bhnet-logo-netflix">NETFLIX</div>
-                                            <div class="bhnet-movie-title">STRANGER<br>THINGS</div>
-                                        </div>
-                                        <div class="bhnet-mini-card">
-                                            <div class="bhnet-logo-hbo">HBO</div>
-                                            <div class="bhnet-movie-title">THE LAST<br>OF US</div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Center Column: 3D Curved Live Soccer Screen -->
-                                    <div class="bhnet-curved-tv-frame">
-                                        <div class="bhnet-tv-live-tag">LIVE</div>
-                                        <div class="bhnet-tv-match-scene">
-                                            <div class="bhnet-stadium-lights"></div>
-                                            <div class="bhnet-match-pitch">
-                                                <div class="bhnet-pitch-lines"></div>
-                                            </div>
-                                            <!-- Dynamic Soccer Match Visual -->
-                                            <svg class="bhnet-soccer-players" viewBox="0 0 200 130" fill="none">
-                                                <!-- Floodlight Beams -->
-                                                <polygon points="20,0 60,90 10,90" fill="rgba(255,255,255,0.06)" />
-                                                <polygon points="180,0 190,90 140,90" fill="rgba(255,255,255,0.06)" />
-                                                <!-- Goal Post Outline -->
-                                                <path d="M70 65 L130 65 L130 95 M70 65 L70 95" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
-                                                <!-- Striker (Left Red/Blue) -->
-                                                <circle cx="85" cy="72" r="5" fill="#f59e0b" />
-                                                <path d="M85 77 L85 92 M85 82 L75 88 M85 82 L95 86 M85 92 L78 106 M85 92 L94 102" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" />
-                                                <!-- Defender (Right Blue/White) -->
-                                                <circle cx="115" cy="70" r="5" fill="#38bdf8" />
-                                                <path d="M115 75 L115 90 M115 80 L105 84 M115 80 L123 85 M115 90 L110 104 M115 90 L122 102" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" />
-                                                <!-- Glowing Soccer Ball -->
-                                                <circle cx="98" cy="100" r="4.5" fill="#ffffff" filter="drop-shadow(0 0 4px #ffffff)" />
-                                                <path d="M98 97 L96 99 L97 102 L100 102 L100 99 Z" fill="#000000" />
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right Column: Sports Channels & Today's Matches -->
-                                    <div class="bhnet-side-box">
-                                        <div class="bhnet-mini-card active-live">
-                                            <span class="bhnet-live-badge-mini">LIVE</span>
-                                            <div class="bhnet-side-box-header" style="background:transparent;border:none;padding:0;font-size:0.68rem;">قنوات رياضية</div>
-                                            <div class="bhnet-logo-bein">
-                                                <span>beIN</span><span class="bein-purple">SPORTS</span>
-                                            </div>
-                                        </div>
-                                        <div class="bhnet-mini-card active-live">
-                                            <span class="bhnet-live-badge-mini">LIVE</span>
-                                            <div class="bhnet-side-box-header" style="background:transparent;border:none;padding:0;font-size:0.68rem;">مباريات اليوم</div>
-                                            <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fbbf24;margin-top:2px;">
-                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.55.06-1.09.17-1.61l4.42 4.42v1.19c0 .55.45 1 1 1h2v2h.41zm6.9-3.95c-.32-.61-.95-1.05-1.9-1.05h-1v-3c0-.55-.45-1-1-1H9v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41C17.92 6.35 19 8.98 19 12c0 1.5-.41 2.9-1.1 4.05z" />
-                                            </svg>
-                                        </div>
-                                    </div>
+                                        <span>أختر سرعتك المناسبة</span>
+                                    </span>
                                 </div>
 
-                                <!-- Bottom 3 Feature Pills -->
-                                <div class="bhnet-tv-pills-row">
-                                    <div class="bhnet-tv-pill">
-                                        <span>تغطية واسعة</span>
-                                        <span class="bhnet-tv-pill-badge">((•))</span>
-                                    </div>
-                                    <div class="bhnet-tv-pill">
-                                        <span>بدون تقطيع</span>
-                                        <span class="bhnet-tv-pill-badge">📶</span>
-                                    </div>
-                                    <div class="bhnet-tv-pill">
-                                        <span>جودة عالية</span>
-                                        <span class="bhnet-tv-pill-badge">4K</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 4. QURANIC VERSE PILL BOX -->
-                            <div class="bhnet-quran-box">
-                                <p class="bhnet-quran-text">﴿ قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ ۚ ذَٰلِكَ أَزْكَىٰ لَهُمْ ﴾</p>
-                            </div>
-
-                            <!-- 5. INTERNET SPEED SELECTOR ("اختر سرعة الإنترنت") -->
-                            <div class="bhnet-speed-section">
-                                <div class="bhnet-section-title">
-                                    <svg viewBox="0 0 24 24" class="bhnet-section-title-icon">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                    </svg>
-                                    <span>اختر سرعة الإنترنت</span>
-                                </div>
-
-                                <!-- Native hidden select to maintain all legacy MikroTik script sync -->
+                                <!-- Native select preserved hidden for script/form integration -->
                                 <select id="speed" name="domain" speed-field style="display: none;">
                                     <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
-                                    <option value="128k/512k">10 Mbps</option>
-                                    <option value="256k/700k">20 Mbps</option>
-                                    <option selected value="256k/1M">50 Mbps</option>
-                                    <option value="512M/3M">100 Mbps</option>
-                                    <option value="1M/8M">200 Mbps</option>
-                                    <option value="2M/15M">300 Mbps</option>
+                                    <option value="128k/512k">سرعة أقتصادية</option>
+                                    <option selected value="256k/700k">سرعة عادية</option>
+                                    <option value="256k/1M">سرعة متوسطة</option>
+                                    <option value="512M/3M">سرعة عالية</option>
+                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا
+                                    </option>
                                 </select>
 
-                                <!-- 6 Dynamic Speed Option Pills -->
-                                <div class="bhnet-speeds-grid">
-                                    <div class="bhnet-speed-pill" data-speed-val="128k/512k" data-speed-label="10 Mbps">10 Mbps</div>
-                                    <div class="bhnet-speed-pill" data-speed-val="256k/700k" data-speed-label="20 Mbps">20 Mbps</div>
-                                    <div class="bhnet-speed-pill active" data-speed-val="256k/1M" data-speed-label="50 Mbps">50 Mbps</div>
-                                    <div class="bhnet-speed-pill" data-speed-val="512M/3M" data-speed-label="100 Mbps">100 Mbps</div>
-                                    <div class="bhnet-speed-pill" data-speed-val="1M/8M" data-speed-label="200 Mbps">200 Mbps</div>
-                                    <div class="bhnet-speed-pill" data-speed-val="2M/15M" data-speed-label="300 Mbps">300 Mbps</div>
-                                </div>
+                                <!-- Modern Interactive Speed Trigger Button -->
+                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn"
+                                    parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
+                                    <div class="speed-trigger-left">
+                                        <span class="speed-trigger-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                            </svg>
+                                        </span>
+                                        <div class="speed-trigger-text">
+                                            <span class="speed-trigger-label">السرعة المختارة:</span>
+                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة
+                                                عادية</span>
+                                        </div>
+                                    </div>
+                                    <div class="speed-trigger-badge">
+                                        <span>تغيير</span>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                                        </svg>
+                                    </div>
+                                </button>
                             </div>
 
-                            <!-- 6. CARD INPUT FORM & GOLDEN LOGIN BUTTON -->
-                            <form class="login-form" name="login" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 10px; margin: 0;">
-                                
-                                <!-- Voucher Input Row with ID Card icon on left & Camera QR scanner on right -->
-                                <div class="bhnet-input-wrap">
-                                    <!-- ID Card / Previous Card Selector Button -->
-                                    <button type="button" class="bhnet-input-action-btn" id="quickPreviousCardBtn" title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
-                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
-                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                            <!-- Card Input with Integrated Micro Actions -->
+                            <div class="input-group-modern">
+                                <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
+                                <div class="input-wrapper-glass">
+                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn"
+                                        title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
+                                        <svg viewBox="0 0 24 24" class="camera-icon-svg">
+                                            <path
+                                                d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
                                         </svg>
                                     </button>
-
-                                    <!-- Main Card Number Input -->
-                                    <input name="username" class="bhnet-card-input" placeholder="أدخل رقم الكرت هنا"
+                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
                                         username-field improve-input autocomplete="off" enterkeyhint="go"
                                         inputmode="text">
 
-                                    <!-- Camera QR Code Scanner Button -->
-                                    <button type="button" class="bhnet-input-action-btn" id="bhnetQrTriggerBtn" title="مسح رمز الاستجابة السريعة (QR)" aria-label="مسح الكرت بالكاميرا">
-                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
-                                            <path d="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2 6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10c0-1.39-.29-2.71-.81-3.91l-9.39 9.39c-.19.19-.45.29-.71.29-.26 0-.52-.1-.71-.29l-1.98-1.98zM12 4c.48 0 .94.06 1.39.16l-3.32 5.75L7.9 7.74C9.07 5.48 10.42 4 12 4zm-7.66 9.35c-.22-.65-.34-1.34-.34-2.06 0-2.3 1.05-4.36 2.71-5.74l4.24 4.24-6.61 3.56z" />
-                                            <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                                        </svg>
-                                    </button>
-
-                                    <!-- Hidden Previous Card Select -->
-                                    <select id="se" style="display: none;" aria-hidden="true">
-                                        <option value="" selected disabled>دخول بكرت سابق</option>
-                                        <option value="relod">تحديث</option>
-                                    </select>
-                                </div>
-
-                                <!-- Hidden Password Field for MikroTik Hotspot form compliance -->
-                                <div class="login-field password-field" style="display: none;">
-                                    <input type="hidden" name="password" class="login-input" placeholder="كلمة السر" improve-input>
-                                </div>
-
-                                <!-- Primary Golden Login Button ("دخول الإنترنت 📶") -->
-                                <button class="bhnet-btn-login-gold button login-submit login-submit-btn" parent-id="status" enable-hot-cookie type="button" id="mainLoginBtn">
-                                    <span>دخول الإنترنت</span>
-                                    <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; fill: currentColor;">
-                                        <path d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z"/>
-                                        <path d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z"/>
-                                        <path d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z"/>
-                                        <circle cx="12" cy="18.5" r="2.2" />
-                                    </svg>
-                                </button>
-
-                                <!-- 7. GOOGLE UPDATES BLOCKER TOGGLE ROW -->
-                                <div class="bhnet-toggle-row">
-                                    <div class="bhnet-toggle-switch-side">
-                                        <label class="bhnet-custom-switch" title="تفعيل/تعطيل إيقاف التحديثات">
-                                            <input type="checkbox" value="_Uon" id="chupdate">
-                                            <span class="bhnet-switch-slider"></span>
-                                        </label>
+                                    <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
+                                    <div class="input-inner-actions">
+                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
+                                            title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
+                                            <span>دخول بكرت سابق</span>
+                                        </button>
+                                        <select id="se" style="display: none;" aria-hidden="true">
+                                            <option value="" selected disabled>دخول بكرت سابق</option>
+                                            <option value="relod">تحديث</option>
+                                        </select>
                                     </div>
-                                    <div class="bhnet-toggle-text-center">
-                                        <span class="bhnet-toggle-main-title">إيقاف تحديثات جوجل</span>
-                                        <span class="bhnet-toggle-sub-title">منع التحديثات التلقائية</span>
-                                    </div>
-                                    <div class="bhnet-toggle-globe-icon" title="رمز الشبكة">
-                                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;">
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <!-- 8. ACTION BUTTONS (أسعار الكروت & أماكن البيع) -->
-                            <div class="bhnet-action-cards-grid">
-                                <div class="bhnet-action-tile price-icon" parent-id="price" data-price-button title="عرض أسعار وباقات الكروت">
-                                    <span class="bhnet-action-tile-text">أسعار الكروت</span>
-                                    <svg class="bhnet-action-tile-icon" viewBox="0 0 24 24">
-                                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
-                                    </svg>
-                                </div>
-                                <div class="bhnet-action-tile sellpoint" parent-id="sell-point" data-sell-point-button title="عرض مراكز ونقاط بيع الكروت">
-                                    <span class="bhnet-action-tile-text">أماكن البيع</span>
-                                    <svg class="bhnet-action-tile-icon" viewBox="0 0 24 24">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                                    </svg>
                                 </div>
                             </div>
 
-                            <!-- 9. FOOTER BAR (خدمة العملاء | برمجه الصفحه | 3D راوتر) -->
-                            <div class="bhnet-footer-row">
-                                <!-- Customer Support -->
-                                <a href="tel:777500733" class="bhnet-footer-support" title="اتصال مباشر بخدمة العملاء">
-                                    <svg viewBox="0 0 24 24" class="bhnet-footer-headset">
-                                        <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/>
-                                    </svg>
-                                    <div class="bhnet-footer-support-info">
-                                        <span class="bhnet-footer-support-label">خدمة العملاء</span>
-                                        <span class="bhnet-footer-support-phone" data-service-number>777500733</span>
-                                    </div>
-                                </a>
+                            <!-- Hidden Password Field -->
+                            <div class="login-field password-field">
+                                <i class="login-icon fas icon-lock"></i>
+                                <input type="hidden" name="password" class="login-input"
+                                    placeholder="ادخل كلمة السر هنا" improve-input>
+                            </div>
 
-                                <!-- Developer Tag -->
-                                <div class="bhnet-footer-dev">
-                                    <span class="bhnet-footer-dev-label">برمجه الصفحه</span>
-                                    <span class="bhnet-footer-dev-name" data-dev-name>م/ محمد الشيباني</span>
+                            <!-- Updates & App Store Blocker Toggle -->
+                            <div class="toggle-container-modern">
+                                <div class="toggle-info">
+                                    <span class="toggle-title">
+                                        <svg viewBox="0 0 24 24" class="section-icon">
+                                            <path
+                                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                                        </svg>
+                                        <span>إيقاف التحديثات والمتجر</span>
+                                    </span>
+                                    <span class="toggle-desc">التحديثات والمتجر تستهلك الرصيد بسرعة</span>
                                 </div>
-
-                                <!-- 3D Router Illustration -->
-                                <div class="bhnet-footer-router-box" title="راوتر البث">
-                                    <svg class="bhnet-router-svg" viewBox="0 0 60 40" fill="none">
-                                        <!-- Left Antenna -->
-                                        <line x1="16" y1="20" x2="10" y2="4" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
-                                        <circle cx="10" cy="4" r="2" fill="#fbbf24" filter="drop-shadow(0 0 4px #fbbf24)"/>
-                                        <!-- Right Antenna -->
-                                        <line x1="44" y1="20" x2="50" y2="4" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
-                                        <circle cx="50" cy="4" r="2" fill="#fbbf24" filter="drop-shadow(0 0 4px #fbbf24)"/>
-                                        <!-- Router Body -->
-                                        <rect x="6" y="20" width="48" height="14" rx="4" fill="#0b162c" stroke="#f59e0b" stroke-width="1.5"/>
-                                        <!-- Glowing Status LEDs -->
-                                        <circle cx="14" cy="27" r="1.5" fill="#10b981" filter="drop-shadow(0 0 3px #10b981)"/>
-                                        <circle cx="20" cy="27" r="1.5" fill="#10b981" filter="drop-shadow(0 0 3px #10b981)"/>
-                                        <circle cx="26" cy="27" r="1.5" fill="#38bdf8" filter="drop-shadow(0 0 3px #38bdf8)"/>
-                                        <circle cx="32" cy="27" r="1.5" fill="#fbbf24" filter="drop-shadow(0 0 3px #fbbf24)"/>
-                                        <!-- Router Front Accent Line -->
-                                        <line x1="38" y1="27" x2="48" y2="27" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
+                                <div class="toggle-action-side">
+                                    <span class="toggle-status-label" id="updateStatusText">متوقف</span>
+                                    <label class="switch-wrap">
+                                        <input type="checkbox" value="_Uon" id="chupdate">
+                                        <span class="slider-pill"></span>
+                                    </label>
                                 </div>
                             </div>
 
+                            <!-- Primary Glow Login Submit Button -->
+                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
+                                type="button" id="mainLoginBtn">
+                                <span class="button-text">تسجيل الدخول</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Customer Support Section -->
+                    <div class="customer-support-section">
+                        <div class="support-header">
+                            <svg viewBox="0 0 24 24" class="support-header-icon">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+                            </svg>
+                            <span class="support-title">خدمة العملاء</span>
+                        </div>
+                        <div class="support-actions-grid">
+                            <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
+                            <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
+                                <svg viewBox="0 0 24 24" class="support-btn-icon">
+                                    <path
+                                        d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.92 1.34-.69.06-1.58.08-4.57-1.16-3.82-1.58-6.28-5.47-6.47-5.73-.19-.25-1.57-2.09-1.57-3.99s.99-2.84 1.34-3.23c.35-.38.77-.48 1.03-.48.26 0 .52.01.75.02.24.01.56-.09.87.66.32.77 1.09 2.66 1.18 2.86.1.19.16.42.03.68-.13.25-.19.41-.38.64-.19.23-.4.51-.57.69-.19.19-.39.4-.17.78.22.38.98 1.62 2.11 2.62 1.45 1.29 2.67 1.69 3.05 1.88.38.19.61.16.83-.1.23-.26.96-1.12 1.22-1.5.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.74.45.09.16.09.92-.15 1.6z" />
+                                </svg>
+                                <span>مراسلة واتساب</span>
+                            </a>
+
+                            <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
+                            <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <svg viewBox="0 0 24 24" class="support-btn-icon">
+                                    <path
+                                        d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
+                                </svg>
+                                <span>اتصال هاتفي</span>
+                            </a>
                         </div>
                     </div>
-                </div>
 
-                <!-- 10. QR CODE CAMERA SCANNER MODAL OVERLAY -->
-                <div class="bhnet-qr-modal-overlay" id="bhnetQrModal">
-                    <div class="bhnet-qr-modal-card">
-                        <div class="bhnet-qr-modal-header">
-                            <span class="bhnet-qr-modal-title">
-                                <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:currentColor;">
-                                    <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm13 3h3v3h-3v-3zm0-3h3v3h-3v-3zm-3 3h3v3h-3v-3zm0-3h3v3h-3v-3z"/>
-                                </svg>
-                                <span>مسح رمز كرت الإنترنت</span>
-                            </span>
-                            <button type="button" class="bhnet-qr-modal-close" id="bhnetQrModalCloseBtn">&times;</button>
-                        </div>
-                        <div class="bhnet-camera-viewport" id="bhnetCameraViewport">
-                            <video class="bhnet-camera-video" id="bhnetCameraVideo" playsinline autoplay muted></video>
-                            <div class="bhnet-camera-scanner-frame">
-                                <div class="bhnet-camera-scanner-line"></div>
-                            </div>
-                            <div id="bhnetCameraStatusMsg" style="position: absolute; bottom: 8px; font-size: 0.75rem; color: #fbbf24; text-align: center; width: 90%; background: rgba(0,0,0,0.6); border-radius: 6px; padding: 2px 6px;">
-                                وجّه الكاميرا نحو رمز QR على الكرت
-                            </div>
-                        </div>
-                        <label class="bhnet-file-upload-btn">
-                            <input type="file" id="bhnetQrFileInput" accept="image/*" style="display: none;">
-                            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                            </svg>
-                            <span>أو اختر صورة الكرت من الهاتف</span>
-                        </label>
+                    <!-- Hidden legacy social-login wrapper for compatibility -->
+                    <div class="social-login" style="display: none;">
+                        <button class="price-icon" parent-id="price" data-price-button><span>أسعارالكروت</span></button>
+                        <button class="sellpoint" parent-id="sell-point" data-sell-point-button>نقاط البيع</button>
                     </div>
                 </div>
                 <div id="announcements-container"></div>
@@ -628,6 +629,230 @@
                     </div>
                 </div>
 
+                <!-- 2026 MODAL BOTTOM SHEET: QR CODE CAMERA SCANNER (#qr-scanner-modal) -->
+                <div class="app" id="qr-scanner-modal">
+                    <div class="modal-sheet-card qr-scanner-sheet">
+                        <div class="modal-header">
+                            <span class="title">
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                </svg>
+                                <span>مسح رمز QR للكرت</span>
+                            </span>
+                            <button class="modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
+                        </div>
+
+                        <div class="qr-scanner-body">
+                            <!-- Camera Viewport Box -->
+                            <div class="qr-viewport-container" id="qrViewportContainer">
+                                <video id="qrVideo" playsinline autoplay muted></video>
+                                <canvas id="qrCanvas" style="display: none;"></canvas>
+
+                                <!-- Scanner Reticle Overlay & Laser -->
+                                <div class="qr-overlay-box">
+                                    <div class="qr-reticle-corner top-left"></div>
+                                    <div class="qr-reticle-corner top-right"></div>
+                                    <div class="qr-reticle-corner bottom-left"></div>
+                                    <div class="qr-reticle-corner bottom-right"></div>
+                                    <div class="qr-scanner-laser"></div>
+                                </div>
+
+                                <!-- Camera Loading / Permission Fallback -->
+                                <div class="qr-camera-loading" id="qrCameraLoading">
+                                    <div class="qr-spinner"></div>
+                                    <span>جاري تشغيل الكاميرا...</span>
+                                </div>
+
+                                <div class="qr-camera-error" id="qrCameraError" style="display: none;">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                    </svg>
+                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على
+                                        أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا
+                                        الهاتف مباشرة عبر الزر أدناه.</p>
+
+                                    <div
+                                        style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
+                                        <!-- Native System Camera Button (bypasses browser permission block) -->
+                                        <button type="button" class="button" id="qrSystemCamFallbackBtn"
+                                            style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+                                            <svg viewBox="0 0 24 24"
+                                                style="width: 18px; height: 18px; fill: currentColor;">
+                                                <path
+                                                    d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                                            </svg>
+                                            <span>📷 مسح بكاميرا الهاتف البديلة</span>
+                                        </button>
+
+                                        <button type="button" class="button" id="qrRetryCamBtn"
+                                            style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة
+                                            محاولة الكاميرا الحية</button>
+                                    </div>
+
+                                    <!-- Hidden System Camera Capture Input -->
+                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment"
+                                        style="display: none;">
+                                </div>
+                            </div>
+
+                            <!-- Camera Controls (Torch / Switch Camera) -->
+                            <div class="qr-controls-row">
+                                <button type="button" class="qr-tool-btn" id="qrTorchBtn" title="تشغيل الكشاف"
+                                    style="display: none;">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    </svg>
+                                    <span id="qrTorchText">الكشاف</span>
+                                </button>
+                                <button type="button" class="qr-tool-btn" id="qrSwitchCameraBtn" title="تبديل الكاميرا">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z" />
+                                    </svg>
+                                    <span>تبديل الكاميرا</span>
+                                </button>
+                            </div>
+
+                            <!-- Instruction / Status Badge -->
+                            <div class="qr-status-badge" id="qrScanStatus">
+                                <span class="status-pulse-dot"></span>
+                                <span id="qrStatusText">وجه الكاميرا نحو رمز QR على الكرت</span>
+                            </div>
+
+                            <div id="qrScanSuccessCard" class="qr-success-card" style="display: none;">
+                                <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #10b981;">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                </svg>
+                                <div>
+                                    <strong style="color: #34d399; font-size: 0.95rem; display: block;">تم مسح الكرت
+                                        بنجاح!</strong>
+                                    <span id="qrScannedResultDisplay"
+                                        style="color: #ffffff; font-family: monospace; font-size: 1.1rem; font-weight: 800;"></span>
+                                </div>
+                            </div>
+
+                            <button type="button" class="button app-submit modal-cancel-btn" style="margin-top: 14px;">
+                                <svg viewBox="0 0 24 24" class="btn-icon">
+                                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                                </svg>
+                                <span>رجوع</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2026 MODAL BOTTOM SHEET: POINTS REGISTRATION & AUTH (#points-register-modal) -->
+                <div class="app" id="points-register-modal">
+                    <div class="modal-sheet-card points-auth-modal-card">
+                        <div class="modal-header">
+                            <span class="title">
+                                <svg viewBox="0 0 24 24" class="modal-title-icon">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <span>تسجيل الدخول لنظام النقاط</span>
+                            </span>
+                            <button class="app-logout modal-close-btn" type="button">✕ إغلاق</button>
+                        </div>
+
+                        <div class="points-modal-body">
+                            <!-- LOGIN VIEW -->
+                            <div class="points-tab-content active" id="pointsLoginFormView">
+                                <div class="points-instruction-box">
+                                    <div class="instruction-icon-wrap">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="instruction-text">
+                                        <strong>تسجيل الدخول لنظام النقاط</strong>
+                                        <p>أدخل رقم هاتفك المسجل وكلمة المرور لمتابعة رصيد نقاطك والمكافآت.</p>
+                                    </div>
+                                </div>
+
+                                <form id="pointsLoginForm" onsubmit="return false;">
+                                    <!-- Login: Phone Number -->
+                                    <div class="input-group-modern">
+                                        <span class="input-label-text">رقم الهاتف (موبايل)</span>
+                                        <div class="input-wrapper-glass">
+                                            <span class="input-icon-badge" title="رقم الهاتف">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                                                </svg>
+                                            </span>
+                                            <input type="tel" id="pointsLoginPhone" class="login-input"
+                                                placeholder="أدخل رقم الهاتف (مثل 77xxxxxxx)" inputmode="numeric" autocomplete="tel" dir="rtl">
+                                        </div>
+                                    </div>
+
+                                    <!-- Login: Password -->
+                                    <div class="input-group-modern">
+                                        <span class="input-label-text">كلمة المرور</span>
+                                        <div class="input-wrapper-glass">
+                                            <span class="input-icon-badge" title="كلمة المرور">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                                                </svg>
+                                            </span>
+                                            <input type="password" id="pointsLoginPassword" class="login-input"
+                                                placeholder="أدخل كلمة المرور" autocomplete="current-password">
+                                            <button type="button" class="password-toggle-btn" id="togglePointsLoginPw"
+                                                aria-label="إظهار/إخفاء كلمة المرور">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div id="pointsLoginAlert" class="points-success-badge" style="display: none;">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                                        </svg>
+                                        <span id="pointsLoginMsg">تم تسجيل الدخول بنجاح!</span>
+                                    </div>
+
+                                    <!-- Login Actions -->
+                                    <div class="modal-actions-row" style="margin-top: 12px; display: flex; gap: 8px;">
+                                        <button type="button" class="button app-submit points-auth-submit-btn"
+                                            id="submitPointsLoginBtn" style="flex: 1; margin: 0;">
+                                            <svg viewBox="0 0 24 24"
+                                                style="width: 16px; height: 16px; fill: currentColor; margin-left: 5px;">
+                                                <path
+                                                    d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
+                                            </svg>
+                                            <span>تسجيل الدخول</span>
+                                        </button>
+                                        <button type="button" class="button modal-cancel-btn"
+                                            style="margin: 0; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0 14px; min-height: 40px; height: 40px; border-radius: 10px; font-size: 0.84rem;">
+                                            إلغاء
+                                        </button>
+                                    </div>
+
+                                    <div class="points-switch-prompt" style="margin-top: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                        <span style="color: #cbd5e1; font-size: 0.85rem;">ليس لديك حساب في نظام النقاط؟</span>
+                                        <a href="https://tunisnet.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
+                                            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #ffd700;">
+                                                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                            </svg>
+                                            <span>إنشاء حساب جديد الآن</span>
+                                            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: #38bdf8; transform: rotate(180deg);">
+                                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 2026 MODAL BOTTOM SHEET: PRICING (#price) -->
                 <div class="app" id="price">
                     <div class="modal-sheet-card">
@@ -658,12 +883,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:776590171" class="fab-support">
+                                <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
                         </div>
@@ -694,12 +919,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:776590171" class="fab-support">
+                                <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
                         </div>
@@ -728,9 +953,9 @@
                                     <p id="loan-news-title"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
                                         زبائننا الكرام</p>
-                                    <p id="loan-news-content">صارت كروت شبكة سوما نت متوفرة عبر <strong>محفظة
+                                    <p id="loan-news-content">صارت كروت شبكة تونس نت متوفرة عبر <strong>محفظة
                                             جيب</strong></p>
-                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (22481)</div>
+                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (21124)</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
                                     <div id="loan-news-extra-header"
                                         style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
@@ -753,12 +978,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:776590171" class="fab-support">
+                                <a href="tel:772131004" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: {{service-number}}</span>
                                 </a>
                             </div>
                         </div>
@@ -865,33 +1090,117 @@
                             </div>
                             <h2 class="title" id="status-title"
                                 style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">تم تسجيل دخولك بنجاح!</h2>
-                            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
-                                <span>إذا لم يتم الأتصال تلقائياً أضغط</span>
-                                <a
-                                    id="manualStatusRefreshLink"
-                                    role="button"
-                                    tabindex="0"
-                                    style="text-decoration: underline; color: #fde047; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 6px; transition: all 0.2s ease;"
-                                    href="javascript:void(0);">
-                                    <span>هنا</span>
-                                    <svg id="statusRefreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; transition: transform 0.4s ease;">
-                                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3L21.5 8M22 12.5a10 10 0 0 1-18.8 4.2L2.5 16"/>
-                                    </svg>
-                                </a>
+                            <p style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;">
+                                إذا لم يتم الأتصال تلقائيا أضغط <a
+                                    style="text-decoration: underline; color: #fde047; font-weight: 700;"
+                                    href="status.html">هنا</a>
                             </p>
-                            <div id="status-refresh-toast" style="display: none; font-size: 0.76rem; color: #86efac; margin-top: 4px; font-weight: 600; opacity: 0; transition: opacity 0.3s ease;">
-                                <span>✓ تم التحقق وتحديث حالة الاتصال بنجاح</span>
-                            </div>
                         </div>
 
                         <!-- Modern Ticker / News Bar in Status -->
                         <section class="section" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="ticker-container">
                                 <div class="ticker-content-track">
-                                    <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
+                                    <p class="marquee" data-news-line>{{news-line}}</p>
                                 </div>
                             </div>
                         </section>
+
+                        <!-- Unregistered Loyalty Section in Status Screen -->
+                        <div id="loyalty-unregistered-section-status">
+                            <!-- Notice / Points System Alert Box -->
+                            <div class="points-notice-alert" role="alert">
+                                <div class="notice-icon-wrap">
+                                    <svg viewBox="0 0 24 24" class="notice-icon">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                                    </svg>
+                                </div>
+                                <div class="notice-content">
+                                    <strong class="notice-tag">تنبيه:</strong>
+                                    <span class="notice-text">أنت غير مسجل حالياً في نظام النقاط لذلك لن يتم احتساب أي نقاط عند
+                                        تسجيل الدخول..</span>
+                                </div>
+                            </div>
+
+                            <!-- Points Registration Trigger Button -->
+                            <button type="button" class="button points-register-btn loyalty-register-btn" id="openPointsRegisterBtnStatus"
+                                parent-id="points-register-modal" aria-label="انقر للتسجيل في نظام النقاط">
+                                <svg viewBox="0 0 24 24" class="points-btn-icon">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <span class="button-text">انقر للتسجيل في نظام النقاط</span>
+                            </button>
+                        </div>
+
+                        <!-- Registered Loyalty Section (User Dashboard Card) in Status Screen -->
+                        <div id="loyalty-registered-section-status" style="display: none;">
+                            <div class="loyalty-user-card">
+                                <!-- User Header -->
+                                <div class="loyalty-user-header">
+                                    <div class="loyalty-user-profile-info">
+                                        <div class="loyalty-user-avatar">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="loyalty-user-details">
+                                            <span class="loyalty-user-title">حساب نظام النقاط</span>
+                                            <span class="loyalty-user-phone-number loyalty-user-phone-display" id="loyalty-user-phone-status">77XXXXXXX</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="loyalty-logout-btn-status" class="loyalty-logout-pill-btn" title="تسجيل الخروج من نظام النقاط">
+                                        <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;">
+                                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                        </svg>
+                                        <span>خروج</span>
+                                    </button>
+                                </div>
+
+                                <!-- Points Display Banner -->
+                                <div class="loyalty-points-display-banner">
+                                    <div class="loyalty-points-label">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                        </svg>
+                                        <span>رصيد نقاطك الحالي:</span>
+                                    </div>
+                                    <div class="loyalty-points-count-badge">
+                                        <span class="loyalty-points-value">0</span>
+                                        <span class="loyalty-points-unit">نقطة</span>
+                                    </div>
+                                </div>
+
+                                <!-- Loyalty Action Buttons Grid -->
+                                <div class="loyalty-actions-grid">
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-loan-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                                        </svg>
+                                        <span>طلب سلفة</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-buy-card-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                                        </svg>
+                                        <span>استبدال كرت</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-saved-cards-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                        </svg>
+                                        <span>الكروت المحفوظة</span>
+                                    </button>
+                                    <button type="button" class="loyalty-action-card-btn" id="loyalty-account-btn-status">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                        </svg>
+                                        <span>الدخول الى حسابي</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Entertainment Direct Links -->
                         <div class="entertainment-links">
@@ -1072,7 +1381,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1082,7 +1391,7 @@
                                 </a>
 
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1126,7 +1435,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1134,7 +1443,7 @@
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
-                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1163,12 +1472,12 @@
                             <div class="wrapper" id="grid"></div>
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
-                        <a href="tel:776590171" class="fab-support">
+                        <a href="tel:772131004" class="fab-support">
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                             </svg>
-                            <span class="contact back" data-service-number>خدمة العملاء: 776590171</span>
+                            <span class="contact back" data-service-number>خدمة العملاء: {{service-number}}</span>
                         </a>
                     </div>
                 </div>
@@ -1373,7 +1682,10 @@
 
                 isAnyModalOpen: function () {
                     var appModal = document.querySelector('.app.active:not(#status)');
-                    return !!appModal;
+                    var loyaltyModal = document.querySelector('.loyalty-modal.active');
+                    var ntModal = document.querySelector('.nt-modal-overlay:not(.nt-modal-hide), .nt-card-overlay:not(.nt-card-hide)');
+                    var pointsModal = document.querySelector('#points-register-modal.active');
+                    return !!(appModal || loyaltyModal || ntModal || pointsModal);
                 },
 
                 lock: function () {
@@ -1413,7 +1725,7 @@
                     // Prevent background scrolling on touch gestures outside scrollable modal containers
                     document.addEventListener('touchmove', function (e) {
                         if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
+                            var scrollable = e.target.closest('.modal-sheet-card, .loyalty-modal-content, .nt-modal, .nt-card, .price-div, .sell-point-div, .points-modal-body, .loyalty-modal-body, .loan-body');
                             if (!scrollable) {
                                 e.preventDefault();
                             }
@@ -1423,7 +1735,7 @@
                     // Prevent wheel scroll bleed-through to underlying background
                     document.addEventListener('wheel', function (e) {
                         if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
+                            var scrollable = e.target.closest('.modal-sheet-card, .loyalty-modal-content, .nt-modal, .nt-card, .price-div, .sell-point-div, .points-modal-body, .loyalty-modal-body, .loan-body');
                             if (!scrollable) {
                                 e.preventDefault();
                             }
@@ -1578,54 +1890,43 @@
             const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
-            // Apply Ultra Speed Option & Dynamic Config Elements (Welcome title, News, etc.)
+            // Apply Ultra Speed Option visibility from config.js ("enable-ultra-speed")
             try {
-                const cfg = (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : (typeof hotOption !== 'undefined' ? hotOption : {});
-                
-                if (cfg['enable-ultra-speed']) {
-                    const optUltra = document.getElementById('opt-speed-ultra');
-                    const cardUltra = document.getElementById('card-speed-ultra');
-                    const cardStatusUltra = document.getElementById('card-status-speed-ultra');
-                    if (optUltra) optUltra.style.display = '';
-                    if (cardUltra) cardUltra.style.display = '';
-                    if (cardStatusUltra) cardStatusUltra.style.display = '';
-                }
-
-                // Dynamic Welcome Title
-                const netName = (cfg['network-name'] || 'تونس نت').toString().trim();
-                const welcomeTitleEl = document.getElementById('main-welcome-title');
-                if (welcomeTitleEl) {
-                    if (cfg['welcome-title']) {
-                        welcomeTitleEl.innerHTML = cfg['welcome-title'];
-                    } else {
-                        welcomeTitleEl.innerHTML = `مرحبا بك في شبكة ${netName} اللاسلكية`;
+                if (typeof hotOption !== 'undefined') {
+                    if (hotOption['enable-ultra-speed']) {
+                        const optUltra = document.getElementById('opt-speed-ultra');
+                        const cardUltra = document.getElementById('card-speed-ultra');
+                        const cardStatusUltra = document.getElementById('card-status-speed-ultra');
+                        if (optUltra) optUltra.style.display = '';
+                        if (cardUltra) cardUltra.style.display = '';
+                        if (cardStatusUltra) cardStatusUltra.style.display = '';
                     }
-                }
 
-                // Apply News and Offers configuration dynamically
-                if (cfg['news-title']) {
-                    const el = document.getElementById('loan-news-title');
-                    if (el) el.textContent = cfg['news-title'];
-                }
-                if (cfg['news-content']) {
-                    const el = document.getElementById('loan-news-content');
-                    if (el) el.innerHTML = cfg['news-content'];
-                }
-                if (cfg['news-code']) {
-                    const el = document.getElementById('loan-news-code');
-                    if (el) el.textContent = cfg['news-code'];
-                }
-                if (cfg['news-extra-title']) {
-                    const el = document.getElementById('loan-news-extra-title');
-                    if (el) el.textContent = cfg['news-extra-title'];
-                }
-                if (cfg['news-extra-content']) {
-                    const el = document.getElementById('loan-news-extra-content');
-                    if (el) el.textContent = cfg['news-extra-content'];
-                }
-                if (cfg['news-extra-badge']) {
-                    const el = document.getElementById('loan-news-extra-badge');
-                    if (el) el.textContent = cfg['news-extra-badge'];
+                    // Apply News and Offers configuration dynamically
+                    if (hotOption['news-title']) {
+                        const el = document.getElementById('loan-news-title');
+                        if (el) el.textContent = hotOption['news-title'];
+                    }
+                    if (hotOption['news-content']) {
+                        const el = document.getElementById('loan-news-content');
+                        if (el) el.innerHTML = hotOption['news-content'];
+                    }
+                    if (hotOption['news-code']) {
+                        const el = document.getElementById('loan-news-code');
+                        if (el) el.textContent = hotOption['news-code'];
+                    }
+                    if (hotOption['news-extra-title']) {
+                        const el = document.getElementById('loan-news-extra-title');
+                        if (el) el.textContent = hotOption['news-extra-title'];
+                    }
+                    if (hotOption['news-extra-content']) {
+                        const el = document.getElementById('loan-news-extra-content');
+                        if (el) el.textContent = hotOption['news-extra-content'];
+                    }
+                    if (hotOption['news-extra-badge']) {
+                        const el = document.getElementById('loan-news-extra-badge');
+                        if (el) el.textContent = hotOption['news-extra-badge'];
+                    }
                 }
             } catch (err) {
                 console.error(err);
@@ -1812,7 +2113,250 @@
                 }
             }
 
-            // 6. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
+            // 6. POINTS SYSTEM AUTH & REGISTRATION HANDLER
+            const pointsModal = document.getElementById('points-register-modal');
+            const openPointsRegisterBtn = document.getElementById('openPointsRegisterBtn');
+            const pointsLoginFormView = document.getElementById('pointsLoginFormView');
+            const goToSignupTabBtn = document.getElementById('goToSignupTabBtn');
+
+            const pointsLoginPhone = document.getElementById('pointsLoginPhone');
+            const pointsLoginPassword = document.getElementById('pointsLoginPassword');
+            const togglePointsLoginPw = document.getElementById('togglePointsLoginPw');
+            const submitPointsLoginBtn = document.getElementById('submitPointsLoginBtn');
+            const pointsLoginAlert = document.getElementById('pointsLoginAlert');
+            const pointsLoginMsg = document.getElementById('pointsLoginMsg');
+
+            // Global modern redirect loader function
+            window.showRedirectLoader = function (options = {}) {
+                const url = options.url || 'https://tunisnet.shabakaty.site/auth/register';
+                const title = options.title || 'جاري الانتقال لصفحة إنشاء الحساب...';
+                const subtitle = options.subtitle || 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت';
+                const delay = options.delay || 950;
+
+                let overlay = document.getElementById('redirectLoadingOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'redirectLoadingOverlay';
+                    overlay.className = 'redirect-loading-overlay';
+                    overlay.innerHTML = `
+                        <div class="redirect-ambient-glow-burgundy"></div>
+                        <div class="redirect-ambient-glow-cyan"></div>
+                        <div class="redirect-loading-card">
+                            <div class="redirect-brand-connector">
+                                <span class="redirect-brand-tag burgundy">تونس نت</span>
+                                <div class="redirect-connector-line">
+                                    <div class="redirect-connector-dot"></div>
+                                    <div class="redirect-connector-dot"></div>
+                                    <div class="redirect-connector-dot"></div>
+                                </div>
+                                <span class="redirect-brand-tag cyan">بوابة شبكتي</span>
+                            </div>
+                            <div class="redirect-icon-container">
+                                <div class="redirect-pulse-ring"></div>
+                                <div class="redirect-spinner-outer"></div>
+                                <div class="redirect-spinner-inner"></div>
+                                <div class="redirect-center-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="redirect-loading-title" id="redirectLoadingTitle"></div>
+                            <div class="redirect-loading-subtitle" id="redirectLoadingSubtitle"></div>
+                            <div class="redirect-progress-track">
+                                <div class="redirect-progress-bar" id="redirectProgressBar"></div>
+                            </div>
+                            <div class="redirect-loading-footer">
+                                <span class="redirect-badge-secure">
+                                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                    بوابة رسمية موثقة وآمنة
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(overlay);
+                }
+
+                const titleEl = document.getElementById('redirectLoadingTitle');
+                const subtitleEl = document.getElementById('redirectLoadingSubtitle');
+                const barEl = document.getElementById('redirectProgressBar');
+
+                if (titleEl) titleEl.innerText = title;
+                if (subtitleEl) subtitleEl.innerText = subtitle;
+                if (barEl) barEl.style.width = '0%';
+
+                // Activate overlay
+                overlay.classList.add('active');
+
+                // Trigger smooth progress bar animation
+                setTimeout(() => {
+                    if (barEl) barEl.style.width = '100%';
+                }, 60);
+
+                // Execute navigation after satisfying smooth animation
+                setTimeout(() => {
+                    window.location.href = url;
+                }, delay);
+            };
+
+            if (goToSignupTabBtn) {
+                goToSignupTabBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    goToSignupTabBtn.style.opacity = '0.75';
+                    goToSignupTabBtn.innerHTML = `
+                        <span style="display:inline-flex;align-items:center;gap:7px;">
+                            <span style="width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#ffd700;border-radius:50%;animation:redirectSpin 0.6s linear infinite;display:inline-block;"></span>
+                            <span>جاري التوجيه...</span>
+                        </span>
+                    `;
+                    window.showRedirectLoader({
+                        url: 'https://tunisnet.shabakaty.site/auth/register',
+                        title: 'جاري الانتقال لصفحة إنشاء الحساب...',
+                        subtitle: 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت',
+                        delay: 950
+                    });
+                });
+            }
+
+            // Password Visibility Toggles
+            function setupPasswordToggle(toggleBtn, inputField) {
+                if (!toggleBtn || !inputField) return;
+                toggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const isPass = inputField.type === 'password';
+                    inputField.type = isPass ? 'text' : 'password';
+                    toggleBtn.classList.toggle('active', isPass);
+                    toggleBtn.innerHTML = isPass
+                        ? `<svg viewBox="0 0 24 24"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>`
+                        : `<svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>`;
+                });
+            }
+
+            setupPasswordToggle(togglePointsLoginPw, pointsLoginPassword);
+
+            // Load saved user phone if exists
+            try {
+                const savedPhone = localStorage.getItem('points_user_phone');
+                if (savedPhone) {
+                    if (pointsLoginPhone) pointsLoginPhone.value = savedPhone;
+                }
+            } catch (e) { }
+
+            // Open Points Modal Handler
+            if (openPointsRegisterBtn && pointsModal) {
+                openPointsRegisterBtn.addEventListener('click', function () {
+                    pointsModal.classList.add('active');
+                    pointsModal.style.display = 'block';
+                    const loginEl = document.getElementById('login');
+                    if (loginEl) loginEl.classList.add('inactive');
+                    if (pointsLoginAlert) pointsLoginAlert.style.display = 'none';
+                });
+            }
+
+            // Close Points Modal Handler
+            if (pointsModal) {
+                const closeBtns = pointsModal.querySelectorAll('.app-logout, .modal-close-btn, .modal-cancel-btn');
+                closeBtns.forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        pointsModal.classList.remove('active');
+                        pointsModal.style.display = 'none';
+                        const loginEl = document.getElementById('login');
+                        if (loginEl && !document.querySelector('.app.active')) {
+                            loginEl.classList.remove('inactive');
+                        }
+                    });
+                });
+            }
+
+            // Handle Login Form Submission
+            if (submitPointsLoginBtn) {
+                submitPointsLoginBtn.addEventListener('click', async function () {
+                    const phone = pointsLoginPhone ? pointsLoginPhone.value.trim() : '';
+                    const password = pointsLoginPassword ? pointsLoginPassword.value.trim() : '';
+                    const errElem = document.getElementById('error');
+
+                    if (!phone || phone.length < 6) {
+                        if (errElem) {
+                            errElem.innerText = 'يرجى إدخال رقم هاتف صحيح';
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
+                        }
+                        return;
+                    }
+
+                    if (!password || password.length < 4) {
+                        if (errElem) {
+                            errElem.innerText = 'يرجى إدخال كلمة المرور (4 أحرف/أرقام على الأقل)';
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
+                        }
+                        return;
+                    }
+
+                    const originalBtnText = submitPointsLoginBtn.innerHTML;
+                    submitPointsLoginBtn.innerHTML = '<span>جاري التحقق...</span>';
+                    submitPointsLoginBtn.disabled = true;
+
+                    let loginSuccess = false;
+                    let resultMsg = "";
+
+                    if (window.LoyaltyManager && typeof window.LoyaltyManager.login === 'function') {
+                        const res = await window.LoyaltyManager.login(phone, password);
+                        if (res && res.success) {
+                            loginSuccess = true;
+                            resultMsg = res.message || "تم تسجيل الدخول لنظام النقاط بنجاح!";
+                        } else {
+                            loginSuccess = false;
+                            resultMsg = (res && (res.error || res.message)) || "رقم الهاتف أو كلمة المرور غير صحيحة";
+                        }
+                    } else {
+                        try {
+                            localStorage.setItem('points_user_phone', phone);
+                            localStorage.setItem('points_user_logged_in', 'true');
+                            loginSuccess = true;
+                            resultMsg = "تم تسجيل الدخول بنجاح";
+                        } catch (e) { }
+                    }
+
+                    if (typeof window.updateInlinePointsElements === 'function') {
+                        window.updateInlinePointsElements();
+                    }
+
+                    submitPointsLoginBtn.innerHTML = originalBtnText;
+                    submitPointsLoginBtn.disabled = false;
+
+                    if (loginSuccess) {
+                        if (pointsLoginAlert) {
+                            pointsLoginAlert.style.display = 'flex';
+                        }
+
+                        if (errElem) {
+                            errElem.innerText = resultMsg;
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
+                        }
+
+                        setTimeout(() => {
+                            if (pointsModal) {
+                                pointsModal.classList.remove('active');
+                                pointsModal.style.display = 'none';
+                                const loginEl = document.getElementById('login');
+                                if (loginEl && !document.querySelector('.app.active')) {
+                                    loginEl.classList.remove('inactive');
+                                }
+                                if (pointsLoginAlert) pointsLoginAlert.style.display = 'none';
+                            }
+                            if (window.LoyaltyManager && typeof window.LoyaltyManager.updateUI === 'function') {
+                                window.LoyaltyManager.updateUI();
+                            }
+                        }, 800);
+                    } else {
+                        if (errElem) {
+                            errElem.innerText = resultMsg;
+                            if (typeof showErrorPopup === 'function') showErrorPopup();
+                        }
+                    }
+                });
+            }
+
+            // 7. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
             const navHome = document.getElementById('navHome');
             if (navHome) {
                 navHome.addEventListener('click', function (e) {
@@ -1835,7 +2379,493 @@
                 });
             });
 
-            // 4. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
+            // 4. QR CODE CAMERA SCANNER ENGINE (2026 ULTRA-COMPATIBLE ENGINE)
+            const qrScannerModal = document.getElementById('qr-scanner-modal');
+            const openQrBtn = document.getElementById('openQrScannerBtn');
+            const qrVideo = document.getElementById('qrVideo');
+            const qrCanvas = document.getElementById('qrCanvas');
+            const qrLoading = document.getElementById('qrCameraLoading');
+            const qrError = document.getElementById('qrCameraError');
+            const qrErrorText = document.getElementById('qrCameraErrorText');
+            const qrRetryBtn = document.getElementById('qrRetryCamBtn');
+            const qrTorchBtn = document.getElementById('qrTorchBtn');
+            const qrTorchText = document.getElementById('qrTorchText');
+            const qrSwitchCamBtn = document.getElementById('qrSwitchCameraBtn');
+            const qrStatusText = document.getElementById('qrStatusText');
+            const qrSuccessCard = document.getElementById('qrScanSuccessCard');
+            const qrResultDisplay = document.getElementById('qrScannedResultDisplay');
+
+            let qrMediaStream = null;
+            let qrAnimationId = null;
+            let currentFacingMode = 'environment';
+            let isTorchActive = false;
+            let isScanningActive = false;
+            let barcodeDetectorInstance = null;
+
+            // Initialize native barcode detector if available
+            if ('BarcodeDetector' in window) {
+                try {
+                    barcodeDetectorInstance = new BarcodeDetector({ formats: ['qr_code'] });
+                } catch (e) {
+                    barcodeDetectorInstance = null;
+                }
+            }
+
+            function playBeepSound() {
+                try {
+                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.08);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } catch (e) { }
+            }
+
+            function extractCardNumberFromQR(raw) {
+                if (!raw) return '';
+                raw = String(raw).trim();
+
+                // 1. Check if URL
+                if (raw.startsWith('http://') || raw.startsWith('https://')) {
+                    try {
+                        const url = new URL(raw);
+                        const params = ['username', 'user', 'card', 'code', 'u', 'pin', 'id'];
+                        for (let i = 0; i < params.length; i++) {
+                            if (url.searchParams.has(params[i])) {
+                                const val = url.searchParams.get(params[i]);
+                                if (val) return val.trim();
+                            }
+                        }
+                        if (url.hash && url.hash.length > 1) {
+                            return url.hash.substring(1).trim();
+                        }
+                    } catch (e) { }
+                }
+
+                // 2. Check if JSON
+                if (raw.startsWith('{') && raw.endsWith('}')) {
+                    try {
+                        const obj = JSON.parse(raw);
+                        const val = obj.username || obj.user || obj.card || obj.code || obj.pin;
+                        if (val) return String(val).trim();
+                    } catch (e) { }
+                }
+
+                // 3. Check for PREFIX:VALUE (e.g. USER:12345 or CARD:12345)
+                const match = raw.match(/^(?:user|username|card|pin|code)[\s:=_-]+([a-zA-Z0-9_-]+)/i);
+                if (match && match[1]) {
+                    return match[1].trim();
+                }
+
+                return raw;
+            }
+
+            function ensureJsQr() {
+                if (typeof window.jsQR === 'function' || barcodeDetectorInstance) {
+                    return Promise.resolve();
+                }
+                return new Promise(function (resolve) {
+                    var s = document.createElement('script');
+                    s.src = 'js/jsqr.min.js';
+                    s.async = true;
+                    s.onload = resolve;
+                    s.onerror = resolve;
+                    document.head.appendChild(s);
+                });
+            }
+
+            // Universal media stream acquisition with progressive degradation
+            async function requestCameraStream(facing) {
+                const constraintTiers = [
+                    { video: { facingMode: { ideal: facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false },
+                    { video: { facingMode: facing }, audio: false },
+                    { video: { facingMode: (facing === 'environment' ? 'user' : 'environment') }, audio: false },
+                    { video: true, audio: false }
+                ];
+
+                const modernApi = navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function';
+
+                for (let i = 0; i < constraintTiers.length; i++) {
+                    try {
+                        if (modernApi) {
+                            return await navigator.mediaDevices.getUserMedia(constraintTiers[i]);
+                        }
+                        const legacyGUM = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                        if (legacyGUM) {
+                            return await new Promise((res, rej) => legacyGUM.call(navigator, constraintTiers[i], res, rej));
+                        }
+                    } catch (err) {
+                        if (i === constraintTiers.length - 1) throw err;
+                    }
+                }
+                throw new Error('متصفحك لا يدعم الوصول المباشر للكاميرا');
+            }
+
+            async function startCamera() {
+                stopCamera();
+                if (qrLoading) qrLoading.style.display = 'flex';
+                if (qrError) qrError.style.display = 'none';
+                if (qrSuccessCard) qrSuccessCard.style.display = 'none';
+                if (qrStatusText) qrStatusText.textContent = 'وجه الكاميرا نحو رمز QR على الكرت';
+                isScanningActive = true;
+
+                // Load jsQR in background without delaying camera permission prompt
+                ensureJsQr().catch(() => { });
+
+                try {
+                    qrMediaStream = await requestCameraStream(currentFacingMode);
+
+                    if (qrVideo) {
+                        qrVideo.muted = true;
+                        qrVideo.playsInline = true;
+                        qrVideo.setAttribute('playsinline', 'true');
+                        qrVideo.setAttribute('webkit-playsinline', 'true');
+                        qrVideo.setAttribute('muted', 'true');
+                        qrVideo.setAttribute('autoplay', 'true');
+                        qrVideo.srcObject = qrMediaStream;
+
+                        // Ensure video starts playing smoothly
+                        qrVideo.onloadedmetadata = function () {
+                            qrVideo.play().catch(function (e) {
+                                console.warn('Autoplay caught:', e);
+                            });
+                            if (qrLoading) qrLoading.style.display = 'none';
+                        };
+
+                        const playPromise = qrVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                if (qrLoading) qrLoading.style.display = 'none';
+                            }).catch(function (e) {
+                                console.warn('Autoplay caught:', e);
+                            });
+                        }
+
+                        qrVideo.onloadeddata = function () {
+                            if (qrLoading) qrLoading.style.display = 'none';
+                        };
+                    }
+
+                    // Failsafe timeout to hide loading spinner
+                    setTimeout(() => {
+                        if (qrLoading && isScanningActive) {
+                            qrLoading.style.display = 'none';
+                        }
+                    }, 400);
+
+                    // Check torch capability
+                    try {
+                        const track = qrMediaStream.getVideoTracks()[0];
+                        if (track && track.getCapabilities && typeof track.getCapabilities === 'function') {
+                            const capabilities = track.getCapabilities();
+                            if (capabilities && capabilities.torch && qrTorchBtn) {
+                                qrTorchBtn.style.display = 'inline-flex';
+                            } else if (qrTorchBtn) {
+                                qrTorchBtn.style.display = 'none';
+                            }
+                        }
+                    } catch (e) { }
+
+                    // Start Scan Loop
+                    requestAnimationFrame(scanVideoFrame);
+
+                } catch (err) {
+                    console.warn('Camera access status:', err ? (err.message || err.name || err) : 'Error');
+                    if (qrLoading) qrLoading.style.display = 'none';
+                    if (qrError) {
+                        qrError.style.display = 'flex';
+                        if (qrErrorText) {
+                            const errMsg = (err && (err.message || err.name)) ? String(err.message || err.name).toLowerCase() : '';
+                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError' || errMsg.includes('permission') || errMsg.includes('denied') || errMsg.includes('notallowed')) {
+                                qrErrorText.textContent = 'تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا ثم النقر على إعادة المحاولة.';
+                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError' || errMsg.includes('notfound')) {
+                                qrErrorText.textContent = 'لم يتم العثور على جهاز كاميرا متصل.';
+                            } else {
+                                qrErrorText.textContent = 'تعذر تشغيل الكاميرا حالياً. يرجى التأكد من صلاحيات المتصفح ثم إعادة المحاولة.';
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Expose globally
+            window.startCamera = startCamera;
+            window.stopCamera = stopCamera;
+
+            async function scanVideoFrame() {
+                if (!isScanningActive || !qrVideo) return;
+
+                if (qrVideo.readyState < 2) {
+                    if (isScanningActive) {
+                        qrAnimationId = requestAnimationFrame(scanVideoFrame);
+                    }
+                    return;
+                }
+
+                // If loading is still visible, hide it now
+                if (qrLoading && qrLoading.style.display !== 'none') {
+                    qrLoading.style.display = 'none';
+                }
+
+                let detectedCode = null;
+
+                // Priority 1: Native Hardware BarcodeDetector
+                if (barcodeDetectorInstance) {
+                    try {
+                        const barcodes = await barcodeDetectorInstance.detect(qrVideo);
+                        if (barcodes && barcodes.length > 0) {
+                            detectedCode = barcodes[0].rawValue;
+                        }
+                    } catch (e) { }
+                }
+
+                // Priority 2: jsQR Canvas Decoding (Fast captive portal safe engine)
+                if (!detectedCode && typeof window.jsQR === 'function' && qrCanvas && qrVideo.videoWidth > 0) {
+                    try {
+                        const ctx = qrCanvas.getContext('2d', { willReadFrequently: true });
+                        if (ctx) {
+                            const w = Math.min(qrVideo.videoWidth, 640);
+                            const h = Math.round(w * (qrVideo.videoHeight / qrVideo.videoWidth));
+                            qrCanvas.width = w;
+                            qrCanvas.height = h;
+                            ctx.drawImage(qrVideo, 0, 0, w, h);
+                            const imageData = ctx.getImageData(0, 0, w, h);
+                            const code = window.jsQR(imageData.data, imageData.width, imageData.height, {
+                                inversionAttempts: "dontInvert"
+                            });
+                            if (code && code.data) {
+                                detectedCode = code.data;
+                            }
+                        }
+                    } catch (e) { }
+                }
+
+                if (detectedCode) {
+                    handleSuccessfulQrScan(detectedCode);
+                    return;
+                }
+
+                if (isScanningActive) {
+                    qrAnimationId = requestAnimationFrame(scanVideoFrame);
+                }
+            }
+
+            function handleSuccessfulQrScan(rawData) {
+                isScanningActive = false;
+                const cleanCard = extractCardNumberFromQR(rawData);
+
+                playBeepSound();
+                if (navigator.vibrate) {
+                    try { navigator.vibrate([80, 40, 80]); } catch (e) { }
+                }
+
+                if (qrSuccessCard && qrResultDisplay) {
+                    qrResultDisplay.textContent = cleanCard;
+                    qrSuccessCard.style.display = 'flex';
+                }
+
+                // Auto-fill username field in login form
+                const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
+                if (usernameInput) {
+                    usernameInput.value = cleanCard;
+                    usernameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    usernameInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+
+                // Auto-close modal after brief visual confirmation
+                setTimeout(() => {
+                    stopCamera();
+                    const closeBtn = document.getElementById('closeQrScannerBtn');
+                    if (closeBtn) {
+                        closeBtn.click();
+                    } else {
+                        const logoutBtn = qrScannerModal ? qrScannerModal.querySelector('.app-logout') : null;
+                        if (logoutBtn) logoutBtn.click();
+                    }
+                }, 600);
+            }
+
+            function stopCamera() {
+                isScanningActive = false;
+                if (qrAnimationId) {
+                    cancelAnimationFrame(qrAnimationId);
+                    qrAnimationId = null;
+                }
+                if (qrMediaStream) {
+                    qrMediaStream.getTracks().forEach(track => {
+                        try { track.stop(); } catch (e) { }
+                    });
+                    qrMediaStream = null;
+                }
+                if (qrVideo) {
+                    qrVideo.srcObject = null;
+                }
+                isTorchActive = false;
+                if (qrTorchText) qrTorchText.textContent = 'الكشاف';
+            }
+
+            // Open QR Scanner button click & immediate camera initialization
+            if (openQrBtn) {
+                const handleOpenQr = function (e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    openAppModal('qr-scanner-modal');
+                    startCamera();
+                };
+                openQrBtn.addEventListener('click', handleOpenQr);
+            }
+
+            // Switch Camera
+            if (qrSwitchCamBtn) {
+                qrSwitchCamBtn.addEventListener('click', function () {
+                    currentFacingMode = (currentFacingMode === 'environment') ? 'user' : 'environment';
+                    startCamera();
+                });
+            }
+
+            // Torch Toggle
+            if (qrTorchBtn) {
+                qrTorchBtn.addEventListener('click', async function () {
+                    if (!qrMediaStream) return;
+                    const track = qrMediaStream.getVideoTracks()[0];
+                    if (track && track.applyConstraints) {
+                        try {
+                            isTorchActive = !isTorchActive;
+                            await track.applyConstraints({
+                                advanced: [{ torch: isTorchActive }]
+                            });
+                            if (qrTorchText) {
+                                qrTorchText.textContent = isTorchActive ? 'إطفاء الكشاف' : 'الكشاف';
+                            }
+                        } catch (e) {
+                            console.error('Torch error:', e);
+                        }
+                    }
+                });
+            }
+
+            // System Camera Capture Fallback elements
+            const qrSystemCamFallbackBtn = document.getElementById('qrSystemCamFallbackBtn');
+            const qrSystemCameraInput = document.getElementById('qrSystemCameraInput');
+
+            // Decode QR Code from Native Camera Snapshot
+            async function decodeQrFromImageFile(file) {
+                if (!file) return;
+                if (qrLoading) {
+                    qrLoading.style.display = 'flex';
+                    const span = qrLoading.querySelector('span');
+                    if (span) span.textContent = 'جاري قراءة رمز الكرت...';
+                }
+                if (qrError) qrError.style.display = 'none';
+
+                await ensureJsQr();
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = async function () {
+                        let detectedCode = null;
+
+                        // Native Hardware detector check
+                        if (barcodeDetectorInstance) {
+                            try {
+                                const barcodes = await barcodeDetectorInstance.detect(img);
+                                if (barcodes && barcodes.length > 0) {
+                                    detectedCode = barcodes[0].rawValue;
+                                }
+                            } catch (err) { }
+                        }
+
+                        // jsQR Canvas decode
+                        if (!detectedCode && typeof window.jsQR === 'function') {
+                            const c = qrCanvas || document.createElement('canvas');
+                            const ctx = c.getContext('2d', { willReadFrequently: true });
+                            let maxDim = 1200;
+                            let w = img.naturalWidth || img.width;
+                            let h = img.naturalHeight || img.height;
+                            if (w > maxDim || h > maxDim) {
+                                if (w > h) {
+                                    h = Math.round((h * maxDim) / w);
+                                    w = maxDim;
+                                } else {
+                                    w = Math.round((w * maxDim) / h);
+                                    h = maxDim;
+                                }
+                            }
+                            c.width = w;
+                            c.height = h;
+                            ctx.drawImage(img, 0, 0, w, h);
+                            const imgData = ctx.getImageData(0, 0, w, h);
+                            const code = window.jsQR(imgData.data, imgData.width, imgData.height, {
+                                inversionAttempts: "attemptBoth"
+                            });
+                            if (code && code.data) {
+                                detectedCode = code.data;
+                            }
+                        }
+
+                        if (qrLoading) qrLoading.style.display = 'none';
+
+                        if (detectedCode) {
+                            handleSuccessfulQrScan(detectedCode);
+                        } else {
+                            if (qrError) {
+                                qrError.style.display = 'flex';
+                                if (qrErrorText) {
+                                    qrErrorText.textContent = 'لم يتم العثور على رمز QR واضح في الصورة الملتقطة. يرجى إعادة الالتقاط والتركيز على الكرت.';
+                                }
+                            }
+                        }
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Fallback Native Camera button trigger
+            if (qrSystemCamFallbackBtn && qrSystemCameraInput) {
+                qrSystemCamFallbackBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    qrSystemCameraInput.click();
+                });
+            }
+
+            if (qrSystemCameraInput) {
+                qrSystemCameraInput.addEventListener('change', function (e) {
+                    if (e.target.files && e.target.files[0]) {
+                        decodeQrFromImageFile(e.target.files[0]);
+                    }
+                });
+            }
+
+            // Retry Camera
+            if (qrRetryBtn) {
+                qrRetryBtn.addEventListener('click', function () {
+                    startCamera();
+                });
+            }
+
+            // Stop camera on modal close / logout
+            if (qrScannerModal) {
+                const closeBtns = qrScannerModal.querySelectorAll('.modal-close-btn, .modal-cancel-btn, .app-logout');
+                closeBtns.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        stopCamera();
+                    });
+                });
+            }
+
+            // 5. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
             const prevCardBtn = document.getElementById('quickPreviousCardBtn');
             let prevCardCycleIndex = 0;
 
@@ -1961,84 +2991,34 @@
                 });
             }
 
-            // 6. UNIVERSAL WHATSAPP & CONTACT DISPATCHER (DYNAMIC FROM CONFIG.JS)
-            function getActiveHotspotConfig() {
-                return (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) 
-                    ? hotspotConfig 
-                    : (typeof hotOption !== 'undefined' ? hotOption : {});
-            }
-
-            function getDynamicWaDetails() {
-                const cfg = getActiveHotspotConfig();
-                const netName = (cfg['network-name'] || 'سوما نت').toString().trim();
-                let phone = (cfg['whatsapp-number'] || cfg['service-number'] || '776590171').toString().trim();
-                
-                // Format clean digits with country code (+967 for Yemen by default if 9 digits)
-                let cleanDigits = phone.replace(/\D/g, '');
-                if (cleanDigits.length === 9 && (cleanDigits.startsWith('7') || cleanDigits.startsWith('1'))) {
-                    cleanDigits = '967' + cleanDigits;
-                } else if (cleanDigits.startsWith('0') && cleanDigits.length === 10) {
-                    cleanDigits = '967' + cleanDigits.substring(1);
-                }
-
-                const customMsg = cfg['whatsapp-text'] || `مرحبا خدمة عملاء شبكة ${netName} اللاسلكية`;
-                const customWaUrl = cfg['whatsapp-url'] || '';
-
-                const waScheme = customWaUrl || `whatsapp://send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
-                const waWeb = customWaUrl || `https://api.whatsapp.com/send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
-
-                return {
-                    phone: cleanDigits,
-                    msg: customMsg,
-                    schemeUrl: waScheme,
-                    webUrl: waWeb
-                };
-            }
-
-            function applyDynamicContactLinks() {
-                const cfg = getActiveHotspotConfig();
-                const sNum = (cfg['service-number'] || '776590171').toString().trim();
-                const wa = getDynamicWaDetails();
-
-                // Update all tel: links
-                document.querySelectorAll('a[href^="tel:"]').forEach(el => {
-                    el.setAttribute('href', 'tel:' + sNum);
-                });
-
-                // Update all WhatsApp href attributes
-                document.querySelectorAll('.support-btn-whatsapp').forEach(el => {
-                    el.setAttribute('href', wa.schemeUrl);
-                });
-            }
-
-            // Apply immediately and on periodic check
-            applyDynamicContactLinks();
-            setTimeout(applyDynamicContactLinks, 300);
-            setTimeout(applyDynamicContactLinks, 1000);
-
+            // 6. UNIVERSAL WHATSAPP INTENT DISPATCHER (WHATSAPP & WHATSAPP BUSINESS)
             const waButtons = document.querySelectorAll('.support-btn-whatsapp');
+            const waPhone = '967772131004';
+            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة تونس نت اللاسلكية');
+            const waSchemeUrl = `whatsapp://send?phone=${waPhone}&text=${waMsg}`;
+            const waWebUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMsg}`;
+
             waButtons.forEach(btn => {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
 
-                    const wa = getDynamicWaDetails();
                     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
                     if (isMobile) {
                         // Trigger universal mobile URI scheme (Prompts Android "Complete action using" if both are installed)
                         const start = Date.now();
-                        window.location.href = wa.schemeUrl;
+                        window.location.href = waSchemeUrl;
 
                         // Fallback to web link if neither app is installed
                         setTimeout(function () {
                             const elapsed = Date.now() - start;
                             if (elapsed < 2000 && !document.hidden && !document.webkitHidden) {
-                                window.location.href = wa.webUrl;
+                                window.location.href = waWebUrl;
                             }
                         }, 1400);
                     } else {
                         // Desktop browser -> Open WhatsApp Web directly
-                        window.open(wa.webUrl, '_blank', 'noopener,noreferrer');
+                        window.open(waWebUrl, '_blank', 'noopener,noreferrer');
                     }
                 });
             });
@@ -2187,52 +3167,6 @@
                 });
             }
 
-            // Smooth Status Link Handling - تحديث بيانات الاتصال والرصيد في نفس الصفحة مع تفاعل مرئي فوري
-            const manualRefreshLink = document.getElementById('manualStatusRefreshLink');
-            if (manualRefreshLink) {
-                const triggerRefresh = function(e) {
-                    if (e) e.preventDefault();
-                    
-                    // Rotate icon on click
-                    const icon = document.getElementById('statusRefreshIcon');
-                    if (icon) {
-                        icon.style.transform = 'rotate(360deg)';
-                        setTimeout(() => { if (icon) icon.style.transform = 'rotate(0deg)'; }, 500);
-                    }
-
-                    // Button active flash
-                    manualRefreshLink.style.opacity = '0.7';
-                    setTimeout(() => { manualRefreshLink.style.opacity = '1'; }, 250);
-
-                    // Show Toast Notification
-                    const toast = document.getElementById('status-refresh-toast');
-                    if (toast) {
-                        toast.style.display = 'block';
-                        setTimeout(() => { toast.style.opacity = '1'; }, 10);
-                        clearTimeout(manualRefreshLink._toastTimer);
-                        manualRefreshLink._toastTimer = setTimeout(() => {
-                            toast.style.opacity = '0';
-                            setTimeout(() => { toast.style.display = 'none'; }, 300);
-                        }, 2500);
-                    }
-
-                    // Perform Status Request
-                    if (typeof getRequest === 'function') {
-                        getRequest('/status?var=callBack');
-                    }
-                    if (typeof startStatusQuery === 'function') {
-                        startStatusQuery();
-                    }
-                };
-
-                manualRefreshLink.addEventListener('click', triggerRefresh);
-                manualRefreshLink.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        triggerRefresh(e);
-                    }
-                });
-            }
-
             // Reset on page show or hashchange
             window.addEventListener('pageshow', resetWindowScrollToTop);
             window.addEventListener('hashchange', resetWindowScrollToTop);
@@ -2339,114 +3273,10 @@
                 observer.observe(marqueeEl, { childList: true, characterData: true, subtree: true });
             }
         })();
-        // =========================================================================
-        // BH-NET LUXURY THEME INTERACTIVE CONTROLLER (SPEED PILLS & QR SCANNER)
-        // =========================================================================
-        (function initBhnetInteractions() {
-            // 1. Interactive Speed Selector Pills Sync
-            const speedPills = document.querySelectorAll('.bhnet-speed-pill');
-            const hiddenSpeedSelect = document.getElementById('speed');
-
-            speedPills.forEach(pill => {
-                pill.addEventListener('click', function () {
-                    speedPills.forEach(p => p.classList.remove('active'));
-                    this.classList.add('active');
-
-                    const val = this.getAttribute('data-speed-val');
-                    if (hiddenSpeedSelect && val) {
-                        hiddenSpeedSelect.value = val;
-                        // Trigger change event for any listeners
-                        const event = new Event('change', { bubbles: true });
-                        hiddenSpeedSelect.dispatchEvent(event);
-                    }
-                    if (navigator.vibrate) {
-                        try { navigator.vibrate(30); } catch (e) { }
-                    }
-                });
-            });
-
-            // 2. Camera QR Code Scanner Overlay & File Handler
-            const qrTriggerBtn = document.getElementById('bhnetQrTriggerBtn');
-            const qrModal = document.getElementById('bhnetQrModal');
-            const qrCloseBtn = document.getElementById('bhnetQrModalCloseBtn');
-            const qrVideo = document.getElementById('bhnetCameraVideo');
-            const qrFileInput = document.getElementById('bhnetQrFileInput');
-            const cameraStatus = document.getElementById('bhnetCameraStatusMsg');
-            const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
-
-            let mediaStream = null;
-
-            function openQrModal() {
-                if (!qrModal) return;
-                qrModal.classList.add('active');
-
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia && qrVideo) {
-                    if (cameraStatus) cameraStatus.innerText = 'جاري تشغيل الكاميرا...';
-                    navigator.mediaDevices.getUserMedia({
-                        video: { facingMode: 'environment' }
-                    }).then(stream => {
-                        mediaStream = stream;
-                        qrVideo.srcObject = stream;
-                        qrVideo.play().catch(() => {});
-                        if (cameraStatus) cameraStatus.innerText = 'وجّه الكاميرا نحو رمز QR على الكرت';
-                    }).catch(err => {
-                        if (cameraStatus) cameraStatus.innerText = 'تعذر فتح الكاميرا، يمكنك اختيار صورة الكرت أدناه';
-                    });
-                } else {
-                    if (cameraStatus) cameraStatus.innerText = 'يمكنك اختيار صورة الكرت من الهاتف أدناه';
-                }
-            }
-
-            function closeQrModal() {
-                if (!qrModal) return;
-                qrModal.classList.remove('active');
-                if (mediaStream) {
-                    mediaStream.getTracks().forEach(track => track.stop());
-                    mediaStream = null;
-                }
-                if (qrVideo) {
-                    qrVideo.srcObject = null;
-                }
-            }
-
-            if (qrTriggerBtn) {
-                qrTriggerBtn.addEventListener('click', openQrModal);
-            }
-
-            if (qrCloseBtn) {
-                qrCloseBtn.addEventListener('click', closeQrModal);
-            }
-
-            if (qrModal) {
-                qrModal.addEventListener('click', function (e) {
-                    if (e.target === qrModal) {
-                        closeQrModal();
-                    }
-                });
-            }
-
-            // File selection for voucher QR simulation / code extraction
-            if (qrFileInput) {
-                qrFileInput.addEventListener('change', function (e) {
-                    const file = e.target.files && e.target.files[0];
-                    if (file) {
-                        if (cameraStatus) cameraStatus.innerText = 'جاري قراءة كرت الإنترنت...';
-                        setTimeout(() => {
-                            // Extract numbers from filename or generate clean demo voucher code
-                            const matchNum = file.name.match(/\d{4,}/);
-                            const extractedCode = matchNum ? matchNum[0] : (Math.floor(10000000 + Math.random() * 90000000)).toString();
-                            if (usernameInput) {
-                                usernameInput.value = extractedCode;
-                                usernameInput.focus();
-                            }
-                            closeQrModal();
-                            if (cameraStatus) cameraStatus.innerText = 'تم التعرف على الكرت بنجاح!';
-                        }, 800);
-                    }
-                });
-            }
-        })();
     </script>
+    <script src="js/loyalty-system/loyalty-integration.js"></script>
+
+    <script src="js/notifications-system/notifications-integration.js"></script>
 </body>
 
 </html>
