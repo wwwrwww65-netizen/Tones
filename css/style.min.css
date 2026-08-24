@@ -2006,7 +2006,7 @@ body.keyboard-open .bottom-nav-bar,
 .customer-support-section {
   margin-top: 14px;
   margin-bottom: 6px;
-  padding: 14px 16px;
+  padding: 14px 12px;
   background: rgba(65, 12, 22, 0.28);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-xl);
@@ -2016,8 +2016,12 @@ body.keyboard-open .bottom-nav-bar,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .support-header {
@@ -2043,12 +2047,13 @@ body.keyboard-open .bottom-nav-bar,
 
 .support-actions-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   width: 100%;
+  box-sizing: border-box;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 320px) {
   .support-actions-grid {
     grid-template-columns: 1fr;
   }
@@ -2058,16 +2063,25 @@ body.keyboard-open .bottom-nav-bar,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 11px 14px;
+  gap: 6px;
+  padding: 10px 8px;
   border-radius: var(--radius-lg);
   font-family: var(--font-main);
-  font-size: 0.86rem;
+  font-size: clamp(0.75rem, 3.2vw, 0.86rem);
   font-weight: 800;
   text-decoration: none;
   transition: var(--transition-smooth);
   cursor: pointer;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+}
+
+.support-btn span {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .support-btn-icon {
@@ -2672,25 +2686,30 @@ body:has(#status.active) #login {
 
 .status-grid-metrics {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   margin: 14px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .metric-card-glass {
   background: rgba(80, 20, 25, 0.25);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 10px 6px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 6px;
+  gap: 4px;
   transition: var(--transition-smooth);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .metric-card-glass:hover {
@@ -2703,15 +2722,23 @@ body:has(#status.active) #login {
 }
 
 .metric-title {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: #FFFFFF;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
   text-align: center;
   width: 100%;
+  white-space: nowrap !important;
+  box-sizing: border-box;
+}
+
+.metric-title span {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .metric-icon {
@@ -2722,12 +2749,18 @@ body:has(#status.active) #login {
 }
 
 .metric-val {
-  font-size: 1.15rem;
+  font-size: clamp(0.78rem, 3.4vw, 1.05rem);
   font-weight: 800;
   color: #FFFFFF;
   text-align: center;
   width: 100%;
-  letter-spacing: 0.3px;
+  letter-spacing: 0px;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  display: block;
+  box-sizing: border-box;
 }
 
 .metric-val.gold {
@@ -2744,25 +2777,36 @@ body:has(#status.active) #login {
 
 .entertainment-links {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   margin: 14px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .stream-card-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px;
+  gap: 6px;
+  padding: 10px 8px;
   border-radius: var(--radius-md);
   background: rgba(212, 175, 55, 0.15);
   border: 1px solid rgba(212, 175, 55, 0.4);
   color: #FFFFFF;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: clamp(0.78rem, 3.2vw, 0.88rem);
   transition: var(--transition-smooth);
+  white-space: nowrap !important;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.stream-card-link span {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stream-card-link:hover {
@@ -2872,24 +2916,27 @@ body:has(#status.active) #login {
 
 .status-actions-row {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .status-actions-row button,
 .btn-danger-glass,
 .btn-secondary-glass {
   flex: 1;
-  padding: 11px 16px;
-  min-height: 46px;
+  min-width: 0;
+  padding: 10px 6px;
+  min-height: 44px;
   border-radius: 12px;
   background: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B8860B 100%) !important;
   border: none !important;
   color: #2D0509 !important;
   font-family: var(--font-main);
   font-weight: 900 !important;
-  font-size: 16px;
-  letter-spacing: 0.2px;
+  font-size: clamp(0.78rem, 3.4vw, 0.92rem) !important;
+  letter-spacing: 0px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.32), inset 0 1.5px 3px rgba(255, 255, 255, 0.45) !important;
   cursor: pointer;
@@ -2897,7 +2944,18 @@ body:has(#status.active) #login {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+  white-space: nowrap !important;
+  box-sizing: border-box;
+}
+
+.status-actions-row button span,
+.btn-danger-glass span,
+.btn-secondary-glass span {
+  white-space: nowrap !important;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status-actions-row button:hover,
@@ -2919,8 +2977,8 @@ body:has(#status.active) #login {
 .status-actions-row button svg,
 .btn-danger-glass svg,
 .btn-secondary-glass svg {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   fill: #2D0509 !important;
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
   flex-shrink: 0;
@@ -3447,13 +3505,13 @@ img, svg, video, canvas {
   }
   
   .support-actions-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
   }
   
   .support-btn {
-    padding: 9px 12px;
-    font-size: 0.82rem;
+    padding: 8px 6px;
+    font-size: 0.76rem;
   }
   
   .bottom-nav-bar {
@@ -3486,11 +3544,12 @@ img, svg, video, canvas {
   }
   
   .status-grid-metrics {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
   }
   
   .metric-card-glass.full-width {
-    grid-column: span 1;
+    grid-column: span 2;
   }
 }
 
