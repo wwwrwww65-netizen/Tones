@@ -438,7 +438,7 @@ class LoyaltyManager {
         }
         const token = (this.storage && this.storage.getAccessToken()) || (this.user && this.user.token);
         this.openLoyaltyAutoLogin({
-            serverUrl: this.config.api?.baseURL || "https://albarqneet.shabakaty.site",
+            serverUrl: this.config.api?.baseURL || "https://bh.shabakaty.site",
             accessToken: token,
             triggerButton: triggerBtn,
             originalBtnHTML: origHTML
@@ -447,7 +447,7 @@ class LoyaltyManager {
 
     async openLoyaltyAutoLogin(options = {}) {
         const {
-            serverUrl = this.config.api?.baseURL || "https://albarqneet.shabakaty.site",
+            serverUrl = this.config.api?.baseURL || "https://bh.shabakaty.site",
             accessToken = null,
             onSuccess = null,
             onError = null,

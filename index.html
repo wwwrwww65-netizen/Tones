@@ -25,6 +25,63 @@
     <link rel="stylesheet" href="css/announcements-style.css">
     <!-- ملف الألوان الرئيسي — يحتوي على جميع الألوان في مكان واحد بشرح عربي -->
     <link rel="stylesheet" href="css/theme-colors.css">
+    
+    <!-- درع الحماية من وميض المتغيرات (FOUC Shield) وتثبيت مساحة الحاوية لمنع خروج الشعار -->
+    <style id="fouc-shield">
+        [data-network-name]:not(title), [data-news-line] {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+    <style>
+        /* تثبيت أبعاد الحاوية ومنع العناصر من الخروج عند وجود نص طويل أثناء التحميل */
+        .network-hero-content {
+            flex-wrap: nowrap !important;
+        }
+        .network-hero-title-wrap {
+            flex: 1 1 0% !important;
+            min-width: 0 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .network-logo-frame, .network-status-badge {
+            flex: 0 0 auto !important;
+        }
+    </style>
+    <script>
+        (function() {
+            var origTitle = "شبكة{{network-name}} اللاسلكيه";
+            document.title = "جاري التحميل..."; // إخفاء الكود من عنوان الصفحة مبدئياً
+            
+            window.addEventListener("DOMContentLoaded", function() {
+                var titleEl = document.querySelector('title[data-network-name]');
+                if (titleEl) {
+                    titleEl.innerHTML = origTitle; // إرجاع النص الأساسي لكي يتمكن السكريبت من العمل
+                }
+                
+                var t = setInterval(function() {
+                    var el = document.querySelector('.network-hero-title');
+                    // إذا اختفت الأقواس، فهذا يعني أن البيانات تم تحميلها ووضعها
+                    if (el && el.innerHTML.indexOf("{{") === -1) {
+                        var shield = document.getElementById("fouc-shield");
+                        if (shield) shield.remove();
+                        clearInterval(t);
+                    }
+                }, 40);
+                
+                // حماية احتياطية لإظهار العناصر في حال تأخر السكريبت
+                setTimeout(function() { 
+                    var shield = document.getElementById("fouc-shield");
+                    if (shield) shield.remove(); 
+                    clearInterval(t);
+                }, 2500);
+            });
+        })();
+    </script>
 
     <style>
         .im1::before {
@@ -222,7 +279,7 @@
 
                             <!-- Network Title & Animated Wifi Icon in Center -->
                             <div class="network-hero-title-wrap">
-                                <span class="network-hero-title" data-network-name="true" style="opacity: 0;">شبكة {{network-name}} اللاسلكية</span>
+                                <span class="network-hero-title" data-network-name="true">شبكة {{network-name}} اللاسلكية</span>
                                 <svg class="network-hero-wifi-icon wifi-animated-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <!-- Wave 3 (Outer signal) -->
                                     <path class="wifi-sig wifi-sig-3"
@@ -240,7 +297,7 @@
 
                             <!-- Network Logo (Left side in RTL) -->
                             <div class="network-logo-frame">
-                                <img src="./logo.png" alt="شعار شبكة البرق نت" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
+                                <img src="./photo_2026-08-25_07-48-44.png" alt="شعار شبكة BH-NET" class="network-logo-img" onerror="this.onerror=null; this.src='./img/network-logo.png'">
                             </div>
                         </div>
                     </div>
@@ -336,7 +393,7 @@
                     <section class="section">
                         <div class="ticker-container">
                             <div class="ticker-content-track">
-                                <p class="marquee" data-news-line style="opacity: 0;">{{news-line}}</p>
+                                <p class="marquee" data-news-line>{{news-line}}</p>
                             </div>
                         </div>
                     </section>
@@ -455,53 +512,17 @@
 
                         <!-- 1. بطاقة شريط السرعات المتحرك (Speed Strip Carousel Card) -->
                         <div class="app-card speed-selection-card">
+                            <!-- Native select strictly linked with MikroTik system & scripts (name="domain" & speed-field) -->
+                            <!-- يتم بناء الخيارات ديناميكياً من config.js -->
                             <select id="speed" name="domain" speed-field style="display: none;">
-                                <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
-                                <option value="1M">1 ميجا</option>
-                                <option value="2M">2 ميجا</option>
-                                <option selected value="4M">4 ميجا</option>
-                                <option value="8M">8 ميجا</option>
-                                <option value="16M">16 ميجا</option>
+                                <option value="" disabled hidden selected>أختيار سرعة الإنترنت</option>
                             </select>
 
                             <!-- Horizontal Moving / Scrollable Speeds Carousel Strip -->
                             <div class="speed-slider-wrapper">
                                 <div class="speed-pills-row" id="speedPillsRow" role="radiogroup"
                                     aria-label="شريط تحديد سرعة الإنترنت">
-                                    <button type="button" class="speed-pill-btn" data-speed="1M" data-speed-title="1 ميجا"
-                                        aria-label="سرعة 1 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">1</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="2M" data-speed-title="2 ميجا"
-                                        aria-label="سرعة 2 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">2</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn active" data-speed="4M"
-                                        data-speed-title="4 ميجا" aria-label="سرعة 4 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">4</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="8M" data-speed-title="8 ميجا"
-                                        aria-label="سرعة 8 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">8</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="16M"
-                                        data-speed-title="16 ميجا" aria-label="سرعة 16 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">16</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
+                                    <!-- يتم بناء أزرار السرعة ديناميكياً من config.js -->
                                 </div>
                             </div>
                         </div>
@@ -587,7 +608,7 @@
                         </div>
                         <div class="support-actions-grid">
                             <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                            <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                            <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                 class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
@@ -597,7 +618,7 @@
                             </a>
 
                             <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                            <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                            <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
                                         d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -629,43 +650,187 @@
                         </div>
 
                         <div class="speed-cards-list" id="speedModalList">
-                            <div class="speed-card-option" data-speed="1M" data-speed-title="1 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">1 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="2M" data-speed-title="2 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">2 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option active" data-speed="4M" data-speed-title="4 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">4 ميجا (الموصى بها)</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="8M" data-speed-title="8 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">8 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="12M" data-speed-title="12 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">12 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="20M" data-speed-title="20 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">20 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="40M" data-speed-title="40 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">40 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-speed="60M" data-speed-title="60 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">60 ميجا (السرعة القصوى)</span></div>
-                            </div>
+                            <!-- يتم بناء بطاقات السرعة ديناميكياً من config.js -->
                         </div>
                     </div>
                 </div>
 
+                <!-- ========================================================
+                     سكريبت الربط الموحد للسرعات - يقرأ من config.js ويبني
+                     كل الأماكن الثلاثة ويربطها بالميكروتيك تلقائياً
+                ========================================================== -->
+                <script>
+                    (function initSpeedsFromConfig() {
+                        function run() {
+                            var speeds = (window.hotspotConfig || {})["speeds"];
+                            if (!speeds || !speeds.length) return;
 
+                            // --- 1. أزرار السرعة الصغيرة في صفحة الدخول (#speedPillsRow) ---
+                            var pillsRow   = document.getElementById("speedPillsRow");
+                            var speedSel   = document.getElementById("speed");          // select الميكروتيك
+                            var speedDisp  = document.getElementById("selectedSpeedDisplay");
+
+                            if (pillsRow && speedSel) {
+                                pillsRow.innerHTML = "";
+                                speedSel.innerHTML = '<option value="" disabled hidden selected>أختيار سرعة الإنترنت</option>';
+
+                                var defaultPill = null;
+                                speeds.forEach(function (sp) {
+                                    if (!sp.visible) return;
+
+                                    // زر الـ pill
+                                    var btn = document.createElement("button");
+                                    btn.type = "button";
+                                    btn.className = "speed-pill-btn";
+                                    btn.setAttribute("data-speed", sp.value);
+                                    btn.setAttribute("data-speed-title", sp.name);
+                                    btn.setAttribute("aria-label", "سرعة " + sp.name);
+
+                                    // استخراج رقم السرعة لعرضه كبيراً
+                                    var numMatch = sp.name.match(/\d+/);
+                                    var num = numMatch ? numMatch[0] : sp.value;
+
+                                    btn.innerHTML =
+                                        '<span class="pill-dot"></span>' +
+                                        '<span class="pill-num">' + num + '</span>' +
+                                        '<span class="pill-unit">ميجا</span>';
+
+                                    if (sp.isDefault) {
+                                        btn.classList.add("active");
+                                        defaultPill = btn;
+                                        if (speedDisp) speedDisp.textContent = sp.name;
+                                    }
+
+                                    pillsRow.appendChild(btn);
+
+                                    // خيار في select الميكروتيك
+                                    var opt = document.createElement("option");
+                                    opt.value = sp.value;
+                                    opt.textContent = sp.name;
+                                    if (sp.isDefault) opt.selected = true;
+                                    speedSel.appendChild(opt);
+                                });
+
+                                // ✅ تأكيد القيمة الافتراضية في الـ select (ضرورة لإرسالها للميكروتيك)
+                                var defaultSp = speeds.find(function(s) { return s.visible && s.isDefault; });
+                                if (!defaultSp) defaultSp = speeds.find(function(s) { return s.visible; });
+                                if (defaultSp) speedSel.value = defaultSp.value;
+
+                                // أحداث أزرار الـ pill
+                                var allPills = pillsRow.querySelectorAll(".speed-pill-btn");
+                                allPills.forEach(function (pill) {
+                                    pill.addEventListener("click", function () {
+                                        allPills.forEach(function (p) { p.classList.remove("active"); });
+                                        pill.classList.add("active");
+                                        var val = pill.getAttribute("data-speed");
+                                        var title = pill.getAttribute("data-speed-title");
+                                        if (speedSel) speedSel.value = val;
+                                        if (speedDisp) speedDisp.textContent = title;
+                                        // sync modal list too
+                                        var modalCards = document.querySelectorAll("#speedModalList .speed-card-option");
+                                        modalCards.forEach(function (c) {
+                                            c.classList.toggle("active", c.getAttribute("data-speed") === val);
+                                        });
+                                    });
+                                });
+                            }
+
+                            // --- 2. موداله صفحة الدخول (#speedModalList) ---
+                            var loginModal = document.getElementById("speedModalList");
+                            if (loginModal) {
+                                loginModal.innerHTML = "";
+                                speeds.forEach(function (sp) {
+                                    if (!sp.visible) return;
+                                    var div = document.createElement("div");
+                                    div.className = "speed-card-option" + (sp.isDefault ? " active" : "");
+                                    div.setAttribute("data-speed", sp.value);
+                                    div.setAttribute("data-speed-title", sp.name);
+                                    var badge = sp.badge
+                                        ? '<span style="font-size:0.68rem;background:var(--accent-gold,#f59e0b);color:#000;padding:1px 7px;border-radius:10px;font-weight:700;margin-right:6px;">' + sp.badge + '</span>'
+                                        : "";
+                                    div.innerHTML =
+                                        '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
+                                        '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + badge + '</span></div>';
+                                    loginModal.appendChild(div);
+                                });
+
+                                // أحداث موداله الدخول
+                                var modalCards = loginModal.querySelectorAll(".speed-card-option");
+                                modalCards.forEach(function (card) {
+                                    card.addEventListener("click", function () {
+                                        modalCards.forEach(function (c) { c.classList.remove("active"); });
+                                        card.classList.add("active");
+                                        var val = card.getAttribute("data-speed");
+                                        var title = card.getAttribute("data-speed-title");
+                                        if (speedSel) speedSel.value = val;
+                                        if (speedDisp) speedDisp.textContent = title;
+                                        // sync pills too
+                                        var pills = document.querySelectorAll("#speedPillsRow .speed-pill-btn");
+                                        pills.forEach(function (p) {
+                                            p.classList.toggle("active", p.getAttribute("data-speed") === val);
+                                        });
+                                        setTimeout(function () {
+                                            if (typeof closeAppModal === "function") closeAppModal("speed-modal");
+                                        }, 180);
+                                    });
+                                });
+                            }
+
+                            // --- 3. موداله صفحة الحالة (#statusSpeedModalList) ---
+                            var statusModal = document.getElementById("statusSpeedModalList");
+                            var speedchange = document.getElementById("speedchange");
+                            var triggerText = document.getElementById("statusSpeedTriggerText");
+                            if (statusModal) {
+                                statusModal.innerHTML = "";
+                                speeds.forEach(function (sp) {
+                                    if (!sp.visible) return;
+                                    var div = document.createElement("div");
+                                    div.className = "speed-card-option" + (sp.isDefault ? " active" : "");
+                                    div.setAttribute("data-status-speed", sp.value);
+                                    div.setAttribute("data-speed-title", sp.name);
+                                    var badge = sp.badge
+                                        ? '<span style="font-size:0.68rem;background:var(--accent-gold,#f59e0b);color:#000;padding:1px 7px;border-radius:10px;font-weight:700;margin-right:6px;">' + sp.badge + '</span>'
+                                        : "";
+                                    div.innerHTML =
+                                        '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
+                                        '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + badge + '</span></div>';
+                                    statusModal.appendChild(div);
+                                });
+
+                                var statusCards = statusModal.querySelectorAll(".speed-card-option");
+                                statusCards.forEach(function (card) {
+                                    card.addEventListener("click", function (e) {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        statusCards.forEach(function (c) { c.classList.remove("active"); });
+                                        card.classList.add("active");
+                                        var val = card.getAttribute("data-status-speed");
+                                        var title = card.getAttribute("data-speed-title");
+                                        if (triggerText) triggerText.textContent = title;
+                                        if (speedchange) {
+                                            speedchange.value = val;
+                                            speedchange.dispatchEvent(new Event("change", { bubbles: true }));
+                                        }
+                                        setTimeout(function () {
+                                            if (typeof closeAppModal === "function") closeAppModal("status-speed-modal");
+                                        }, 180);
+                                    });
+                                });
+                            }
+                        }
+
+                        // تشغيل بعد تحميل config.js
+                        if (window.hotspotConfig && window.hotspotConfig["speeds"]) {
+                            if (document.readyState === "loading") {
+                                document.addEventListener("DOMContentLoaded", run);
+                            } else {
+                                run();
+                            }
+                        } else {
+                            window.addEventListener("load", function () { setTimeout(run, 350); });
+                        }
+                    })();
+                </script>
 
                 <!-- 2026 MODAL BOTTOM SHEET: POINTS REGISTRATION & AUTH (#points-register-modal) -->
                 <div class="app" id="points-register-modal">
@@ -761,7 +926,7 @@
 
                                     <div class="points-switch-prompt" style="margin-top: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
                                         <span style="color: #cbd5e1; font-size: 0.85rem;">ليس لديك حساب في نظام النقاط؟</span>
-                                        <a href="https://albarqneet.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
+                                        <a href="https://bh.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
                                             <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #ffd700;">
                                                 <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                             </svg>
@@ -809,7 +974,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:773127677" class="fab-support">
+                                <a href="tel:738348945" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -845,7 +1010,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:773127677" class="fab-support">
+                                <a href="tel:738348945" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -879,7 +1044,7 @@
                                     <p id="loan-news-title" data-news-title="true"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
                                         🔥 {{news-title}} 🔥</p>
-                                    <p id="loan-news-content" data-news-content="true" style="opacity: 0;">{{news-content}}</p>
+                                    <p id="loan-news-content" data-news-content="true"><b>الميزة الأساسية:</b> استمتع بتصفح تطبيقي الواتساب (WhatsApp) و الإنستقرام (Instagram) مجاناً بالكامل!<br><br><b>سهولة الوصول:</b> العرض متاح لك مباشرة بدون الحاجة لتسجيل الدخول إلى الشبكة.<br><br><b>وقت العرض:</b> تبدأ المتعة يومياً من الساعة 5 فجراً وحتى الساعة 8 صباحاً.</p>
                                     <div id="loan-news-code" data-news-code="true" class="loan-highlight-badge">{{news-code}}</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
                                     <div id="loan-news-extra-header"
@@ -902,7 +1067,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:773127677" class="fab-support">
+                                <a href="tel:738348945" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -928,26 +1093,7 @@
                         </div>
 
                         <div class="speed-cards-list" id="statusSpeedModalList">
-                            <div class="speed-card-option" data-status-speed="1M" data-speed-title="1 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">1 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="2M" data-speed-title="2 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">2 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option active" data-status-speed="4M" data-speed-title="4 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">4 ميجا (الموصى بها)</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="8M" data-speed-title="8 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">8 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="16M" data-speed-title="16 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">16 ميجا (السرعة القصوى)</span></div>
-                            </div>
+                            <!-- يتم بناء بطاقات السرعات ديناميكياً من config.js -->
                         </div>
                         <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
                             <svg viewBox="0 0 24 24" class="btn-icon">
@@ -957,6 +1103,79 @@
                         </button>
                     </div>
                 </div>
+
+                <script>
+                    // === بناء بطاقات السرعات من config.js تلقائياً ===
+                    (function buildSpeedCards() {
+                        function run() {
+                            var cfg = window.hotspotConfig || {};
+                            var speeds = cfg["speeds"];
+                            if (!speeds || !speeds.length) return;
+
+                            var list = document.getElementById("statusSpeedModalList");
+                            if (!list) return;
+                            list.innerHTML = "";
+
+                            var defaultSet = false;
+                            speeds.forEach(function (sp, idx) {
+                                if (!sp.visible) return;
+
+                                var isDefault = sp.isDefault && !defaultSet;
+                                if (sp.isDefault) defaultSet = true;
+
+                                var div = document.createElement("div");
+                                div.className = "speed-card-option" + (isDefault ? " active" : "");
+                                div.setAttribute("data-status-speed", sp.value);
+                                div.setAttribute("data-speed-title", sp.name);
+
+                                var badgeHtml = sp.badge
+                                    ? '<span style="font-size:0.68rem;background:var(--accent-gold,#f59e0b);color:#000;padding:1px 7px;border-radius:10px;font-weight:700;margin-right:6px;">' + sp.badge + '</span>'
+                                    : "";
+
+                                div.innerHTML =
+                                    '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
+                                    '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + badgeHtml + '</span></div>';
+
+                                list.appendChild(div);
+                            });
+
+                            // إعادة تهيئة الأحداث
+                            var cards = list.querySelectorAll(".speed-card-option");
+                            var triggerText = document.getElementById("statusSpeedTriggerText");
+                            var speedchange = document.getElementById("speedchange");
+
+                            cards.forEach(function (card) {
+                                card.addEventListener("click", function (e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    cards.forEach(function (c) { c.classList.remove("active"); });
+                                    card.classList.add("active");
+                                    var title = card.getAttribute("data-speed-title");
+                                    var val = card.getAttribute("data-status-speed");
+                                    if (triggerText) triggerText.textContent = title;
+                                    if (speedchange) {
+                                        speedchange.value = val;
+                                        speedchange.dispatchEvent(new Event("change", { bubbles: true }));
+                                    }
+                                    setTimeout(function () {
+                                        if (typeof closeAppModal === "function") closeAppModal("status-speed-modal");
+                                    }, 180);
+                                });
+                            });
+                        }
+
+                        // ننتظر تحميل config.js ثم نبني البطاقات
+                        if (window.hotspotConfig && window.hotspotConfig["speeds"]) {
+                            run();
+                        } else {
+                            window.addEventListener("load", function () {
+                                setTimeout(run, 300);
+                            });
+                        }
+                    })();
+                </script>
+
+
 
                 <!-- 2026 STATUS DASHBOARD SCREEN (#status) -->
                 <div class="app" id="status">
@@ -1267,7 +1486,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1277,7 +1496,7 @@
                                 </a>
 
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                                <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1321,7 +1540,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1329,7 +1548,7 @@
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
-                                <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1358,7 +1577,7 @@
                             <div class="wrapper" id="grid"></div>
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
-                        <a href="tel:773127677" class="fab-support">
+                        <a href="tel:738348945" class="fab-support">
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -2145,7 +2364,7 @@
 
             // Global modern redirect loader function
             window.showRedirectLoader = function (options = {}) {
-                const url = options.url || 'https://albarqneet.shabakaty.site/auth/register';
+                const url = options.url || 'https://bh.shabakaty.site/auth/register';
                 const title = options.title || 'جاري الانتقال لصفحة إنشاء الحساب...';
                 const subtitle = options.subtitle || 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت';
                 const delay = options.delay || 950;
@@ -2160,7 +2379,7 @@
                         <div class="redirect-ambient-glow-cyan"></div>
                         <div class="redirect-loading-card">
                             <div class="redirect-brand-connector">
-                                <span class="redirect-brand-tag burgundy">البرق نت</span>
+                                <span class="redirect-brand-tag burgundy">BH-NET</span>
                                 <div class="redirect-connector-line">
                                     <div class="redirect-connector-dot"></div>
                                     <div class="redirect-connector-dot"></div>
@@ -2227,7 +2446,7 @@
                         </span>
                     `;
                     window.showRedirectLoader({
-                        url: 'https://albarqneet.shabakaty.site/auth/register',
+                        url: 'https://bh.shabakaty.site/auth/register',
                         title: 'جاري الانتقال لصفحة إنشاء الحساب...',
                         subtitle: 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت',
                         delay: 950
@@ -2524,8 +2743,8 @@
 
             // 6. UNIVERSAL WHATSAPP INTENT DISPATCHER (WHATSAPP & WHATSAPP BUSINESS)
             const waButtons = document.querySelectorAll('.support-btn-whatsapp');
-            const waPhone = '967773127677';
-            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة البرق نت اللاسلكية');
+            const waPhone = '967738348945';
+            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة BH-NET اللاسلكية');
             const waSchemeUrl = `whatsapp://send?phone=${waPhone}&text=${waMsg}`;
             const waWebUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMsg}`;
 

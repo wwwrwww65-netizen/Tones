@@ -2403,7 +2403,6 @@ body.modal-scroll-locked {
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
-  overflow-x: auto;
 }
 
 .modal-sheet-card {
@@ -2599,7 +2598,6 @@ table {
   border-collapse: separate;
   border-spacing: 0 8px;
   margin: 10px 0;
-  white-space: nowrap;
 }
 
 thead th {
