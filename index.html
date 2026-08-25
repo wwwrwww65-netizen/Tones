@@ -222,7 +222,7 @@
 
                             <!-- Network Title & Animated Wifi Icon in Center -->
                             <div class="network-hero-title-wrap">
-                                <span class="network-hero-title">شبكة BH-NET اللاسلكية</span>
+                                <span class="network-hero-title" data-network-name="true">شبكة {{network-name}} اللاسلكية</span>
                                 <svg class="network-hero-wifi-icon wifi-animated-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <!-- Wave 3 (Outer signal) -->
                                     <path class="wifi-sig wifi-sig-3"
@@ -240,7 +240,7 @@
 
                             <!-- Network Logo (Left side in RTL) -->
                             <div class="network-logo-frame">
-                                <img src="./photo_2026-08-25_06-15-19.png" alt="شعار شبكة BH-NET" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
+                                <img src="./photo_2026-08-25_07-48-44.png" alt="شعار شبكة BH-NET" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
                             </div>
                         </div>
                     </div>
@@ -901,11 +901,11 @@
                                 <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن (تُقرأ تلقائياً من config.js) -->
                                 <!-- ========================================================================= -->
                                 <div class="loan-body" id="loan-news-container">
-                                    <p id="loan-news-title"
+                                    <p id="loan-news-title" data-news-title="true"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
-                                        🔥 تفاصيل العرض الحصري 🔥</p>
-                                    <p id="loan-news-content"><b>الميزة الأساسية:</b> استمتع بتصفح تطبيقي الواتساب (WhatsApp) و الإنستقرام (Instagram) مجاناً بالكامل!<br><br><b>سهولة الوصول:</b> العرض متاح لك مباشرة بدون الحاجة لتسجيل الدخول إلى الشبكة.<br><br><b>وقت العرض:</b> تبدأ المتعة يومياً من الساعة 5 فجراً وحتى الساعة 8 صباحاً.</p>
-                                    <div id="loan-news-code" class="loan-highlight-badge">عرض مجاني لا يحتاج لكرت!</div>
+                                        🔥 {{news-title}} 🔥</p>
+                                    <p id="loan-news-content" data-news-content="true"><b>الميزة الأساسية:</b> استمتع بتصفح تطبيقي الواتساب (WhatsApp) و الإنستقرام (Instagram) مجاناً بالكامل!<br><br><b>سهولة الوصول:</b> العرض متاح لك مباشرة بدون الحاجة لتسجيل الدخول إلى الشبكة.<br><br><b>وقت العرض:</b> تبدأ المتعة يومياً من الساعة 5 فجراً وحتى الساعة 8 صباحاً.</p>
+                                    <div id="loan-news-code" data-news-code="true" class="loan-highlight-badge">{{news-code}}</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
                                     <div id="loan-news-extra-header"
                                         style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
@@ -914,10 +914,10 @@
                                             <path
                                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
                                         </svg>
-                                        <strong id="loan-news-extra-title">📺 البث المباشر:</strong>
+                                        <strong id="loan-news-extra-title" data-news-extra-title="true">📺 {{news-extra-title}}</strong>
                                     </div>
-                                    <p id="loan-news-extra-content">استمتع بمشاهدة البث المباشر عبر الرابط أدناه:</p>
-                                    <a href="https://kor.fntvs.net/channel.php" target="_blank" id="loan-news-extra-badge" class="loan-highlight-badge" style="display:inline-block; text-decoration:none;">البث المباشر 🎥</a>
+                                    <p id="loan-news-extra-content" data-news-extra-content="true">{{news-extra-content}}</p>
+                                    <a href="https://kor.fntvs.net/channel.php" target="_blank" data-news-extra-badge="true" id="loan-news-extra-badge" class="loan-highlight-badge" style="display:inline-block; text-decoration:none;">{{news-extra-badge}}</a>
                                 </div>
                                 <!-- ========================================================================= -->
 
@@ -1457,37 +1457,89 @@
 
             // 1. CAROUSEL SEAMLESS INFINITE LOOP & AUTOPLAY
             const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.carousel-dot');
+            const dotsContainer = document.getElementById('carouselDots');
             const prevBtn = document.getElementById('carouselPrev');
             const nextBtn = document.getElementById('carouselNext');
             const carouselContainer = document.getElementById('adCarousel');
 
             if (track) {
-                const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
-                const totalSlides = originalSlides.length;
-                let currentIndex = 1;
-                let isTransitioning = false;
-                let autoplayInterval = null;
-                let transitionSafetyTimeout = null;
+                const imgElements = Array.from(track.querySelectorAll('img'));
 
-                if (totalSlides > 1) {
-                    // Clone first and last slides for seamless circular transition
-                    const firstClone = originalSlides[0].cloneNode(true);
-                    const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
-                    firstClone.classList.add('carousel-clone');
-                    lastClone.classList.add('carousel-clone');
-
-                    track.insertBefore(lastClone, track.firstElementChild);
-                    track.appendChild(firstClone);
-
-                    // Initialize starting position at first real slide
-                    track.style.transition = 'none';
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    track.offsetHeight; // Force reflow
-                    track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+                // Verify which images actually exist before initializing carousel using a fresh Image object
+                function checkImageValid(src) {
+                    return new Promise(resolve => {
+                        const tempImg = new Image();
+                        tempImg.onload = () => resolve(true);
+                        tempImg.onerror = () => resolve(false);
+                        tempImg.src = src;
+                    });
                 }
 
-                function updateDots() {
+                Promise.all(imgElements.map(async img => {
+                    const isValid = await checkImageValid(img.src);
+                    return { img: img, ok: isValid };
+                })).then(results => {
+                    let validSlidesCount = 0;
+                    results.forEach(res => {
+                        if (!res.ok) {
+                            let slide = res.img.closest('.carousel-slide');
+                            if (slide) slide.remove();
+                        } else {
+                            validSlidesCount++;
+                        }
+                    });
+
+                    if (dotsContainer) {
+                        dotsContainer.innerHTML = '';
+                        for (let i = 0; i < validSlidesCount; i++) {
+                            const d = document.createElement('span');
+                            d.className = i === 0 ? 'carousel-dot active' : 'carousel-dot';
+                            dotsContainer.appendChild(d);
+                        }
+                    }
+
+                    const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+                    const totalSlides = originalSlides.length;
+                    
+                    if (totalSlides === 0) {
+                        const wrapper = document.querySelector('.ads-carousel-wrapper');
+                        if (wrapper) wrapper.style.display = 'none';
+                        return;
+                    }
+
+                    const dots = document.querySelectorAll('.carousel-dot');
+                    let currentIndex = 1;
+                    let isTransitioning = false;
+                    let autoplayInterval = null;
+                    let transitionSafetyTimeout = null;
+
+                    if (totalSlides === 1) {
+                        track.style.transition = 'none';
+                        track.style.transform = `translateX(0%)`;
+                        if (dotsContainer) dotsContainer.style.display = 'none';
+                        if (prevBtn) prevBtn.style.display = 'none';
+                        if (nextBtn) nextBtn.style.display = 'none';
+                        return;
+                    }
+
+                    if (totalSlides > 1) {
+                        // Clone first and last slides for seamless circular transition
+                        const firstClone = originalSlides[0].cloneNode(true);
+                        const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
+                        firstClone.classList.add('carousel-clone');
+                        lastClone.classList.add('carousel-clone');
+
+                        track.insertBefore(lastClone, track.firstElementChild);
+                        track.appendChild(firstClone);
+
+                        // Initialize starting position at first real slide
+                        track.style.transition = 'none';
+                        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        track.offsetHeight; // Force reflow
+                        track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+                    }
+
+                    function updateDots() {
                     const realIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                     dots.forEach((dot, idx) => {
                         dot.classList.toggle('active', idx === realIndex);
@@ -1594,6 +1646,7 @@
                 }
 
                 startAutoplay();
+                });
             }
 
             // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
@@ -2211,7 +2264,7 @@
                         </span>
                     `;
                     window.showRedirectLoader({
-                        url: 'https://tunisnet.shabakaty.site/auth/register',
+                        url: 'https://bh.shabakaty.site/auth/register',
                         title: 'جاري الانتقال لصفحة إنشاء الحساب...',
                         subtitle: 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت',
                         delay: 950

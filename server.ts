@@ -91,7 +91,7 @@ app.get('/login', (req, res) => {
       link_login_only: '/login',
       link_logout: '/logout',
       link_status: '/status',
-      nas_id: 'TunisNet-MikroTik',
+      nas_id: 'BH-NET-MikroTik',
       ip: sessionState.ip,
       mac: sessionState.mac,
       trial: 'no',

@@ -1,6 +1,6 @@
 /*
  * ══════════════════════════════════════════════════════════════════
- *   ملف الألوان الرئيسي — تونس نت هوت سبوت
+ *   ملف الألوان الرئيسي — BH-NET هوت سبوت
  *   theme-colors.css
  *
  *   📌 هذا الملف هو المصدر الوحيد لجميع الألوان في الواجهة.
@@ -115,14 +115,14 @@ body,
 
 /* إطار شعار الشبكة بتأثير زوايا مستديرة فاخر */
 .network-logo-frame {
-  width:         58px !important;
-  height:        58px !important;
-  min-width:     58px !important;
+  width:         90px !important;
+  height:        90px !important;
+  min-width:     90px !important;
   border-radius: 14px !important;
   overflow:      hidden !important;
-  border:        1.5px solid #E2E8F0 !important;
-  box-shadow:    0 2px 8px rgba(0, 0, 0, 0.06) !important;
-  background:    #FFFFFF !important;
+  border:        none !important;
+  box-shadow:    none !important;
+  background:    transparent !important;
   display:       flex !important;
   align-items:   center !important;
   justify-content: center !important;
@@ -132,8 +132,9 @@ body,
 .network-logo-img {
   width:       100% !important;
   height:      100% !important;
-  object-fit:  cover !important;
+  object-fit:  contain !important;
   display:     block !important;
+  transform:   scale(0.9) !important;
 }
 
 /* عنوان الشبكة وأيقونة الواي فاي */
@@ -191,7 +192,7 @@ body,
 }
 
 .network-hero-title {
-  font-size:   18px !important;
+  font-size:   21px !important;
   font-weight: 900 !important;
   color:       #0F172A !important;
   line-height: 1.3 !important;
