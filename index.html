@@ -222,7 +222,7 @@
 
                             <!-- Network Title & Animated Wifi Icon in Center -->
                             <div class="network-hero-title-wrap">
-                                <span class="network-hero-title" data-network-name="true">شبكة {{network-name}} اللاسلكية</span>
+                                <span class="network-hero-title" data-network-name="true" style="opacity: 0;">شبكة {{network-name}} اللاسلكية</span>
                                 <svg class="network-hero-wifi-icon wifi-animated-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <!-- Wave 3 (Outer signal) -->
                                     <path class="wifi-sig wifi-sig-3"
@@ -240,7 +240,7 @@
 
                             <!-- Network Logo (Left side in RTL) -->
                             <div class="network-logo-frame">
-                                <img src="./photo_2026-08-25_07-48-44.png" alt="شعار شبكة BH-NET" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
+                                <img src="./logo.png" alt="شعار شبكة البرق نت" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                     <section class="section">
                         <div class="ticker-container">
                             <div class="ticker-content-track">
-                                <p class="marquee" data-news-line>{{news-line}}</p>
+                                <p class="marquee" data-news-line style="opacity: 0;">{{news-line}}</p>
                             </div>
                         </div>
                     </section>
@@ -455,20 +455,16 @@
 
                         <!-- 1. بطاقة شريط السرعات المتحرك (Speed Strip Carousel Card) -->
                         <div class="app-card speed-selection-card">
-                            <!-- Native select strictly linked with MikroTik system & scripts (name="domain" & speed-field) -->
                             <select id="speed" name="domain" speed-field style="display: none;">
                                 <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
                                 <option value="1M">1 ميجا</option>
                                 <option value="2M">2 ميجا</option>
                                 <option selected value="4M">4 ميجا</option>
                                 <option value="8M">8 ميجا</option>
-                                <option value="12M">12 ميجا</option>
-                                <option value="20M">20 ميجا</option>
-                                <option value="40M">40 ميجا</option>
-                                <option value="60M">60 ميجا</option>
+                                <option value="16M">16 ميجا</option>
                             </select>
 
-                            <!-- Horizontal Moving / Scrollable Speeds Carousel Strip (1, 2, 4, 8, 12, 20, 40, 60 ميجا) -->
+                            <!-- Horizontal Moving / Scrollable Speeds Carousel Strip -->
                             <div class="speed-slider-wrapper">
                                 <div class="speed-pills-row" id="speedPillsRow" role="radiogroup"
                                     aria-label="شريط تحديد سرعة الإنترنت">
@@ -500,31 +496,10 @@
                                         <span class="pill-unit">ميجا</span>
                                     </button>
 
-                                    <button type="button" class="speed-pill-btn" data-speed="12M"
-                                        data-speed-title="12 ميجا" aria-label="سرعة 12 ميجا">
+                                    <button type="button" class="speed-pill-btn" data-speed="16M"
+                                        data-speed-title="16 ميجا" aria-label="سرعة 16 ميجا">
                                         <span class="pill-dot"></span>
-                                        <span class="pill-num">12</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="20M"
-                                        data-speed-title="20 ميجا" aria-label="سرعة 20 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">20</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="40M"
-                                        data-speed-title="40 ميجا" aria-label="سرعة 40 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">40</span>
-                                        <span class="pill-unit">ميجا</span>
-                                    </button>
-
-                                    <button type="button" class="speed-pill-btn" data-speed="60M"
-                                        data-speed-title="60 ميجا" aria-label="سرعة 60 ميجا">
-                                        <span class="pill-dot"></span>
-                                        <span class="pill-num">60</span>
+                                        <span class="pill-num">16</span>
                                         <span class="pill-unit">ميجا</span>
                                     </button>
                                 </div>
@@ -612,7 +587,7 @@
                         </div>
                         <div class="support-actions-grid">
                             <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                            <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                            <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                 class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
@@ -622,7 +597,7 @@
                             </a>
 
                             <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                            <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                            <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
                                         d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -786,7 +761,7 @@
 
                                     <div class="points-switch-prompt" style="margin-top: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
                                         <span style="color: #cbd5e1; font-size: 0.85rem;">ليس لديك حساب في نظام النقاط؟</span>
-                                        <a href="https://bh.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
+                                        <a href="https://albarqneet.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
                                             <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #ffd700;">
                                                 <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                             </svg>
@@ -834,7 +809,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:773127677" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -870,7 +845,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:773127677" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -927,7 +902,7 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:773127677" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -969,21 +944,9 @@
                                 <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
                                 <div class="speed-card-info"><span class="speed-card-name">8 ميجا</span></div>
                             </div>
-                            <div class="speed-card-option" data-status-speed="12M" data-speed-title="12 ميجا">
+                            <div class="speed-card-option" data-status-speed="16M" data-speed-title="16 ميجا">
                                 <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">12 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="20M" data-speed-title="20 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">20 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="40M" data-speed-title="40 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">40 ميجا</span></div>
-                            </div>
-                            <div class="speed-card-option" data-status-speed="60M" data-speed-title="60 ميجا">
-                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
-                                <div class="speed-card-info"><span class="speed-card-name">60 ميجا (السرعة القصوى)</span></div>
+                                <div class="speed-card-info"><span class="speed-card-name">16 ميجا (السرعة القصوى)</span></div>
                             </div>
                         </div>
                         <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
@@ -1304,7 +1267,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1314,7 +1277,7 @@
                                 </a>
 
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1358,7 +1321,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967773127677&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%82%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1366,7 +1329,7 @@
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
-                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:773127677" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1395,7 +1358,7 @@
                             <div class="wrapper" id="grid"></div>
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
-                        <a href="tel:738348945" class="fab-support">
+                        <a href="tel:773127677" class="fab-support">
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
@@ -2182,7 +2145,7 @@
 
             // Global modern redirect loader function
             window.showRedirectLoader = function (options = {}) {
-                const url = options.url || 'https://bh.shabakaty.site/auth/register';
+                const url = options.url || 'https://albarqneet.shabakaty.site/auth/register';
                 const title = options.title || 'جاري الانتقال لصفحة إنشاء الحساب...';
                 const subtitle = options.subtitle || 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت';
                 const delay = options.delay || 950;
@@ -2197,7 +2160,7 @@
                         <div class="redirect-ambient-glow-cyan"></div>
                         <div class="redirect-loading-card">
                             <div class="redirect-brand-connector">
-                                <span class="redirect-brand-tag burgundy">BH-NET</span>
+                                <span class="redirect-brand-tag burgundy">البرق نت</span>
                                 <div class="redirect-connector-line">
                                     <div class="redirect-connector-dot"></div>
                                     <div class="redirect-connector-dot"></div>
@@ -2264,7 +2227,7 @@
                         </span>
                     `;
                     window.showRedirectLoader({
-                        url: 'https://bh.shabakaty.site/auth/register',
+                        url: 'https://albarqneet.shabakaty.site/auth/register',
                         title: 'جاري الانتقال لصفحة إنشاء الحساب...',
                         subtitle: 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت',
                         delay: 950
@@ -2561,8 +2524,8 @@
 
             // 6. UNIVERSAL WHATSAPP INTENT DISPATCHER (WHATSAPP & WHATSAPP BUSINESS)
             const waButtons = document.querySelectorAll('.support-btn-whatsapp');
-            const waPhone = '967738348945';
-            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة BH-NET اللاسلكية');
+            const waPhone = '967773127677';
+            const waMsg = encodeURIComponent('مرحبا خدمة عملاء شبكة البرق نت اللاسلكية');
             const waSchemeUrl = `whatsapp://send?phone=${waPhone}&text=${waMsg}`;
             const waWebUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${waMsg}`;
 

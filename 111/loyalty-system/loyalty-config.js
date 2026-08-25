@@ -7,7 +7,7 @@ window.LoyaltyConfig = {
   // API Settings
   api: {
     // Base URL - Change this to your actual API server
-    baseURL: 'https://bh.shabakaty.site',
+    baseURL: 'https://albarqneet.shabakaty.site',
 
     // Endpoints
     endpoints: {
