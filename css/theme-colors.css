@@ -1,0 +1,946 @@
+/*
+ * ══════════════════════════════════════════════════════════════════
+ *   ملف الألوان الرئيسي — تونس نت هوت سبوت
+ *   theme-colors.css
+ *
+ *   📌 هذا الملف هو المصدر الوحيد لجميع الألوان في الواجهة.
+ *      عدّل من هنا فقط، وستتغير الألوان في كل مكان تلقائياً.
+ * ══════════════════════════════════════════════════════════════════
+ */
+
+
+/* ══════════════════════════════════════════════════════════════════
+   1. المتغيرات الجذرية — اللوحة اللونية الأساسية
+   ══════════════════════════════════════════════════════════════════ */
+:root {
+  /* ─── الألوان الرئيسية ─── */
+  --color-primary:        #FF5722;   /* البرتقالي الحيوي — الأزرار الرئيسية */
+  --color-primary-dark:   #E64A19;   /* برتقالي غامق — نهاية التدرج في الأزرار */
+  --color-primary-light:  #FF7043;   /* برتقالي فاتح — بداية التدرج في الأزرار */
+  --color-primary-glow:   rgba(255, 87, 34, 0.38); /* وهج برتقالي للظلال */
+
+  --color-blue:           #2563EB;   /* أزرق ساطع — الزر المفعل، رقم النقاط */
+  --color-blue-dark:      #1E3A8A;   /* كحلي ملكي داكن — العناوين والنصوص الرئيسية */
+  --color-blue-light:     #3B82F6;   /* أزرق فاتح/سماوي — أيقونات حقل الإدخال */
+  --color-blue-pale:      #EFF6FF;   /* أزرق شاحب — خلفية الأيقونات والتلميحات */
+  --color-blue-border:    #BFDBFE;   /* أزرق حدود ناعمة */
+  --color-blue-banner:    #DBEAFE;   /* أزرق فاتح — خلفية بنر النقاط */
+
+  --color-green:          #10B981;   /* أخضر — واتساب، التأكيد */
+  --color-red:            #EF4444;   /* أحمر — الأخطاء، التنبيهات، زر الخروج */
+
+  /* ─── النصوص ─── */
+  --color-text-main:      #1E3A8A;   /* الكحلي الملكي — العناوين والنصوص الرئيسية */
+  --color-text-sub:       #64748B;   /* رمادي متوسط — النصوص الفرعية والشروحات */
+  --color-text-white:     #FFFFFF;   /* أبيض ناصع — نص الأزرار المفعلة */
+  --color-text-placeholder: #94A3B8; /* رمادي فاتح — النص الإرشادي في الحقول */
+
+  /* ─── الخلفيات ─── */
+  --color-bg-page:        #F4F7FB;   /* رمادي مزرق فاتح — خلفية الصفحة السفلية */
+  --color-bg-header:      #0B1120;   /* كحلي ليلي داكن — خلفية الهيدر العلوي */
+  --color-bg-white:       #FFFFFF;   /* أبيض نقي — البطاقات والنوافذ */
+
+  /* ─── الحدود ─── */
+  --color-border:         #E2E8F0;   /* رمادي ناعم — إطارات الحقول والبطاقات */
+  --color-border-mid:     #CBD5E1;   /* رمادي متوسط — حدود أقوى قليلاً */
+
+  /* ─── الظلال ─── */
+  --shadow-card:  0 4px 14px rgba(30, 58, 138, 0.07);  /* ظل البطاقات */
+  --shadow-btn:   0 4px 16px rgba(230, 74, 25, 0.38);  /* ظل أزرار تسجيل الدخول */
+  --shadow-nav:   0 -2px 20px rgba(30, 58, 138, 0.06); /* ظل الشريط السفلي */
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   2. الخلفية العامة للصفحة والهيدر
+   ══════════════════════════════════════════════════════════════════ */
+
+/* خلفية الـ body — رمادي مزرق فاتح ومريح */
+body {
+  background-color: var(--color-bg-page) !important;
+  color:            var(--color-text-main) !important;
+}
+
+/* خلفية الشاشة: موحدة بالكامل لتكون بلون رمادي مزرق فاتح (بدون الجزء الكحلي العلوي) */
+.screen-background {
+  background: var(--color-bg-page) !important;
+}
+
+/* إخفاء الكرات المضيئة المتحركة (لا وجود لها في التصميم النظيف) */
+.screen-background-shape,
+.floating-icons {
+  display: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   3. الهيدر العلوي — اسم الشبكة وزر "جديدنا"
+   ══════════════════════════════════════════════════════════════════ */
+
+/* اسم الشبكة في الهيدر → كحلي ملكي داكن */
+.brand-name {
+  color:       var(--color-text-main) !important;
+  text-shadow: none !important;
+}
+
+/* أيقونة الواي فاي في الهيدر → أزرق */
+.brand-icon-wrap {
+  background: var(--color-blue-pale) !important;
+  border:     1px solid var(--color-blue-border) !important;
+  box-shadow: none !important;
+}
+.brand-icon-wrap svg { fill: var(--color-blue) !important; }
+
+/* زر "جديدنا" في الهيدر */
+button#btn-whats-new,
+.top-header .m {
+  background: #FFFFFF !important;
+  border:     1px solid var(--color-border) !important;
+  color:      var(--color-text-main) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+button#btn-whats-new .btn-icon,
+.top-header .m .btn-icon { fill: var(--color-blue) !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   4. الشريط الإخباري المتحرك (Ticker)
+   ══════════════════════════════════════════════════════════════════ */
+
+.ticker-container {
+  background:  #FFFFFF !important;
+  border:      1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  box-shadow:  0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* نص الشريط الإخباري → كحلي ملكي داكن */
+.marquee {
+  color:       var(--color-text-main) !important;
+  font-weight: 800 !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   5. العنوان الرئيسي h1
+   ══════════════════════════════════════════════════════════════════ */
+
+h1 {
+  color:       var(--color-text-main) !important;
+  text-shadow: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   6. الكاروسيل الإعلاني (Carousel)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* النقاط السفلية — رمادي */
+.carousel-dot       { background: var(--color-border-mid) !important; }
+/* النقطة المفعلة — برتقالي */
+.carousel-dot.active {
+  background:  var(--color-primary) !important;
+  box-shadow:  0 0 10px var(--color-primary-glow) !important;
+}
+/* أزرار الانتقال السابق/التالي */
+.carousel-nav-btn {
+  background: rgba(11, 17, 32, 0.75) !important;
+  border:     1px solid var(--color-border) !important;
+  color:      #FFFFFF !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   7. تنبيه نظام النقاط (لم تسجل بعد)
+   ══════════════════════════════════════════════════════════════════ */
+
+.points-notice-alert {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 14px !important;
+  box-shadow:    var(--shadow-card) !important;
+}
+
+/* أيقونة التنبيه — حاوية حمراء */
+.notice-icon-wrap {
+  background: #FEE2E2 !important;
+  border:     1px solid #FCA5A5 !important;
+}
+.notice-icon { fill: var(--color-red) !important; }
+
+/* نص "تنبيه" → أحمر */
+.notice-tag  { color: var(--color-red) !important; }
+/* نص التنبيه → رمادي */
+.notice-text { color: var(--color-text-sub) !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   8. أزرار تسجيل الدخول والتسجيل في نظام النقاط
+   ══════════════════════════════════════════════════════════════════ */
+
+.button.points-register-btn,
+.points-register-btn,
+.login-submit-btn,
+.button.login-submit,
+button.login-submit,
+#mainLoginBtn,
+.loyalty-btn,
+button.loyalty-btn,
+.points-auth-submit-btn {
+  background:    linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%) !important;
+  color:         #FFFFFF !important;
+  font-weight:   900 !important;
+  font-size:     16.5px !important;
+  text-shadow:   0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  border:        none !important;
+  border-radius: 12px !important;
+  min-height:    46px !important;
+  box-shadow:    var(--shadow-btn), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* حالة التحويم */
+.button.points-register-btn:hover,
+.points-register-btn:hover,
+.login-submit-btn:hover,
+.button.login-submit:hover,
+button.login-submit:hover,
+#mainLoginBtn:hover,
+.loyalty-btn:hover,
+button.loyalty-btn:hover {
+  background:  linear-gradient(180deg, #FF8A65 0%, #F4511E 100%) !important;
+  box-shadow:  0 6px 22px rgba(230, 74, 25, 0.48) !important;
+  transform:   translateY(-1px) !important;
+  filter:      none !important;
+}
+
+/* النص والأيقونة داخل هذه الأزرار → أبيض */
+.points-register-btn .button-text,
+.button.points-register-btn .button-text,
+.login-submit-btn .button-text,
+.button.login-submit .button-text,
+.points-register-btn .points-btn-icon,
+.button.points-register-btn .points-btn-icon {
+  color:       #FFFFFF !important;
+  fill:        #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
+  filter:      none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   9. بطاقة تسجيل الدخول الرئيسية (.login-card)
+   ══════════════════════════════════════════════════════════════════ */
+
+.login-card {
+  background:    #FFFFFF !important;
+  border:        none !important;
+  border-radius: 20px !important;
+  box-shadow:    0 10px 30px -5px rgba(30, 58, 138, 0.08),
+                 0 4px 6px -2px rgba(0, 0, 0, 0.04) !important;
+  padding:       22px 18px !important;
+}
+
+/* الشريط اللوني العلوي للبطاقة → برتقالي */
+.login-card::before {
+  background: var(--color-primary) !important;
+  height:     4px !important;
+}
+
+.card-header p   { color: var(--color-text-main) !important; text-shadow: none !important; }
+.card-header .subtitle { color: var(--color-text-sub) !important; }
+.input-label-text { color: var(--color-text-main) !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   10. حقول الإدخال (رقم الكرت / الهاتف / كلمة المرور)
+   ══════════════════════════════════════════════════════════════════ */
+
+.input-wrapper-glass {
+  background:    #FFFFFF !important;
+  border:        2px solid var(--color-border-mid) !important;
+  border-radius: 12px !important;
+  box-shadow:    0 4px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* حالة التركيز على الحقل → وهج أزرق و خلفية بيضاء */
+.input-wrapper-glass:focus-within {
+  background:   #FFFFFF !important;
+  border-color: var(--color-blue) !important;
+  box-shadow:   0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* أيقونة داخل الحقل → أزرق فاتح */
+.input-icon-badge {
+  background: var(--color-blue-pale) !important;
+  border:     1px solid var(--color-blue-border) !important;
+  color:      var(--color-blue-light) !important;
+}
+.input-icon-badge svg { fill: var(--color-blue-light) !important; }
+
+/* أيقونة زر الكاميرا (مسح QR) */
+.input-icon-badge.camera-scan-btn {
+  background: #FFFFFF !important;
+  border:     1.5px solid var(--color-border) !important;
+}
+.input-icon-badge.camera-scan-btn svg { fill: var(--color-blue) !important; }
+
+/* نص الكرت المُدخل → كحلي ملكي */
+.login-input,
+input[name="username"] {
+  color:       var(--color-text-main) !important;
+  font-weight: 800 !important;
+}
+
+/* النص الإرشادي (Placeholder) → رمادي فاتح */
+.login-input::placeholder {
+  color:       var(--color-text-placeholder) !important;
+  opacity:     1 !important;
+  font-weight: 500 !important;
+}
+
+/* زر "دخول بكرت سابق" → رمادي فاتح */
+.prev-card-pill-btn {
+  background:    #F1F5F9 !important;
+  border:        1px solid var(--color-border-mid) !important;
+  color:         var(--color-text-sub) !important;
+  border-radius: 9px !important;
+}
+.prev-card-pill-btn:hover {
+  background:    var(--color-blue) !important;
+  border-color:  var(--color-blue) !important;
+  color:         #FFFFFF !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   11. محدد السرعة (Speed Selector)
+   ══════════════════════════════════════════════════════════════════ */
+
+.speed-title      { color: var(--color-text-main) !important; }
+.section-icon     { fill:  var(--color-blue-light) !important; }
+
+/* الزر المشغِّل لنافذة السرعة */
+.speed-modal-trigger-btn {
+  background:    #FFFFFF !important;
+  border:        1.5px solid var(--color-border) !important;
+  color:         var(--color-text-main) !important;
+  border-radius: 12px !important;
+  box-shadow:    none !important;
+}
+.speed-modal-trigger-btn:hover { border-color: var(--color-blue) !important; }
+
+.speed-trigger-label    { color: var(--color-text-sub) !important; }
+.speed-trigger-selected { color: var(--color-text-main) !important; font-weight: 800 !important; }
+.speed-trigger-badge    { background: var(--color-blue) !important; color: #FFFFFF !important; border: none !important; }
+.speed-trigger-icon     { background: var(--color-blue-pale) !important; border: 1px solid var(--color-blue-border) !important; }
+.speed-trigger-icon svg { fill: var(--color-blue) !important; }
+
+/* خيارات السرعة في النافذة */
+.speed-card-option {
+  background:    #FFFFFF !important;
+  border:        1.5px solid var(--color-border) !important;
+  border-radius: 12px !important;
+  color:         var(--color-text-main) !important;
+}
+/* الخيار المفعل */
+.speed-card-option.active {
+  background:   var(--color-blue) !important;
+  border-color: var(--color-blue) !important;
+  color:        #FFFFFF !important;
+  box-shadow:   0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+.speed-card-option.active .speed-card-name { color: #FFFFFF !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   12. بطاقة إيقاف التحديثات والمتجر (Toggle Card)
+   ══════════════════════════════════════════════════════════════════ */
+
+.toggle-container-modern {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 14px !important;
+  box-shadow:    var(--shadow-card) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.toggle-container-modern:hover {
+  border-color: var(--color-blue-border) !important;
+  box-shadow:   0 4px 14px rgba(37, 99, 235, 0.08) !important;
+}
+
+.toggle-title { color: var(--color-text-main) !important; font-weight: 700 !important; }
+.toggle-desc  { color: var(--color-text-sub) !important; }
+
+/* ملصق الحالة النصي (متوقف / مفعّل) */
+.toggle-status-label {
+  color:      var(--color-text-sub) !important;
+  background: #F1F5F9 !important;
+  border:     1px solid var(--color-border-mid) !important;
+}
+/* حالة التفعيل → أخضر */
+.toggle-status-label.active {
+  color:       #FFFFFF !important;
+  background:  var(--color-green) !important;
+  border-color: var(--color-green) !important;
+  box-shadow:  none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   13. قسم خدمة العملاء
+   ══════════════════════════════════════════════════════════════════ */
+
+.customer-support-section {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 18px !important;
+  box-shadow:    var(--shadow-card) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.support-header-icon { fill: var(--color-blue) !important; filter: none !important; }
+.support-title       { color: var(--color-text-main) !important; text-shadow: none !important; }
+
+/* زر واتساب → خلفية بيضاء وأيقونة/نص أخضر */
+.support-btn-whatsapp {
+  background: #FFFFFF !important;
+  border:     1.5px solid #D1FAE5 !important;
+  color:      var(--color-green) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1) !important;
+}
+.support-btn-whatsapp .support-btn-icon { fill: var(--color-green) !important; filter: none !important; }
+.support-btn-whatsapp:hover {
+  background:   #F0FDF4 !important;
+  border-color: var(--color-green) !important;
+  color:        #059669 !important;
+  transform:    translateY(-1px) !important;
+  box-shadow:   0 4px 14px rgba(16, 185, 129, 0.18) !important;
+}
+
+/* زر الاتصال الهاتفي → خلفية بيضاء وأيقونة/نص أزرق */
+.support-btn-call {
+  background: #FFFFFF !important;
+  border:     1.5px solid var(--color-blue-border) !important;
+  color:      var(--color-blue) !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1) !important;
+}
+.support-btn-call .support-btn-icon { fill: var(--color-blue) !important; filter: none !important; }
+.support-btn-call:hover {
+  background:   var(--color-blue-pale) !important;
+  border-color: var(--color-blue) !important;
+  color:        #1D4ED8 !important;
+  transform:    translateY(-1px) !important;
+  box-shadow:   0 4px 14px rgba(37, 99, 235, 0.18) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   14. الشريط السفلي — Bottom Navigation Bar
+   ══════════════════════════════════════════════════════════════════ */
+
+/* الشريط كاملاً → أبيض شفاف مع ضبابية ناعمة */
+.bottom-nav-bar {
+  background:          rgba(255, 255, 255, 0.88) !important;
+  border:              1px solid rgba(226, 232, 240, 0.8) !important;
+  backdrop-filter:     blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow:          var(--shadow-nav) !important;
+}
+
+/* أزرار التنقل غير المفعلة → رمادي متوسط */
+.nav-item-btn {
+  color: var(--color-text-sub) !important;
+}
+.nav-item-btn svg { fill: var(--color-text-sub) !important; }
+
+/* حالة التحويم → أزرق خفيف */
+.nav-item-btn:hover {
+  color:      var(--color-blue) !important;
+  background: rgba(37, 99, 235, 0.06) !important;
+}
+.nav-item-btn:hover svg { fill: var(--color-blue) !important; }
+
+/* الزر المفعل (الرئيسية) → أزرق فاتح شفاف مع نص أزرق */
+.nav-item-btn.active {
+  color:       var(--color-blue) !important;
+  background:  rgba(37, 99, 235, 0.1) !important;
+  border:      1px solid rgba(37, 99, 235, 0.15) !important;
+}
+.nav-item-btn.active svg { fill: var(--color-blue) !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   15. بطاقة مستخدم نظام النقاط (عند التسجيل)
+   ══════════════════════════════════════════════════════════════════ */
+
+.loyalty-user-card {
+  background:    #FFFFFF !important;
+  border:        1.5px solid var(--color-border) !important;
+  border-radius: 18px !important;
+  box-shadow:    var(--shadow-card) !important;
+}
+
+.loyalty-user-title  { color: var(--color-text-main) !important; }
+.loyalty-user-phone-number { color: var(--color-text-sub) !important; }
+
+/* أيقونة الحساب */
+.loyalty-user-avatar { background: var(--color-blue-pale) !important; border: 1px solid var(--color-blue-border) !important; }
+.loyalty-user-avatar svg { fill: var(--color-blue) !important; }
+
+/* زر الخروج → إطار أحمر */
+.loyalty-logout-pill-btn {
+  background:    #FFFFFF !important;
+  border:        1.5px solid var(--color-red) !important;
+  color:         var(--color-red) !important;
+  border-radius: 999px !important;
+}
+.loyalty-logout-pill-btn:hover { background: #FEF2F2 !important; color: #DC2626 !important; }
+
+/* بنر رصيد النقاط → أزرق باهت */
+.loyalty-points-display-banner {
+  background:    var(--color-blue-banner) !important;
+  border:        1px solid var(--color-blue-border) !important;
+  border-radius: 12px !important;
+}
+.loyalty-points-label      { color: var(--color-text-main) !important; }
+.loyalty-points-label svg  { fill:  var(--color-blue) !important; }
+.loyalty-points-value      { color: var(--color-blue) !important; font-weight: 900 !important; text-shadow: none !important; }
+.loyalty-points-unit       { color: var(--color-text-main) !important; }
+
+/* أزرار شبكة الإجراءات (طلب سلفة، استبدال كرت...) */
+.loyalty-action-card-btn {
+  background:    #FFFFFF !important;
+  border:        1.5px solid var(--color-border) !important;
+  color:         var(--color-text-main) !important;
+  border-radius: 12px !important;
+}
+.loyalty-action-card-btn svg  { fill: var(--color-blue) !important; }
+.loyalty-action-card-btn:hover {
+  background:   var(--color-blue-pale) !important;
+  border-color: var(--color-blue) !important;
+  color:        var(--color-blue) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   16. النوافذ المنبثقة (Modals / Bottom Sheets)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* طبقة التعتيم خلف النافذة */
+.loyalty-modal,
+.app {
+  background:          rgba(11, 17, 32, 0.5) !important;
+  backdrop-filter:     none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* محتوى النافذة → أبيض مسطح */
+.loyalty-modal-content,
+.modal-sheet-card,
+.points-auth-modal-card {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 20px !important;
+  box-shadow:    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+  color:         var(--color-text-main) !important;
+}
+
+/* رأس النافذة */
+.modal-header,
+.loyalty-modal-header {
+  border-bottom: 1px solid var(--color-border) !important;
+}
+.modal-header .title,
+.loyalty-modal-header h2 {
+  color:       var(--color-text-main) !important;
+  text-shadow: none !important;
+}
+.loyalty-modal-header p { color: var(--color-text-sub) !important; }
+.modal-title-icon       { fill: var(--color-blue) !important; }
+
+/* زر إغلاق النافذة → رمادي، يتحول أحمر عند التحويم */
+.modal-close-btn,
+.loyalty-modal-close {
+  background: #F1F5F9 !important;
+  border:     1px solid var(--color-border-mid) !important;
+  color:      var(--color-text-sub) !important;
+}
+.modal-close-btn:hover,
+.loyalty-modal-close:hover {
+  background:   var(--color-red) !important;
+  border-color: var(--color-red) !important;
+  color:        #FFFFFF !important;
+  transform:    none !important;
+}
+
+/* تبويبات تسجيل / دخول في نافذة النقاط */
+.points-auth-tabs {
+  background:    #F8FAFC !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 12px !important;
+}
+.points-tab-btn { color: var(--color-text-sub) !important; }
+.points-tab-btn.active {
+  background:   var(--color-blue) !important;
+  color:        #FFFFFF !important;
+  border:       none !important;
+  box-shadow:   0 2px 6px rgba(37, 99, 235, 0.25) !important;
+}
+.points-tab-btn.active svg { fill: #FFFFFF !important; }
+
+/* صندوق التعليمات داخل النوافذ */
+.points-instruction-box {
+  background:    var(--color-blue-pale) !important;
+  border:        1px solid var(--color-blue-border) !important;
+  border-radius: 12px !important;
+}
+.instruction-icon-wrap {
+  background: var(--color-blue-banner) !important;
+  border:     1px solid #93C5FD !important;
+}
+.instruction-icon-wrap svg  { fill: var(--color-blue) !important; }
+.instruction-text strong    { color: var(--color-text-main) !important; }
+.instruction-text p         { color: var(--color-text-sub) !important; }
+
+/* حقول الإدخال داخل نوافذ النقاط */
+.points-modal-body .login-input        { color: var(--color-text-main) !important; }
+.points-modal-body .login-input::placeholder { color: var(--color-text-placeholder) !important; }
+.points-link-btn { color: var(--color-blue) !important; font-weight: 700 !important; }
+
+/* بطاقات أنواع الكروت وبطاقات محفوظة */
+.saved-card-item,
+.card-type-item,
+.loyalty-modal-body .loan-card {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 14px !important;
+  color:         var(--color-text-main) !important;
+}
+.card-type-item .card-name   { color: var(--color-text-main) !important; }
+.card-type-item .card-points { color: var(--color-blue) !important; font-weight: 800 !important; }
+.card-code {
+  background: #F8FAFC !important;
+  border:     1px dashed var(--color-border-mid) !important;
+  color:      var(--color-text-main) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   17. شاشة التحويل/التحميل (Redirect Loading Overlay)
+   ══════════════════════════════════════════════════════════════════ */
+
+.redirect-loading-overlay {
+  background:          var(--color-bg-page) !important;
+  backdrop-filter:     none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* إخفاء الكرات الضوئية والتأثيرات القديمة */
+.redirect-ambient-glow-burgundy,
+.redirect-ambient-glow-cyan { display: none !important; }
+
+/* كارت التحميل المركزي → أبيض نظيف */
+.redirect-loading-card {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  border-radius: 24px !important;
+  box-shadow:    0 20px 40px rgba(30, 58, 138, 0.1) !important;
+  color:         var(--color-text-main) !important;
+}
+.redirect-loading-title    { color: var(--color-text-main) !important; text-shadow: none !important; }
+.redirect-loading-subtitle { color: var(--color-text-sub) !important; }
+
+/* شريط التقدم → برتقالي ← أزرق */
+.redirect-progress-track { background: var(--color-border) !important; border: none !important; }
+.redirect-progress-bar {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-blue) 100%) !important;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* حلقة الدوران → برتقالي وأزرق */
+.redirect-spinner-outer {
+  border-top-color:   var(--color-primary) !important;
+  border-right-color: var(--color-blue) !important;
+}
+.redirect-spinner-inner {
+  border-bottom-color: var(--color-blue-light) !important;
+  border-left-color:   var(--color-primary) !important;
+}
+/* أيقونة مركزية → أزرق */
+.redirect-center-icon {
+  background: var(--color-blue) !important;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.3) !important;
+}
+.redirect-badge-secure {
+  background:  var(--color-blue-pale) !important;
+  border:      1px solid var(--color-blue-border) !important;
+  color:       var(--color-text-main) !important;
+}
+.redirect-badge-secure svg { fill: var(--color-blue) !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
+   18. شريط التمرير (Scrollbar)
+   ══════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background:    rgba(37, 99, 235, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.7);
+}
+* {
+  scrollbar-color: rgba(37, 99, 235, 0.35) transparent;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   19. اللودر (Loading Spinner)
+   ══════════════════════════════════════════════════════════════════ */
+
+.loader {
+  border:         3px solid rgba(255, 87, 34, 0.2) !important;
+  border-top-color: var(--color-primary) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   20. نظام الإشعارات والتنبيهات والـ Floating Buttons
+   ══════════════════════════════════════════════════════════════════ */
+
+/* زر النقاط العائم (FAB) */
+.loyalty-fab {
+  background: var(--color-primary) !important;
+  box-shadow: 0 4px 15px var(--color-primary-glow) !important;
+  color:      #FFFFFF !important;
+}
+.loyalty-fab:hover {
+  background: var(--color-primary-dark) !important;
+  box-shadow: 0 6px 20px rgba(230, 74, 25, 0.45) !important;
+  transform:  translateY(-2px) !important;
+}
+.fab-badge {
+  background: var(--color-red) !important;
+  color:      #FFFFFF !important;
+}
+
+/* بطاقة الإشعار المنبثقة للولاء */
+.loyalty-notification {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  box-shadow:    0 10px 40px rgba(30, 58, 138, 0.1) !important;
+  border-radius: 16px !important;
+}
+.loyalty-notification-icon {
+  background: var(--color-blue-pale) !important;
+  border:     1px solid var(--color-blue-border) !important;
+}
+.loyalty-notification-icon svg {
+  fill:  var(--color-blue) !important;
+  color: var(--color-blue) !important;
+}
+.loyalty-notification-text strong { color: var(--color-text-main) !important; }
+.loyalty-notification-text p      { color: var(--color-text-sub) !important; }
+
+.loyalty-total, .points-highlight {
+  color: var(--color-blue) !important;
+  font-weight: 800 !important;
+}
+
+/* الإشعارات العامة والبنرات (nt-banner, nt-card, .error-container) */
+.nt-banner, .nt-card, .error-container, #error {
+  background:    #FFFFFF !important;
+  border:        1px solid var(--color-border) !important;
+  box-shadow:    0 10px 30px rgba(30, 58, 138, 0.08) !important;
+  border-radius: 16px !important;
+  color:         var(--color-text-main) !important;
+}
+.nt-banner-title, .nt-card-title, .error-heading {
+  color:       var(--color-text-main) !important;
+  font-weight: 800 !important;
+}
+.nt-banner-message, .nt-card-message, .error-text {
+  color: var(--color-text-sub) !important;
+}
+.nt-banner-icon, .nt-card-icon {
+  color: var(--color-blue) !important;
+  fill:  var(--color-blue) !important;
+}
+
+/* أزرار الإجراءات داخل التنبيهات */
+.nt-banner-action, .nt-card-action {
+  background: var(--color-blue-pale) !important;
+  color:      var(--color-blue) !important;
+  border:     1px solid var(--color-blue-border) !important;
+}
+.nt-banner-action:hover, .nt-card-action:hover {
+  background: var(--color-blue) !important;
+  color:      #FFFFFF !important;
+}
+
+/* رسائل نجاح وخطأ النظام الصغرى */
+#loyalty-message.loyalty-success {
+  background: #F0FDF4 !important;
+  border:     1px solid #BBF7D0 !important;
+  color:      var(--color-green) !important;
+}
+#loyalty-message.loyalty-error {
+  background: #FEF2F2 !important;
+  border:     1px solid #FECACA !important;
+  color:      var(--color-red) !important;
+}
+
+/* زر إغلاق التنبيهات */
+.nt-banner-close, .nt-card-close, .loyalty-notification-close {
+  background: #F1F5F9 !important;
+  border:     1px solid var(--color-border-mid) !important;
+  color:      var(--color-text-sub) !important;
+}
+.nt-banner-close:hover, .nt-card-close:hover, .loyalty-notification-close:hover {
+  background: var(--color-red) !important;
+  color:      #FFFFFF !important;
+  border-color: var(--color-red) !important;
+}
+
+/* ??????????????????????????????????????????????????????????????????
+   21. ����� ������� ����� ����� (modal-sheet-card + ���� �������)
+   ?????????????????????????????????????????????????????????????????? */
+
+/* ����� ������� �������� ? ���� ��� */
+.modal-sheet-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 20px 50px rgba(30, 58, 138, 0.12) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.modal-header { border-bottom: 1px solid #E2E8F0 !important; }
+.modal-header .title { color: #1E3A8A !important; text-shadow: none !important; }
+.modal-title-icon { fill: #2563EB !important; }
+
+/* �� ����� ? ����� ���� */
+.modal-close-btn {
+  background: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #64748B !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+.modal-close-btn:hover {
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  color: #FFFFFF !important;
+  transform: none !important;
+}
+
+/* �� ���� ? ������� ���� */
+.modal-cancel-btn,
+.modal-sheet-card .button.modal-cancel-btn,
+.app .button.modal-cancel-btn,
+.app button.modal-cancel-btn,
+.app-logout.button.app-submit {
+  background: linear-gradient(180deg, #FF7043 0%, #E64A19 100%) !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25) !important;
+  box-shadow: 0 4px 16px rgba(255,87,34,0.38), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+  border: none !important;
+  filter: none !important;
+}
+.modal-cancel-btn:hover,
+.modal-sheet-card .button.modal-cancel-btn:hover,
+.app .button.modal-cancel-btn:hover,
+.app button.modal-cancel-btn:hover,
+.app-logout.button.app-submit:hover {
+  background: linear-gradient(180deg, #FF8A65 0%, #F4511E 100%) !important;
+  color: #FFFFFF !important;
+  filter: none !important;
+}
+.modal-cancel-btn svg, .app-logout.button.app-submit svg { fill: #FFFFFF !important; filter: none !important; }
+
+/* ��� �� ������� ������� */
+.modal-actions-row .modal-cancel-btn {
+  background: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #64748B !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* ���� ������� */
+thead th {
+  background: #EFF6FF !important;
+  color: #1E3A8A !important;
+  border: 1px solid #BFDBFE !important;
+  font-weight: 800 !important;
+}
+tbody tr { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; }
+tbody tr:hover { background: #EFF6FF !important; border-color: #BFDBFE !important; }
+tbody td { color: #1E3A8A !important; font-weight: 600 !important; }
+tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
+
+/* ����� ������ ������ */
+.loan-body {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #1E3A8A !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.loan-highlight-badge {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #2563EB !important;
+}
+
+/* ������� �����/����� */
+.price-tabs, .modal-tab-group {
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 10px !important;
+}
+.price-tab-btn, .modal-tab-btn { color: #64748B !important; background: transparent !important; }
+.price-tab-btn.active, .modal-tab-btn.active {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.25) !important;
+}
+
+/* �� ���� ������� �� ���� ������� */
+.modal-sheet-card .support-phone-btn, .modal-support-btn {
+  background: #FFFFFF !important;
+  border: 1.5px solid #BFDBFE !important;
+  color: #2563EB !important;
+}
+.modal-sheet-card .support-phone-btn svg, .modal-support-btn svg { fill: #2563EB !important; }
+
+/* ══════════════════════════════════════════════════════════════════
+   21. نافذة الأسعار ونقاط البيع
+   ══════════════════════════════════════════════════════════════════ */
+.modal-sheet-card { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; box-shadow: 0 20px 50px rgba(30,58,138,0.12) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.modal-header { border-bottom: 1px solid #E2E8F0 !important; }
+.modal-header .title { color: #1E3A8A !important; text-shadow: none !important; }
+.modal-title-icon { fill: #2563EB !important; }
+.modal-close-btn { background: #F1F5F9 !important; border: 1px solid #CBD5E1 !important; color: #64748B !important; box-shadow: none !important; text-shadow: none !important; }
+.modal-close-btn:hover { background: #EF4444 !important; border-color: #EF4444 !important; color: #FFFFFF !important; transform: none !important; }
+.modal-cancel-btn, .modal-sheet-card .button.modal-cancel-btn, .app .button.modal-cancel-btn, .app button.modal-cancel-btn, .app-logout.button.app-submit { background: linear-gradient(180deg,#FF7043 0%,#E64A19 100%) !important; color: #FFFFFF !important; text-shadow: 0 1px 3px rgba(0,0,0,0.25) !important; border: none !important; filter: none !important; }
+.modal-cancel-btn:hover, .modal-sheet-card .button.modal-cancel-btn:hover, .app .button.modal-cancel-btn:hover, .app button.modal-cancel-btn:hover, .app-logout.button.app-submit:hover { background: linear-gradient(180deg,#FF8A65 0%,#F4511E 100%) !important; color: #FFFFFF !important; filter: none !important; }
+.modal-cancel-btn svg, .app-logout.button.app-submit svg { fill: #FFFFFF !important; filter: none !important; }
+.modal-actions-row .modal-cancel-btn { background: #F1F5F9 !important; border: 1px solid #CBD5E1 !important; color: #64748B !important; box-shadow: none !important; text-shadow: none !important; }
+thead th { background: #EFF6FF !important; color: #1E3A8A !important; border: 1px solid #BFDBFE !important; font-weight: 800 !important; }
+tbody tr { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; }
+tbody tr:hover { background: #EFF6FF !important; border-color: #BFDBFE !important; }
+tbody td { color: #1E3A8A !important; font-weight: 600 !important; }
+tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
+.loan-body { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; color: #1E3A8A !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.loan-highlight-badge { background: #EFF6FF !important; border: 1px solid #BFDBFE !important; color: #2563EB !important; }
+.price-tabs, .modal-tab-group { background: #F1F5F9 !important; border: 1px solid #E2E8F0 !important; border-radius: 10px !important; }
+.price-tab-btn, .modal-tab-btn { color: #64748B !important; background: transparent !important; }
+.price-tab-btn.active, .modal-tab-btn.active { background: #2563EB !important; color: #FFFFFF !important; }
+.modal-sheet-card .support-phone-btn, .modal-support-btn { background: #FFFFFF !important; border: 1.5px solid #BFDBFE !important; color: #2563EB !important; }
+.modal-sheet-card .support-phone-btn svg, .modal-support-btn svg { fill: #2563EB !important; }

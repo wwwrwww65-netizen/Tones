@@ -623,3 +623,58 @@ button.loyalty-btn:active {
   50% { transform: scale(1.5); opacity: 1; }
 }
 
+/* Master Loyalty Overrides for White & Orange-Blue Theme */
+.loyalty-modal {
+  background: rgba(11, 17, 32, 0.5) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.loyalty-modal-content {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+  color: #1E3A8A !important;
+}
+
+.loyalty-modal-header h2 {
+  color: #1E3A8A !important;
+  text-shadow: none !important;
+}
+
+.loyalty-modal-body,
+.loyalty-form-label {
+  color: #1E3A8A !important;
+}
+
+.loyalty-form-input,
+#loyalty-phone-input,
+#loyalty-password-input {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  color: #1E3A8A !important;
+}
+
+.loyalty-form-input:focus,
+#loyalty-phone-input:focus,
+#loyalty-password-input:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+.loyalty-btn,
+button.loyalty-btn {
+  background: #FF5722 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.35) !important;
+  text-shadow: none !important;
+}
+
+.loyalty-btn:hover,
+button.loyalty-btn:hover {
+  background: #F97316 !important;
+  box-shadow: 0 6px 18px rgba(255, 87, 34, 0.45) !important;
+}
+
+
