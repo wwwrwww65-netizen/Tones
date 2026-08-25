@@ -11,7 +11,7 @@
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <meta name="HandheldFriendly" content="true">
     <meta name="MobileOptimized" content="width">
-    <meta name="theme-color" content="#090d16">
+    <meta name="theme-color" content="#F4F7FB">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
@@ -211,11 +211,19 @@
                 <!-- MAIN LOGIN VIEW -->
                 <div class="login" id="login">
 
-                    <!-- Top Modern Header -->
-                    <header class="top-header">
-                        <div class="network-brand">
-                            <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
-                                <svg class="wifi-animated-icon" viewBox="0 0 24 24">
+                    <!-- 1. بطاقة الهيدر الرئيسية الفاخرة للشبكة (Network Hero Brand Card) -->
+                    <div class="app-card network-hero-card">
+                        <div class="network-hero-content">
+                            <!-- Connection Status Badge (Right side in RTL) -->
+                            <div class="network-status-badge">
+                                <span class="status-pulse-dot"></span>
+                                <span class="status-badge-text">متصل</span>
+                            </div>
+
+                            <!-- Network Title & Animated Wifi Icon in Center -->
+                            <div class="network-hero-title-wrap">
+                                <span class="network-hero-title">شبكة BH-NET اللاسلكية</span>
+                                <svg class="network-hero-wifi-icon wifi-animated-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <!-- Wave 3 (Outer signal) -->
                                     <path class="wifi-sig wifi-sig-3"
                                         d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
@@ -229,35 +237,44 @@
                                     <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
                                 </svg>
                             </div>
-                            <div class="brand-info">
-                                <span class="brand-name" data-network-name>{{network-name}}</span>
+
+                            <!-- Network Logo (Left side in RTL) -->
+                            <div class="network-logo-frame">
+                                <img src="./photo_2026-08-25_06-15-19.png" alt="شعار شبكة BH-NET" class="network-logo-img" onerror="this.src='./img/network-logo.png'">
                             </div>
                         </div>
+                    </div>
 
-                        <!-- "جديدنا" Notification Pill Button -->
-                        <button class="m" parent-id="loan" data-loan-button id="btn-whats-new" type="button">
-                            <svg viewBox="0 0 24 24" class="btn-icon">
-                                <path
-                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
-                            </svg>
-                            <span>جديدنا</span>
-                        </button>
-                    </header>
-
-                    <!-- ========================================================================= -->
-                    <!-- الشريط الإخباري المتحرك (يبدأ فارغاً ثم يتدفق النص من اليسار إلى اليمين) -->
-                    <!-- ========================================================================= -->
-                    <section class="section">
-                        <div class="ticker-container">
-                            <div class="ticker-content-track">
-                                <p class="marquee" data-news-line>{{news-line}}</p>
+                    <!-- 2. بطاقة المميزات الثلاثية (Network Features Strip Card) -->
+                    <div class="app-card network-features-strip-card">
+                        <div class="feature-strip-item">
+                            <div class="feature-strip-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="feature-strip-icon">
+                                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                                </svg>
                             </div>
+                            <span class="feature-strip-label">اتصال سريع</span>
                         </div>
-                    </section>
+                        <div class="feature-strip-divider"></div>
+                        <div class="feature-strip-item">
+                            <div class="feature-strip-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="feature-strip-icon">
+                                    <path d="M19 3H5L2 9l10 12L22 9l-3-6zM5.5 5h13l1.8 3.6-8.3 10-8.3-10L5.5 5z"/>
+                                </svg>
+                            </div>
+                            <span class="feature-strip-label">خدمة مميزة</span>
+                        </div>
+                        <div class="feature-strip-divider"></div>
+                        <div class="feature-strip-item">
+                            <div class="feature-strip-icon-wrap">
+                                <svg viewBox="0 0 24 24" class="feature-strip-icon">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                                </svg>
+                            </div>
+                            <span class="feature-strip-label">ثقة متجددة</span>
+                        </div>
+                    </div>
 
-
-                    <!-- Main Welcome Title -->
-                    <h1>مرحبا بك في شبكة BH-NET اللاسلكية</h1>
 
                     <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
                     <div class="ads-carousel-wrapper">
@@ -312,6 +329,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- ========================================================================= -->
+                    <!-- الشريط الإخباري المتحرك (تحت البنر) -->
+                    <!-- ========================================================================= -->
+                    <section class="section">
+                        <div class="ticker-container">
+                            <div class="ticker-content-track">
+                                <p class="marquee" data-news-line>{{news-line}}</p>
+                            </div>
+                        </div>
+                    </section>
 
                     <!-- Unregistered Loyalty Section -->
                     <div id="loyalty-unregistered-section">
@@ -409,93 +437,147 @@
                         </div>
                     </div>
 
-                    <!-- Glassmorphic Login Card -->
-                    <div class="login-card">
-                        <form class="login-form" name="login" onsubmit="return false;">
+                    <!-- Separate Cards Login Form Wrapper -->
+                    <form class="login-form" name="login" onsubmit="return false;">
 
-                            <!-- Speed Selector Group (Modern Button Trigger) -->
-                            <div class="speed-selector-group" style="margin-bottom: 14px;">
-                                <div class="speed-header">
-                                    <span class="speed-title">
-                                        <svg viewBox="0 0 24 24" class="section-icon">
-                                            <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                        </svg>
-                                        <span>أختر سرعتك المناسبة</span>
-                                    </span>
+                        <!-- 1. ترويسة اختيار السرعة المستقلة خارج الحاوية (Speed Selector Outer Header) -->
+                        <div class="speed-selection-outer-header">
+                            <div class="card-section-title-wrap">
+                                <span class="card-section-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                    </svg>
+                                </span>
+                                <span class="card-section-title">أختر سرعتك المناسبة</span>
+                            </div>
+                            <span class="selected-speed-badge" id="selectedSpeedDisplay">4 ميجا</span>
+                        </div>
+
+                        <!-- 1. بطاقة شريط السرعات المتحرك (Speed Strip Carousel Card) -->
+                        <div class="app-card speed-selection-card">
+                            <!-- Native select strictly linked with MikroTik system & scripts (name="domain" & speed-field) -->
+                            <select id="speed" name="domain" speed-field style="display: none;">
+                                <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
+                                <option value="1M">1 ميجا</option>
+                                <option value="2M">2 ميجا</option>
+                                <option selected value="4M">4 ميجا</option>
+                                <option value="8M">8 ميجا</option>
+                                <option value="12M">12 ميجا</option>
+                                <option value="20M">20 ميجا</option>
+                                <option value="40M">40 ميجا</option>
+                                <option value="60M">60 ميجا</option>
+                            </select>
+
+                            <!-- Horizontal Moving / Scrollable Speeds Carousel Strip (1, 2, 4, 8, 12, 20, 40, 60 ميجا) -->
+                            <div class="speed-slider-wrapper">
+                                <div class="speed-pills-row" id="speedPillsRow" role="radiogroup"
+                                    aria-label="شريط تحديد سرعة الإنترنت">
+                                    <button type="button" class="speed-pill-btn" data-speed="1M" data-speed-title="1 ميجا"
+                                        aria-label="سرعة 1 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">1</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="2M" data-speed-title="2 ميجا"
+                                        aria-label="سرعة 2 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">2</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn active" data-speed="4M"
+                                        data-speed-title="4 ميجا" aria-label="سرعة 4 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">4</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="8M" data-speed-title="8 ميجا"
+                                        aria-label="سرعة 8 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">8</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="12M"
+                                        data-speed-title="12 ميجا" aria-label="سرعة 12 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">12</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="20M"
+                                        data-speed-title="20 ميجا" aria-label="سرعة 20 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">20</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="40M"
+                                        data-speed-title="40 ميجا" aria-label="سرعة 40 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">40</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
+
+                                    <button type="button" class="speed-pill-btn" data-speed="60M"
+                                        data-speed-title="60 ميجا" aria-label="سرعة 60 ميجا">
+                                        <span class="pill-dot"></span>
+                                        <span class="pill-num">60</span>
+                                        <span class="pill-unit">ميجا</span>
+                                    </button>
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- Native select preserved hidden for script/form integration -->
-                                <select id="speed" name="domain" speed-field style="display: none;">
-                                    <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
-                                    <option value="128k/512k">سرعة أقتصادية</option>
-                                    <option selected value="256k/700k">سرعة عادية</option>
-                                    <option value="256k/1M">سرعة متوسطة</option>
-                                    <option value="512M/3M">سرعة عالية</option>
-                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا
-                                    </option>
-                                </select>
-
-                                <!-- Modern Interactive Speed Trigger Button -->
-                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn"
-                                    parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
-                                    <div class="speed-trigger-left">
-                                        <span class="speed-trigger-icon">
-                                            <svg viewBox="0 0 24 24">
-                                                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                            </svg>
-                                        </span>
-                                        <div class="speed-trigger-text">
-                                            <span class="speed-trigger-label">السرعة المختارة:</span>
-                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة
-                                                عادية</span>
-                                        </div>
-                                    </div>
-                                    <div class="speed-trigger-badge">
-                                        <span>تغيير</span>
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
-                                        </svg>
-                                    </div>
-                                </button>
+                        <!-- 2. بطاقة رقم الكرت المستقلة (Card Input Card) -->
+                        <div class="app-card login-input-card">
+                            <div class="input-card-header">
+                                <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
                             </div>
 
-                            <!-- Card Input with Integrated Micro Actions -->
-                            <div class="input-group-modern">
-                                <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
-                                <div class="input-wrapper-glass">
-                                    <button type="button" class="input-icon-badge camera-scan-btn" id="openQrScannerBtn"
-                                        title="مسح رمز QR بالكاميرا" aria-label="مسح رمز QR بالكاميرا">
-                                        <svg viewBox="0 0 24 24" class="camera-icon-svg">
-                                            <path
-                                                d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                                        </svg>
-                                    </button>
-                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
-                                        username-field improve-input autocomplete="off" enterkeyhint="go"
-                                        inputmode="text">
+                            <div class="input-wrapper-glass">
+                                <span class="input-icon-badge" title="رقم الكرت" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                                    </svg>
+                                </span>
+                                <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
+                                    username-field improve-input autocomplete="off" enterkeyhint="go"
+                                    inputmode="text">
 
-                                    <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
-                                    <div class="input-inner-actions">
-                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
-                                            title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
-                                            <span>دخول بكرت سابق</span>
-                                        </button>
-                                        <select id="se" style="display: none;" aria-hidden="true">
-                                            <option value="" selected disabled>دخول بكرت سابق</option>
-                                            <option value="relod">تحديث</option>
-                                        </select>
-                                    </div>
+                                <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
+                                <div class="input-inner-actions">
+                                    <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
+                                        title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
+                                        <span>دخول بكرت سابق</span>
+                                    </button>
+                                    <select id="se" style="display: none;" aria-hidden="true">
+                                        <option value="" selected disabled>دخول بكرت سابق</option>
+                                        <option value="relod">تحديث</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <!-- Hidden Password Field -->
-                            <div class="login-field password-field">
+                            <div class="login-field password-field" style="display: none;">
                                 <i class="login-icon fas icon-lock"></i>
                                 <input type="hidden" name="password" class="login-input"
                                     placeholder="ادخل كلمة السر هنا" improve-input>
                             </div>
+                        </div>
 
-                            <!-- Updates & App Store Blocker Toggle -->
+                        <!-- 3. زر تسجيل الدخول المنفصل والمستقل (Standalone Submit Button) -->
+                        <div class="login-submit-wrapper">
+                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
+                                type="button" id="mainLoginBtn">
+                                <span class="button-text">تسجيل الدخول</span>
+                            </button>
+                        </div>
+
+                        <!-- 4. بطاقة إيقاف التحديثات والمتجر المستقلة (Updates Blocker Card) -->
+                        <div class="app-card updates-toggle-card">
                             <div class="toggle-container-modern">
                                 <div class="toggle-info">
                                     <span class="toggle-title">
@@ -515,14 +597,9 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Primary Glow Login Submit Button -->
-                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
-                                type="button" id="mainLoginBtn">
-                                <span class="button-text">تسجيل الدخول</span>
-                            </button>
-                        </form>
-                    </div>
+                    </form>
 
                     <!-- Customer Support Section -->
                     <div class="customer-support-section">
@@ -577,173 +654,43 @@
                         </div>
 
                         <div class="speed-cards-list" id="speedModalList">
-                            <!-- Speed Option 1 -->
-                            <div class="speed-card-option" data-speed="128k/512k" data-speed-title="سرعة اقتصادية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة اقتصادية</span>
-                                </div>
+                            <div class="speed-card-option" data-speed="1M" data-speed-title="1 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">1 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 2 (Default / Active) -->
-                            <div class="speed-card-option active" data-speed="256k/700k" data-speed-title="سرعة عادية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عادية (الموصى بها)</span>
-                                </div>
+                            <div class="speed-card-option" data-speed="2M" data-speed-title="2 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">2 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 3 -->
-                            <div class="speed-card-option" data-speed="256k/1M" data-speed-title="سرعة متوسطة">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة متوسطة</span>
-                                </div>
+                            <div class="speed-card-option active" data-speed="4M" data-speed-title="4 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">4 ميجا (الموصى بها)</span></div>
                             </div>
-
-                            <!-- Speed Option 4 -->
-                            <div class="speed-card-option" data-speed="512M/3M" data-speed-title="سرعة عالية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عالية</span>
-                                </div>
+                            <div class="speed-card-option" data-speed="8M" data-speed-title="8 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">8 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
-                            <div class="speed-card-option" id="card-speed-ultra" data-speed="1M/8M"
-                                data-speed-title="سرعة عالية جدا" style="display: none;">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عالية جدا</span>
-                                </div>
+                            <div class="speed-card-option" data-speed="12M" data-speed-title="12 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">12 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-speed="20M" data-speed-title="20 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">20 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-speed="40M" data-speed-title="40 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">40 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-speed="60M" data-speed-title="60 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">60 ميجا (السرعة القصوى)</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2026 MODAL BOTTOM SHEET: QR CODE CAMERA SCANNER (#qr-scanner-modal) -->
-                <div class="app" id="qr-scanner-modal">
-                    <div class="modal-sheet-card qr-scanner-sheet">
-                        <div class="modal-header">
-                            <span class="title">
-                                <svg viewBox="0 0 24 24" class="modal-title-icon">
-                                    <path
-                                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                                </svg>
-                                <span>مسح رمز QR للكرت</span>
-                            </span>
-                            <button class="modal-close-btn" id="closeQrScannerBtn" type="button">✕ إغلاق</button>
-                        </div>
 
-                        <div class="qr-scanner-body">
-                            <!-- Camera Viewport Box -->
-                            <div class="qr-viewport-container" id="qrViewportContainer">
-                                <video id="qrVideo" playsinline autoplay muted></video>
-                                <canvas id="qrCanvas" style="display: none;"></canvas>
-
-                                <!-- Scanner Reticle Overlay & Laser -->
-                                <div class="qr-overlay-box">
-                                    <div class="qr-reticle-corner top-left"></div>
-                                    <div class="qr-reticle-corner top-right"></div>
-                                    <div class="qr-reticle-corner bottom-left"></div>
-                                    <div class="qr-reticle-corner bottom-right"></div>
-                                    <div class="qr-scanner-laser"></div>
-                                </div>
-
-                                <!-- Camera Loading / Permission Fallback -->
-                                <div class="qr-camera-loading" id="qrCameraLoading">
-                                    <div class="qr-spinner"></div>
-                                    <span>جاري تشغيل الكاميرا...</span>
-                                </div>
-
-                                <div class="qr-camera-error" id="qrCameraError" style="display: none;">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-                                    </svg>
-                                    <p id="qrCameraErrorText">تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على
-                                        أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا، أو يمكنك فتح كاميرا
-                                        الهاتف مباشرة عبر الزر أدناه.</p>
-
-                                    <div
-                                        style="display: flex; gap: 8px; flex-direction: column; width: 100%; max-width: 280px; margin-top: 10px;">
-                                        <!-- Native System Camera Button (bypasses browser permission block) -->
-                                        <button type="button" class="button" id="qrSystemCamFallbackBtn"
-                                            style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 0.9rem; padding: 10px 14px; font-weight: 700; border: none; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
-                                            <svg viewBox="0 0 24 24"
-                                                style="width: 18px; height: 18px; fill: currentColor;">
-                                                <path
-                                                    d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
-                                            </svg>
-                                            <span>📷 مسح بكاميرا الهاتف البديلة</span>
-                                        </button>
-
-                                        <button type="button" class="button" id="qrRetryCamBtn"
-                                            style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 14px; color: #fff; border-radius: 8px;">إعادة
-                                            محاولة الكاميرا الحية</button>
-                                    </div>
-
-                                    <!-- Hidden System Camera Capture Input -->
-                                    <input type="file" id="qrSystemCameraInput" accept="image/*" capture="environment"
-                                        style="display: none;">
-                                </div>
-                            </div>
-
-                            <!-- Camera Controls (Torch / Switch Camera) -->
-                            <div class="qr-controls-row">
-                                <button type="button" class="qr-tool-btn" id="qrTorchBtn" title="تشغيل الكشاف"
-                                    style="display: none;">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                    </svg>
-                                    <span id="qrTorchText">الكشاف</span>
-                                </button>
-                                <button type="button" class="qr-tool-btn" id="qrSwitchCameraBtn" title="تبديل الكاميرا">
-                                    <svg viewBox="0 0 24 24">
-                                        <path
-                                            d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z" />
-                                    </svg>
-                                    <span>تبديل الكاميرا</span>
-                                </button>
-                            </div>
-
-                            <!-- Instruction / Status Badge -->
-                            <div class="qr-status-badge" id="qrScanStatus">
-                                <span class="status-pulse-dot"></span>
-                                <span id="qrStatusText">وجه الكاميرا نحو رمز QR على الكرت</span>
-                            </div>
-
-                            <div id="qrScanSuccessCard" class="qr-success-card" style="display: none;">
-                                <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: #10b981;">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                </svg>
-                                <div>
-                                    <strong style="color: #34d399; font-size: 0.95rem; display: block;">تم مسح الكرت
-                                        بنجاح!</strong>
-                                    <span id="qrScannedResultDisplay"
-                                        style="color: #ffffff; font-family: monospace; font-size: 1.1rem; font-weight: 800;"></span>
-                                </div>
-                            </div>
-
-                            <button type="button" class="button app-submit modal-cancel-btn" style="margin-top: 14px;">
-                                <svg viewBox="0 0 24 24" class="btn-icon">
-                                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                                </svg>
-                                <span>رجوع</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- 2026 MODAL BOTTOM SHEET: POINTS REGISTRATION & AUTH (#points-register-modal) -->
                 <div class="app" id="points-register-modal">
@@ -839,7 +786,7 @@
 
                                     <div class="points-switch-prompt" style="margin-top: 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
                                         <span style="color: #cbd5e1; font-size: 0.85rem;">ليس لديك حساب في نظام النقاط؟</span>
-                                        <a href="https://tunisnet.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
+                                        <a href="https://bh.shabakaty.site/auth/register" class="points-signup-glow-btn" id="goToSignupTabBtn">
                                             <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #ffd700;">
                                                 <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                             </svg>
@@ -1006,56 +953,37 @@
                         </div>
 
                         <div class="speed-cards-list" id="statusSpeedModalList">
-                            <!-- Speed Option 1 -->
-                            <div class="speed-card-option" data-status-speed="128k/512k"
-                                data-speed-title="سرعة اقتصادية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة اقتصادية</span>
-                                </div>
+                            <div class="speed-card-option" data-status-speed="1M" data-speed-title="1 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">1 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 2 -->
-                            <div class="speed-card-option" data-status-speed="256k/700k" data-speed-title="سرعة عادية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عادية (الموصى بها)</span>
-                                </div>
+                            <div class="speed-card-option" data-status-speed="2M" data-speed-title="2 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">2 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 3 -->
-                            <div class="speed-card-option" data-status-speed="256k/1M" data-speed-title="سرعة متوسطة">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة متوسطة</span>
-                                </div>
+                            <div class="speed-card-option active" data-status-speed="4M" data-speed-title="4 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">4 ميجا (الموصى بها)</span></div>
                             </div>
-
-                            <!-- Speed Option 4 -->
-                            <div class="speed-card-option" data-status-speed="512M/3M" data-speed-title="سرعة عالية">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عالية</span>
-                                </div>
+                            <div class="speed-card-option" data-status-speed="8M" data-speed-title="8 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">8 ميجا</span></div>
                             </div>
-
-                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
-                            <div class="speed-card-option" id="card-status-speed-ultra" data-status-speed="1M/8M"
-                                data-speed-title="سرعة عالية جدا" style="display: none;">
-                                <div class="speed-card-indicator">
-                                    <div class="speed-radio-dot"></div>
-                                </div>
-                                <div class="speed-card-info">
-                                    <span class="speed-card-name">سرعة عالية جدا</span>
-                                </div>
+                            <div class="speed-card-option" data-status-speed="12M" data-speed-title="12 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">12 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-status-speed="20M" data-speed-title="20 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">20 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-status-speed="40M" data-speed-title="40 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">40 ميجا</span></div>
+                            </div>
+                            <div class="speed-card-option" data-status-speed="60M" data-speed-title="60 ميجا">
+                                <div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>
+                                <div class="speed-card-info"><span class="speed-card-name">60 ميجا (السرعة القصوى)</span></div>
                             </div>
                         </div>
                         <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
@@ -1206,19 +1134,12 @@
 
                         <!-- Entertainment Direct Links -->
                         <div class="entertainment-links">
-                            <a class="stream-card-link" href="http://30.10.10.10" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
-                                    <path
-                                        d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
-                                </svg>
-                                <span>الاستراحة</span>
-                            </a>
-                            <a class="stream-card-link" href="http://30.10.10.10:88" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
+                            <a class="stream-card-link" href="https://kor.fntvs.net/channel.php" target="_blank" rel="noopener noreferrer" data-mobasher>
+                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
                                     <path
                                         d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-11-2l6-4-6-4v8z" />
                                 </svg>
-                                <span>البث المباشر</span>
+                                <span>البث المباشر والقنوات الرياضية</span>
                             </a>
                         </div>
 
@@ -1304,7 +1225,7 @@
                                             <path
                                                 d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
                                         </svg>
-                                        <span>التنزيل (Download)</span>
+                                        <span>التنزيل</span>
                                     </span>
                                     <span class="metric-val cyan" id="bytes_out">-</span>
                                 </div>
@@ -1314,7 +1235,7 @@
                                             <path
                                                 d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
                                         </svg>
-                                        <span>الرفع (Upload)</span>
+                                        <span>الرفع</span>
                                     </span>
                                     <span class="metric-val emerald" id="bytes_in">-</span>
                                 </div>
@@ -1373,7 +1294,7 @@
                             data-app-store-status-button style="display: none;">متجر البرامج</button>
 
                         <!-- Customer Support Section (Identical to Main Login Page) -->
-                        <div class="customer-support-section" style="margin-top: 18px;">
+                        <div class="customer-support-section status-support-section">
                             <div class="support-header">
                                 <svg viewBox="0 0 24 24" class="support-header-icon">
                                     <path
@@ -1523,7 +1444,6 @@
     <span style="display: none;" id="winmsg"></span>
 
     <!-- Hotspot System Scripts -->
-    <script src="js/jsqr.min.js"></script>
     <script src="js/init.min.js"></script>
     <script src="js/hotInImprover.min.js"></script>
     <script src="js/hotCookie.min.js"></script>
@@ -1792,11 +1712,6 @@
                 } else {
                     document.body.style.overflow = 'hidden';
                 }
-
-                // If opening QR scanner modal, start camera immediately
-                if (modal.id === 'qr-scanner-modal' && typeof window.startCamera === 'function') {
-                    window.startCamera();
-                }
             }
 
             function closeAppModal(modalOrId) {
@@ -1815,9 +1730,6 @@
                             target.style.display = 'none';
                         }
                     }, 180);
-                    if (target.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
-                        window.stopCamera();
-                    }
                 } else {
                     document.querySelectorAll('.app.active').forEach(m => {
                         if (m.id !== 'status') {
@@ -1827,9 +1739,6 @@
                                     m.style.display = 'none';
                                 }
                             }, 180);
-                            if (m.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
-                                window.stopCamera();
-                            }
                         }
                     });
                 }
@@ -1877,7 +1786,6 @@
             // Modal Trigger Buttons (parent-id and dedicated IDs)
             document.querySelectorAll('button[parent-id], [data-open-modal]').forEach(btn => {
                 btn.addEventListener('click', function (e) {
-                    if (this.id === 'openQrScannerBtn') return; // Handled specifically with direct camera start
                     const parentId = this.getAttribute('parent-id') || this.getAttribute('data-open-modal');
                     if (parentId && parentId !== 'status') {
                         e.preventDefault();
@@ -1887,9 +1795,10 @@
                 }, true);
             });
 
-            // 3. SPEED SELECTOR & MODAL POPUP SYNC (LOGIN SCREEN)
+            // 3. SPEED SELECTOR & OVAL PILLS SYNC (LOGIN SCREEN)
             const speedSelect = document.getElementById('speed');
             const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
+            const speedPills = document.querySelectorAll('.speed-pill-btn');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
             // Apply Ultra Speed Option visibility from config.js ("enable-ultra-speed")
@@ -1898,9 +1807,11 @@
                     if (hotOption['enable-ultra-speed']) {
                         const optUltra = document.getElementById('opt-speed-ultra');
                         const cardUltra = document.getElementById('card-speed-ultra');
+                        const pillUltra = document.getElementById('pill-speed-ultra');
                         const cardStatusUltra = document.getElementById('card-status-speed-ultra');
                         if (optUltra) optUltra.style.display = '';
                         if (cardUltra) cardUltra.style.display = '';
+                        if (pillUltra) pillUltra.style.display = '';
                         if (cardStatusUltra) cardStatusUltra.style.display = '';
                     }
 
@@ -1935,24 +1846,109 @@
             }
 
             const speedLabelMap = {
-                '128k/512k': 'سرعة اقتصادية',
-                '256k/700k': 'سرعة عادية',
-                '256k/1M': 'سرعة متوسطة',
-                '512M/3M': 'سرعة عالية',
-                '1M/8M': 'سرعة عالية جدا'
+                '1M': '1 ميجا',
+                '2M': '2 ميجا',
+                '4M': '4 ميجا',
+                '8M': '8 ميجا',
+                '12M': '12 ميجا',
+                '20M': '20 ميجا',
+                '40M': '40 ميجا',
+                '60M': '60 ميجا',
+                '128k/512k': '1 ميجا',
+                '512k/1M': '1 ميجا',
+                '256k/700k': '2 ميجا',
+                '1M/2M': '2 ميجا',
+                '256k/1M': '4 ميجا',
+                '2M/4M': '4 ميجا',
+                '512M/3M': '8 ميجا',
+                '2M/8M': '8 ميجا',
+                '1M/8M': '8 ميجا',
+                '3M/12M': '12 ميجا',
+                '5M/20M': '20 ميجا',
+                '10M/40M': '40 ميجا',
+                '15M/60M': '60 ميجا'
             };
 
             function updateSpeedSelection(val) {
-                if (speedSelect) {
+                if (speedSelect && speedSelect.value !== val) {
                     speedSelect.value = val;
                     const event = new Event('change', { bubbles: true });
                     speedSelect.dispatchEvent(event);
                 }
-                if (selectedSpeedDisplay && speedLabelMap[val]) {
-                    selectedSpeedDisplay.textContent = speedLabelMap[val];
+                const label = speedLabelMap[val] || val;
+                if (selectedSpeedDisplay) {
+                    selectedSpeedDisplay.textContent = label;
                 }
                 speedCards.forEach(card => {
-                    card.classList.toggle('active', card.getAttribute('data-speed') === val);
+                    const cardSpeed = card.getAttribute('data-speed');
+                    card.classList.toggle('active', cardSpeed === val || speedLabelMap[cardSpeed] === label);
+                });
+                speedPills.forEach(pill => {
+                    const pillSpeed = pill.getAttribute('data-speed');
+                    const isActive = pillSpeed === val || speedLabelMap[pillSpeed] === label;
+                    pill.classList.toggle('active', isActive);
+                    if (isActive) {
+                        try {
+                            pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        } catch (e) {}
+                    }
+                });
+            }
+
+            // Speed Pill Buttons Event Listener
+            if (speedPills.length > 0) {
+                speedPills.forEach(pill => {
+                    pill.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const val = this.getAttribute('data-speed');
+                        const speedTitle = this.getAttribute('data-speed-title') || speedLabelMap[val] || val;
+                        updateSpeedSelection(val);
+                        if (selectedSpeedDisplay) {
+                            selectedSpeedDisplay.textContent = speedTitle;
+                        }
+                    });
+                });
+            }
+
+            // Speed Strip Carousel Scroll Arrows & Drag Support
+            const speedPillsRow = document.getElementById('speedPillsRow');
+            const speedNavPrev = document.getElementById('speedNavPrev');
+            const speedNavNext = document.getElementById('speedNavNext');
+
+            if (speedPillsRow) {
+                if (speedNavPrev) {
+                    speedNavPrev.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        speedPillsRow.scrollBy({ left: -90, behavior: 'smooth' });
+                    });
+                }
+                if (speedNavNext) {
+                    speedNavNext.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        speedPillsRow.scrollBy({ left: 90, behavior: 'smooth' });
+                    });
+                }
+
+                // Mouse Drag to scroll
+                let isDragging = false;
+                let startX = 0;
+                let scrollLeft = 0;
+
+                speedPillsRow.addEventListener('mousedown', function (e) {
+                    isDragging = true;
+                    startX = e.pageX - speedPillsRow.offsetLeft;
+                    scrollLeft = speedPillsRow.scrollLeft;
+                });
+                window.addEventListener('mouseup', function () {
+                    isDragging = false;
+                });
+                speedPillsRow.addEventListener('mousemove', function (e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const x = e.pageX - speedPillsRow.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    speedPillsRow.scrollLeft = scrollLeft - walk;
                 });
             }
 
@@ -1975,18 +1971,21 @@
                         }, 180);
                     });
                 });
+            }
 
-                if (speedSelect) {
-                    speedSelect.addEventListener('change', function () {
-                        const val = speedSelect.value;
-                        if (selectedSpeedDisplay && speedLabelMap[val]) {
-                            selectedSpeedDisplay.textContent = speedLabelMap[val];
-                        }
-                        speedCards.forEach(card => {
-                            card.classList.toggle('active', card.getAttribute('data-speed') === val);
-                        });
+            if (speedSelect) {
+                speedSelect.addEventListener('change', function () {
+                    const val = speedSelect.value;
+                    if (selectedSpeedDisplay && speedLabelMap[val]) {
+                        selectedSpeedDisplay.textContent = speedLabelMap[val];
+                    }
+                    speedCards.forEach(card => {
+                        card.classList.toggle('active', card.getAttribute('data-speed') === val);
                     });
-                }
+                    speedPills.forEach(pill => {
+                        pill.classList.toggle('active', pill.getAttribute('data-speed') === val);
+                    });
+                });
             }
 
             // 4. UPDATES BLOCKER TOGGLE STATUS TEXT (LOGIN SCREEN)
@@ -2130,7 +2129,7 @@
 
             // Global modern redirect loader function
             window.showRedirectLoader = function (options = {}) {
-                const url = options.url || 'https://tunisnet.shabakaty.site/auth/register';
+                const url = options.url || 'https://bh.shabakaty.site/auth/register';
                 const title = options.title || 'جاري الانتقال لصفحة إنشاء الحساب...';
                 const subtitle = options.subtitle || 'يتم تحويلك إلى بوابة التسجيل في شبكتي لنظام النقاط والمكافآت';
                 const delay = options.delay || 950;
@@ -2381,493 +2380,7 @@
                 });
             });
 
-            // 4. QR CODE CAMERA SCANNER ENGINE (2026 ULTRA-COMPATIBLE ENGINE)
-            const qrScannerModal = document.getElementById('qr-scanner-modal');
-            const openQrBtn = document.getElementById('openQrScannerBtn');
-            const qrVideo = document.getElementById('qrVideo');
-            const qrCanvas = document.getElementById('qrCanvas');
-            const qrLoading = document.getElementById('qrCameraLoading');
-            const qrError = document.getElementById('qrCameraError');
-            const qrErrorText = document.getElementById('qrCameraErrorText');
-            const qrRetryBtn = document.getElementById('qrRetryCamBtn');
-            const qrTorchBtn = document.getElementById('qrTorchBtn');
-            const qrTorchText = document.getElementById('qrTorchText');
-            const qrSwitchCamBtn = document.getElementById('qrSwitchCameraBtn');
-            const qrStatusText = document.getElementById('qrStatusText');
-            const qrSuccessCard = document.getElementById('qrScanSuccessCard');
-            const qrResultDisplay = document.getElementById('qrScannedResultDisplay');
-
-            let qrMediaStream = null;
-            let qrAnimationId = null;
-            let currentFacingMode = 'environment';
-            let isTorchActive = false;
-            let isScanningActive = false;
-            let barcodeDetectorInstance = null;
-
-            // Initialize native barcode detector if available
-            if ('BarcodeDetector' in window) {
-                try {
-                    barcodeDetectorInstance = new BarcodeDetector({ formats: ['qr_code'] });
-                } catch (e) {
-                    barcodeDetectorInstance = null;
-                }
-            }
-
-            function playBeepSound() {
-                try {
-                    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.08);
-                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.25);
-                } catch (e) { }
-            }
-
-            function extractCardNumberFromQR(raw) {
-                if (!raw) return '';
-                raw = String(raw).trim();
-
-                // 1. Check if URL
-                if (raw.startsWith('http://') || raw.startsWith('https://')) {
-                    try {
-                        const url = new URL(raw);
-                        const params = ['username', 'user', 'card', 'code', 'u', 'pin', 'id'];
-                        for (let i = 0; i < params.length; i++) {
-                            if (url.searchParams.has(params[i])) {
-                                const val = url.searchParams.get(params[i]);
-                                if (val) return val.trim();
-                            }
-                        }
-                        if (url.hash && url.hash.length > 1) {
-                            return url.hash.substring(1).trim();
-                        }
-                    } catch (e) { }
-                }
-
-                // 2. Check if JSON
-                if (raw.startsWith('{') && raw.endsWith('}')) {
-                    try {
-                        const obj = JSON.parse(raw);
-                        const val = obj.username || obj.user || obj.card || obj.code || obj.pin;
-                        if (val) return String(val).trim();
-                    } catch (e) { }
-                }
-
-                // 3. Check for PREFIX:VALUE (e.g. USER:12345 or CARD:12345)
-                const match = raw.match(/^(?:user|username|card|pin|code)[\s:=_-]+([a-zA-Z0-9_-]+)/i);
-                if (match && match[1]) {
-                    return match[1].trim();
-                }
-
-                return raw;
-            }
-
-            function ensureJsQr() {
-                if (typeof window.jsQR === 'function' || barcodeDetectorInstance) {
-                    return Promise.resolve();
-                }
-                return new Promise(function (resolve) {
-                    var s = document.createElement('script');
-                    s.src = 'js/jsqr.min.js';
-                    s.async = true;
-                    s.onload = resolve;
-                    s.onerror = resolve;
-                    document.head.appendChild(s);
-                });
-            }
-
-            // Universal media stream acquisition with progressive degradation
-            async function requestCameraStream(facing) {
-                const constraintTiers = [
-                    { video: { facingMode: { ideal: facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false },
-                    { video: { facingMode: facing }, audio: false },
-                    { video: { facingMode: (facing === 'environment' ? 'user' : 'environment') }, audio: false },
-                    { video: true, audio: false }
-                ];
-
-                const modernApi = navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function';
-
-                for (let i = 0; i < constraintTiers.length; i++) {
-                    try {
-                        if (modernApi) {
-                            return await navigator.mediaDevices.getUserMedia(constraintTiers[i]);
-                        }
-                        const legacyGUM = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-                        if (legacyGUM) {
-                            return await new Promise((res, rej) => legacyGUM.call(navigator, constraintTiers[i], res, rej));
-                        }
-                    } catch (err) {
-                        if (i === constraintTiers.length - 1) throw err;
-                    }
-                }
-                throw new Error('متصفحك لا يدعم الوصول المباشر للكاميرا');
-            }
-
-            async function startCamera() {
-                stopCamera();
-                if (qrLoading) qrLoading.style.display = 'flex';
-                if (qrError) qrError.style.display = 'none';
-                if (qrSuccessCard) qrSuccessCard.style.display = 'none';
-                if (qrStatusText) qrStatusText.textContent = 'وجه الكاميرا نحو رمز QR على الكرت';
-                isScanningActive = true;
-
-                // Load jsQR in background without delaying camera permission prompt
-                ensureJsQr().catch(() => { });
-
-                try {
-                    qrMediaStream = await requestCameraStream(currentFacingMode);
-
-                    if (qrVideo) {
-                        qrVideo.muted = true;
-                        qrVideo.playsInline = true;
-                        qrVideo.setAttribute('playsinline', 'true');
-                        qrVideo.setAttribute('webkit-playsinline', 'true');
-                        qrVideo.setAttribute('muted', 'true');
-                        qrVideo.setAttribute('autoplay', 'true');
-                        qrVideo.srcObject = qrMediaStream;
-
-                        // Ensure video starts playing smoothly
-                        qrVideo.onloadedmetadata = function () {
-                            qrVideo.play().catch(function (e) {
-                                console.warn('Autoplay caught:', e);
-                            });
-                            if (qrLoading) qrLoading.style.display = 'none';
-                        };
-
-                        const playPromise = qrVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise.then(() => {
-                                if (qrLoading) qrLoading.style.display = 'none';
-                            }).catch(function (e) {
-                                console.warn('Autoplay caught:', e);
-                            });
-                        }
-
-                        qrVideo.onloadeddata = function () {
-                            if (qrLoading) qrLoading.style.display = 'none';
-                        };
-                    }
-
-                    // Failsafe timeout to hide loading spinner
-                    setTimeout(() => {
-                        if (qrLoading && isScanningActive) {
-                            qrLoading.style.display = 'none';
-                        }
-                    }, 400);
-
-                    // Check torch capability
-                    try {
-                        const track = qrMediaStream.getVideoTracks()[0];
-                        if (track && track.getCapabilities && typeof track.getCapabilities === 'function') {
-                            const capabilities = track.getCapabilities();
-                            if (capabilities && capabilities.torch && qrTorchBtn) {
-                                qrTorchBtn.style.display = 'inline-flex';
-                            } else if (qrTorchBtn) {
-                                qrTorchBtn.style.display = 'none';
-                            }
-                        }
-                    } catch (e) { }
-
-                    // Start Scan Loop
-                    requestAnimationFrame(scanVideoFrame);
-
-                } catch (err) {
-                    console.warn('Camera access status:', err ? (err.message || err.name || err) : 'Error');
-                    if (qrLoading) qrLoading.style.display = 'none';
-                    if (qrError) {
-                        qrError.style.display = 'flex';
-                        if (qrErrorText) {
-                            const errMsg = (err && (err.message || err.name)) ? String(err.message || err.name).toLowerCase() : '';
-                            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError' || errMsg.includes('permission') || errMsg.includes('denied') || errMsg.includes('notallowed')) {
-                                qrErrorText.textContent = 'تم رفض الإذن أو حظر الكاميرا من المتصفح. يرجى الضغط على أيقونة القفل/الإعدادات في شريط المتصفح والسماح للكاميرا ثم النقر على إعادة المحاولة.';
-                            } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError' || errMsg.includes('notfound')) {
-                                qrErrorText.textContent = 'لم يتم العثور على جهاز كاميرا متصل.';
-                            } else {
-                                qrErrorText.textContent = 'تعذر تشغيل الكاميرا حالياً. يرجى التأكد من صلاحيات المتصفح ثم إعادة المحاولة.';
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Expose globally
-            window.startCamera = startCamera;
-            window.stopCamera = stopCamera;
-
-            async function scanVideoFrame() {
-                if (!isScanningActive || !qrVideo) return;
-
-                if (qrVideo.readyState < 2) {
-                    if (isScanningActive) {
-                        qrAnimationId = requestAnimationFrame(scanVideoFrame);
-                    }
-                    return;
-                }
-
-                // If loading is still visible, hide it now
-                if (qrLoading && qrLoading.style.display !== 'none') {
-                    qrLoading.style.display = 'none';
-                }
-
-                let detectedCode = null;
-
-                // Priority 1: Native Hardware BarcodeDetector
-                if (barcodeDetectorInstance) {
-                    try {
-                        const barcodes = await barcodeDetectorInstance.detect(qrVideo);
-                        if (barcodes && barcodes.length > 0) {
-                            detectedCode = barcodes[0].rawValue;
-                        }
-                    } catch (e) { }
-                }
-
-                // Priority 2: jsQR Canvas Decoding (Fast captive portal safe engine)
-                if (!detectedCode && typeof window.jsQR === 'function' && qrCanvas && qrVideo.videoWidth > 0) {
-                    try {
-                        const ctx = qrCanvas.getContext('2d', { willReadFrequently: true });
-                        if (ctx) {
-                            const w = Math.min(qrVideo.videoWidth, 640);
-                            const h = Math.round(w * (qrVideo.videoHeight / qrVideo.videoWidth));
-                            qrCanvas.width = w;
-                            qrCanvas.height = h;
-                            ctx.drawImage(qrVideo, 0, 0, w, h);
-                            const imageData = ctx.getImageData(0, 0, w, h);
-                            const code = window.jsQR(imageData.data, imageData.width, imageData.height, {
-                                inversionAttempts: "dontInvert"
-                            });
-                            if (code && code.data) {
-                                detectedCode = code.data;
-                            }
-                        }
-                    } catch (e) { }
-                }
-
-                if (detectedCode) {
-                    handleSuccessfulQrScan(detectedCode);
-                    return;
-                }
-
-                if (isScanningActive) {
-                    qrAnimationId = requestAnimationFrame(scanVideoFrame);
-                }
-            }
-
-            function handleSuccessfulQrScan(rawData) {
-                isScanningActive = false;
-                const cleanCard = extractCardNumberFromQR(rawData);
-
-                playBeepSound();
-                if (navigator.vibrate) {
-                    try { navigator.vibrate([80, 40, 80]); } catch (e) { }
-                }
-
-                if (qrSuccessCard && qrResultDisplay) {
-                    qrResultDisplay.textContent = cleanCard;
-                    qrSuccessCard.style.display = 'flex';
-                }
-
-                // Auto-fill username field in login form
-                const usernameInput = document.querySelector('input[name="username"]') || document.querySelector('input[username-field]');
-                if (usernameInput) {
-                    usernameInput.value = cleanCard;
-                    usernameInput.dispatchEvent(new Event('input', { bubbles: true }));
-                    usernameInput.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-
-                // Auto-close modal after brief visual confirmation
-                setTimeout(() => {
-                    stopCamera();
-                    const closeBtn = document.getElementById('closeQrScannerBtn');
-                    if (closeBtn) {
-                        closeBtn.click();
-                    } else {
-                        const logoutBtn = qrScannerModal ? qrScannerModal.querySelector('.app-logout') : null;
-                        if (logoutBtn) logoutBtn.click();
-                    }
-                }, 600);
-            }
-
-            function stopCamera() {
-                isScanningActive = false;
-                if (qrAnimationId) {
-                    cancelAnimationFrame(qrAnimationId);
-                    qrAnimationId = null;
-                }
-                if (qrMediaStream) {
-                    qrMediaStream.getTracks().forEach(track => {
-                        try { track.stop(); } catch (e) { }
-                    });
-                    qrMediaStream = null;
-                }
-                if (qrVideo) {
-                    qrVideo.srcObject = null;
-                }
-                isTorchActive = false;
-                if (qrTorchText) qrTorchText.textContent = 'الكشاف';
-            }
-
-            // Open QR Scanner button click & immediate camera initialization
-            if (openQrBtn) {
-                const handleOpenQr = function (e) {
-                    if (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                    openAppModal('qr-scanner-modal');
-                    startCamera();
-                };
-                openQrBtn.addEventListener('click', handleOpenQr);
-            }
-
-            // Switch Camera
-            if (qrSwitchCamBtn) {
-                qrSwitchCamBtn.addEventListener('click', function () {
-                    currentFacingMode = (currentFacingMode === 'environment') ? 'user' : 'environment';
-                    startCamera();
-                });
-            }
-
-            // Torch Toggle
-            if (qrTorchBtn) {
-                qrTorchBtn.addEventListener('click', async function () {
-                    if (!qrMediaStream) return;
-                    const track = qrMediaStream.getVideoTracks()[0];
-                    if (track && track.applyConstraints) {
-                        try {
-                            isTorchActive = !isTorchActive;
-                            await track.applyConstraints({
-                                advanced: [{ torch: isTorchActive }]
-                            });
-                            if (qrTorchText) {
-                                qrTorchText.textContent = isTorchActive ? 'إطفاء الكشاف' : 'الكشاف';
-                            }
-                        } catch (e) {
-                            console.error('Torch error:', e);
-                        }
-                    }
-                });
-            }
-
-            // System Camera Capture Fallback elements
-            const qrSystemCamFallbackBtn = document.getElementById('qrSystemCamFallbackBtn');
-            const qrSystemCameraInput = document.getElementById('qrSystemCameraInput');
-
-            // Decode QR Code from Native Camera Snapshot
-            async function decodeQrFromImageFile(file) {
-                if (!file) return;
-                if (qrLoading) {
-                    qrLoading.style.display = 'flex';
-                    const span = qrLoading.querySelector('span');
-                    if (span) span.textContent = 'جاري قراءة رمز الكرت...';
-                }
-                if (qrError) qrError.style.display = 'none';
-
-                await ensureJsQr();
-
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = new Image();
-                    img.onload = async function () {
-                        let detectedCode = null;
-
-                        // Native Hardware detector check
-                        if (barcodeDetectorInstance) {
-                            try {
-                                const barcodes = await barcodeDetectorInstance.detect(img);
-                                if (barcodes && barcodes.length > 0) {
-                                    detectedCode = barcodes[0].rawValue;
-                                }
-                            } catch (err) { }
-                        }
-
-                        // jsQR Canvas decode
-                        if (!detectedCode && typeof window.jsQR === 'function') {
-                            const c = qrCanvas || document.createElement('canvas');
-                            const ctx = c.getContext('2d', { willReadFrequently: true });
-                            let maxDim = 1200;
-                            let w = img.naturalWidth || img.width;
-                            let h = img.naturalHeight || img.height;
-                            if (w > maxDim || h > maxDim) {
-                                if (w > h) {
-                                    h = Math.round((h * maxDim) / w);
-                                    w = maxDim;
-                                } else {
-                                    w = Math.round((w * maxDim) / h);
-                                    h = maxDim;
-                                }
-                            }
-                            c.width = w;
-                            c.height = h;
-                            ctx.drawImage(img, 0, 0, w, h);
-                            const imgData = ctx.getImageData(0, 0, w, h);
-                            const code = window.jsQR(imgData.data, imgData.width, imgData.height, {
-                                inversionAttempts: "attemptBoth"
-                            });
-                            if (code && code.data) {
-                                detectedCode = code.data;
-                            }
-                        }
-
-                        if (qrLoading) qrLoading.style.display = 'none';
-
-                        if (detectedCode) {
-                            handleSuccessfulQrScan(detectedCode);
-                        } else {
-                            if (qrError) {
-                                qrError.style.display = 'flex';
-                                if (qrErrorText) {
-                                    qrErrorText.textContent = 'لم يتم العثور على رمز QR واضح في الصورة الملتقطة. يرجى إعادة الالتقاط والتركيز على الكرت.';
-                                }
-                            }
-                        }
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-
-            // Fallback Native Camera button trigger
-            if (qrSystemCamFallbackBtn && qrSystemCameraInput) {
-                qrSystemCamFallbackBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    qrSystemCameraInput.click();
-                });
-            }
-
-            if (qrSystemCameraInput) {
-                qrSystemCameraInput.addEventListener('change', function (e) {
-                    if (e.target.files && e.target.files[0]) {
-                        decodeQrFromImageFile(e.target.files[0]);
-                    }
-                });
-            }
-
-            // Retry Camera
-            if (qrRetryBtn) {
-                qrRetryBtn.addEventListener('click', function () {
-                    startCamera();
-                });
-            }
-
-            // Stop camera on modal close / logout
-            if (qrScannerModal) {
-                const closeBtns = qrScannerModal.querySelectorAll('.modal-close-btn, .modal-cancel-btn, .app-logout');
-                closeBtns.forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        stopCamera();
-                    });
-                });
-            }
-
-            // 5. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
+            // 4. DIRECT FILL PREVIOUS CARD BUTTON (دخول بكرت سابق)
             const prevCardBtn = document.getElementById('quickPreviousCardBtn');
             let prevCardCycleIndex = 0;
 

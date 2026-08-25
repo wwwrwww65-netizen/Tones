@@ -1,49 +1,49 @@
 /* ===== Loyalty System Modal Styles ===== */
 
-/* ===== Root Variables - Customize Colors Here ===== */
+/* ===== Root Variables - Modern Light Theme Edition ===== */
 :root {
   /* Primary Colors */
-  --loyalty-primary-color: #881337;
-  --loyalty-primary-dark: #4c0519;
-  --loyalty-accent-color: #D4AF37;         /* اللون الأساسي الفاتح */
-  --loyalty-text-success: #FFFFFF;           /* نص أبيض */
+  --loyalty-primary-color: #1E88E5;
+  --loyalty-primary-dark: #1565C0;
+  --loyalty-accent-color: #3B82F6;         /* اللون الأساسي الفاتح */
+  --loyalty-text-success: #0F172A;           /* نص داكن */
   /* Highlight Colors */
-  --loyalty-highlight-bg-start: rgba(80, 20, 25, 0.45);     /* بداية تدرج الصندوق المميز */
-  --loyalty-highlight-bg-end: rgba(136, 19, 55, 0.35);       /* نهاية تدرج الصندوق المميز */
+  --loyalty-highlight-bg-start: #EFF6FF;     /* بداية تدرج الصندوق المميز */
+  --loyalty-highlight-bg-end: #DBEAFE;       /* نهاية تدرج الصندوق المميز */
   
   /* Accent Colors */
-  --loyalty-accent-color: #D4AF37;           /* لون التمييز (ذهبي) */
-  --loyalty-accent-dark: #B8860B;            /* لون التمييز الداكن */
+  --loyalty-accent-color: #1E88E5;           /* لون التمييز */
+  --loyalty-accent-dark: #1565C0;            /* لون التمييز الداكن */
   
   /* Background Colors */
-  --loyalty-bg-white: #501419;               /* خلفية عنابية */
-  --loyalty-bg-gray: #30060e;                /* خلفية عنابية داكنة */
-  --loyalty-overlay-bg: rgba(18, 2, 6, 0.75); /* خلفية الأوفرلاي */
+  --loyalty-bg-white: #FFFFFF;               /* خلفية بيضاء */
+  --loyalty-bg-gray: #F8FAFC;                /* خلفية فاتحة */
+  --loyalty-overlay-bg: rgba(15, 23, 42, 0.5); /* خلفية الأوفرلاي مع بلور */
   
   /* Text Colors */
-  --loyalty-text-dark: #FFFFFF;              /* نص داكن */
-  --loyalty-text-white: #ffffff;             /* نص أبيض */
+  --loyalty-text-dark: #0F172A;              /* نص داكن رئيسي */
+  --loyalty-text-white: #FFFFFF;             /* نص أبيض */
  
   
   /* Border & Divider Colors */
-  --loyalty-border-color: rgba(212, 175, 55, 0.45);           /* لون الحدود */
-  --loyalty-divider-color: rgba(212, 175, 55, 0.25);             /* لون الفواصل */
+  --loyalty-border-color: #E2E8F0;           /* لون الحدود */
+  --loyalty-divider-color: #CBD5E1;          /* لون الفواصل */
 
   /* Shadow & Effects */
-  --loyalty-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --loyalty-shadow-medium: 0 3px 10px rgba(0, 0, 0, 0.2);
-  --loyalty-shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.8);
+  --loyalty-shadow-light: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --loyalty-shadow-medium: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --loyalty-shadow-heavy: 0 20px 60px rgba(15, 23, 42, 0.16);
   
   /* Button Shadows */
-  --loyalty-btn-primary-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  --loyalty-btn-accent-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+  --loyalty-btn-primary-shadow: 0 4px 15px rgba(30, 136, 229, 0.35);
+  --loyalty-btn-accent-shadow: 0 4px 15px rgba(30, 136, 229, 0.35);
   
   /* Scrollbar Colors */
-  --loyalty-scrollbar-track: #180208;        /* مسار السكرول */
-  --loyalty-scrollbar-thumb: #881337;        /* السكرول */
+  --loyalty-scrollbar-track: #F1F5F9;        /* مسار السكرول */
+  --loyalty-scrollbar-thumb: #CBD5E1;        /* السكرول */
   
   /* Close Button */
-  --loyalty-close-hover-bg: rgba(212, 175, 55, 0.4);         /* لون زر الإغلاق عند التمرير */
+  --loyalty-close-hover-bg: #EF4444;         /* لون زر الإغلاق عند التمرير */
 }
 /* ===== Modal Overlay ===== */
 
@@ -127,9 +127,8 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  background-color: #e51e0f;
-  /* background: rgba(255, 255, 255, 0.9); */
-  border: none;
+  background-color: #F1F5F9;
+  border: 1px solid #E2E8F0;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -144,20 +143,21 @@
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 20px;
-  color: white;
+  color: #64748B;
   z-index: 10;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  -webkit-box-shadow: var(--loyalty-shadow-light);
-  -moz-box-shadow: var(--loyalty-shadow-light);
-  box-shadow: var(--loyalty-shadow-light);
+  -webkit-box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  -moz-box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
 }
 
 .loyalty-modal-close-notifacion:hover {
-  background: var(--loyalty-close-hover-bg);
-  color: white;
+  background: #FEE2E2;
+  border-color: #FECACA;
+  color: #EF4444;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -167,14 +167,14 @@
 
 /* Header */
 .loyalty-modal-header-notifacion {
-  background: -webkit-linear-gradient(135deg, var(--loyalty-primary-color) 0%, var(--loyalty-primary-dark) 100%);
-  background: -moz-linear-gradient(135deg, var(--loyalty-primary-color) 0%, var(--loyalty-primary-dark) 100%);
-  background: linear-gradient(135deg, var(--loyalty-primary-color) 0%, var(--loyalty-primary-dark) 100%);
+  background: -webkit-linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+  background: -moz-linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
   color: var(--loyalty-text-white);
-  padding: 30px 20px 25px;
+  padding: 26px 20px 22px;
   text-align: center;
   position: relative;
-  border-bottom: 3px solid rgb(191, 189, 189);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .loyalty-modal-header-notifacion h2 {

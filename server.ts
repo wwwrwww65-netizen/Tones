@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 let sessionState = {
   isLoggedIn: false,
   username: 'USER-1234',
-  speed: '256k/700k',
+  speed: '4M',
   updateOption: '_Uon',
   bytesIn: 14680064,
   bytesOut: 58720256,
@@ -53,14 +53,14 @@ function getUptimeString(startTime: number): string {
 app.get('/login', (req, res) => {
   const isCallBack = req.query.var === 'callBack';
   const username = req.query.username as string;
-  const domain = (req.query.domain as string) || '256k/700k';
+  const domain = (req.query.domain as string) || '4M';
 
   if (isCallBack) {
     if (username) {
       // User is logging in
       sessionState.isLoggedIn = true;
       sessionState.username = username;
-      sessionState.speed = domain.split('_')[0] || '256k/700k';
+      sessionState.speed = domain.split('_')[0] || '4M';
       sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
       sessionState.startTime = Date.now();
 

@@ -1,22 +1,29 @@
 /**
- * Notifications System Styles
- * Styling for banners, modals, and centered cards
+ * Notifications System Styles - Modern Light Theme Edition
+ * Premium styling for banners, modals, and centered cards
  */
 
 /* ===== Banner Styles ===== */
 .nt-banner {
-    /* position: fixed; */
+    position: relative;
     left: 0;
     right: 0;
     width: 100%;
-    padding: 15px 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 8px auto;
+    padding: 14px 18px;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+    color: #0F172A !important;
     z-index: 10100;
-    transform: translateY(-100%);
-    transition: transform 0.4s ease-out;
-    border-radius: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease-out;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family: 'Almarai', 'Tajawal', sans-serif;
 }
 
 .nt-banner-top {
@@ -26,87 +33,119 @@
 .nt-banner-bottom {
     top: auto;
     bottom: 0;
-    transform: translateY(100%);
+    transform: translateY(20px);
 }
 
-.nt-banner-show.nt-banner-top {
-    transform: translateY(0);
-}
-
+.nt-banner-show.nt-banner-top,
 .nt-banner-show.nt-banner-bottom {
     transform: translateY(0);
+    opacity: 1;
 }
 
 .nt-banner-hide.nt-banner-top {
-    transform: translateY(-100%);
+    transform: translateY(-20px);
+    opacity: 0;
 }
 
 .nt-banner-hide.nt-banner-bottom {
-    transform: translateY(100%);
+    transform: translateY(20px);
+    opacity: 0;
 }
 
 .nt-banner-content {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
 }
 
 .nt-banner-icon {
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 12px;
+    background: #EFF6FF !important;
+    color: #1E88E5 !important;
+    fill: #1E88E5 !important;
+    font-size: 20px;
     flex-shrink: 0;
+    border: 1px solid #DBEAFE;
 }
 
 .nt-banner-text {
     flex: 1;
-    min-width: 200px;
+    min-width: 0;
+    text-align: right;
 }
 
 .nt-banner-title {
     display: block;
-    font-size: 16px;
-    margin-bottom: 4px;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #0F172A !important;
+    margin-bottom: 2px;
+    line-height: 1.3;
 }
 
 .nt-banner-message {
     display: block;
-    font-size: 14px;
-    opacity: 0.9;
+    font-size: 12.5px;
+    color: #475569 !important;
+    line-height: 1.4;
+    font-weight: 500;
 }
 
 .nt-banner-action {
-    padding: 8px 20px;
-    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: opacity 0.3s;
+    font-weight: 700;
+    font-size: 13px;
+    background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%) !important;
+    color: #FFFFFF !important;
+    border: none;
+    box-shadow: 0 3px 10px rgba(30, 136, 229, 0.3) !important;
+    transition: all 0.25s ease;
     flex-shrink: 0;
-    max-height: 40px;
+    white-space: nowrap;
 }
 
 .nt-banner-action:hover {
-    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(30, 136, 229, 0.45) !important;
+    opacity: 0.96;
 }
 
 .nt-banner-close {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: currentColor;
-    font-size: 24px;
-    width: 30px;
-    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F1F5F9 !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #64748B !important;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.2s ease;
     flex-shrink: 0;
     line-height: 1;
+    padding: 0;
 }
 
 .nt-banner-close:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: #FEE2E2 !important;
+    border-color: #FECACA !important;
+    color: #EF4444 !important;
+    transform: scale(1.05);
 }
 
 /* ===== Modal Styles ===== */
@@ -116,14 +155,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10200;
     opacity: 0;
-    transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 20px;
+    direction: rtl;
+    font-family: 'Almarai', 'Tajawal', sans-serif;
     overscroll-behavior: contain !important;
     touch-action: pan-y;
 }
@@ -137,74 +180,97 @@
 }
 
 .nt-modal {
-    max-width: 500px;
+    max-width: 440px;
     width: 100%;
-    border-radius: 15px;
-    padding: 30px;
+    border-radius: 22px !important;
+    padding: 28px 24px;
     position: relative;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    transform: scale(0.9);
-    transition: transform 0.3s ease-out;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.16) !important;
+    color: #0F172A !important;
+    transform: scale(0.92) translateY(10px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
 }
 
 .nt-modal-show .nt-modal {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
 .nt-modal-hide .nt-modal {
-    transform: scale(0.9);
+    transform: scale(0.92) translateY(10px);
 }
 
 .nt-modal-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    color: currentColor;
-    font-size: 28px;
-    width: 35px;
-    height: 35px;
+    top: 16px;
+    left: 16px;
+    right: auto;
+    background: #F1F5F9 !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #64748B !important;
+    font-size: 20px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
+    z-index: 2;
 }
 
 .nt-modal-close:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: #FEE2E2 !important;
+    border-color: #FECACA !important;
+    color: #EF4444 !important;
+    transform: rotate(90deg);
 }
 
 .nt-modal-content {
     text-align: center;
+    padding-top: 6px;
 }
 
 .nt-modal-title {
-    font-size: 24px;
-    margin: 0 0 15px 0;
-    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+    color: #0F172A !important;
+    line-height: 1.35;
 }
 
 .nt-modal-message {
-    font-size: 16px;
+    font-size: 14.5px;
     line-height: 1.6;
-    margin: 0 0 20px 0;
-    opacity: 0.9;
+    margin: 0 0 22px 0;
+    color: #475569 !important;
+    font-weight: 500;
 }
 
 .nt-modal-action {
-    /* display: inline-block; */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px 30px;
-    border-radius: 8px;
+    border-radius: 14px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 15px;
+    background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%) !important;
+    color: #FFFFFF !important;
+    border: none;
+    box-shadow: 0 4px 16px rgba(30, 136, 229, 0.35) !important;
     transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 140px;
 }
 
 .nt-modal-action:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5) !important;
 }
 
 /* ===== Centered Card Styles ===== */
@@ -214,14 +280,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10200;
     opacity: 0;
-    transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 20px;
+    direction: rtl;
+    font-family: 'Almarai', 'Tajawal', sans-serif;
     overscroll-behavior: contain !important;
     touch-action: pan-y;
 }
@@ -235,42 +305,54 @@
 }
 
 .nt-card {
-    max-width: 400px;
+    max-width: 380px;
     width: 100%;
-    border-radius: 20px;
-    padding: 40px 30px;
+    border-radius: 24px !important;
+    padding: 32px 24px 26px;
     position: relative;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-    transform: translateY(30px);
-    transition: transform 0.3s ease-out;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 25px 65px rgba(15, 23, 42, 0.18) !important;
+    color: #0F172A !important;
+    transform: translateY(20px) scale(0.94);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
 }
 
 .nt-card-show .nt-card {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .nt-card-hide .nt-card {
-    transform: translateY(30px);
+    transform: translateY(20px) scale(0.94);
 }
 
 .nt-card-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    color: currentColor;
-    font-size: 24px;
+    top: 16px;
+    left: 16px;
+    right: auto;
+    background: #F1F5F9 !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #64748B !important;
+    font-size: 20px;
     width: 32px;
     height: 32px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
+    z-index: 2;
 }
 
 .nt-card-close:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: #FEE2E2 !important;
+    border-color: #FECACA !important;
+    color: #EF4444 !important;
+    transform: rotate(90deg);
 }
 
 .nt-card-content {
@@ -278,42 +360,64 @@
 }
 
 .nt-card-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    background: #EFF6FF !important;
+    color: #1E88E5 !important;
+    font-size: 28px;
+    margin-bottom: 16px;
+    border: 1.5px solid #DBEAFE;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.15);
 }
 
 .nt-card-title {
-    font-size: 22px;
-    margin: 0 0 15px 0;
-    font-weight: 700;
+    font-size: 19px;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+    color: #0F172A !important;
+    line-height: 1.3;
 }
 
 .nt-card-message {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
-    margin: 0 0 25px 0;
-    opacity: 0.9;
+    margin: 0 0 22px 0;
+    color: #475569 !important;
+    font-weight: 500;
 }
 
 .nt-card-action {
-    /* display: inline-block; */
-    padding: 12px 28px;
-    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 26px;
+    border-radius: 14px;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 14.5px;
+    background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%) !important;
+    color: #FFFFFF !important;
+    border: none;
+    box-shadow: 0 4px 15px rgba(30, 136, 229, 0.35) !important;
     transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 130px;
 }
 
 .nt-card-action:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5) !important;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .nt-banner {
-        padding: 12px 15px;
+        padding: 12px 14px;
+        margin: 6px 12px;
+        width: auto;
     }
 
     .nt-banner-content {
@@ -321,68 +425,66 @@
     }
 
     .nt-banner-icon {
-        font-size: 20px;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 18px;
     }
 
     .nt-banner-title {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     .nt-banner-message {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .nt-banner-action {
-        padding: 6px 15px;
-        font-size: 13px;
+        padding: 6px 14px;
+        font-size: 12px;
     }
 
     .nt-modal {
-        padding: 25px 20px;
+        padding: 22px 18px;
     }
 
     .nt-modal-title {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .nt-modal-message {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     .nt-card {
-        padding: 30px 20px;
+        padding: 26px 18px 22px;
     }
 
     .nt-card-icon {
-        font-size: 40px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
     }
 
     .nt-card-title {
-        font-size: 19px;
+        font-size: 17.5px;
     }
 
     .nt-card-message {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 }
 
 @media (max-width: 480px) {
-    .nt-banner-text {
-        min-width: 100%;
-        order: 2;
-    }
-
-    .nt-banner-action {
-        order: 3;
-        width: 100%;
-        text-align: center;
+    .nt-banner-content {
+        flex-wrap: nowrap;
     }
 
     .nt-modal {
-        padding: 20px 15px;
+        padding: 20px 16px;
     }
 
     .nt-card {
-        padding: 25px 15px;
+        padding: 24px 16px 20px;
     }
 }

@@ -479,11 +479,11 @@ button.loyalty-btn:active {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #881337 0%, #be123c 45%, #0284c7 100%);
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 22px rgba(225, 29, 72, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 22px rgba(30, 136, 229, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   z-index: 2;
   animation: redirectFloat 2.5s ease-in-out infinite alternate;
 }
@@ -492,20 +492,19 @@ button.loyalty-btn:active {
   width: 28px;
   height: 28px;
   fill: #ffffff;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .redirect-loading-title {
-  color: #ffffff;
+  color: #0F172A;
   font-size: 1.2rem;
   font-weight: 800;
   margin-bottom: 8px;
   letter-spacing: -0.2px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .redirect-loading-subtitle {
-  color: #e2e8f0;
+  color: #475569;
   font-size: 0.88rem;
   line-height: 1.6;
   margin-bottom: 24px;
@@ -514,8 +513,8 @@ button.loyalty-btn:active {
 
 .redirect-progress-track {
   height: 7px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #E2E8F0;
+  border: 1px solid #CBD5E1;
   border-radius: 999px;
   overflow: hidden;
   position: relative;
@@ -525,10 +524,10 @@ button.loyalty-btn:active {
 .redirect-progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #881337 0%, #e11d48 30%, #d4af37 60%, #38bdf8 100%);
+  background: linear-gradient(90deg, #1E88E5 0%, #3B82F6 50%, #60A5FA 100%);
   background-size: 250% 100%;
   border-radius: 999px;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.85);
+  box-shadow: 0 0 14px rgba(30, 136, 229, 0.5);
   transition: width 0.75s cubic-bezier(0.22, 1, 0.36, 1);
   animation: redirectBarShimmer 1.8s linear infinite;
 }
@@ -543,20 +542,20 @@ button.loyalty-btn:active {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: linear-gradient(135deg, rgba(136, 19, 55, 0.35) 0%, rgba(14, 165, 233, 0.2) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: #EFF6FF;
+  border: 1px solid #DBEAFE;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.78rem;
-  color: #f1f5f9;
+  color: #1E88E5;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.1);
 }
 
 .redirect-badge-secure svg {
   width: 15px;
   height: 15px;
-  fill: #d4af37;
+  fill: #1E88E5;
 }
 
 /* Prompt Button Enhancement */
@@ -564,23 +563,23 @@ button.loyalty-btn:active {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, #881337 0%, #be123c 40%, #0284c7 100%);
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+  border: 1px solid #93C5FD;
   color: #ffffff !important;
   font-weight: 800;
   text-decoration: none !important;
   padding: 6px 14px;
   border-radius: 12px;
   font-size: 0.88rem;
-  box-shadow: 0 4px 15px rgba(190, 18, 60, 0.35), 0 0 10px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 15px rgba(30, 136, 229, 0.35);
   transition: all 0.25s ease;
   cursor: pointer;
 }
 
 .points-switch-prompt .points-signup-glow-btn:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 6px 20px rgba(190, 18, 60, 0.5), 0 0 18px rgba(56, 189, 248, 0.45);
-  border-color: #d4af37;
+  box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5);
+  border-color: #3B82F6;
 }
 
 .points-switch-prompt .points-signup-glow-btn:active {

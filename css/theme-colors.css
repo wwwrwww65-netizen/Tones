@@ -88,33 +88,210 @@ body,
 
 
 /* ══════════════════════════════════════════════════════════════════
-   3. الهيدر العلوي — اسم الشبكة وزر "جديدنا"
+   3. بطاقة الهيدر الفاخرة للشبكة وبطاقة المميزات (Hero Card & Features Strip)
    ══════════════════════════════════════════════════════════════════ */
 
-/* اسم الشبكة في الهيدر → كحلي ملكي داكن */
-.brand-name {
-  color:       var(--color-text-main) !important;
-  text-shadow: none !important;
+.network-hero-card {
+  position:      relative !important;
+  background:    #FFFFFF !important;
+  border:        1px solid #E2E8F0 !important;
+  border-radius: 18px !important;
+  padding:       12px 14px !important;
+  margin-bottom: 10px !important;
+  box-shadow:    0 4px 14px rgba(15, 23, 42, 0.05) !important;
+  width:         100% !important;
+  box-sizing:    border-box !important;
 }
 
-/* أيقونة الواي فاي في الهيدر → أزرق */
-.brand-icon-wrap {
-  background: var(--color-blue-pale) !important;
-  border:     1px solid var(--color-blue-border) !important;
-  box-shadow: none !important;
+.network-hero-content {
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: space-between !important;
+  gap:             12px !important;
+  width:           100% !important;
+  direction:       rtl !important;
+  padding-top:     4px !important;
 }
-.brand-icon-wrap svg { fill: var(--color-blue) !important; }
 
-/* زر "جديدنا" في الهيدر */
-button#btn-whats-new,
-.top-header .m {
-  background: #FFFFFF !important;
-  border:     1px solid var(--color-border) !important;
-  color:      var(--color-text-main) !important;
-  box-shadow: var(--shadow-card) !important;
+/* إطار شعار الشبكة بتأثير زوايا مستديرة فاخر */
+.network-logo-frame {
+  width:         58px !important;
+  height:        58px !important;
+  min-width:     58px !important;
+  border-radius: 14px !important;
+  overflow:      hidden !important;
+  border:        1.5px solid #E2E8F0 !important;
+  box-shadow:    0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  background:    #FFFFFF !important;
+  display:       flex !important;
+  align-items:   center !important;
+  justify-content: center !important;
+  flex-shrink:   0 !important;
 }
-button#btn-whats-new .btn-icon,
-.top-header .m .btn-icon { fill: var(--color-blue) !important; }
+
+.network-logo-img {
+  width:       100% !important;
+  height:      100% !important;
+  object-fit:  cover !important;
+  display:     block !important;
+}
+
+/* عنوان الشبكة وأيقونة الواي فاي */
+.network-hero-title-wrap {
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: center !important;
+  gap:             8px !important;
+  flex:            1 !important;
+}
+
+.network-hero-wifi-icon {
+  width:       22px !important;
+  height:      22px !important;
+  min-width:   22px !important;
+  flex-shrink: 0 !important;
+}
+
+.network-hero-wifi-icon .wifi-sig {
+  fill:             #1E88E5 !important;
+  animation:        wifiHeroWave 1.8s infinite ease-in-out !important;
+  transform-origin: 12px 19.5px !important;
+}
+
+.network-hero-wifi-icon .wifi-sig-dot {
+  animation-delay: 0s !important;
+}
+
+.network-hero-wifi-icon .wifi-sig-1 {
+  animation-delay: 0.25s !important;
+}
+
+.network-hero-wifi-icon .wifi-sig-2 {
+  animation-delay: 0.5s !important;
+}
+
+.network-hero-wifi-icon .wifi-sig-3 {
+  animation-delay: 0.75s !important;
+}
+
+@keyframes wifiHeroWave {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.92);
+  }
+  25%, 55% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px rgba(30, 136, 229, 0.6));
+  }
+  80%, 100% {
+    opacity: 0.25;
+    transform: scale(0.92);
+  }
+}
+
+.network-hero-title {
+  font-size:   18px !important;
+  font-weight: 900 !important;
+  color:       #0F172A !important;
+  line-height: 1.3 !important;
+  margin:      0 !important;
+  letter-spacing: -0.3px !important;
+  white-space: nowrap !important;
+}
+
+/* شارة حالة الاتصال (متصل) - مصغرة في الزاوية العلوية اليمنى */
+.network-status-badge {
+  position:        absolute !important;
+  top:             9px !important;
+  right:           12px !important;
+  display:         inline-flex !important;
+  align-items:     center !important;
+  gap:             4px !important;
+  background:      #ECFDF5 !important;
+  border:          1px solid #A7F3D0 !important;
+  border-radius:   9999px !important;
+  padding:         2px 7px !important;
+  color:           #065F46 !important;
+  font-size:       10.5px !important;
+  font-weight:     700 !important;
+  flex-shrink:     0 !important;
+  box-shadow:      0 1px 3px rgba(16, 185, 129, 0.08) !important;
+  z-index:         2 !important;
+}
+
+.status-pulse-dot {
+  width:         5.5px !important;
+  height:        5.5px !important;
+  border-radius: 50% !important;
+  background:    #10B981 !important;
+  box-shadow:    0 0 5px rgba(16, 185, 129, 0.8) !important;
+  display:       inline-block !important;
+  animation:     statusPulse 2s infinite !important;
+}
+
+@keyframes statusPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 10px rgba(16, 185, 129, 1); }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.status-badge-text {
+  line-height: 1 !important;
+}
+
+/* بطاقة المميزات الثلاثية (اتصال سريع | خدمة مميزة | ثقة متجددة) */
+.network-features-strip-card {
+  background:      #FFFFFF !important;
+  border:          1px solid #E2E8F0 !important;
+  border-radius:   14px !important;
+  padding:         9px 8px !important;
+  margin-bottom:   12px !important;
+  box-shadow:      0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: space-around !important;
+  width:           100% !important;
+  box-sizing:      border-box !important;
+}
+
+.feature-strip-item {
+  display:        flex !important;
+  flex-direction: column !important;
+  align-items:    center !important;
+  gap:            4px !important;
+  flex:           1 !important;
+  text-align:     center !important;
+}
+
+.feature-strip-icon-wrap {
+  display:         flex !important;
+  align-items:     center !important;
+  justify-content: center !important;
+  width:           24px !important;
+  height:          24px !important;
+}
+
+.feature-strip-icon {
+  width:  20px !important;
+  height: 20px !important;
+  fill:   #1E88E5 !important;
+}
+
+.feature-strip-label {
+  font-size:   11.5px !important;
+  font-weight: 700 !important;
+  color:       #334155 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.feature-strip-divider {
+  width:      1px !important;
+  height:     24px !important;
+  background: #E2E8F0 !important;
+  flex-shrink: 0 !important;
+}
 
 
 /* ══════════════════════════════════════════════════════════════════
@@ -243,22 +420,296 @@ button.loyalty-btn:hover {
 
 
 /* ══════════════════════════════════════════════════════════════════
-   9. بطاقة تسجيل الدخول الرئيسية (.login-card)
+   9. نظام البطاقات المنفصلة (Separate Standalone Cards Architecture)
    ══════════════════════════════════════════════════════════════════ */
 
-.login-card {
-  background:    #FFFFFF !important;
-  border:        none !important;
-  border-radius: 20px !important;
-  box-shadow:    0 10px 30px -5px rgba(30, 58, 138, 0.08),
-                 0 4px 6px -2px rgba(0, 0, 0, 0.04) !important;
-  padding:       22px 18px !important;
+.login-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  width: 100% !important;
 }
 
-/* الشريط اللوني العلوي للبطاقة → برتقالي */
+/* البطاقة البيضاء النقية المستقلة ذات الحواف والظلال الناعمة */
+.app-card {
+  background:    #FFFFFF !important;
+  border:        1px solid rgba(226, 232, 240, 0.85) !important;
+  border-radius: 16px !important;
+  box-shadow:    0 2px 10px rgba(15, 23, 42, 0.04),
+                 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+  margin-bottom: 14px !important; /* مسافة رأسية ثابتة بين كل بطاقة والتي تليها */
+  box-sizing:    border-box !important;
+  position:      relative !important;
+  transition:    box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+/* ترويسة اختيار السرعة المستقلة خارج الحاوية */
+.speed-selection-outer-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 8px !important;
+  padding: 0 4px !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.speed-selection-card {
+  padding: 10px 12px !important;
+}
+
+.login-input-card {
+  padding: 16px !important;
+}
+
+.updates-toggle-card {
+  padding: 12px 14px !important;
+  margin-bottom: 8px !important;
+}
+
+.updates-toggle-card .toggle-container-modern {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* ترويسة أقسام البطاقات */
+.card-section-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 12px !important;
+  gap: 8px !important;
+}
+
+.card-section-title-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.card-section-icon {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  background: var(--color-blue-pale) !important;
+  border: 1px solid var(--color-blue-border) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.card-section-icon svg {
+  width: 15px !important;
+  height: 15px !important;
+  fill: var(--color-blue) !important;
+}
+
+.card-section-title {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: var(--color-text-main) !important;
+}
+
+.selected-speed-badge {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--color-blue) !important;
+  background: var(--color-blue-pale) !important;
+  border: 1px solid var(--color-blue-border) !important;
+  padding: 3px 9px !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   أزرار السرعات البيضاوية الأفقية كشريط متحرك وسلس (Speed Slider Row)
+   ══════════════════════════════════════════════════════════════════ */
+
+.speed-slider-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.speed-slider-nav-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  background: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+  padding: 0 !important;
+  outline: none !important;
+}
+
+.speed-slider-nav-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: #475569 !important;
+  transition: fill 0.2s ease !important;
+}
+
+.speed-slider-nav-btn:hover {
+  background: #E2E8F0 !important;
+  border-color: #94A3B8 !important;
+  transform: scale(1.05) !important;
+}
+
+.speed-slider-nav-btn:hover svg {
+  fill: #1E293B !important;
+}
+
+.speed-slider-nav-btn:active {
+  transform: scale(0.95) !important;
+}
+
+.speed-pills-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 4px 2px 6px 2px !important;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+  -webkit-overflow-scrolling: touch !important;
+  cursor: grab !important;
+}
+
+.speed-pills-row::-webkit-scrollbar {
+  display: none !important; /* Chrome/Safari */
+}
+
+.speed-pills-row.dragging {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
+
+.speed-pill-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  flex: 0 0 auto !important; /* منع الانكماش أو الالتفاف */
+  padding: 7px 13px !important;
+  border-radius: 9999px !important; /* شكل بيضاوي كامل */
+  background: #F8FAFC !important;
+  border: 1.5px solid #E2E8F0 !important;
+  color: #334155 !important;
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  user-select: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+}
+
+.speed-pill-btn:hover {
+  background: #EFF6FF !important;
+  border-color: #93C5FD !important;
+  color: #1D4ED8 !important;
+  transform: translateY(-1px) !important;
+}
+
+.speed-pill-btn .pill-dot {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #94A3B8 !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.speed-pill-btn .pill-num {
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.speed-pill-btn .pill-unit {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  opacity: 0.95 !important;
+}
+
+.speed-pill-btn.active {
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%) !important;
+  border-color: #1565C0 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(21, 101, 192, 0.38) !important;
+  transform: translateY(-1px) scale(1.04) !important;
+}
+
+.speed-pill-btn.active .pill-dot {
+  background: #FFFFFF !important;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ترويسة بطاقة إدخال الكرت */
+.input-card-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 10px !important;
+}
+
+.input-card-header .card-section-icon {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.input-card-header .card-section-icon svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.input-card-header .input-label-text {
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: var(--color-text-main) !important;
+  line-height: 1.4 !important;
+}
+
+.login-submit-wrapper {
+  width: 100% !important;
+  margin-bottom: 14px !important;
+}
+
+.login-submit-wrapper .login-submit-btn,
+.login-submit-btn {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.login-card {
+  background:    transparent !important;
+  border:        none !important;
+  box-shadow:    none !important;
+  padding:       0 !important;
+}
+
 .login-card::before {
-  background: var(--color-primary) !important;
-  height:     4px !important;
+  display: none !important;
 }
 
 .card-header p   { color: var(--color-text-main) !important; text-shadow: none !important; }
@@ -409,10 +860,24 @@ input[name="username"] {
 .customer-support-section {
   background:    #FFFFFF !important;
   border:        1px solid var(--color-border) !important;
-  border-radius: 18px !important;
+  border-radius: 16px !important;
   box-shadow:    var(--shadow-card) !important;
+  padding:       10px 14px !important;
+  margin-top:    0 !important;
+  margin-bottom: 2px !important;
+  gap:           8px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/* تقليل التباعد السفلي للحاوية الرئيسية ليتناسب مع الشريط السفلي */
+.container {
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)) !important;
+}
+@media screen and (max-width: 375px) {
+  .container {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 
 .support-header-icon { fill: var(--color-blue) !important; filter: none !important; }
@@ -767,59 +1232,122 @@ input[name="username"] {
   font-weight: 800 !important;
 }
 
-/* الإشعارات العامة والبنرات (nt-banner, nt-card, .error-container) */
-.nt-banner, .nt-card, .error-container, #error {
+/* الإشعارات العامة والبنرات وتنبيهات النظام المنبثقة (Toast & Banners) */
+.nt-banner, .nt-card, .announcement-banner {
   background:    #FFFFFF !important;
-  border:        1px solid var(--color-border) !important;
-  box-shadow:    0 10px 30px rgba(30, 58, 138, 0.08) !important;
-  border-radius: 16px !important;
-  color:         var(--color-text-main) !important;
+  border:        1px solid #E2E8F0 !important;
+  box-shadow:    0 12px 36px rgba(15, 23, 42, 0.09) !important;
+  border-radius: 18px !important;
+  color:         #0F172A !important;
+  font-family:   'Almarai', 'Tajawal', sans-serif !important;
 }
-.nt-banner-title, .nt-card-title, .error-heading {
-  color:       var(--color-text-main) !important;
+
+/* التنبيه العائم في أعلى الشاشة (Error / Info Toast) */
+.error-container {
+  z-index: 99999 !important;
+}
+
+.error, #error-toast {
+  background:          #FFFFFF !important;
+  border:              1px solid #E2E8F0 !important;
+  box-shadow:          0 12px 36px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+  border-radius:       16px !important;
+  padding:             12px 16px !important;
+  backdrop-filter:     blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  direction:           rtl !important;
+  font-family:         'Almarai', 'Tajawal', sans-serif !important;
+}
+
+.toast-icon-wrap {
+  background: #EFF6FF !important;
+  border:     1px solid #DBEAFE !important;
+  border-radius: 10px !important;
+}
+
+.toast-icon-wrap svg {
+  fill: #1E88E5 !important;
+}
+
+.error p#error, #error {
+  color:       #0F172A !important;
+  font-size:   14px !important;
+  font-weight: 700 !important;
+  margin:      0 !important;
+}
+
+.error::after, #error-toast::after {
+  background: linear-gradient(90deg, #1E88E5 0%, #1565C0 100%) !important;
+}
+
+.nt-banner-title, .nt-card-title, .error-heading, .announcement-title {
+  color:       #0F172A !important;
   font-weight: 800 !important;
+  letter-spacing: -0.2px !important;
 }
-.nt-banner-message, .nt-card-message, .error-text {
-  color: var(--color-text-sub) !important;
+
+.nt-banner-message, .nt-card-message, .error-text, .announcement-message {
+  color:       #475569 !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
 }
-.nt-banner-icon, .nt-card-icon {
-  color: var(--color-blue) !important;
-  fill:  var(--color-blue) !important;
+
+.nt-banner-icon, .nt-card-icon, .announcement-icon {
+  background: #EFF6FF !important;
+  color:      #1E88E5 !important;
+  fill:       #1E88E5 !important;
+  border:     1px solid #DBEAFE !important;
 }
 
 /* أزرار الإجراءات داخل التنبيهات */
-.nt-banner-action, .nt-card-action {
-  background: var(--color-blue-pale) !important;
-  color:      var(--color-blue) !important;
-  border:     1px solid var(--color-blue-border) !important;
+.nt-banner-action, .nt-card-action, .announcement-action {
+  background:  linear-gradient(135deg, #1E88E5 0%, #1565C0 100%) !important;
+  color:       #FFFFFF !important;
+  border:      none !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  box-shadow:  0 3px 10px rgba(30, 136, 229, 0.3) !important;
+  transition:  all 0.2s ease !important;
 }
-.nt-banner-action:hover, .nt-card-action:hover {
-  background: var(--color-blue) !important;
+
+.nt-banner-action:hover, .nt-card-action:hover, .announcement-action:hover {
+  transform:  translateY(-1px) !important;
+  box-shadow: 0 5px 15px rgba(30, 136, 229, 0.45) !important;
   color:      #FFFFFF !important;
+  opacity:    0.96 !important;
 }
 
 /* رسائل نجاح وخطأ النظام الصغرى */
 #loyalty-message.loyalty-success {
-  background: #F0FDF4 !important;
-  border:     1px solid #BBF7D0 !important;
-  color:      var(--color-green) !important;
+  background:    #F0FDF4 !important;
+  border:        1px solid #BBF7D0 !important;
+  color:         #166534 !important;
+  font-weight:   700 !important;
+  border-radius: 12px !important;
 }
+
 #loyalty-message.loyalty-error {
-  background: #FEF2F2 !important;
-  border:     1px solid #FECACA !important;
-  color:      var(--color-red) !important;
+  background:    #FEF2F2 !important;
+  border:        1px solid #FECACA !important;
+  color:         #991B1B !important;
+  font-weight:   700 !important;
+  border-radius: 12px !important;
 }
 
 /* زر إغلاق التنبيهات */
 .nt-banner-close, .nt-card-close, .loyalty-notification-close {
-  background: #F1F5F9 !important;
-  border:     1px solid var(--color-border-mid) !important;
-  color:      var(--color-text-sub) !important;
+  background:    #F1F5F9 !important;
+  border:        1px solid #E2E8F0 !important;
+  color:         #64748B !important;
+  border-radius: 50% !important;
+  transition:    all 0.2s ease !important;
 }
+
 .nt-banner-close:hover, .nt-card-close:hover, .loyalty-notification-close:hover {
-  background: var(--color-red) !important;
-  color:      #FFFFFF !important;
-  border-color: var(--color-red) !important;
+  background:   #FEE2E2 !important;
+  color:        #EF4444 !important;
+  border-color: #FECACA !important;
+  transform:    scale(1.08) !important;
 }
 
 /* ??????????????????????????????????????????????????????????????????
@@ -963,13 +1491,22 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
    22. شاشة تم تسجيل الدخول بنجاح والحالة (#status)
    ══════════════════════════════════════════════════════════════════ */
 
-/* الحاوية والبطاقة الرئيسية لشاشة الحالة */
+/* الحاوية والبطاقة الرئيسية لشاشة الحالة - شفافة لتظهر خلفية الصفحة الأساسية مثل صفحة تسجيل الدخول تماماً */
+#status {
+  background:    transparent !important;
+  border:        none !important;
+  box-shadow:    none !important;
+  padding:       0 !important;
+}
+
 #status .modal-sheet-card {
-  background: #FFFFFF !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 16px !important;
-  box-shadow: var(--shadow-card) !important;
-  backdrop-filter: none !important;
+  background:              transparent !important;
+  border:                  none !important;
+  border-radius:           0 !important;
+  box-shadow:              none !important;
+  padding:                 0 !important;
+  margin:                  0 !important;
+  backdrop-filter:         none !important;
   -webkit-backdrop-filter: none !important;
 }
 
@@ -1029,24 +1566,42 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
   font-weight: 700 !important;
 }
 
-/* روابط الترفيه (الاستراحة، البث المباشر) */
+/* روابط الترفيه (البث المباشر) */
+#status .entertainment-links {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  margin: 12px 0 !important;
+}
+
 #status .entertainment-links .stream-card-link {
   background: #FFFFFF !important;
   border: 1px solid var(--color-blue-border) !important;
   color: var(--color-blue) !important;
-  box-shadow: var(--shadow-card) !important;
-  border-radius: 12px !important;
-  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(30, 136, 229, 0.08) !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  padding: 13px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
 }
 
 #status .entertainment-links .stream-card-link:hover {
   background: var(--color-blue-pale) !important;
   border-color: var(--color-blue) !important;
   color: var(--color-blue) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(30, 136, 229, 0.16) !important;
 }
 
 #status .entertainment-links .stream-card-link svg {
   fill: var(--color-blue) !important;
+  width: 22px !important;
+  height: 22px !important;
 }
 
 /* بطاقة تغيير سرعة الكرت الحالية في شاشة الحالة */
@@ -1104,16 +1659,25 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 
 /* بطاقات استهلاك الكرت (Live Metrics Grid) */
 #status .status-grid-metrics {
-  gap: 12px !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
   margin: 14px 0 !important;
 }
 
 #status .metric-card-glass {
   background: #FFFFFF !important;
   border: 1px solid var(--color-border) !important;
-  border-radius: 12px !important;
-  padding: 14px 12px !important;
+  border-radius: 14px !important;
+  padding: 12px 8px !important;
   box-shadow: var(--shadow-card) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 6px !important;
+  overflow: hidden !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
@@ -1126,17 +1690,38 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 #status .metric-title {
   color: var(--color-text-sub) !important;
   font-weight: 700 !important;
-  font-size: 0.82rem !important;
+  font-size: 0.8rem !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#status .metric-title span {
+  white-space: nowrap !important;
 }
 
 #status .metric-icon {
   fill: var(--color-blue) !important;
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
 }
 
 #status .metric-val {
   color: var(--color-text-main) !important;
   font-weight: 800 !important;
-  font-size: 1.15rem !important;
+  font-size: clamp(0.88rem, 3.4vw, 1.1rem) !important;
+  white-space: nowrap !important;
+  line-height: 1.25 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-align: center !important;
 }
 
 #status .metric-val.cyan {
@@ -1156,6 +1741,7 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 #status .status-metrics-section-title {
   color: var(--color-text-main) !important;
   font-weight: 800 !important;
+  white-space: nowrap !important;
 }
 
 #status div:has(> .status-grid-metrics) > div:first-child svg {
@@ -1164,8 +1750,33 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 
 /* أزرار الإجراءات السفلية: تسجيل الخروج وقطع الاتصال */
 #status .status-actions-row {
-  margin-top: 18px !important;
+  display: flex !important;
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
   gap: 12px !important;
+  width: 100% !important;
+}
+
+#status .status-actions-row button,
+#status .btn-danger-glass,
+#status .btn-secondary-glass {
+  flex: 1 !important;
+  white-space: nowrap !important;
+  padding: 10px 8px !important;
+  min-height: 46px !important;
+  border-radius: 12px !important;
+  font-size: clamp(0.85rem, 3.5vw, 0.95rem) !important;
+  gap: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+#status .status-actions-row button span,
+#status .btn-danger-glass span,
+#status .btn-secondary-glass span {
+  white-space: nowrap !important;
 }
 
 #status .btn-danger-glass {
@@ -1174,10 +1785,9 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
   font-weight: 900 !important;
   border: none !important;
   border-radius: 12px !important;
-  min-height: 46px !important;
   box-shadow: var(--shadow-btn), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
-  letter-spacing: 0.3px !important;
+  letter-spacing: 0.2px !important;
 }
 
 #status .btn-danger-glass:hover {
@@ -1189,6 +1799,9 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 #status .btn-danger-glass svg {
   fill: #FFFFFF !important;
   filter: none !important;
+  width: 17px !important;
+  height: 17px !important;
+  flex-shrink: 0 !important;
 }
 
 #status .btn-secondary-glass {
@@ -1197,7 +1810,6 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
   color: var(--color-text-main) !important;
   font-weight: 800 !important;
   border-radius: 12px !important;
-  min-height: 46px !important;
   box-shadow: var(--shadow-card) !important;
   text-shadow: none !important;
 }
@@ -1213,10 +1825,19 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
 #status .btn-secondary-glass svg {
   fill: var(--color-text-main) !important;
   filter: none !important;
+  width: 17px !important;
+  height: 17px !important;
+  flex-shrink: 0 !important;
 }
 
 #status .btn-secondary-glass:hover svg {
   fill: var(--color-blue) !important;
+}
+
+/* بطاقة خدمة العملاء في شاشة الحالة */
+#status .customer-support-section {
+  margin-top: 16px !important;
+  margin-bottom: 24px !important;
 }
 
 /* بطاقة حساب نظام النقاط عند التسجيل في شاشة الحالة */
