@@ -83,7 +83,7 @@ window.siteConfig = {
     "offers": "استمتع بتصفح تطبيقي الواتساب (WhatsApp) و الإنستقرام (Instagram) مجاناً بدون كرت من 5:00 فجراً حتى 8:00 صباحاً يومياً.",
     "offersBtnText": "📺 مشاهدة البث المباشر والمباريات",
     "offersBtnUrl": "https://kor.fntvs.net/channel.php",
-    "offersBtnV": true,
+    "offersBtnV": false,
     "salesPoints": [
         "بقالة صلاح موسى",
         "بقالة مستشار مصطفى",
@@ -97,5 +97,5 @@ window.siteConfig = {
     "estr": "",
     "estrV": false,
     "moba": "https://kor.fntvs.net/channel.php",
-    "mobaV": true
+    "mobaV": false
 };
