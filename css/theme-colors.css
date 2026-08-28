@@ -627,6 +627,13 @@ button.login-submit:hover,
   flex-shrink: 0 !important;
 }
 
+.speed-pill-btn .pill-text {
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
 .speed-pill-btn .pill-num {
   font-size: 14px !important;
   font-weight: 900 !important;
