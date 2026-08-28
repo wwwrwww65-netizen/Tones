@@ -57,7 +57,28 @@ app.get('/login', (req, res) => {
 
   if (isCallBack) {
     if (username) {
-      // User is logging in
+      // Simulate wrong card test cases in preview emulator
+      const lower = username.toLowerCase().trim();
+      if (lower.startsWith('err') || lower === '000000' || lower === '99887766' || lower === '123' || lower === 'error') {
+        let errorMsg = 'invalid username or password';
+        if (lower === 'err_used' || lower === '000000') {
+          errorMsg = 'simultaneous session limit reached';
+        } else if (lower === 'err_mac' || lower === '99887766') {
+          errorMsg = 'invalid Calling-Station-Id';
+        } else if (lower === 'err_time') {
+          errorMsg = 'uptime limit reached';
+        } else if (lower === 'err_traffic') {
+          errorMsg = 'traffic limit reached';
+        }
+
+        return res.json({
+          logged_in: 'no',
+          error: errorMsg,
+          action: 'onLoginError',
+        });
+      }
+
+      // User is logging in successfully
       sessionState.isLoggedIn = true;
       sessionState.username = username;
       // Support both domain formats: '4M_Uoff' or '4M|*no**'

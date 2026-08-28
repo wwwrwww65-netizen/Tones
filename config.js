@@ -1,5 +1,6 @@
 window.siteConfig = {
     "siteName": "الأولى نت",
+    "subDecText": "للإنترنت اللاسلكي",
     "welcomeMessage": "مرحبا بكم في شبكة الأولى نت اللاسلكية",
     "welcomeMessageV": true,
     "erbV": true,
