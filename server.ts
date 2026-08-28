@@ -60,8 +60,15 @@ app.get('/login', (req, res) => {
       // User is logging in
       sessionState.isLoggedIn = true;
       sessionState.username = username;
-      sessionState.speed = domain.split('_')[0] || '4M';
-      sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
+      // Support both domain formats: '4M_Uoff' or '4M|*no**'
+      if (domain.includes('|')) {
+        const parts = domain.split('|');
+        sessionState.speed = parts[0] || '4M';
+        sessionState.updateOption = parts[1] && parts[1].includes('*no**') ? '_Uoff' : '_Uon';
+      } else {
+        sessionState.speed = domain.split('_')[0] || '4M';
+        sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
+      }
       sessionState.startTime = Date.now();
 
       return res.json({
@@ -70,6 +77,7 @@ app.get('/login', (req, res) => {
         mac: sessionState.mac,
         link_login_only: '/login',
         sspeed: `${sessionState.speed}_`,
+        spes: sessionState.speed,
         update: sessionState.updateOption,
         ip: sessionState.ip,
         bytes_in: String(sessionState.bytesIn),
@@ -115,6 +123,7 @@ app.get('/status', (req, res) => {
       logged_in: sessionState.isLoggedIn ? 'yes' : 'no',
       mac: sessionState.mac,
       sspeed: `${sessionState.speed}_`,
+      spes: sessionState.speed,
       update: sessionState.updateOption,
       ip: sessionState.ip,
       bytes_in: String(sessionState.bytesIn),
@@ -146,6 +155,24 @@ app.get('/logout', (req, res) => {
   }
 
   res.redirect('/');
+});
+
+// Notifications & Announcements API simulation endpoint
+app.get('/api/v1/public/content', (req, res) => {
+  return res.json({
+    success: true,
+    data: {
+      notifications: [],
+      announcements: [],
+    },
+  });
+});
+
+app.get('/api/*', (req, res) => {
+  return res.json({
+    success: true,
+    data: {},
+  });
 });
 
 // Serve static assets from project root and specific subfolders

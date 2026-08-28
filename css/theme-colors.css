@@ -370,15 +370,10 @@ h1 {
    8. أزرار تسجيل الدخول والتسجيل في نظام النقاط
    ══════════════════════════════════════════════════════════════════ */
 
-.button.points-register-btn,
-.points-register-btn,
 .login-submit-btn,
 .button.login-submit,
 button.login-submit,
-#mainLoginBtn,
-.loyalty-btn,
-button.loyalty-btn,
-.points-auth-submit-btn {
+#mainLoginBtn {
   background:    linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%) !important;
   color:         #FFFFFF !important;
   font-weight:   900 !important;
@@ -392,14 +387,10 @@ button.loyalty-btn,
 }
 
 /* حالة التحويم */
-.button.points-register-btn:hover,
-.points-register-btn:hover,
 .login-submit-btn:hover,
 .button.login-submit:hover,
 button.login-submit:hover,
-#mainLoginBtn:hover,
-.loyalty-btn:hover,
-button.loyalty-btn:hover {
+#mainLoginBtn:hover {
   background:  linear-gradient(180deg, #FF8A65 0%, #F4511E 100%) !important;
   box-shadow:  0 6px 22px rgba(230, 74, 25, 0.48) !important;
   transform:   translateY(-1px) !important;
@@ -407,12 +398,8 @@ button.loyalty-btn:hover {
 }
 
 /* النص والأيقونة داخل هذه الأزرار → أبيض */
-.points-register-btn .button-text,
-.button.points-register-btn .button-text,
 .login-submit-btn .button-text,
-.button.login-submit .button-text,
-.points-register-btn .points-btn-icon,
-.button.points-register-btn .points-btn-icon {
+.button.login-submit .button-text {
   color:       #FFFFFF !important;
   fill:        #FFFFFF !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important;
@@ -952,57 +939,7 @@ input[name="username"] {
 .nav-item-btn.active svg { fill: var(--color-blue) !important; }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   15. بطاقة مستخدم نظام النقاط (عند التسجيل)
-   ══════════════════════════════════════════════════════════════════ */
 
-.loyalty-user-card {
-  background:    #FFFFFF !important;
-  border:        1.5px solid var(--color-border) !important;
-  border-radius: 18px !important;
-  box-shadow:    var(--shadow-card) !important;
-}
-
-.loyalty-user-title  { color: var(--color-text-main) !important; }
-.loyalty-user-phone-number { color: var(--color-text-sub) !important; }
-
-/* أيقونة الحساب */
-.loyalty-user-avatar { background: var(--color-blue-pale) !important; border: 1px solid var(--color-blue-border) !important; }
-.loyalty-user-avatar svg { fill: var(--color-blue) !important; }
-
-/* زر الخروج → إطار أحمر */
-.loyalty-logout-pill-btn {
-  background:    #FFFFFF !important;
-  border:        1.5px solid var(--color-red) !important;
-  color:         var(--color-red) !important;
-  border-radius: 999px !important;
-}
-.loyalty-logout-pill-btn:hover { background: #FEF2F2 !important; color: #DC2626 !important; }
-
-/* بنر رصيد النقاط → أزرق باهت */
-.loyalty-points-display-banner {
-  background:    var(--color-blue-banner) !important;
-  border:        1px solid var(--color-blue-border) !important;
-  border-radius: 12px !important;
-}
-.loyalty-points-label      { color: var(--color-text-main) !important; }
-.loyalty-points-label svg  { fill:  var(--color-blue) !important; }
-.loyalty-points-value      { color: var(--color-blue) !important; font-weight: 900 !important; text-shadow: none !important; }
-.loyalty-points-unit       { color: var(--color-text-main) !important; }
-
-/* أزرار شبكة الإجراءات (طلب سلفة، استبدال كرت...) */
-.loyalty-action-card-btn {
-  background:    #FFFFFF !important;
-  border:        1.5px solid var(--color-border) !important;
-  color:         var(--color-text-main) !important;
-  border-radius: 12px !important;
-}
-.loyalty-action-card-btn svg  { fill: var(--color-blue) !important; }
-.loyalty-action-card-btn:hover {
-  background:   var(--color-blue-pale) !important;
-  border-color: var(--color-blue) !important;
-  color:        var(--color-blue) !important;
-}
 
 
 /* ══════════════════════════════════════════════════════════════════
@@ -1010,7 +947,6 @@ input[name="username"] {
    ══════════════════════════════════════════════════════════════════ */
 
 /* طبقة التعتيم خلف النافذة */
-.loyalty-modal,
 .app {
   background:          rgba(11, 17, 32, 0.5) !important;
   backdrop-filter:     none !important;
@@ -1018,9 +954,7 @@ input[name="username"] {
 }
 
 /* محتوى النافذة → أبيض مسطح */
-.loyalty-modal-content,
-.modal-sheet-card,
-.points-auth-modal-card {
+.modal-sheet-card {
   background:    #FFFFFF !important;
   border:        1px solid var(--color-border) !important;
   border-radius: 20px !important;
@@ -1029,27 +963,22 @@ input[name="username"] {
 }
 
 /* رأس النافذة */
-.modal-header,
-.loyalty-modal-header {
+.modal-header {
   border-bottom: 1px solid var(--color-border) !important;
 }
-.modal-header .title,
-.loyalty-modal-header h2 {
+.modal-header .title {
   color:       var(--color-text-main) !important;
   text-shadow: none !important;
 }
-.loyalty-modal-header p { color: var(--color-text-sub) !important; }
 .modal-title-icon       { fill: var(--color-blue) !important; }
 
 /* زر إغلاق النافذة → رمادي، يتحول أحمر عند التحويم */
-.modal-close-btn,
-.loyalty-modal-close {
+.modal-close-btn {
   background: #F1F5F9 !important;
   border:     1px solid var(--color-border-mid) !important;
   color:      var(--color-text-sub) !important;
 }
-.modal-close-btn:hover,
-.loyalty-modal-close:hover {
+.modal-close-btn:hover {
   background:   var(--color-red) !important;
   border-color: var(--color-red) !important;
   color:        #FFFFFF !important;
@@ -1092,8 +1021,7 @@ input[name="username"] {
 
 /* بطاقات أنواع الكروت وبطاقات محفوظة */
 .saved-card-item,
-.card-type-item,
-.loyalty-modal-body .loan-card {
+.card-type-item {
   background:    #FFFFFF !important;
   border:        1px solid var(--color-border) !important;
   border-radius: 14px !important;
@@ -1194,44 +1122,7 @@ input[name="username"] {
    20. نظام الإشعارات والتنبيهات والـ Floating Buttons
    ══════════════════════════════════════════════════════════════════ */
 
-/* زر النقاط العائم (FAB) */
-.loyalty-fab {
-  background: var(--color-primary) !important;
-  box-shadow: 0 4px 15px var(--color-primary-glow) !important;
-  color:      #FFFFFF !important;
-}
-.loyalty-fab:hover {
-  background: var(--color-primary-dark) !important;
-  box-shadow: 0 6px 20px rgba(230, 74, 25, 0.45) !important;
-  transform:  translateY(-2px) !important;
-}
-.fab-badge {
-  background: var(--color-red) !important;
-  color:      #FFFFFF !important;
-}
 
-/* بطاقة الإشعار المنبثقة للولاء */
-.loyalty-notification {
-  background:    #FFFFFF !important;
-  border:        1px solid var(--color-border) !important;
-  box-shadow:    0 10px 40px rgba(30, 58, 138, 0.1) !important;
-  border-radius: 16px !important;
-}
-.loyalty-notification-icon {
-  background: var(--color-blue-pale) !important;
-  border:     1px solid var(--color-blue-border) !important;
-}
-.loyalty-notification-icon svg {
-  fill:  var(--color-blue) !important;
-  color: var(--color-blue) !important;
-}
-.loyalty-notification-text strong { color: var(--color-text-main) !important; }
-.loyalty-notification-text p      { color: var(--color-text-sub) !important; }
-
-.loyalty-total, .points-highlight {
-  color: var(--color-blue) !important;
-  font-weight: 800 !important;
-}
 
 /* الإشعارات العامة والبنرات وتنبيهات النظام المنبثقة (Toast & Banners) */
 .nt-banner, .nt-card, .announcement-banner {
@@ -1318,25 +1209,10 @@ input[name="username"] {
   opacity:    0.96 !important;
 }
 
-/* رسائل نجاح وخطأ النظام الصغرى */
-#loyalty-message.loyalty-success {
-  background:    #F0FDF4 !important;
-  border:        1px solid #BBF7D0 !important;
-  color:         #166534 !important;
-  font-weight:   700 !important;
-  border-radius: 12px !important;
-}
 
-#loyalty-message.loyalty-error {
-  background:    #FEF2F2 !important;
-  border:        1px solid #FECACA !important;
-  color:         #991B1B !important;
-  font-weight:   700 !important;
-  border-radius: 12px !important;
-}
 
 /* زر إغلاق التنبيهات */
-.nt-banner-close, .nt-card-close, .loyalty-notification-close {
+.nt-banner-close, .nt-card-close {
   background:    #F1F5F9 !important;
   border:        1px solid #E2E8F0 !important;
   color:         #64748B !important;
@@ -1344,7 +1220,7 @@ input[name="username"] {
   transition:    all 0.2s ease !important;
 }
 
-.nt-banner-close:hover, .nt-card-close:hover, .loyalty-notification-close:hover {
+.nt-banner-close:hover, .nt-card-close:hover {
   background:   #FEE2E2 !important;
   color:        #EF4444 !important;
   border-color: #FECACA !important;
@@ -1841,78 +1717,4 @@ tbody td:first-child { color: #FF5722 !important; font-weight: 900 !important; }
   margin-bottom: 24px !important;
 }
 
-/* بطاقة حساب نظام النقاط عند التسجيل في شاشة الحالة */
-#status .loyalty-user-card {
-  background: #FFFFFF !important;
-  border: 1px solid var(--color-border) !important;
-  box-shadow: var(--shadow-card) !important;
-  border-radius: 14px !important;
-  padding: 16px !important;
-  margin-bottom: 14px !important;
-}
 
-#status .loyalty-user-avatar {
-  background: var(--color-blue-pale) !important;
-  border: 1px solid var(--color-blue-border) !important;
-}
-
-#status .loyalty-user-avatar svg {
-  fill: var(--color-blue) !important;
-}
-
-#status .loyalty-user-title {
-  color: var(--color-text-sub) !important;
-}
-
-#status .loyalty-user-phone-number {
-  color: var(--color-text-main) !important;
-}
-
-#status .loyalty-logout-pill-btn {
-  background: #FEE2E2 !important;
-  border: 1px solid #FECACA !important;
-  color: var(--color-red) !important;
-}
-
-#status .loyalty-logout-pill-btn:hover {
-  background: var(--color-red) !important;
-  color: #FFFFFF !important;
-}
-
-#status .loyalty-points-display-banner {
-  background: var(--color-blue-banner) !important;
-  border: 1px solid var(--color-blue-border) !important;
-  border-radius: 12px !important;
-}
-
-#status .loyalty-points-label {
-  color: var(--color-text-main) !important;
-}
-
-#status .loyalty-points-label svg {
-  fill: var(--color-primary) !important;
-}
-
-#status .loyalty-points-value {
-  color: var(--color-blue) !important;
-}
-
-#status .loyalty-points-unit {
-  color: var(--color-text-sub) !important;
-}
-
-#status .loyalty-action-card-btn {
-  background: #FFFFFF !important;
-  border: 1px solid var(--color-border) !important;
-  color: var(--color-text-main) !important;
-  box-shadow: var(--shadow-card) !important;
-}
-
-#status .loyalty-action-card-btn:hover {
-  background: var(--color-blue-pale) !important;
-  border-color: var(--color-blue-border) !important;
-}
-
-#status .loyalty-action-card-btn svg {
-  fill: var(--color-blue) !important;
-}

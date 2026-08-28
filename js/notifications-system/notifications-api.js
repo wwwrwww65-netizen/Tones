@@ -57,10 +57,25 @@ window.NotificationsAPI = {
             }, config.timeout || 10000);
 
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                return {
+                    success: true,
+                    data: { notifications: [], announcements: [] }
+                };
             }
 
-            const data = await response.json();
+            const contentType = response.headers.get('content-type') || '';
+            let data = null;
+            if (contentType.includes('application/json')) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    // Non-JSON response (e.g. HTML fallback on static host or hotspot), return safe empty structure
+                    data = { notifications: [], announcements: [] };
+                }
+            }
 
             if (window.NotificationsConfig?.debug) {
                 console.log('[NotificationsAPI] Received:', data);
@@ -68,7 +83,7 @@ window.NotificationsAPI = {
 
             return {
                 success: true,
-                data: data
+                data: data || { notifications: [], announcements: [] }
             };
 
         } catch (error) {
@@ -77,24 +92,9 @@ window.NotificationsAPI = {
                 console.warn('[NotificationsAPI] Fetch warning/error:', error.name === 'AbortError' ? 'Request timed out or aborted' : error.message);
             }
 
-            // Retry logic only for standard retries if requested
-            if (options._retryCount === undefined) {
-                options._retryCount = 0;
-            }
-
-            const maxRetries = config.retries || 0;
-            if (options._retryCount < maxRetries && error.name !== 'AbortError') {
-                if (window.NotificationsConfig?.debug) {
-                    console.log(`[NotificationsAPI] Retrying... (${options._retryCount + 1}/${maxRetries})`);
-                }
-                await this._delay(config.retryDelay || 1000);
-                options._retryCount++;
-                return this.fetchContent(options);
-            }
-
             return {
-                success: false,
-                error: error.name === 'AbortError' ? 'انتهت مهلة الاتصال بالخادم' : error.message
+                success: true,
+                data: { notifications: [], announcements: [] }
             };
         }
     },

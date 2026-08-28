@@ -91,7 +91,6 @@ Config({
   // =========================================================================
   "price-button": true,          // إظهار زر قائمة أسعار الكروت (true: نعم / false: لا)
   "sell-point-button": true,     // إظهار زر نقاط البيع وأماكن التوزيع (true: نعم / false: لا)
-  "loan-button": true,           // إظهار زر خدمة الاستدانة / كرت سلف (true: نعم / false: لا)
   "app-store-status-button": false,
   "show-date-field": false,
 
