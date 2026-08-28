@@ -1,13 +1,109 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { createCanvas } from '@napi-rs/canvas';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
+
+// Quran PDF Caching & Rendering Engine
+const quranCacheDir = path.join(__dirname, 'public', 'quran-pages');
+if (!fs.existsSync(quranCacheDir)) {
+  fs.mkdirSync(quranCacheDir, { recursive: true });
+}
+
+let quranPdfDoc: any = null;
+let quranTotalPages = 569;
+let quranLoadingPromise: Promise<any> | null = null;
+
+async function getQuranDoc() {
+  if (quranPdfDoc) return quranPdfDoc;
+  if (quranLoadingPromise) return quranLoadingPromise;
+
+  quranLoadingPromise = (async () => {
+    try {
+      const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
+      const pdfPath = path.join(__dirname, 'mobile-quran.pdf');
+      if (fs.existsSync(pdfPath)) {
+        const data = new Uint8Array(fs.readFileSync(pdfPath));
+        quranPdfDoc = await pdfjsLib.getDocument({ data }).promise;
+        quranTotalPages = quranPdfDoc.numPages || 569;
+        console.log(`[Quran Engine] Loaded PDF successfully. Total pages: ${quranTotalPages}`);
+        
+        // Start background pre-rendering
+        startBackgroundPreRender();
+        return quranPdfDoc;
+      }
+    } catch (err) {
+      console.error('[Quran Engine] Error loading PDF:', err);
+    }
+    return null;
+  })();
+
+  return quranLoadingPromise;
+}
+
+// Render a single page on demand and cache to disk
+async function renderQuranPage(pageNumber: number): Promise<Buffer | null> {
+  const pageFile = path.join(quranCacheDir, `${pageNumber}.jpg`);
+  if (fs.existsSync(pageFile)) {
+    return fs.readFileSync(pageFile);
+  }
+
+  const doc = await getQuranDoc();
+  if (!doc || pageNumber < 1 || pageNumber > quranTotalPages) {
+    return null;
+  }
+
+  try {
+    const page = await doc.getPage(pageNumber);
+    // 1.55 scale provides sharp text while keeping size compact (~160KB)
+    const viewport = page.getViewport({ scale: 1.55 });
+    const canvas = createCanvas(viewport.width, viewport.height);
+    const ctx = canvas.getContext('2d');
+    
+    // Fill white background before rendering
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, viewport.width, viewport.height);
+
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const buffer = canvas.toBuffer('image/jpeg', 82);
+    
+    // Save to disk cache asynchronously
+    fs.writeFile(pageFile, buffer, () => {});
+    return buffer;
+  } catch (err) {
+    console.error(`[Quran Engine] Failed to render page ${pageNumber}:`, err);
+    return null;
+  }
+}
+
+// Progressive background pre-renderer
+let isPreRendering = false;
+async function startBackgroundPreRender() {
+  if (isPreRendering) return;
+  isPreRendering = true;
+
+  // Give priority to initial pages first
+  for (let i = 1; i <= quranTotalPages; i++) {
+    const pageFile = path.join(quranCacheDir, `${i}.jpg`);
+    if (!fs.existsSync(pageFile)) {
+      await renderQuranPage(i);
+      // Small pause to prevent CPU spikes
+      await new Promise(res => setTimeout(res, 35));
+    }
+  }
+  isPreRendering = false;
+  console.log('[Quran Engine] All pages pre-rendered and cached to disk.');
+}
+
+// Eager load Quran document
+getQuranDoc().catch(console.error);
 
 app.use(cors());
 app.use(express.json());
@@ -178,6 +274,41 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+// Quran Page image renderer endpoint
+app.get('/api/quran/page/:page', async (req, res) => {
+  const pageNum = parseInt(req.params.page, 10);
+  if (isNaN(pageNum) || pageNum < 1 || pageNum > quranTotalPages) {
+    return res.status(404).send('Page not found');
+  }
+
+  const pageBuffer = await renderQuranPage(pageNum);
+  if (!pageBuffer) {
+    return res.status(500).send('Error rendering page');
+  }
+
+  res.setHeader('Content-Type', 'image/jpeg');
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.send(pageBuffer);
+});
+
+// Quran Information & Surah list endpoint
+app.get('/api/quran/info', (req, res) => {
+  const surahsPath = path.join(__dirname, 'js', 'quran-surahs.json');
+  let surahs = [];
+  if (fs.existsSync(surahsPath)) {
+    try {
+      surahs = JSON.parse(fs.readFileSync(surahsPath, 'utf-8'));
+    } catch (e) {}
+  }
+
+  res.json({
+    success: true,
+    totalPages: quranTotalPages,
+    surahs: surahs
+  });
+});
+
 // Notifications & Announcements API simulation endpoint
 app.get('/api/v1/public/content', (req, res) => {
   return res.json({
@@ -194,6 +325,44 @@ app.get('/api/*', (req, res) => {
     success: true,
     data: {},
   });
+});
+
+// Serve Quran static pre-rendered pages directly from disk
+app.use('/quran-pages', express.static(quranCacheDir, {
+  maxAge: '30d',
+  immutable: true,
+  setHeaders: (res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+}));
+app.use('/public', express.static(path.join(__dirname, 'public'), {
+  maxAge: '30d',
+  immutable: true
+}));
+
+// Dedicated route for Quran PDF file download & inline viewing
+app.get(['/mobile-quran.pdf', '/mobile-quran', '/download-quran', '/api/quran/download'], (req, res) => {
+  const filePath = path.join(__dirname, 'mobile-quran.pdf');
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send('PDF file not found');
+  }
+
+  const isDownload = req.query.download === '1' || req.query.dl === '1' || req.path.includes('download');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Accept-Ranges', 'bytes');
+
+  if (isDownload) {
+    return res.download(filePath, 'mobile-quran.pdf', (err) => {
+      if (err && !res.headersSent) {
+        res.status(500).send('Error downloading file');
+      }
+    });
+  }
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline; filename="mobile-quran.pdf"');
+  res.sendFile(filePath);
 });
 
 // Serve static assets from project root and specific subfolders

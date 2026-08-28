@@ -9,9 +9,11 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^1.0.8",
     "cors": "^2.8.6",
     "express": "^4.19.2",
     "jsqr": "^1.4.0",
+    "pdfjs-dist": "^6.2.108",
     "sharp": "^0.35.3"
   },
   "devDependencies": {
