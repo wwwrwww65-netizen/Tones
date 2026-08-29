@@ -342,7 +342,7 @@
         if (totalPagesEl) totalPagesEl.textContent = totalPages;
 
         if (img) {
-            const staticUrl = `/quran-pages/${num}.jpg`;
+            const staticUrl = `public/quran-pages/${num}.jpg`;
 
             const onPageReady = () => {
                 img.style.opacity = '1';
@@ -351,7 +351,7 @@
             };
 
             // If already loaded and active
-            if (img.src.endsWith(`/quran-pages/${num}.jpg`) && img.complete && img.naturalWidth > 0) {
+            if (img.src.endsWith(`public/quran-pages/${num}.jpg`) && img.complete && img.naturalWidth > 0) {
                 onPageReady();
                 return;
             }
@@ -379,7 +379,7 @@
             if (p >= 1 && p <= totalPages && !prefetchCache.has(p)) {
                 prefetchCache.add(p);
                 const preloadImg = new Image();
-                preloadImg.src = `/quran-pages/${p}.jpg`;
+                preloadImg.src = `public/quran-pages/${p}.jpg`;
             }
         });
     }
