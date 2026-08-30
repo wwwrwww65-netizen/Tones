@@ -4,26 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title data-network-name>شبكة سوما نت اللاسلكية</title>
-    <script type="text/javascript">
-    <!--
-    (function() {
-        var loggedInVar = "$(logged-in)";
-        var linkStatusVar = "$(link-status)";
-        var linkLoginVar = "$(link-login)";
-        
-        // When running on MikroTik Hotspot
-        if (!loggedInVar.includes('$(')) {
-            if (loggedInVar === 'yes') {
-                window.location.replace(linkStatusVar && !linkStatusVar.includes('$(') ? linkStatusVar : 'status.html');
-            } else {
-                if (window.location.pathname.indexOf('index.html') !== -1 || window.location.pathname.endsWith('/')) {
-                    window.location.replace(linkLoginVar && !linkLoginVar.includes('$(') ? linkLoginVar : 'login.html');
-                }
-            }
-        }
-    })();
-    //-->
-    </script>
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
         function Config(a) { hotspotConfig = a; }
@@ -100,22 +80,24 @@
     <script src="js/security.min.js"></script>
 
     <!-- MikroTik CHAP sendin form & MD5 authentication -->
-    $(if chap-id)
-    <form name="sendin" action="$(link-login-only)" method="post" style="display:none;">
-        <input type="hidden" name="username" />
-        <input type="hidden" name="password" />
-        <input type="hidden" name="dst" value="$(link-orig)" />
-        <input type="hidden" name="popup" value="true" />
-    </form>
     <script type="text/javascript" src="md5.js"></script>
     <script type="text/javascript">
     <!--
+    function cleanCardNumber(str) {
+        if (!str) return '';
+        var arabicNums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+        var result = String(str).trim();
+        for (var i = 0; i < 10; i++) {
+            result = result.split(arabicNums[i]).join(String(i));
+        }
+        return result.replace(/s+/g, '');
+    }
     function removeSpaces(str) {
-        return str ? str.replace(/\s+/g, '') : '';
+        return cleanCardNumber(str);
     }
     function doLogin() {
-        var uField = document.login ? document.login.username : document.querySelector('input[name="username"]');
-        var u = uField ? removeSpaces(uField.value) : '';
+        var uField = document.login ? (document.login.username || document.querySelector('input[name="username"]')) : document.querySelector('input[name="username"]');
+        var u = uField ? cleanCardNumber(uField.value) : '';
         if (uField) uField.value = u;
         
         if (!u) {
@@ -139,15 +121,10 @@
             localStorage.setItem('mikrotik_last_user', u);
         } catch(e) {}
         
-        var pField = document.login ? document.login.password : document.querySelector('input[name="password"]');
-        var p = (pField && pField.value) ? pField.value : u;
-        if (pField && !pField.value) pField.value = u;
-
         // Button Loading State
         var btn = document.getElementById("mainLoginBtn") || document.querySelector(".login-submit-btn");
         if (btn) {
             btn.classList.add("processing");
-            btn.disabled = true;
         }
         
         if (typeof rememberLoginCard === 'function') {
@@ -164,39 +141,16 @@
             if (document.login) {
                 speedSelect.setAttribute("name", "domain");
             }
-            if (document.sendin) {
-                var dInp = document.sendin.querySelector('input[name="domain"]');
-                if (!dInp) {
-                    dInp = document.createElement("input");
-                    dInp.type = "hidden";
-                    dInp.name = "domain";
-                    document.sendin.appendChild(dInp);
-                }
-                dInp.value = domainVal;
-            }
         } else {
             if (speedSelect) {
                 speedSelect.removeAttribute("name");
             }
-            if (document.sendin) {
-                var dInp = document.sendin.querySelector('input[name="domain"]');
-                if (dInp) dInp.remove();
-            }
         }
 
-        var chapId = '$(chap-id)';
-        var chapChallenge = '$(chap-challenge)';
-        if (chapId && !chapId.includes('$(') && typeof hexMD5 === 'function' && document.sendin) {
-            document.sendin.username.value = u;
-            document.sendin.password.value = hexMD5(chapId + p + chapChallenge);
-            document.sendin.submit();
-            return false;
-        }
         return true;
     }
     //-->
     </script>
-    $(endif)
 
 </head>
 
@@ -546,7 +500,7 @@
                             <!-- Hidden Password Field -->
                             <div class="login-field password-field">
                                 <i class="login-icon fas icon-lock"></i>
-                                <input type="hidden" name="password" class="login-input"
+                                <input type="hidden" id="dummy_password" class="login-input"
                                     placeholder="ادخل كلمة السر هنا" improve-input>
                             </div>
 
@@ -617,7 +571,6 @@
                     </div>
                 </div>
                 <div id="announcements-container"></div>
-                <div class="banner-container" style="background: rgb(184, 24, 24);border-radius: 10px;"> </div>
                 <!-- 2026 MODAL BOTTOM SHEET: SPEED SELECTOR POPUP (#speed-modal) -->
                 <div class="app" id="speed-modal">
                     <div class="modal-sheet-card compact-speed-card">
@@ -1436,17 +1389,29 @@
                 if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); startAutoplay(); };
                 if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); startAutoplay(); };
 
-                // Handle image error fallback: if an image doesn't exist (e.g. 404), remove its slide
+                // Handle image error and missing image fallback
                 const allImgs = track.querySelectorAll('.carousel-slide img');
                 allImgs.forEach(img => {
-                    img.addEventListener('error', function () {
-                        const slide = this.closest('.carousel-slide');
-                        if (slide) {
+                    function handleImgError() {
+                        const slide = img.closest('.carousel-slide');
+                        if (slide && !slide.dataset.broken) {
                             slide.dataset.broken = 'true';
                             slide.remove();
                             refreshCarousel();
                         }
+                    }
+
+                    img.addEventListener('error', handleImgError);
+                    img.addEventListener('load', function() {
+                        if (this.naturalWidth === 0) {
+                            handleImgError();
+                        }
                     });
+
+                    // Check if already completed and broken at initialization
+                    if (img.complete && img.naturalWidth === 0) {
+                        handleImgError();
+                    }
                 });
 
                 // Touch Swipe Gestures for Mobile
@@ -2598,8 +2563,6 @@
         }
         if (uVal && uVal !== "-") {
             uField.value = uVal;
-            var pField = document.querySelector('input[name="password"], input[password-field]');
-            if (pField && !pField.value) pField.value = uVal;
         }
     }
 

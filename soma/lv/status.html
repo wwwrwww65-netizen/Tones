@@ -4,7 +4,7 @@
 $(if refresh-timeout)
 <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
 $(endif)
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1257">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="-1">
 <style type="text/css">
@@ -75,7 +75,7 @@ $(elif login-by != 'mac')
 	<br><div style="text-align: center;">Sveiks $(username)!</div><br>
 $(endif)
 	<tr><td align="right">IP adrese:</td><td>$(ip)</td></tr>
-	<tr><td align="right">baiti prom/šurp:</td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
+	<tr><td align="right">baiti prom/Å¡urp:</td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
 $(if session-time-left)
 	<tr><td align="right">ilgums / atlicis:</td><td>$(uptime) / $(session-time-left)</td></tr>
 $(else)
@@ -83,15 +83,15 @@ $(else)
 $(endif)
 $(if blocked == 'yes')
 	<tr><td align="right">statuss:</td><td><div style="color: #FF8080">
-nepieciešama <a href="$(link-advert)" target="hotspot_advert">reklāma</a></div></td>
+nepiecieÅ¡ama <a href="$(link-advert)" target="hotspot_advert">reklÄma</a></div></td>
 $(elif refresh-timeout)
-	<tr><td align="right">intervāls:</td><td>$(refresh-timeout)</td>
+	<tr><td align="right">intervÄls:</td><td>$(refresh-timeout)</td>
 $(endif)
 
 </table>
 $(if login-by-mac != 'yes')
 <br>
-<input type="submit" value="atslēgties">
+<input type="submit" value="atslÄ“gties">
 $(endif)
 </form>
 </td>

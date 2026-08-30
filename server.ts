@@ -200,6 +200,14 @@ app.all(['/logout', '/logout.html'], (req, res) => {
   res.sendFile(path.join(__dirname, 'logout.html'));
 });
 
+// Root and index conditional dispatcher
+app.get(['/', '/index', '/index.html'], (req, res) => {
+  if (sessionState.isLoggedIn) {
+    return res.redirect('/status.html');
+  }
+  return res.redirect('/login.html');
+});
+
 // Serve static assets from project root and specific subfolders
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 app.use('/adimg', express.static(path.join(__dirname, 'adimg')));

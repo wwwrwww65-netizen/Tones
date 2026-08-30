@@ -2,34 +2,11 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    $(if refresh-timeout)
-    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
-    $(endif)
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
 
     <meta charset="UTF-8">
     <title data-network-name>شبكة سوما نت اللاسلكية</title>
-    <script type="text/javascript">
-    <!--
-    (function() {
-        var loggedInVar = "$(logged-in)";
-        var linkStatusVar = "$(link-status)";
-        var linkLoginVar = "$(link-login)";
-        
-        // When running on MikroTik Hotspot
-        if (!loggedInVar.includes('$(')) {
-            if (loggedInVar === 'yes') {
-                window.location.replace(linkStatusVar && !linkStatusVar.includes('$(') ? linkStatusVar : 'status.html');
-            } else {
-                if (window.location.pathname.indexOf('index.html') !== -1 || window.location.pathname.endsWith('/')) {
-                    window.location.replace(linkLoginVar && !linkLoginVar.includes('$(') ? linkLoginVar : 'login.html');
-                }
-            }
-        }
-    })();
-    //-->
-    </script>
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
         function Config(a) { hotspotConfig = a; }
@@ -489,7 +466,6 @@
                     </div>
                 </div>
                 <div id="announcements-container"></div>
-                <div class="banner-container" style="background: rgb(184, 24, 24);border-radius: 10px;"> </div>
                 <!-- 2026 MODAL BOTTOM SHEET: SPEED SELECTOR POPUP (#speed-modal) -->
                 <div class="app" id="speed-modal">
                     <div class="modal-sheet-card compact-speed-card">
@@ -952,22 +928,25 @@
                             </div>
                         </div>
 
-                        <!-- Session Action Controls -->
-                        <div class="status-actions-row">
-                            <button class="btn-danger-glass app-logout" erase-cookie clear-hot-cookie type="button">
-                                <svg viewBox="0 0 24 24" class="action-btn-icon">
-                                    <path
-                                        d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
-                                </svg>
-                                <span>تسجيل الخروج</span>
-                            </button>
-                            <button class="btn-secondary-glass app-logout" type="button">
-                                <svg viewBox="0 0 24 24" class="action-btn-icon">
-                                    <path
-                                        d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z" />
-                                </svg>
-                                <span>قطع الاتصال</span>
-                            </button>
+                        <!-- Session Action Controls with Direct MikroTik Logout & Disconnect Forms -->
+                        <div class="status-actions-row" style="display: flex; gap: 10px; width: 100%; margin-top: 14px;">
+                            <form action="$(link-logout)" name="logout" method="post" onSubmit="try { localStorage.removeItem('mikrotik_last_user'); } catch(e) {}" style="flex: 1; margin: 0;">
+                                <input type="hidden" name="erase-cookie" value="on" />
+                                <button class="btn-danger-glass" type="submit" style="width: 100%;">
+                                    <svg viewBox="0 0 24 24" class="action-btn-icon">
+                                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+                                    </svg>
+                                    <span>تسجيل الخروج</span>
+                                </button>
+                            </form>
+                            <form action="$(link-logout)" name="disconnect" method="post" onSubmit="try { localStorage.setItem('mikrotik_last_user', '$(username)'); } catch(e) {}" style="flex: 1; margin: 0;">
+                                <button class="btn-secondary-glass" type="submit" style="width: 100%;">
+                                    <svg viewBox="0 0 24 24" class="action-btn-icon">
+                                        <path d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z" />
+                                    </svg>
+                                    <span>قطع الاتصال</span>
+                                </button>
+                            </form>
                         </div>
 
                         <button class="button app-submit sell-point-icon app-store" parent-id="app-store"
@@ -1308,17 +1287,29 @@
                 if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); startAutoplay(); };
                 if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); startAutoplay(); };
 
-                // Handle image error fallback: if an image doesn't exist (e.g. 404), remove its slide
+                // Handle image error and missing image fallback
                 const allImgs = track.querySelectorAll('.carousel-slide img');
                 allImgs.forEach(img => {
-                    img.addEventListener('error', function () {
-                        const slide = this.closest('.carousel-slide');
-                        if (slide) {
+                    function handleImgError() {
+                        const slide = img.closest('.carousel-slide');
+                        if (slide && !slide.dataset.broken) {
                             slide.dataset.broken = 'true';
                             slide.remove();
                             refreshCarousel();
                         }
+                    }
+
+                    img.addEventListener('error', handleImgError);
+                    img.addEventListener('load', function() {
+                        if (this.naturalWidth === 0) {
+                            handleImgError();
+                        }
                     });
+
+                    // Check if already completed and broken at initialization
+                    if (img.complete && img.naturalWidth === 0) {
+                        handleImgError();
+                    }
                 });
 
                 // Touch Swipe Gestures for Mobile
