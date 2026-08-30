@@ -1,5 +1,100 @@
-$(if var == "")
-<script>
-    window.location.replace("index.html#login");
-</script>
-$(else) { "logged_in": "$(logged-in)", "link_login_only": "$(link-login-only)", "link_logout": "$(link-logout)","sspeed" : "$(domain)_" ,"update" : "$(domain)_" , "username": "null", "mac": "$(mac-esc)", "ip": "$(ip)", "bytes_in": "$(bytes-in)", "bytes_in_nice": "$(bytes-in-nice)", "bytes_out": "$(bytes-out)", "bytes_out_nice": "$(bytes-out-nice)", "remain_bytes_in": "$(remain-bytes-in)", "remain_bytes_out": "$(remain-bytes-out)", "packets_out": "$(packets-out)", "packets_in": "$(packets-in)", "session_time_left": "$(session-time-left)", "uptime": "$(uptime)", "trial": "$(trial)", "action": "onLoggedOut" } $(endif)
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم تسجيل الخروج</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #18060c;
+            background: radial-gradient(circle at 50% 30%, #3a0d1b 0%, #18060c 100%);
+            color: #f1f5f9;
+            padding: 20px;
+        }
+        .logout-card {
+            background: rgba(36, 10, 18, 0.88);
+            border: 1px solid rgba(212, 160, 23, 0.4);
+            border-radius: 24px;
+            padding: 36px 24px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+        }
+        .icon-circle {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #e11d48, #be123c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(225, 29, 72, 0.4);
+        }
+        .icon-circle svg {
+            width: 38px;
+            height: 38px;
+            fill: #ffffff;
+        }
+        h2 {
+            margin: 0 0 10px;
+            color: #fef08a;
+            font-size: 22px;
+            font-weight: 800;
+        }
+        p {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin: 0 0 24px;
+            line-height: 1.6;
+        }
+        .login-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: linear-gradient(135deg, #881337, #9f1239);
+            border: 1px solid rgba(212, 160, 23, 0.5);
+            color: #fde047;
+            padding: 14px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(136, 19, 55, 0.4);
+            transition: all 0.25s ease;
+        }
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-card">
+        <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+        </div>
+        <h2>تم تسجيل الخروج</h2>
+        <p>شكراً لاستخدامك شبكتنا. للاتصال بالإنترنت مجدداً اضغط أدناه:</p>
+        <a href="$(link-login)" class="login-btn">
+            <span>تسجيل الدخول من جديد</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </a>
+    </div>
+</body>
+</html>
