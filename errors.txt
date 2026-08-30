@@ -1,0 +1,21 @@
+# This file contains error messages which are shown to user, when http/https
+# login is used.
+# These messages can be changed to make user interface more friendly, including
+# translations to different languages.
+
+internal-error = خطأ داخلي في النظام ($(error-orig))
+config-error = خطأ في إعدادات الشبكة ($(error-orig))
+not-logged-in = لم تقم بتسجيل الدخول بعد (IP $(ip))
+ippool-empty = لا توجد عناوين IP متاحة في السيرفر حالياً
+shutting-down = جاري إعادة تشغيل خدمة الشبكة، يرجى المحاولة بعد قليل
+user-session-limit = المعذرة، هذا الكرت مستخدم حالياً في جهاز آخر
+license-session-limit = تم الوصول للحد الأقصى لعدد المتصلين في السيرفر
+wrong-mac-username = هذا الحساب مقترن بجهاز آخر
+chap-missing = مشكلة في التشفير (يرجى تفعيل الجافاسكريبت والمحاولة مرة أخرى)
+invalid-username = أسم المستخدم أو كلمة المرور غير صحيحة، الرجاء المحاولة مرة أخرى
+invalid-mac = هذا الحساب خاص بجهاز آخر ولا يمكن استخدامه هنا
+uptime-limit = عذراً لقد انتهى الوقت المتاح لك
+traffic-limit = لقد انتهى رصيد هذا الحساب
+radius-timeout = خادم المصادقة لا يستجيب، يرجى المحاولة بعد قليل
+auth-in-progress = جاري التحقق من الحساب، يرجى الانتظار
+radius-reply = $(error-orig)

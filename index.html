@@ -318,7 +318,7 @@
                         <form class="login-form" name="login" onsubmit="return false;">
 
                             <!-- Speed Selector Group (Modern Button Trigger) -->
-                            <div class="speed-selector-group" style="margin-bottom: 14px;">
+                            <div class="speed-selector-group" data-speed-button style="margin-bottom: 14px;">
                                 <div class="speed-header">
                                     <span class="speed-title">
                                         <svg viewBox="0 0 24 24" class="section-icon">
@@ -397,7 +397,7 @@
                             </div>
 
                             <!-- Updates & App Store Blocker Toggle -->
-                            <div class="toggle-container-modern">
+                            <div class="toggle-container-modern" data-update-button>
                                 <div class="toggle-info">
                                     <span class="toggle-title">
                                         <svg viewBox="0 0 24 24" class="section-icon">
@@ -550,8 +550,10 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th scope="col">الفئة</th>
+                                            <th scope="col">الباقة</th>
+                                            <th scope="col">السعر</th>
                                             <th scope="col">الوقت</th>
+                                            <th scope="col">الصلاحية</th>
                                         </tr>
                                     </thead>
                                     <tbody id="profiles"></tbody>
@@ -632,22 +634,19 @@
                                     <p id="loan-news-title"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
                                         زبائننا الكرام</p>
-                                    <p id="loan-news-content">صارت كروت شبكة سوما نت متوفرة عبر <strong>محفظة
-                                            جيب</strong></p>
-                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (22481)</div>
-                                    <br id="loan-news-break"><br id="loan-news-break-2">
+                                    <p id="loan-news-content" style="font-size: 1rem; line-height: 1.6; color: #f1f5f9;">التطوير مستمر نحن بخدمتكم دائما مع تحيات إدارة شبكة سوما</p>
+                                    <div id="loan-news-code" class="loan-highlight-badge" style="display: none;"></div>
                                     <div id="loan-news-extra-header"
-                                        style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                        style="display: none; align-items: center; gap: 6px; margin-bottom: 4px;">
                                         <svg viewBox="0 0 24 24"
                                             style="width: 18px; height: 18px; fill: var(--accent-cyan);">
                                             <path
                                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
                                         </svg>
-                                        <strong id="loan-news-extra-title">البث المباشر والمباريات:</strong>
+                                        <strong id="loan-news-extra-title"></strong>
                                     </div>
-                                    <p id="loan-news-extra-content">استمتع بمشاهدة الاستراحة والبث المباشر للمباريات
-                                        والدوريات العالمية مجاناً عبر الرابط:</p>
-                                    <div id="loan-news-extra-badge" class="loan-highlight-badge">t.com</div>
+                                    <p id="loan-news-extra-content" style="display: none;"></p>
+                                    <div id="loan-news-extra-badge" class="loan-highlight-badge" style="display: none;"></div>
                                 </div>
                                 <!-- ========================================================================= -->
 
@@ -797,26 +796,9 @@
                             </div>
                         </section>
 
-                        <!-- Entertainment Direct Links -->
-                        <div class="entertainment-links">
-                            <a class="stream-card-link" href="http://30.10.10.10" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
-                                    <path
-                                        d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
-                                </svg>
-                                <span>الاستراحة</span>
-                            </a>
-                            <a class="stream-card-link" href="http://30.10.10.10:88" target="_blank">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
-                                    <path
-                                        d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-11-2l6-4-6-4v8z" />
-                                </svg>
-                                <span>البث المباشر</span>
-                            </a>
-                        </div>
 
                         <!-- Speed Change Card with White Background & Maroon Text -->
-                        <div class="statusdiv">
+                        <div class="statusdiv" data-speed-button>
                             <div
                                 style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                                 <span class="status-metric-label">
@@ -851,7 +833,7 @@
                         </div>
 
                         <!-- Updates & App Store Blocker Toggle (Identical to Login Screen) -->
-                        <div class="toggle-container-modern" style="margin: 12px 0;">
+                        <div class="toggle-container-modern" data-update-button style="margin: 12px 0;">
                             <div class="toggle-info">
                                 <span class="toggle-title">
                                     <svg viewBox="0 0 24 24" class="section-icon">
@@ -1128,39 +1110,105 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            // 1. CAROUSEL SEAMLESS INFINITE LOOP & AUTOPLAY
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.carousel-dot');
-            const prevBtn = document.getElementById('carouselPrev');
-            const nextBtn = document.getElementById('carouselNext');
-            const carouselContainer = document.getElementById('adCarousel');
+            // 1. DYNAMIC AUTO-DETECT BANNER CAROUSEL (from adimg/ 1.jpg to 7.jpg)
+            function initBannerCarousel() {
+                const track = document.getElementById('carouselTrack');
+                const dotsContainer = document.getElementById('carouselDots');
+                const prevBtn = document.getElementById('carouselPrev');
+                const nextBtn = document.getElementById('carouselNext');
+                const carouselContainer = document.getElementById('adCarousel');
+                const carouselWrapper = document.querySelector('.ads-carousel-wrapper');
 
-            if (track) {
-                const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
-                const totalSlides = originalSlides.length;
-                let currentIndex = 1;
-                let isTransitioning = false;
+                if (!track || !carouselContainer) return;
+
                 let autoplayInterval = null;
-                let transitionSafetyTimeout = null;
+                let isTransitioning = false;
+                let currentIndex = 1;
+                let totalSlides = 0;
 
-                if (totalSlides > 1) {
-                    // Clone first and last slides for seamless circular transition
-                    const firstClone = originalSlides[0].cloneNode(true);
-                    const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
+                function refreshCarousel() {
+                    if (autoplayInterval) {
+                        clearInterval(autoplayInterval);
+                        autoplayInterval = null;
+                    }
+
+                    // Remove any existing clone slides before recalculating
+                    const existingClones = track.querySelectorAll('.carousel-clone');
+                    existingClones.forEach(c => c.remove());
+
+                    // Get all real slides
+                    const realSlides = Array.from(track.querySelectorAll('.carousel-slide:not(.carousel-clone)'));
+                    
+                    // Filter out any slides with failed images or marked as broken
+                    const validSlides = realSlides.filter(slide => {
+                        const img = slide.querySelector('img');
+                        return img && !slide.dataset.broken && img.getAttribute('src');
+                    });
+
+                    totalSlides = validSlides.length;
+
+                    if (totalSlides === 0) {
+                        if (carouselWrapper) carouselWrapper.style.display = 'none';
+                        return;
+                    }
+
+                    if (carouselWrapper) carouselWrapper.style.display = '';
+
+                    // Build / update dots
+                    if (dotsContainer) {
+                        dotsContainer.innerHTML = '';
+                        if (totalSlides > 1) {
+                            dotsContainer.style.display = '';
+                            for (let i = 0; i < totalSlides; i++) {
+                                const dot = document.createElement('span');
+                                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                                dot.onclick = (e) => {
+                                    e.stopPropagation();
+                                    if (isTransitioning) return;
+                                    goToSlide(i + 1);
+                                    startAutoplay();
+                                };
+                                dotsContainer.appendChild(dot);
+                            }
+                        } else {
+                            dotsContainer.style.display = 'none';
+                        }
+                    }
+
+                    // Single Image -> Static view without navigation
+                    if (totalSlides === 1) {
+                        if (prevBtn) prevBtn.style.display = 'none';
+                        if (nextBtn) nextBtn.style.display = 'none';
+                        track.style.transition = 'none';
+                        track.style.transform = 'translateX(0)';
+                        return;
+                    }
+
+                    // Multiple Images (2 to 7) -> Seamless infinite circular loop
+                    if (prevBtn) prevBtn.style.display = '';
+                    if (nextBtn) nextBtn.style.display = '';
+
+                    const firstClone = validSlides[0].cloneNode(true);
+                    const lastClone = validSlides[totalSlides - 1].cloneNode(true);
                     firstClone.classList.add('carousel-clone');
                     lastClone.classList.add('carousel-clone');
 
-                    track.insertBefore(lastClone, track.firstElementChild);
+                    track.insertBefore(lastClone, validSlides[0]);
                     track.appendChild(firstClone);
 
-                    // Initialize starting position at first real slide
+                    currentIndex = 1;
                     track.style.transition = 'none';
                     track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     track.offsetHeight; // Force reflow
                     track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+
+                    updateDots();
+                    startAutoplay();
                 }
 
                 function updateDots() {
+                    if (!dotsContainer || totalSlides <= 1) return;
+                    const dots = dotsContainer.querySelectorAll('.carousel-dot');
                     const realIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                     dots.forEach((dot, idx) => {
                         dot.classList.toggle('active', idx === realIndex);
@@ -1168,6 +1216,7 @@
                 }
 
                 function goToSlide(index, animated = true) {
+                    if (totalSlides <= 1) return;
                     currentIndex = index;
                     if (animated) {
                         track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -1177,10 +1226,9 @@
                     track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     updateDots();
 
-                    clearTimeout(transitionSafetyTimeout);
                     if (animated) {
                         isTransitioning = true;
-                        transitionSafetyTimeout = setTimeout(() => {
+                        setTimeout(() => {
                             checkCloneReset();
                             isTransitioning = false;
                         }, 500);
@@ -1189,17 +1237,15 @@
 
                 function checkCloneReset() {
                     if (currentIndex === totalSlides + 1) {
-                        // We moved forward past the last slide into clone 1 -> silently reset to real slide 1
                         track.style.transition = 'none';
                         currentIndex = 1;
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        track.offsetHeight; // Force reflow
+                        track.offsetHeight;
                     } else if (currentIndex === 0) {
-                        // We moved backward past first slide into clone last -> silently reset to real last slide
                         track.style.transition = 'none';
                         currentIndex = totalSlides;
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        track.offsetHeight; // Force reflow
+                        track.offsetHeight;
                     }
                     isTransitioning = false;
                 }
@@ -1211,34 +1257,41 @@
                 });
 
                 function nextSlide() {
-                    if (isTransitioning) return;
+                    if (isTransitioning || totalSlides <= 1) return;
                     goToSlide(currentIndex + 1);
                 }
 
                 function prevSlide() {
-                    if (isTransitioning) return;
+                    if (isTransitioning || totalSlides <= 1) return;
                     goToSlide(currentIndex - 1);
                 }
 
                 function startAutoplay() {
-                    stopAutoplay();
-                    autoplayInterval = setInterval(() => {
-                        nextSlide();
-                    }, 4000);
+                    if (autoplayInterval) clearInterval(autoplayInterval);
+                    if (totalSlides > 1) {
+                        autoplayInterval = setInterval(() => {
+                            nextSlide();
+                        }, 4000);
+                    }
                 }
 
                 function stopAutoplay() {
                     if (autoplayInterval) clearInterval(autoplayInterval);
                 }
 
-                if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
-                if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
+                if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); startAutoplay(); };
+                if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); startAutoplay(); };
 
-                dots.forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        if (isTransitioning) return;
-                        goToSlide(idx + 1);
-                        startAutoplay();
+                // Handle image error fallback: if an image doesn't exist (e.g. 404), remove its slide
+                const allImgs = track.querySelectorAll('.carousel-slide img');
+                allImgs.forEach(img => {
+                    img.addEventListener('error', function () {
+                        const slide = this.closest('.carousel-slide');
+                        if (slide) {
+                            slide.dataset.broken = 'true';
+                            slide.remove();
+                            refreshCarousel();
+                        }
                     });
                 });
 
@@ -1246,28 +1299,29 @@
                 let touchStartX = 0;
                 let touchEndX = 0;
 
-                if (carouselContainer) {
-                    carouselContainer.addEventListener('touchstart', (e) => {
-                        touchStartX = e.changedTouches[0].screenX;
-                        stopAutoplay();
-                    }, { passive: true });
+                carouselContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    stopAutoplay();
+                }, { passive: true });
 
-                    carouselContainer.addEventListener('touchend', (e) => {
-                        touchEndX = e.changedTouches[0].screenX;
-                        const diff = touchEndX - touchStartX;
-                        if (Math.abs(diff) > 40) {
-                            if (diff > 0) {
-                                prevSlide(); // Swipe right
-                            } else {
-                                nextSlide(); // Swipe left
-                            }
+                carouselContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchEndX - touchStartX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) {
+                            prevSlide();
+                        } else {
+                            nextSlide();
                         }
-                        startAutoplay();
-                    }, { passive: true });
-                }
+                    }
+                    startAutoplay();
+                }, { passive: true });
 
-                startAutoplay();
+                // Initial run
+                refreshCarousel();
             }
+
+            initBannerCarousel();
 
             // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
             window.animating = false;
@@ -1507,88 +1561,245 @@
                 }
 
                 // Apply News and Offers configuration dynamically
-                if (cfg['news-title']) {
+                if (typeof cfg['news-title'] !== 'undefined') {
                     const el = document.getElementById('loan-news-title');
-                    if (el) el.textContent = cfg['news-title'];
+                    if (el) {
+                        if (cfg['news-title']) {
+                            el.textContent = cfg['news-title'];
+                            el.style.display = '';
+                        } else {
+                            el.style.display = 'none';
+                        }
+                    }
                 }
-                if (cfg['news-content']) {
+                if (typeof cfg['news-content'] !== 'undefined') {
                     const el = document.getElementById('loan-news-content');
-                    if (el) el.innerHTML = cfg['news-content'];
+                    if (el) {
+                        if (cfg['news-content']) {
+                            el.innerHTML = cfg['news-content'];
+                            el.style.display = '';
+                        } else {
+                            el.style.display = 'none';
+                        }
+                    }
                 }
-                if (cfg['news-code']) {
-                    const el = document.getElementById('loan-news-code');
-                    if (el) el.textContent = cfg['news-code'];
+                const codeEl = document.getElementById('loan-news-code');
+                if (codeEl) {
+                    if (cfg['news-code']) {
+                        codeEl.textContent = cfg['news-code'];
+                        codeEl.style.display = '';
+                    } else {
+                        codeEl.style.display = 'none';
+                    }
                 }
-                if (cfg['news-extra-title']) {
-                    const el = document.getElementById('loan-news-extra-title');
-                    if (el) el.textContent = cfg['news-extra-title'];
+                const extraHeader = document.getElementById('loan-news-extra-header');
+                const extraTitle = document.getElementById('loan-news-extra-title');
+                if (extraHeader) {
+                    if (cfg['news-extra-title']) {
+                        if (extraTitle) extraTitle.textContent = cfg['news-extra-title'];
+                        extraHeader.style.display = 'flex';
+                    } else {
+                        extraHeader.style.display = 'none';
+                    }
                 }
-                if (cfg['news-extra-content']) {
-                    const el = document.getElementById('loan-news-extra-content');
-                    if (el) el.textContent = cfg['news-extra-content'];
+                const extraContent = document.getElementById('loan-news-extra-content');
+                if (extraContent) {
+                    if (cfg['news-extra-content']) {
+                        extraContent.textContent = cfg['news-extra-content'];
+                        extraContent.style.display = '';
+                    } else {
+                        extraContent.style.display = 'none';
+                    }
                 }
-                if (cfg['news-extra-badge']) {
-                    const el = document.getElementById('loan-news-extra-badge');
-                    if (el) el.textContent = cfg['news-extra-badge'];
+                const extraBadge = document.getElementById('loan-news-extra-badge');
+                if (extraBadge) {
+                    if (cfg['news-extra-badge']) {
+                        extraBadge.textContent = cfg['news-extra-badge'];
+                        extraBadge.style.display = '';
+                    } else {
+                        extraBadge.style.display = 'none';
+                    }
                 }
             } catch (err) {
                 console.error(err);
             }
 
-            const speedLabelMap = {
-                '128k/512k': 'سرعة اقتصادية',
-                '256k/700k': 'سرعة عادية',
-                '256k/1M': 'سرعة متوسطة',
-                '512M/3M': 'سرعة عالية',
-                '1M/8M': 'سرعة عالية جدا'
-            };
+            // =========================================================================
+            // DYNAMIC SPEEDS SYNCHRONIZATION (Login Modal & Status Modal)
+            // =========================================================================
+            function initDynamicSpeeds() {
+                const defaultSpeeds = [
+                    { title: "سرعة اقتصادية", value: "128k/512k" },
+                    { title: "سرعة عادية", value: "256k/700k", default: true },
+                    { title: "سرعة متوسطة", value: "256k/1M" },
+                    { title: "سرعة عالية", value: "512M/3M" },
+                    { title: "سرعة عالية جدا", value: "1M/8M" }
+                ];
 
-            function updateSpeedSelection(val) {
+                const cfg = (typeof hotspotConfig !== 'undefined' && hotspotConfig) ? hotspotConfig : {};
+                const rawSpeeds = Array.isArray(cfg.speeds) && cfg.speeds.length > 0 ? cfg.speeds : defaultSpeeds;
+                
+                // Filter active speeds (supports enabled: false, active: false, or disabled: true)
+                const speedsList = rawSpeeds.filter(s => s && s.disabled !== true && s.active !== false && s.enabled !== false);
+                if (speedsList.length === 0) return;
+
+                // Find default speed
+                let defaultSpeed = speedsList.find(s => s.default === true) || speedsList[0];
+
+                const speedSelect = document.getElementById('speed');
+                const speedModalList = document.getElementById('speedModalList');
+                const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
+
+                const statusSpeedModalList = document.getElementById('statusSpeedModalList');
+                const speedchange = document.getElementById('speedchange');
+                const statusSpeedTriggerText = document.getElementById('statusSpeedTriggerText');
+                const sspeedSpan = document.getElementById('sspeed');
+
+                // 1. POPULATE LOGIN SPEED SELECT & MODAL
                 if (speedSelect) {
-                    speedSelect.value = val;
-                    const event = new Event('change', { bubbles: true });
-                    speedSelect.dispatchEvent(event);
-                }
-                if (selectedSpeedDisplay && speedLabelMap[val]) {
-                    selectedSpeedDisplay.textContent = speedLabelMap[val];
-                }
-                speedCards.forEach(card => {
-                    card.classList.toggle('active', card.getAttribute('data-speed') === val);
-                });
-            }
-
-            if (speedCards.length > 0) {
-                speedCards.forEach(card => {
-                    card.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const val = this.getAttribute('data-speed');
-                        const speedTitle = this.getAttribute('data-speed-title') || speedLabelMap[val] || val;
-
-                        updateSpeedSelection(val);
-                        if (selectedSpeedDisplay) {
-                            selectedSpeedDisplay.textContent = speedTitle;
+                    speedSelect.innerHTML = '<option value="" disabled hidden>أختيار سرعة الإنترنت</option>';
+                    speedsList.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.value;
+                        opt.textContent = s.title;
+                        if (s.value === defaultSpeed.value) {
+                            opt.selected = true;
                         }
-
-                        // Close speed modal and return smoothly to login view
-                        setTimeout(() => {
-                            closeAppModal('speed-modal');
-                        }, 180);
+                        speedSelect.appendChild(opt);
                     });
-                });
+                }
 
-                if (speedSelect) {
-                    speedSelect.addEventListener('change', function () {
-                        const val = speedSelect.value;
-                        if (selectedSpeedDisplay && speedLabelMap[val]) {
-                            selectedSpeedDisplay.textContent = speedLabelMap[val];
-                        }
-                        speedCards.forEach(card => {
-                            card.classList.toggle('active', card.getAttribute('data-speed') === val);
+                if (speedModalList) {
+                    speedModalList.innerHTML = '';
+                    speedsList.forEach(s => {
+                        const card = document.createElement('div');
+                        card.className = 'speed-card-option' + (s.value === defaultSpeed.value ? ' active' : '');
+                        card.setAttribute('data-speed', s.value);
+                        card.setAttribute('data-speed-title', s.title);
+                        card.innerHTML = `
+                            <div class="speed-card-indicator">
+                                <div class="speed-radio-dot"></div>
+                            </div>
+                            <div class="speed-card-info">
+                                <span class="speed-card-name">${s.title}</span>
+                            </div>
+                        `;
+
+                        card.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const val = this.getAttribute('data-speed');
+                            const speedTitle = this.getAttribute('data-speed-title') || val;
+
+                            if (speedSelect) {
+                                speedSelect.value = val;
+                                speedSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            if (selectedSpeedDisplay) {
+                                selectedSpeedDisplay.textContent = speedTitle;
+                            }
+                            document.querySelectorAll('#speedModalList .speed-card-option').forEach(c => {
+                                c.classList.toggle('active', c.getAttribute('data-speed') === val);
+                            });
+
+                            setTimeout(() => {
+                                closeAppModal('speed-modal');
+                            }, 180);
                         });
+
+                        speedModalList.appendChild(card);
                     });
                 }
+
+                if (selectedSpeedDisplay && defaultSpeed) {
+                    selectedSpeedDisplay.textContent = defaultSpeed.title;
+                }
+
+                // 2. POPULATE STATUS SCREEN SPEED SELECT & MODAL
+                if (speedchange) {
+                    speedchange.innerHTML = '<option value="ns" disabled hidden selected>أضغط هنا لتغيير سرعة الإنترنت</option>';
+                    speedsList.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s.value;
+                        opt.textContent = s.title;
+                        speedchange.appendChild(opt);
+                    });
+                }
+
+                if (statusSpeedModalList) {
+                    statusSpeedModalList.innerHTML = '';
+                    speedsList.forEach(s => {
+                        const card = document.createElement('div');
+                        card.className = 'speed-card-option' + (s.value === defaultSpeed.value ? ' active' : '');
+                        card.setAttribute('data-status-speed', s.value);
+                        card.setAttribute('data-speed-title', s.title);
+                        card.innerHTML = `
+                            <div class="speed-card-indicator">
+                                <div class="speed-radio-dot"></div>
+                            </div>
+                            <div class="speed-card-info">
+                                <span class="speed-card-name">${s.title}</span>
+                            </div>
+                        `;
+
+                        card.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const val = this.getAttribute('data-status-speed');
+                            const speedTitle = this.getAttribute('data-speed-title') || val;
+
+                            document.querySelectorAll('#statusSpeedModalList .speed-card-option').forEach(c => {
+                                c.classList.toggle('active', c === this);
+                            });
+
+                            if (statusSpeedTriggerText && speedTitle) {
+                                statusSpeedTriggerText.textContent = speedTitle;
+                            }
+                            if (speedchange) {
+                                speedchange.value = val;
+                                speedchange.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+
+                            setTimeout(() => {
+                                closeAppModal('status-speed-modal');
+                            }, 180);
+                        });
+
+                        statusSpeedModalList.appendChild(card);
+                    });
+                }
+
+                if (statusSpeedTriggerText && defaultSpeed) {
+                    statusSpeedTriggerText.textContent = defaultSpeed.title;
+                }
+
+                // Synchronize trigger text and active speed card when sspeed updates from MikroTik
+                if (sspeedSpan) {
+                    const syncSpeedFromMikrotik = () => {
+                        const txt = (sspeedSpan.innerText || sspeedSpan.textContent || '').trim();
+                        if (txt && txt !== 'سرعة الكرت') {
+                            if (statusSpeedTriggerText) {
+                                statusSpeedTriggerText.textContent = txt;
+                            }
+                            document.querySelectorAll('#statusSpeedModalList .speed-card-option').forEach(card => {
+                                const cardTitle = card.getAttribute('data-speed-title') || '';
+                                if (cardTitle && (txt.includes(cardTitle) || cardTitle.includes(txt))) {
+                                    card.classList.add('active');
+                                } else {
+                                    card.classList.remove('active');
+                                }
+                            });
+                        }
+                    };
+                    const speedObserver = new MutationObserver(syncSpeedFromMikrotik);
+                    speedObserver.observe(sspeedSpan, { childList: true, characterData: true, subtree: true });
+                    syncSpeedFromMikrotik();
+                }
             }
+
+            // Run speed initialization
+            initDynamicSpeeds();
+            window.initDynamicSpeeds = initDynamicSpeeds;
 
             // 4. UPDATES BLOCKER TOGGLE STATUS TEXT (LOGIN SCREEN)
             const chUpdate = document.getElementById('chupdate');
@@ -1605,61 +1816,6 @@
                 };
                 chUpdate.addEventListener('change', updateToggleState);
                 updateToggleState();
-            }
-
-            // 5. STATUS SCREEN: SPEED MODAL HANDLER (LIVE CONNECTION SPEED CHANGE)
-            const statusSpeedCards = document.querySelectorAll('#status-speed-modal .speed-card-option');
-            const statusSpeedTriggerText = document.getElementById('statusSpeedTriggerText');
-            const sspeedSpan = document.getElementById('sspeed');
-
-            if (statusSpeedCards.length > 0) {
-                statusSpeedCards.forEach(card => {
-                    card.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const val = this.getAttribute('data-status-speed');
-                        const speedTitle = this.getAttribute('data-speed-title');
-                        const speedchange = document.getElementById('speedchange');
-
-                        statusSpeedCards.forEach(c => c.classList.toggle('active', c === this));
-
-                        if (statusSpeedTriggerText && speedTitle) {
-                            statusSpeedTriggerText.textContent = speedTitle;
-                        }
-                        if (speedchange) {
-                            speedchange.value = val;
-                            const ev = new Event('change', { bubbles: true });
-                            speedchange.dispatchEvent(ev);
-                        }
-
-                        setTimeout(() => {
-                            closeAppModal('status-speed-modal');
-                        }, 180);
-                    });
-                });
-
-                // Synchronize trigger text and active speed card when sspeed updates from MikroTik
-                if (sspeedSpan) {
-                    const syncSpeedFromMikrotik = () => {
-                        const txt = (sspeedSpan.innerText || sspeedSpan.textContent || '').trim();
-                        if (txt && txt !== 'سرعة الكرت') {
-                            if (statusSpeedTriggerText) {
-                                statusSpeedTriggerText.textContent = txt;
-                            }
-                            statusSpeedCards.forEach(card => {
-                                const cardTitle = card.getAttribute('data-speed-title') || '';
-                                if (cardTitle && (txt.includes(cardTitle) || cardTitle.includes(txt))) {
-                                    card.classList.add('active');
-                                } else {
-                                    card.classList.remove('active');
-                                }
-                            });
-                        }
-                    };
-                    const speedObserver = new MutationObserver(syncSpeedFromMikrotik);
-                    speedObserver.observe(sspeedSpan, { childList: true, characterData: true, subtree: true });
-                    syncSpeedFromMikrotik();
-                }
             }
 
             // 6. STATUS SCREEN: UPDATES BLOCKER TOGGLE (Identical to Login Screen)
@@ -2140,6 +2296,34 @@
             // Reset on page show or hashchange
             window.addEventListener('pageshow', resetWindowScrollToTop);
             window.addEventListener('hashchange', resetWindowScrollToTop);
+
+            // =========================================================================
+            // Dynamic Visibility Sync for Speed & Update Buttons from config.js
+            // =========================================================================
+            function syncConfiguredButtons() {
+                if (typeof hotspotConfig === 'undefined') return;
+
+                // 1. زر تغيير السرعة (في صفحة تسجيل الدخول وصفحة الحالة)
+                if (typeof hotspotConfig['speed-button'] !== 'undefined') {
+                    const showSpeed = hotspotConfig['speed-button'] === true;
+                    const speedElements = document.querySelectorAll('[data-speed-button]');
+                    speedElements.forEach(el => {
+                        el.style.display = showSpeed ? '' : 'none';
+                    });
+                }
+
+                // 2. زر إيقاف التحديثات والمتجر (في صفحة تسجيل الدخول وصفحة الحالة)
+                if (typeof hotspotConfig['update-button'] !== 'undefined') {
+                    const showUpdate = hotspotConfig['update-button'] === true;
+                    const updateElements = document.querySelectorAll('[data-update-button]');
+                    updateElements.forEach(el => {
+                        el.style.display = showUpdate ? '' : 'none';
+                    });
+                }
+            }
+
+            syncConfiguredButtons();
+            window.syncConfiguredButtons = syncConfiguredButtons;
         });
 
         // Friday Greeting Check
