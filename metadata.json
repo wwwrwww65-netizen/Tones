@@ -1,6 +1,6 @@
 {
-  "name": "الأولى نت - MikroTik Hotspot",
-  "description": "بوابة تسجيل الدخول لشبكة الأولى نت اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع إدارة السرعات، فحص الكروت، والأسعار",
+  "name": "سوما نت - MikroTik Hotspot",
+  "description": "بوابة تسجيل الدخول لشبكة سوما نت اللاسلكية بنظام ميكروتك (MikroTik Hotspot Portal) مع إدارة السرعات، فحص الكروت، والأسعار",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

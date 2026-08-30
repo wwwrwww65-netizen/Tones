@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title data-network-name>شبكة BH-NET اللاسلكية</title>
+    <title data-network-name>شبكة سوما نت اللاسلكية</title>
+    <script>
+        var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
+        function Config(a) { hotspotConfig = a; }
+    </script>
+    <script src="config/config.js"></script>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,84 +16,15 @@
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <meta name="HandheldFriendly" content="true">
     <meta name="MobileOptimized" content="width">
-    <meta name="theme-color" content="#070B14">
+    <meta name="theme-color" content="#090d16">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
     <link rel="stylesheet" href="css/fontello.min.css">
+    <!-- Master Colors & Theme Configuration -->
+    <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/style.min.css">
-
-    <link rel="stylesheet" href="css/notifications-system.css">
     <!-- Announcements System CSS -->
     <link rel="stylesheet" href="css/announcements-style.css">
-    <!-- ملف الألوان الرئيسي — يحتوي على جميع الألوان في مكان واحد بشرح عربي -->
-    <link rel="stylesheet" href="css/theme-colors.css">
-    
-    <!-- Core Configuration File Loaded Synchronously in Head -->
-    <script src="config.js"></script>
-    <script>
-        (function() {
-            try {
-                var cached = localStorage.getItem('mikrotik_bhnet_dash_config');
-                if (cached) {
-                    var parsed = JSON.parse(cached);
-                    if (parsed && typeof parsed === 'object') {
-                        window.siteConfig = Object.assign({}, window.siteConfig || {}, parsed);
-                    }
-                }
-            } catch(e) {}
-            var cfg = window.siteConfig || {};
-            var netName = cfg.siteName || 'الأولى نت';
-            document.title = 'شبكة ' + netName + ' اللاسلكية';
-            // Early sync before first paint
-            document.addEventListener('DOMContentLoaded', function() {
-                var c = window.siteConfig || {};
-                var name = (c.siteName || 'الأولى نت').trim();
-                document.querySelectorAll('[data-network-name]').forEach(function(el) {
-                    if (el.tagName.toLowerCase() !== 'title') {
-                        el.textContent = 'شبكة ' + name + ' اللاسلكية';
-                    }
-                });
-                var parts = name.split(/\s+/);
-                var prefix = 'الأولى';
-                var suffix = 'نت';
-                if (parts.length > 1) {
-                    suffix = parts.pop();
-                    prefix = parts.join(' ');
-                } else {
-                    prefix = name;
-                    suffix = '';
-                }
-                var prefixEl = document.querySelector('[data-network-name-prefix="true"]');
-                var suffixEl = document.querySelector('.brand-net-gold');
-                if (prefixEl) prefixEl.textContent = prefix;
-                if (suffixEl) {
-                    suffixEl.textContent = suffix;
-                    suffixEl.style.display = suffix ? 'inline-block' : 'none';
-                }
-            });
-        })();
-    </script>
-
-    <style>
-        /* Smooth presentation for network elements */
-        .network-hero-content {
-            flex-wrap: nowrap !important;
-        }
-        .network-hero-title-wrap {
-            flex: 1 1 0% !important;
-            min-width: 0 !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .network-logo-frame, .network-status-badge {
-            flex: 0 0 auto !important;
-        }
-    </style>
-
     <style>
         .im1::before {
             content: "سرعة في النت";
@@ -138,6 +74,7 @@
 
         img {
             -webkit-user-drag: none;
+            user-drag: none;
         }
     </style>
     <script src="js/security.min.js"></script>
@@ -274,140 +211,53 @@
                 <!-- MAIN LOGIN VIEW -->
                 <div class="login" id="login">
 
-                    <!-- 1. بطاقة الشعار والهوية الفاخرة للشبكة (مطابقة تماماً لتصميم الشيباني نت) -->
-                    <div class="app-card aloula-hero-card">
-                        <!-- الخلفية الزخرفية الذهبية الفخمة -->
-                        <div class="aloula-bg-glow-layer" aria-hidden="true">
-                            <svg class="aloula-bg-waves" viewBox="0 0 400 180" preserveAspectRatio="none">
-                                <defs>
-                                    <linearGradient id="goldWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#DFAB52" stop-opacity="0.22"/>
-                                        <stop offset="60%" stop-color="#DFAB52" stop-opacity="0.05"/>
-                                        <stop offset="100%" stop-color="#DFAB52" stop-opacity="0"/>
-                                    </linearGradient>
-                                    <radialGradient id="haloRadialGlow" cx="18%" cy="50%" r="48%">
-                                        <stop offset="0%" stop-color="#DFAB52" stop-opacity="0.38"/>
-                                        <stop offset="50%" stop-color="#DFAB52" stop-opacity="0.08"/>
-                                        <stop offset="100%" stop-color="#DFAB52" stop-opacity="0"/>
-                                    </radialGradient>
-                                </defs>
-                                <circle cx="78" cy="88" r="70" fill="url(#haloRadialGlow)"/>
-                                <path d="M0,140 Q110,165 210,125 T400,105 L400,180 L0,180 Z" fill="url(#goldWaveGrad)"/>
-                                <path d="M0,135 Q120,160 220,118 T400,95" fill="none" stroke="rgba(223, 171, 82, 0.25)" stroke-width="1.2"/>
-                                <path d="M0,152 Q130,172 240,130 T400,108" fill="none" stroke="rgba(223, 171, 82, 0.12)" stroke-width="0.8"/>
+                    <!-- Top Modern Header -->
+                    <header class="top-header">
+                        <div class="network-brand">
+                            <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
+                                <svg class="wifi-animated-icon" viewBox="0 0 24 24">
+                                    <!-- Wave 3 (Outer signal) -->
+                                    <path class="wifi-sig wifi-sig-3"
+                                        d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
+                                    <!-- Wave 2 (Middle signal) -->
+                                    <path class="wifi-sig wifi-sig-2"
+                                        d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z" />
+                                    <!-- Wave 1 (Inner signal) -->
+                                    <path class="wifi-sig wifi-sig-1"
+                                        d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z" />
+                                    <!-- Dot (Base signal) -->
+                                    <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
+                                </svg>
+                            </div>
+                            <div class="brand-info">
+                                <span class="brand-name" data-network-name>سوما نت</span>
+                            </div>
+                        </div>
+
+                        <!-- "جديدنا" Notification Pill Button -->
+                        <button class="m" parent-id="loan" data-loan-button id="btn-whats-new" type="button">
+                            <svg viewBox="0 0 24 24" class="btn-icon">
+                                <path
+                                    d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
                             </svg>
-                        </div>
+                            <span>جديدنا</span>
+                        </button>
+                    </header>
 
-                        <!-- الشريط العلوي (حالة متصل على اليمين) -->
-                        <div class="aloula-top-bar">
-                            <div class="network-status-badge aloula-status-pill">
-                                <span class="status-pulse-dot"></span>
-                                <span class="status-badge-text">متصل</span>
+                    <!-- ========================================================================= -->
+                    <!-- الشريط الإخباري المتحرك (يبدأ فارغاً ثم يتدفق النص من اليسار إلى اليمين) -->
+                    <!-- ========================================================================= -->
+                    <section class="section">
+                        <div class="ticker-container">
+                            <div class="ticker-content-track">
+                                <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
                             </div>
                         </div>
+                    </section>
 
-                        <!-- القسم الأوسط الرئيسي (شعار الواي فاي الدائري المشع + اسم الشبكة الفخم) -->
-                        <div class="aloula-main-row">
-                            <!-- جهة اليمين في RTL: عنوان وهوية الشبكة (الأولى نت) -->
-                            <div class="aloula-brand-col">
-                                <div class="aloula-title-wrap">
-                                    <div class="aloula-title-line" id="aloulaBrandTitle">
-                                        <span class="brand-name-white">
-                                            <span class="name-text" data-network-name-prefix="true">الأولى</span>
-                                        </span>
-                                        <span class="brand-net-gold">نت</span>
-                                    </div>
-                                </div>
-                                <div class="aloula-subtitle-line">
-                                    <span class="sub-dec-line"></span>
-                                    <span class="sub-dec-dot">◆</span>
-                                    <span class="sub-dec-text">للإنترنت اللاسلكي</span>
-                                    <span class="sub-dec-dot">◆</span>
-                                    <span class="sub-dec-line"></span>
-                                </div>
-                                <script>
-                                    (function() {
-                                        try {
-                                            var cfg = window.siteConfig || {};
-                                            var netName = cfg.siteName || (window.hotspotConfig && window.hotspotConfig["network-name"] ? window.hotspotConfig["network-name"].trim() : 'الأولى نت');
-                                            netName = (netName || 'الأولى نت').trim();
-                                            var parts = netName.split(/\s+/);
-                                            var prefix = 'الأولى';
-                                            var suffix = 'نت';
-                                            if (parts.length > 1) {
-                                                suffix = parts.pop();
-                                                prefix = parts.join(' ');
-                                            } else {
-                                                prefix = netName;
-                                                suffix = '';
-                                            }
-                                            var prefixEl = document.querySelector('[data-network-name-prefix="true"]');
-                                            var suffixEl = document.querySelector('.brand-net-gold');
-                                            if (prefixEl) prefixEl.textContent = prefix;
-                                            if (suffixEl) {
-                                                suffixEl.textContent = suffix;
-                                                suffixEl.style.display = suffix ? 'inline-block' : 'none';
-                                            }
 
-                                            // Subtitle dynamic update from config
-                                            var subDecEl = document.querySelector('.sub-dec-text');
-                                            if (subDecEl && cfg.subDecText) {
-                                                subDecEl.textContent = cfg.subDecText;
-                                            }
-
-                                            // Auto-fit font size if name is long (e.g. "شبكة الأولى نت")
-                                            if (prefix.length > 8) {
-                                                if (prefixEl) prefixEl.style.fontSize = 'clamp(22px, 6.5vw, 30px)';
-                                                if (suffixEl) suffixEl.style.fontSize = 'clamp(22px, 6.5vw, 30px)';
-                                            }
-                                        } catch (e) {}
-                                    })();
-                                </script>
-                            </div>
-
-                            <!-- جهة اليسار في RTL: الهالة الدائرية الذهبية المشعة مع أيقونة الواي فاي الكبيرة -->
-                            <div class="aloula-halo-col">
-                                <div class="aloula-halo-orb">
-                                    <div class="halo-spark spark-1"></div>
-                                    <div class="halo-spark spark-2"></div>
-                                    <div class="halo-spark spark-3"></div>
-                                    <div class="halo-ring-outer"></div>
-                                    <div class="halo-ring-inner"></div>
-                                    <svg class="aloula-halo-wifi-svg wifi-animated-icon" viewBox="0 0 24 24" aria-label="شعار الواي فاي">
-                                        <path class="wifi-sig wifi-sig-3" d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z"/>
-                                        <path class="wifi-sig wifi-sig-2" d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z"/>
-                                        <path class="wifi-sig wifi-sig-1" d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z"/>
-                                        <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.9"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- الشريط السفلي المدمج للمميزات الثلاث (اتصال سريع | خدمة مميزة | ثقة متجددة) -->
-                        <div class="aloula-features-strip">
-                            <div class="aloula-feature-item">
-                                <svg viewBox="0 0 24 24" class="aloula-feat-icon">
-                                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
-                                </svg>
-                                <span class="aloula-feat-text">اتصال سريع</span>
-                            </div>
-                            <div class="aloula-feat-divider"></div>
-                            <div class="aloula-feature-item">
-                                <svg viewBox="0 0 24 24" class="aloula-feat-icon">
-                                    <path d="M19 3H5L2 9l10 12L22 9l-3-6zM5.5 5h13l1.8 3.6-8.3 10-8.3-10L5.5 5z"/>
-                                </svg>
-                                <span class="aloula-feat-text">خدمة مميزة</span>
-                            </div>
-                            <div class="aloula-feat-divider"></div>
-                            <div class="aloula-feature-item">
-                                <svg viewBox="0 0 24 24" class="aloula-feat-icon">
-                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-                                </svg>
-                                <span class="aloula-feat-text">ثقة متجددة</span>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- Main Welcome Title (يتغير تلقائياً حسب اسم الشبكة أو النص الترحيبي في config.js) -->
+                    <h1 id="main-welcome-title" data-welcome-title data-network-name>مرحبا بكم في شبكة سوما نت</h1>
 
                     <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
                     <div class="ads-carousel-wrapper">
@@ -463,137 +313,90 @@
                         </div>
                     </div>
 
-                    <!-- ========================================================================= -->
-                    <!-- الشريط الإخباري المتحرك (تحت البنر) -->
-                    <!-- ========================================================================= -->
-                    <section class="section">
-                        <div class="ticker-container">
-                            <div class="ticker-content-track">
-                                <p class="marquee" data-news-line>بسم الله الرحمن الرحيم { قل للمؤمنين يغضوا من أبصارهم ويحفظوا فروجهم ذلك أزكى لهم إن الله خبير بما يصنعون } (النور:30)</p>
-                            </div>
-                        </div>
-                    </section>
+                    <!-- Glassmorphic Login Card -->
+                    <div class="login-card">
+                        <form class="login-form" name="login" onsubmit="return false;">
 
-                    <!-- ========================================================================= -->
-                    <!-- شريط القرآن الكريم مجاناً (تحت الشريط الإخباري) -->
-                    <!-- ========================================================================= -->
-                    <div class="quran-strip-card" id="quranLoginStrip">
-                        <div class="quran-strip-info">
-                            <div class="quran-icon-wrap" aria-hidden="true">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-.4 0-.8.1-1.1.2C4.4 15.6 4 14.9 4 14V4c0-.6.4-1 1-1h13v13z"/>
-                                    <path d="M8 6h8v2H8zm0 3h8v2H8zm0 3h5v2H8z"/>
-                                </svg>
-                            </div>
-                            <div class="quran-text-group">
-                                <div class="quran-title-row">
-                                    <span class="quran-main-title">القرآن الكريم</span>
-                                    <span class="quran-free-badge">مجاني</span>
+                            <!-- Speed Selector Group (Modern Button Trigger) -->
+                            <div class="speed-selector-group" style="margin-bottom: 14px;">
+                                <div class="speed-header">
+                                    <span class="speed-title">
+                                        <svg viewBox="0 0 24 24" class="section-icon">
+                                            <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                        </svg>
+                                        <span>أختر سرعتك المناسبة</span>
+                                    </span>
                                 </div>
-                                <span class="quran-sub-label">المصحف الشريف كاملاً بدون رصيد</span>
+
+                                <!-- Native select preserved hidden for script/form integration -->
+                                <select id="speed" name="domain" speed-field style="display: none;">
+                                    <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
+                                    <option value="128k/512k">سرعة أقتصادية</option>
+                                    <option selected value="256k/700k">سرعة عادية</option>
+                                    <option value="256k/1M">سرعة متوسطة</option>
+                                    <option value="512M/3M">سرعة عالية</option>
+                                    <option value="1M/8M" id="opt-speed-ultra" style="display: none;">سرعة عالية جدا
+                                    </option>
+                                </select>
+
+                                <!-- Modern Interactive Speed Trigger Button -->
+                                <button type="button" class="speed-modal-trigger-btn" id="openSpeedModalBtn"
+                                    parent-id="speed-modal" aria-label="تحديد سرعة الإنترنت">
+                                    <div class="speed-trigger-left">
+                                        <span class="speed-trigger-icon">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                                            </svg>
+                                        </span>
+                                        <div class="speed-trigger-text">
+                                            <span class="speed-trigger-label">السرعة المختارة:</span>
+                                            <span class="speed-trigger-selected" id="selectedSpeedDisplay">سرعة عادية</span>
+                                        </div>
+                                    </div>
+                                    <div class="speed-trigger-badge">
+                                        <span>تغيير</span>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                                        </svg>
+                                    </div>
+                                </button>
                             </div>
-                        </div>
-                        <div class="quran-strip-actions">
-                            <button type="button" class="quran-btn quran-btn-read" onclick="openQuranModal()" title="قراءة القرآن الكريم">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                                </svg>
-                                <span>قراءة</span>
-                            </button>
-                            <!-- <button type="button" class="quran-btn quran-btn-download" title="تنزيل ملف القرآن الكريم PDF" onclick="downloadQuranFile(event)">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
-                                </svg>
-                                <span>تنزيل</span>
-                            </button> -->
-                        </div>
-                    </div>
 
-
-
-                    <!-- Separate Cards Login Form Wrapper -->
-                    <form class="login-form" name="login" onsubmit="return false;">
-
-                        <!-- 1. ترويسة اختيار السرعة المستقلة خارج الحاوية (Speed Selector Outer Header) -->
-                        <div class="speed-selection-outer-header">
-                            <div class="card-section-title-wrap">
-                                <span class="card-section-icon">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M7 2v11h3v9l7-12h-4l4-8z" />
-                                    </svg>
-                                </span>
-                                <span class="card-section-title">أختر سرعتك المناسبة</span>
-                            </div>
-                            <span class="selected-speed-badge" id="selectedSpeedDisplay">سرعة متوسطة</span>
-                        </div>
-
-                        <!-- 1. بطاقة شريط السرعات المتحرك (Speed Strip Carousel Card) -->
-                        <div class="app-card speed-selection-card">
-                            <!-- Native select strictly linked with MikroTik system & scripts (name="domain" & speed-field) -->
-                            <!-- يتم بناء الخيارات ديناميكياً من config.js -->
-                            <select id="speed" name="domain" speed-field style="display: none;">
-                                <option value="" disabled hidden selected>أختيار سرعة الإنترنت</option>
-                            </select>
-
-                            <!-- Horizontal Moving / Scrollable Speeds Carousel Strip -->
-                            <div class="speed-slider-wrapper">
-                                <div class="speed-pills-row" id="speedPillsRow" role="radiogroup"
-                                    aria-label="شريط تحديد سرعة الإنترنت">
-                                    <!-- يتم بناء أزرار السرعة ديناميكياً من config.js -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2. بطاقة رقم الكرت المستقلة (Card Input Card) -->
-                        <div class="app-card login-input-card">
-                            <div class="input-card-header">
+                            <!-- Card Input with Integrated Micro Actions -->
+                            <div class="input-group-modern">
                                 <span class="input-label-text">أدخل رقم الكرت الذي لديك للاتصال فوراً بالإنترنت</span>
-                            </div>
+                                <div class="input-wrapper-glass">
+                                    <div class="input-icon-badge" title="رمز الكرت" aria-label="رمز الكرت">
+                                        <svg viewBox="0 0 24 24" class="card-icon-svg">
+                                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                                        </svg>
+                                    </div>
+                                    <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
+                                        username-field improve-input autocomplete="off" enterkeyhint="go"
+                                        inputmode="text">
 
-                            <div class="input-wrapper-glass">
-                                <span class="input-icon-badge" title="رقم الكرت" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
-                                    </svg>
-                                </span>
-                                <input name="username" class="login-input" placeholder="ادخل رقم الكرت هنا"
-                                    username-field improve-input autocomplete="off" enterkeyhint="go"
-                                    inputmode="text">
-
-                                <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
-                                <div class="input-inner-actions">
-                                    <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
-                                        title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
-                                        <span>دخول بكرت سابق</span>
-                                    </button>
-                                    <select id="se" style="display: none;" aria-hidden="true">
-                                        <option value="" selected disabled>دخول بكرت سابق</option>
-                                        <option value="relod">تحديث</option>
-                                    </select>
+                                    <!-- Embedded Micro-Actions (Previous Card Direct Fill Button) -->
+                                    <div class="input-inner-actions">
+                                        <button type="button" class="prev-card-pill-btn" id="quickPreviousCardBtn"
+                                            title="دخول بكرت سابق" aria-label="دخول بكرت سابق">
+                                            <span>دخول بكرت سابق</span>
+                                        </button>
+                                        <select id="se" style="display: none;" aria-hidden="true">
+                                            <option value="" selected disabled>دخول بكرت سابق</option>
+                                            <option value="relod">تحديث</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Hidden Password Field -->
-                            <div class="login-field password-field" style="display: none;">
+                            <div class="login-field password-field">
                                 <i class="login-icon fas icon-lock"></i>
                                 <input type="hidden" name="password" class="login-input"
                                     placeholder="ادخل كلمة السر هنا" improve-input>
                             </div>
-                        </div>
 
-                        <!-- 3. زر تسجيل الدخول المنفصل والمستقل (Standalone Submit Button) -->
-                        <div class="login-submit-wrapper">
-                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
-                                type="button" id="mainLoginBtn">
-                                <svg viewBox="0 0 24 24" class="login-btn-wifi-icon" aria-hidden="true">
-                                    <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0012 4zm0 4.5c3.31 0 6.31 1.34 8.49 3.51L12 20.49 3.51 12.01A11.93 11.93 0 0112 8.5z" />
-                                </svg>
-                                <span class="button-text">تسجيل الدخول</span>
-                            </button>
-                        </div>
-
-                        <!-- 4. بطاقة إيقاف التحديثات والمتجر المستقلة (Updates Blocker Card) -->
-                        <div class="app-card updates-toggle-card">
+                            <!-- Updates & App Store Blocker Toggle -->
                             <div class="toggle-container-modern">
                                 <div class="toggle-info">
                                     <span class="toggle-title">
@@ -613,9 +416,14 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
 
-                    </form>
+                            <!-- Primary Glow Login Submit Button -->
+                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
+                                type="button" id="mainLoginBtn">
+                                <span class="button-text">تسجيل الدخول</span>
+                            </button>
+                        </form>
+                    </div>
 
                     <!-- Customer Support Section -->
                     <div class="customer-support-section">
@@ -628,7 +436,7 @@
                         </div>
                         <div class="support-actions-grid">
                             <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                            <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                            <a href="whatsapp://send?phone=967772131004&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%AA%D9%88%D9%86%D8%B3%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                 class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
@@ -638,7 +446,7 @@
                             </a>
 
                             <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                            <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                            <a href="tel:772131004" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                 <svg viewBox="0 0 24 24" class="support-btn-icon">
                                     <path
                                         d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -670,221 +478,59 @@
                         </div>
 
                         <div class="speed-cards-list" id="speedModalList">
-                            <!-- يتم بناء بطاقات السرعة ديناميكياً من config.js -->
+                            <!-- Speed Option 1 -->
+                            <div class="speed-card-option" data-speed="128k/512k" data-speed-title="سرعة اقتصادية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة اقتصادية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 2 (Default / Active) -->
+                            <div class="speed-card-option active" data-speed="256k/700k" data-speed-title="سرعة عادية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عادية (الموصى بها)</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 3 -->
+                            <div class="speed-card-option" data-speed="256k/1M" data-speed-title="سرعة متوسطة">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة متوسطة</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 4 -->
+                            <div class="speed-card-option" data-speed="512M/3M" data-speed-title="سرعة عالية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
+                            <div class="speed-card-option" id="card-speed-ultra" data-speed="1M/8M"
+                                data-speed-title="سرعة عالية جدا" style="display: none;">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية جدا</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- ========================================================
-                     سكريبت الربط الموحد للسرعات - يقرأ من config.js ويبني
-                     كل الأماكن الثلاثة ويربطها بالميكروتيك تلقائياً
-                ========================================================== -->
-                <script>
-                    (function initSpeedsFromConfig() {
-                        function getSpeedsList() {
-                            var raw = (window.siteConfig && window.siteConfig.speedOptions) || (window.hotspotConfig || {})["speeds"] || [];
-                            return raw.map(function (s) {
-                                return {
-                                    name: s.label || s.name || '',
-                                    value: s.value !== undefined ? s.value : '',
-                                    isDefault: s.selected || s.isDefault || false,
-                                    visible: s.visible !== undefined ? s.visible : true,
-                                    badge: s.badge || ''
-                                };
-                            }).filter(function (s) { return s.visible && s.name; });
-                        }
-
-                        function run() {
-                            var speeds = getSpeedsList();
-                            if (!speeds.length) return;
-
-                            // خريطة أسماء السرعات لضمان ظهور الاسم فقط في كل مكان
-                            window.speedNameMap = window.speedNameMap || {};
-                            speeds.forEach(function (sp) {
-                                window.speedNameMap[sp.value] = sp.name;
-                            });
-
-                            // --- 1. أزرار السرعة الصغيرة في صفحة الدخول (#speedPillsRow) ---
-                            var pillsRow   = document.getElementById("speedPillsRow");
-                            var speedSel   = document.getElementById("speed");          // select الميكروتيك
-                            var speedDisp  = document.getElementById("selectedSpeedDisplay");
-
-                            if (pillsRow && speedSel) {
-                                pillsRow.innerHTML = "";
-                                speedSel.innerHTML = '<option value="" disabled hidden selected>أختيار سرعة الإنترنت</option>';
-
-                                var defaultPill = null;
-                                var defaultSp = speeds.find(function(s) { return s.isDefault; }) || speeds[0];
-
-                                speeds.forEach(function (sp) {
-                                    // زر الـ pill - يظهر الاسم فقط
-                                    var btn = document.createElement("button");
-                                    btn.type = "button";
-                                    btn.className = "speed-pill-btn";
-                                    btn.setAttribute("data-speed", sp.value);
-                                    btn.setAttribute("data-speed-title", sp.name);
-                                    btn.setAttribute("aria-label", sp.name);
-
-                                    btn.innerHTML =
-                                        '<span class="pill-dot"></span>' +
-                                        '<span class="pill-text">' + sp.name + '</span>';
-
-                                    if (sp === defaultSp || sp.isDefault) {
-                                        btn.classList.add("active");
-                                        defaultPill = btn;
-                                    }
-
-                                    pillsRow.appendChild(btn);
-
-                                    // خيار في select الميكروتيك
-                                    var opt = document.createElement("option");
-                                    opt.value = sp.value;
-                                    opt.textContent = sp.name;
-                                    if (sp === defaultSp || sp.isDefault) opt.selected = true;
-                                    speedSel.appendChild(opt);
-                                });
-
-                                if (defaultSp) {
-                                    speedSel.value = defaultSp.value;
-                                    if (speedDisp) speedDisp.textContent = defaultSp.name;
-                                }
-
-                                // Scroll to active pill automatically so the selected speed is visible and centered
-                                function scrollToActivePill() {
-                                    var activePill = pillsRow.querySelector(".speed-pill-btn.active");
-                                    if (activePill) {
-                                        try {
-                                            activePill.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-                                        } catch (e) {
-                                            var scrollTarget = activePill.offsetLeft - (pillsRow.clientWidth / 2) + (activePill.clientWidth / 2);
-                                            pillsRow.scrollTo({ left: scrollTarget, behavior: 'smooth' });
-                                        }
-                                    }
-                                }
-                                setTimeout(scrollToActivePill, 100);
-                                setTimeout(scrollToActivePill, 400);
-
-                                // أحداث أزرار الـ pill
-                                var allPills = pillsRow.querySelectorAll(".speed-pill-btn");
-                                allPills.forEach(function (pill) {
-                                    pill.addEventListener("click", function () {
-                                        allPills.forEach(function (p) { p.classList.remove("active"); });
-                                        pill.classList.add("active");
-                                        var val = pill.getAttribute("data-speed");
-                                        var title = pill.getAttribute("data-speed-title");
-                                        if (speedSel) speedSel.value = val;
-                                        if (speedDisp) speedDisp.textContent = title;
-                                        scrollToActivePill();
-                                        // sync modal list too
-                                        var modalCards = document.querySelectorAll("#speedModalList .speed-card-option");
-                                        modalCards.forEach(function (c) {
-                                            c.classList.toggle("active", c.getAttribute("data-speed") === val);
-                                        });
-                                    });
-                                });
-                            }
-
-                            // --- 2. موداله صفحة الدخول (#speedModalList) ---
-                            var loginModal = document.getElementById("speedModalList");
-                            if (loginModal) {
-                                loginModal.innerHTML = "";
-                                var defaultSp = speeds.find(function(s) { return s.isDefault; }) || speeds[0];
-                                speeds.forEach(function (sp) {
-                                    var isDef = (sp === defaultSp || sp.isDefault);
-                                    var div = document.createElement("div");
-                                    div.className = "speed-card-option" + (isDef ? " active" : "");
-                                    div.setAttribute("data-speed", sp.value);
-                                    div.setAttribute("data-speed-title", sp.name);
-                                    div.innerHTML =
-                                        '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
-                                        '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + '</span></div>';
-                                    loginModal.appendChild(div);
-                                });
-
-                                // أحداث موداله الدخول
-                                var modalCards = loginModal.querySelectorAll(".speed-card-option");
-                                modalCards.forEach(function (card) {
-                                    card.addEventListener("click", function () {
-                                        modalCards.forEach(function (c) { c.classList.remove("active"); });
-                                        card.classList.add("active");
-                                        var val = card.getAttribute("data-speed");
-                                        var title = card.getAttribute("data-speed-title");
-                                        if (speedSel) speedSel.value = val;
-                                        if (speedDisp) speedDisp.textContent = title;
-                                        // sync pills too
-                                        var pills = document.querySelectorAll("#speedPillsRow .speed-pill-btn");
-                                        pills.forEach(function (p) {
-                                            var isActive = p.getAttribute("data-speed") === val;
-                                            p.classList.toggle("active", isActive);
-                                            if (isActive) {
-                                                try {
-                                                    p.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-                                                } catch(e) {}
-                                            }
-                                        });
-                                        setTimeout(function () {
-                                            if (typeof closeAppModal === "function") closeAppModal("speed-modal");
-                                        }, 180);
-                                    });
-                                });
-                            }
-
-                            // --- 3. موداله صفحة الحالة (#statusSpeedModalList) ---
-                            var statusModal = document.getElementById("statusSpeedModalList");
-                            var speedchange = document.getElementById("speedchange");
-                            var triggerText = document.getElementById("statusSpeedTriggerText");
-                            if (statusModal) {
-                                statusModal.innerHTML = "";
-                                var defaultSp = speeds.find(function(s) { return s.isDefault; }) || speeds[0];
-                                speeds.forEach(function (sp) {
-                                    var isDef = (sp === defaultSp || sp.isDefault);
-                                    var div = document.createElement("div");
-                                    div.className = "speed-card-option" + (isDef ? " active" : "");
-                                    div.setAttribute("data-status-speed", sp.value);
-                                    div.setAttribute("data-speed-title", sp.name);
-                                    div.innerHTML =
-                                        '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
-                                        '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + '</span></div>';
-                                    statusModal.appendChild(div);
-                                });
-
-                                if (triggerText && defaultSp) {
-                                    triggerText.textContent = defaultSp.name;
-                                }
-
-                                var statusCards = statusModal.querySelectorAll(".speed-card-option");
-                                statusCards.forEach(function (card) {
-                                    card.addEventListener("click", function (e) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        statusCards.forEach(function (c) { c.classList.remove("active"); });
-                                        card.classList.add("active");
-                                        var val = card.getAttribute("data-status-speed");
-                                        var title = card.getAttribute("data-speed-title");
-                                        if (triggerText) triggerText.textContent = title;
-                                        if (speedchange) {
-                                            speedchange.value = val;
-                                            speedchange.dispatchEvent(new Event("change", { bubbles: true }));
-                                        }
-                                        setTimeout(function () {
-                                            if (typeof closeAppModal === "function") closeAppModal("status-speed-modal");
-                                        }, 180);
-                                    });
-                                });
-                            }
-                        }
-
-                        // تشغيل بعد تحميل config.js
-                        if (document.readyState === "loading") {
-                            document.addEventListener("DOMContentLoaded", run);
-                        } else {
-                            run();
-                        }
-                        window.addEventListener("load", function () { setTimeout(run, 150); });
-                    })();
-                </script>
-
-
 
                 <!-- 2026 MODAL BOTTOM SHEET: PRICING (#price) -->
                 <div class="app" id="price">
@@ -904,10 +550,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th scope="col">السعر</th>
-                                            <th scope="col">مدة الوقت</th>
-                                            <th scope="col">حجم البيانات</th>
-                                            <th scope="col">الصلاحية</th>
+                                            <th scope="col">الفئة</th>
+                                            <th scope="col">الوقت</th>
                                         </tr>
                                     </thead>
                                     <tbody id="profiles"></tbody>
@@ -918,12 +562,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 738348945</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -954,12 +598,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 738348945</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -985,23 +629,25 @@
                                 <!-- هنا يتم كتابة العروض والخدمات الجديدة والنصائح للزبائن (تُقرأ تلقائياً من config.js) -->
                                 <!-- ========================================================================= -->
                                 <div class="loan-body" id="loan-news-container">
-                                    <p id="loan-news-title" data-news-title="true"
+                                    <p id="loan-news-title"
                                         style="font-weight: 800; font-size: 1.1rem; color: #fde047; margin-bottom: 8px;">
-                                        🔥 عروض ومميزات الشبكة الحصرية 🔥</p>
-                                    <p id="loan-news-content" data-news-content="true"><b>الميزة الأساسية:</b> استمتع بتصفح تطبيقي الواتساب (WhatsApp) و الإنستقرام (Instagram) مجاناً بالكامل!<br><br><b>سهولة الوصول:</b> العرض متاح لك مباشرة بدون الحاجة لتسجيل الدخول إلى الشبكة.<br><br><b>وقت العرض:</b> تبدأ المتعة يومياً من الساعة 5 فجراً وحتى الساعة 8 صباحاً.</p>
-                                    <div id="loan-news-code" data-news-code="true" class="loan-highlight-badge">عرض مجاني</div>
+                                        زبائننا الكرام</p>
+                                    <p id="loan-news-content">صارت كروت شبكة سوما نت متوفرة عبر <strong>محفظة
+                                            جيب</strong></p>
+                                    <div id="loan-news-code" class="loan-highlight-badge">رقم كود الشبكة: (22481)</div>
                                     <br id="loan-news-break"><br id="loan-news-break-2">
                                     <div id="loan-news-extra-header"
                                         style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
                                         <svg viewBox="0 0 24 24"
-                                             style="width: 18px; height: 18px; fill: var(--accent-cyan);">
+                                            style="width: 18px; height: 18px; fill: var(--accent-cyan);">
                                             <path
                                                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
                                         </svg>
-                                        <strong id="loan-news-extra-title" data-news-extra-title="true">📺 البث المباشر والقنوات الرياضية</strong>
+                                        <strong id="loan-news-extra-title">البث المباشر والمباريات:</strong>
                                     </div>
-                                    <p id="loan-news-extra-content" data-news-extra-content="true">تابع أحدث المباريات والبرامج بجودة عالية مباشرة بدون تقطيع</p>
-                                    <a href="https://kor.fntvs.net/channel.php" target="_blank" data-news-extra-badge="true" id="loan-news-extra-badge" class="loan-highlight-badge" style="display:inline-block; text-decoration:none;">📺 مشاهدة البث المباشر</a>
+                                    <p id="loan-news-extra-content">استمتع بمشاهدة الاستراحة والبث المباشر للمباريات
+                                        والدوريات العالمية مجاناً عبر الرابط:</p>
+                                    <div id="loan-news-extra-badge" class="loan-highlight-badge">t.com</div>
                                 </div>
                                 <!-- ========================================================================= -->
 
@@ -1011,12 +657,12 @@
                                     </svg>
                                     <span>رجوع</span>
                                 </button>
-                                <a href="tel:738348945" class="fab-support">
+                                <a href="tel:776590171" class="fab-support">
                                     <svg viewBox="0 0 24 24">
                                         <path
                                             d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                                     </svg>
-                                    <span class="contact" data-service-number>خدمة العملاء: 738348945</span>
+                                    <span class="contact" data-service-number>خدمة العملاء: 776590171</span>
                                 </a>
                             </div>
                         </div>
@@ -1037,7 +683,57 @@
                         </div>
 
                         <div class="speed-cards-list" id="statusSpeedModalList">
-                            <!-- يتم بناء بطاقات السرعات ديناميكياً من config.js -->
+                            <!-- Speed Option 1 -->
+                            <div class="speed-card-option" data-status-speed="128k/512k"
+                                data-speed-title="سرعة اقتصادية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة اقتصادية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 2 -->
+                            <div class="speed-card-option" data-status-speed="256k/700k" data-speed-title="سرعة عادية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عادية (الموصى بها)</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 3 -->
+                            <div class="speed-card-option" data-status-speed="256k/1M" data-speed-title="سرعة متوسطة">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة متوسطة</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 4 -->
+                            <div class="speed-card-option" data-status-speed="512M/3M" data-speed-title="سرعة عالية">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية</span>
+                                </div>
+                            </div>
+
+                            <!-- Speed Option 5 (سرعة عالية جدا - تظهر وتختفي تلقائياً حسب إعداد enable-ultra-speed) -->
+                            <div class="speed-card-option" id="card-status-speed-ultra" data-status-speed="1M/8M"
+                                data-speed-title="سرعة عالية جدا" style="display: none;">
+                                <div class="speed-card-indicator">
+                                    <div class="speed-radio-dot"></div>
+                                </div>
+                                <div class="speed-card-info">
+                                    <span class="speed-card-name">سرعة عالية جدا</span>
+                                </div>
+                            </div>
                         </div>
                         <button class="button app-submit modal-cancel-btn back" type="button" style="margin-top: 14px;">
                             <svg viewBox="0 0 24 24" class="btn-icon">
@@ -1047,75 +743,6 @@
                         </button>
                     </div>
                 </div>
-
-                <script>
-                    // === بناء بطاقات السرعات من config.js تلقائياً ===
-                    (function buildSpeedCards() {
-                        function run() {
-                            var cfg = window.hotspotConfig || {};
-                            var speeds = cfg["speeds"];
-                            if (!speeds || !speeds.length) return;
-
-                            var list = document.getElementById("statusSpeedModalList");
-                            if (!list) return;
-                            list.innerHTML = "";
-
-                            var defaultSet = false;
-                            speeds.forEach(function (sp, idx) {
-                                if (!sp.visible) return;
-
-                                var isDefault = sp.isDefault && !defaultSet;
-                                if (sp.isDefault) defaultSet = true;
-
-                                var div = document.createElement("div");
-                                div.className = "speed-card-option" + (isDefault ? " active" : "");
-                                div.setAttribute("data-status-speed", sp.value);
-                                div.setAttribute("data-speed-title", sp.name);
-
-                                div.innerHTML =
-                                    '<div class="speed-card-indicator"><div class="speed-radio-dot"></div></div>' +
-                                    '<div class="speed-card-info"><span class="speed-card-name">' + sp.name + '</span></div>';
-
-                                list.appendChild(div);
-                            });
-
-                            // إعادة تهيئة الأحداث
-                            var cards = list.querySelectorAll(".speed-card-option");
-                            var triggerText = document.getElementById("statusSpeedTriggerText");
-                            var speedchange = document.getElementById("speedchange");
-
-                            cards.forEach(function (card) {
-                                card.addEventListener("click", function (e) {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    cards.forEach(function (c) { c.classList.remove("active"); });
-                                    card.classList.add("active");
-                                    var title = card.getAttribute("data-speed-title");
-                                    var val = card.getAttribute("data-status-speed");
-                                    if (triggerText) triggerText.textContent = title;
-                                    if (speedchange) {
-                                        speedchange.value = val;
-                                        speedchange.dispatchEvent(new Event("change", { bubbles: true }));
-                                    }
-                                    setTimeout(function () {
-                                        if (typeof closeAppModal === "function") closeAppModal("status-speed-modal");
-                                    }, 180);
-                                });
-                            });
-                        }
-
-                        // ننتظر تحميل config.js ثم نبني البطاقات
-                        if (window.hotspotConfig && window.hotspotConfig["speeds"]) {
-                            run();
-                        } else {
-                            window.addEventListener("load", function () {
-                                setTimeout(run, 300);
-                            });
-                        }
-                    })();
-                </script>
-
-
 
                 <!-- 2026 STATUS DASHBOARD SCREEN (#status) -->
                 <div class="app" id="status">
@@ -1141,74 +768,50 @@
                                 <span class="status-badge-text">متصل بالإنترنت الآن</span>
                             </div>
                             <h2 class="title" id="status-title"
-                                style="font-size: 1.25rem; font-weight: 800;">تم تسجيل دخولك بنجاح!</h2>
-                            <p style="font-size: 0.8rem; margin-top: 4px;">
-                                إذا لم يتم الأتصال تلقائيا أضغط <a
-                                    style="text-decoration: underline; font-weight: 700;"
-                                    href="status.html">هنا</a>
+                                style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">تم تسجيل دخولك بنجاح!</h2>
+                            <p style="font-size: 0.82rem; color: #cbd5e1; margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px;">
+                                <span>إذا لم يتم الأتصال تلقائياً أضغط</span>
+                                <a
+                                    id="manualStatusRefreshLink"
+                                    role="button"
+                                    tabindex="0"
+                                    style="text-decoration: underline; color: #fde047; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 6px; transition: all 0.2s ease;"
+                                    href="javascript:void(0);">
+                                    <span>هنا</span>
+                                    <svg id="statusRefreshIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; transition: transform 0.4s ease;">
+                                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3L21.5 8M22 12.5a10 10 0 0 1-18.8 4.2L2.5 16"/>
+                                    </svg>
+                                </a>
                             </p>
+                            <div id="status-refresh-toast" style="display: none; font-size: 0.76rem; color: #86efac; margin-top: 4px; font-weight: 600; opacity: 0; transition: opacity 0.3s ease;">
+                                <span>✓ تم التحقق وتحديث حالة الاتصال بنجاح</span>
+                            </div>
                         </div>
 
                         <!-- Modern Ticker / News Bar in Status -->
                         <section class="section" style="margin-top: 10px; margin-bottom: 10px;">
                             <div class="ticker-container">
                                 <div class="ticker-content-track">
-                                    <p class="marquee" data-news-line>بسم الله الرحمن الرحيم { قل للمؤمنين يغضوا من أبصارهم ويحفظوا فروجهم ذلك أزكى لهم إن الله خبير بما يصنعون } (النور:30)</p>
+                                    <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متنوعة تناسب الجميع</p>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- ========================================================================= -->
-                        <!-- شريط القرآن الكريم مجاناً (تحت الشريط الإخباري في صفحة الحالة) -->
-                        <!-- ========================================================================= -->
-                        <div class="quran-strip-card" id="quranStatusStrip">
-                            <div class="quran-strip-info">
-                                <div class="quran-icon-wrap" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-.4 0-.8.1-1.1.2C4.4 15.6 4 14.9 4 14V4c0-.6.4-1 1-1h13v13z"/>
-                                        <path d="M8 6h8v2H8zm0 3h8v2H8zm0 3h5v2H8z"/>
-                                    </svg>
-                                </div>
-                                <div class="quran-text-group">
-                                    <div class="quran-title-row">
-                                        <span class="quran-main-title">القرآن الكريم</span>
-                                        <span class="quran-free-badge">مجاناً</span>
-                                    </div>
-                                    <span class="quran-sub-label">تصفح وقراءة المصحف الشريف أثناء اتصالك</span>
-                                </div>
-                            </div>
-                            <div class="quran-strip-actions">
-                                <button type="button" class="quran-btn quran-btn-read" onclick="openQuranModal()" title="قراءة القرآن الكريم">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                                    </svg>
-                                    <span>قراءة</span>
-                                </button>
-                                <!-- <button type="button" class="quran-btn quran-btn-download" title="تنزيل ملف القرآن الكريم PDF" onclick="downloadQuranFile(event)">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
-                                    </svg>
-                                    <span>تنزيل</span>
-                                </button> -->
-                            </div>
-                        </div>
-
-
-
-                        <!-- Entertainment Direct Links (Live Broadcast & Lounge/Break) -->
-                        <div class="entertainment-links" id="entertainmentLinks" style="display: flex; flex-direction: column; gap: 8px; margin: 12px 0;">
-                            <a class="stream-card-link" href="https://kor.fntvs.net/channel.php" target="_blank" rel="noopener noreferrer" id="liveBroadcastLink" data-mobasher>
-                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
+                        <!-- Entertainment Direct Links -->
+                        <div class="entertainment-links">
+                            <a class="stream-card-link" href="http://30.10.10.10" target="_blank">
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
+                                    <path
+                                        d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
+                                </svg>
+                                <span>الاستراحة</span>
+                            </a>
+                            <a class="stream-card-link" href="http://30.10.10.10:88" target="_blank">
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;">
                                     <path
                                         d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-11-2l6-4-6-4v8z" />
                                 </svg>
-                                <span>البث المباشر والقنوات الرياضية</span>
-                            </a>
-                            <a class="stream-card-link estr-card-link" href="#" target="_blank" rel="noopener noreferrer" id="loungeLink" data-estr style="display: none;">
-                                <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;">
-                                    <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
-                                </svg>
-                                <span>استراحة الشبكة</span>
+                                <span>البث المباشر</span>
                             </a>
                         </div>
 
@@ -1218,15 +821,15 @@
                                 style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                                 <span class="status-metric-label">
                                     <svg viewBox="0 0 24 24"
-                                        style="width: 16px; height: 16px; fill: #DFAB52;">
+                                        style="width: 16px; height: 16px; fill: var(--accent-cyan);">
                                         <path d="M7 2v11h3v9l7-12h-4l4-8z" />
                                     </svg>
                                     <span>سرعة الكرت الحالية:</span>
                                 </span>
                                 <span id="sspeed"
-                                    style="font-size: 0.95rem; font-weight: 800; color: #DFAB52;"></span>
+                                    style="font-size: 0.95rem; font-weight: 800; color: var(--accent-cyan);"></span>
                             </div>
-                            <p style="font-size: 0.82rem; margin-bottom: 8px;">أختر سرعة أقل للحفاظ على
+                            <p style="font-size: 0.78rem; color: #f1f5f9; margin-bottom: 8px;">أختر سرعة أقل للحفاظ على
                                 رصيد الكرت</p>
 
                             <button type="button" class="status-select-trigger" id="statusSpeedTrigger"
@@ -1280,11 +883,11 @@
                         <!-- Live Metrics Dashboard -->
                         <div style="margin-top: 14px;">
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: #DFAB52;">
+                                <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent-gold);">
                                     <path
                                         d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
                                 </svg>
-                                <span class="status-metrics-section-title" style="font-size: 0.95rem; font-weight: 800;">معلومات واستهلاك
+                                <span style="font-size: 0.95rem; font-weight: 800; color: #ffffff;">معلومات واستهلاك
                                     الكرت</span>
                             </div>
                             <div class="status-grid-metrics">
@@ -1294,7 +897,7 @@
                                             <path
                                                 d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
                                         </svg>
-                                        <span>التنزيل</span>
+                                        <span>التنزيل (Download)</span>
                                     </span>
                                     <span class="metric-val cyan" id="bytes_out">-</span>
                                 </div>
@@ -1304,7 +907,7 @@
                                             <path
                                                 d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
                                         </svg>
-                                        <span>الرفع</span>
+                                        <span>الرفع (Upload)</span>
                                     </span>
                                     <span class="metric-val emerald" id="bytes_in">-</span>
                                 </div>
@@ -1363,7 +966,7 @@
                             data-app-store-status-button style="display: none;">متجر البرامج</button>
 
                         <!-- Customer Support Section (Identical to Main Login Page) -->
-                        <div class="customer-support-section status-support-section">
+                        <div class="customer-support-section" style="margin-top: 18px;">
                             <div class="support-header">
                                 <svg viewBox="0 0 24 24" class="support-header-icon">
                                     <path
@@ -1373,7 +976,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1383,7 +986,7 @@
                                 </a>
 
                                 <!-- Direct Phone Call Button (Without country code for native phone dialer) -->
-                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1427,7 +1030,7 @@
                             </div>
                             <div class="support-actions-grid">
                                 <!-- WhatsApp Button with Country Code +967 and formatted pre-filled greeting message -->
-                                <a href="whatsapp://send?phone=967738348945&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20BH-NET%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
+                                <a href="whatsapp://send?phone=967776590171&text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%B9%D9%85%D9%84%D8%A7%D8%A1%20%D8%B4%D8%A8%D9%83%D8%A9%20%D8%B3%D9%88%D9%85%D8%A7%20%D9%86%D8%AA%20%D8%A7%D9%84%D9%84%D8%A7%D8%B3%D9%84%D9%83%D9%8A%D8%A9"
                                     class="support-btn support-btn-whatsapp" aria-label="مراسلة واتساب">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
@@ -1435,7 +1038,7 @@
                                     </svg>
                                     <span>مراسلة واتساب</span>
                                 </a>
-                                <a href="tel:738348945" class="support-btn support-btn-call" aria-label="اتصال مباشر">
+                                <a href="tel:776590171" class="support-btn support-btn-call" aria-label="اتصال مباشر">
                                     <svg viewBox="0 0 24 24" class="support-btn-icon">
                                         <path
                                             d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-2.2 2.2a15.11 15.11 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 3.99c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.61c0-.55-.45-1-1-1z" />
@@ -1464,245 +1067,13 @@
                             <div class="wrapper" id="grid"></div>
                         </div>
                         <button class="app-logout button app-submit back">الصفحة السابقة</button>
-                        <a href="tel:738348945" class="fab-support">
+                        <a href="tel:776590171" class="fab-support">
                             <svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                             </svg>
-                            <span class="contact back" data-service-number>خدمة العملاء: 738348945</span>
+                            <span class="contact back" data-service-number>خدمة العملاء: 776590171</span>
                         </a>
-                    </div>
-                </div>
-
-                <!-- 2026 MODAL: ERROR DIALOG & SMS REPORTING (#error-modal) -->
-                <div class="app" id="error-modal">
-                    <div class="modal-sheet-card error-modal-card" style="border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.35); padding: 18px 20px 22px; color: #ffffff; position: relative; max-width: 330px; margin: auto; border: 1.5px solid rgba(212, 175, 55, 0.6);">
-                        <button class="modal-close-icon-x" type="button" onclick="closeErrorModal()" style="position: absolute; top: 12px; left: 14px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(212, 175, 55, 0.45); font-size: 1.1rem; font-weight: 700; color: #ffffff; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; line-height: 1; transition: all 0.2s ease;">✕</button>
-
-                        <div class="error-modal-body" style="padding: 24px 8px 6px; text-align: center;">
-                            <p id="errorModalText" style="color: #ffffff; font-size: 1.05rem; line-height: 1.7; margin: 0 0 20px 0; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">لقد ادخلت اسم المستخدم بطريقة غير صحيحة، الرجاء المحاولة مرة اخرى</p>
-
-                            <!-- SMS Error Dispatch Button styled matching royal night theme -->
-                            <a id="errorSendSmsBtn" href="#" class="error-dispatch-btn btn-sms" style="display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #e6c27a 0%, #d4af37 50%, #b8860b 100%); color: #2d0509; font-weight: 900; font-size: 1rem; padding: 11px 32px; border-radius: 14px; text-decoration: none; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35), inset 0 1.5px 3px rgba(255, 255, 255, 0.45); border: none; cursor: pointer; transition: all 0.2s ease;">
-                                <span>إرسال الخطأ</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2026 LUXURY IMMERSIVE HOLY QURAN READER (#quran-modal) -->
-                <div class="app" id="quran-modal">
-                    <div class="quran-reader-stage">
-                        <!-- Modern Floating Header Bar -->
-                        <header class="quran-modern-header" id="quranHeader">
-                            <div class="quran-hdr-start">
-                                <!-- Close / Back Button -->
-                                <button class="quran-hdr-circle-btn quran-hdr-close" type="button" onclick="closeQuranModal()" title="إغلاق والعودة" aria-label="إغلاق">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                                    </svg>
-                                </button>
-
-                                <!-- Surah Selector Pill -->
-                                <div class="quran-surah-pill">
-                                    <svg viewBox="0 0 24 24" class="quran-surah-icon">
-                                        <path d="M19 2H6c-1.2 0-2 .8-2 2v16c0 1.2.8 2 2 2h13c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1zm-1 18H6c-.6 0-1-.4-1-1s.4-1 1-1h12v2zm0-4H6c-.4 0-.8.1-1.1.2C4.4 15.6 4 14.9 4 14V4c0-.6.4-1 1-1h13v13z"/>
-                                    </svg>
-                                    <select id="quranSurahSelect" class="quran-surah-select" onchange="jumpToSurah(this.value)" aria-label="فهرس سور القرآن">
-                                        <option value="1">سورة الفاتحة (ص 1)</option>
-                                        <option value="2">سورة البقرة (ص 2)</option>
-                                        <option value="45">سورة آل عمران (ص 45)</option>
-                                        <option value="69">سورة النساء (ص 69)</option>
-                                        <option value="95">سورة المائدة (ص 95)</option>
-                                        <option value="115">سورة الأنعام (ص 115)</option>
-                                        <option value="136">سورة الأعراف (ص 136)</option>
-                                        <option value="160">سورة الأنفال (ص 160)</option>
-                                        <option value="169">سورة التوبة (ص 169)</option>
-                                        <option value="187">سورة يونس (ص 187)</option>
-                                        <option value="199">سورة هود (ص 199)</option>
-                                        <option value="211">سورة يوسف (ص 211)</option>
-                                        <option value="224">سورة الرعد (ص 224)</option>
-                                        <option value="230">سورة إبراهيم (ص 230)</option>
-                                        <option value="236">سورة الحجر (ص 236)</option>
-                                        <option value="241">سورة النحل (ص 241)</option>
-                                        <option value="254">سورة الإسراء (ص 254)</option>
-                                        <option value="265">سورة الكهف (ص 265)</option>
-                                        <option value="276">سورة مريم (ص 276)</option>
-                                        <option value="283">سورة طه (ص 283)</option>
-                                        <option value="293">سورة الأنبياء (ص 293)</option>
-                                        <option value="301">سورة الحج (ص 301)</option>
-                                        <option value="310">سورة المؤمنون (ص 310)</option>
-                                        <option value="318">سورة النور (ص 318)</option>
-                                        <option value="328">سورة الفرقان (ص 328)</option>
-                                        <option value="334">سورة الشعراء (ص 334)</option>
-                                        <option value="344">سورة النمل (ص 344)</option>
-                                        <option value="353">سورة القصص (ص 353)</option>
-                                        <option value="363">سورة العنكبوت (ص 363)</option>
-                                        <option value="370">سورة الروم (ص 370)</option>
-                                        <option value="377">سورة لقمان (ص 377)</option>
-                                        <option value="381">سورة السجدة (ص 381)</option>
-                                        <option value="384">سورة الأحزاب (ص 384)</option>
-                                        <option value="394">سورة سبأ (ص 394)</option>
-                                        <option value="400">سورة فاطر (ص 400)</option>
-                                        <option value="406">سورة يس (ص 406)</option>
-                                        <option value="412">سورة الصافات (ص 412)</option>
-                                        <option value="419">سورة ص (ص 419)</option>
-                                        <option value="424">سورة الزمر (ص 424)</option>
-                                        <option value="433">سورة غافر (ص 433)</option>
-                                        <option value="443">سورة فصلت (ص 443)</option>
-                                        <option value="449">سورة الشورى (ص 449)</option>
-                                        <option value="455">سورة الزخرف (ص 455)</option>
-                                        <option value="462">سورة الدخان (ص 462)</option>
-                                        <option value="465">سورة الجاثية (ص 465)</option>
-                                        <option value="468">سورة الأحقاف (ص 468)</option>
-                                        <option value="473">سورة محمد (ص 473)</option>
-                                        <option value="477">سورة الفتح (ص 477)</option>
-                                        <option value="481">سورة الحجرات (ص 481)</option>
-                                        <option value="484">سورة ق (ص 484)</option>
-                                        <option value="486">سورة الذاريات (ص 486)</option>
-                                        <option value="489">سورة الطور (ص 489)</option>
-                                        <option value="492">سورة النجم (ص 492)</option>
-                                        <option value="494">سورة القمر (ص 494)</option>
-                                        <option value="497">سورة الرحمن (ص 497)</option>
-                                        <option value="500">سورة الواقعة (ص 500)</option>
-                                        <option value="503">سورة الحديد (ص 503)</option>
-                                        <option value="508">سورة المجادلة (ص 508)</option>
-                                        <option value="511">سورة الحشر (ص 511)</option>
-                                        <option value="515">سورة الممتحنة (ص 515)</option>
-                                        <option value="517">سورة الصف (ص 517)</option>
-                                        <option value="519">سورة الجمعة (ص 519)</option>
-                                        <option value="520">سورة المنافقون (ص 520)</option>
-                                        <option value="522">سورة التغابن (ص 522)</option>
-                                        <option value="524">سورة الطلاق (ص 524)</option>
-                                        <option value="526">سورة التحريم (ص 526)</option>
-                                        <option value="528">سورة الملك (ص 528)</option>
-                                        <option value="530">سورة القلم (ص 530)</option>
-                                        <option value="532">سورة الحاقة (ص 532)</option>
-                                        <option value="534">سورة المعارج (ص 534)</option>
-                                        <option value="536">سورة نوح (ص 536)</option>
-                                        <option value="538">سورة الجن (ص 538)</option>
-                                        <option value="540">سورة المزمل (ص 540)</option>
-                                        <option value="541">سورة المدثر (ص 541)</option>
-                                        <option value="543">سورة القيامة (ص 543)</option>
-                                        <option value="544">سورة الإنسان (ص 544)</option>
-                                        <option value="546">سورة المرسلات (ص 546)</option>
-                                        <option value="548">سورة النبأ (ص 548)</option>
-                                        <option value="549">سورة النازعات (ص 549)</option>
-                                        <option value="551">سورة عبس (ص 551)</option>
-                                        <option value="552">سورة التكوير (ص 552)</option>
-                                        <option value="553">سورة الانفطار (ص 553)</option>
-                                        <option value="553">سورة المطففين (ص 553)</option>
-                                        <option value="555">سورة الانشقاق (ص 555)</option>
-                                        <option value="556">سورة البروج (ص 556)</option>
-                                        <option value="557">سورة الطارق (ص 557)</option>
-                                        <option value="557">سورة الأعلى (ص 557)</option>
-                                        <option value="558">سورة الغاشية (ص 558)</option>
-                                        <option value="559">سورة الفجر (ص 559)</option>
-                                        <option value="560">سورة البلد (ص 560)</option>
-                                        <option value="561">سورة الشمس (ص 561)</option>
-                                        <option value="561">سورة الليل (ص 561)</option>
-                                        <option value="562">سورة الضحى (ص 562)</option>
-                                        <option value="562">سورة الشرح (ص 562)</option>
-                                        <option value="563">سورة التين (ص 563)</option>
-                                        <option value="563">سورة العلق (ص 563)</option>
-                                        <option value="564">سورة القدر (ص 564)</option>
-                                        <option value="564">سورة البينة (ص 564)</option>
-                                        <option value="565">سورة الزلزلة (ص 565)</option>
-                                        <option value="565">سورة العاديات (ص 565)</option>
-                                        <option value="566">سورة القارعة (ص 566)</option>
-                                        <option value="566">سورة التكاثر (ص 566)</option>
-                                        <option value="567">سورة العصر (ص 567)</option>
-                                        <option value="567">سورة الهمزة (ص 567)</option>
-                                        <option value="567">سورة الفيل (ص 567)</option>
-                                        <option value="568">سورة قريش (ص 568)</option>
-                                        <option value="568">سورة الماعون (ص 568)</option>
-                                        <option value="568">سورة الكوثر (ص 568)</option>
-                                        <option value="569">سورة الكافرون (ص 569)</option>
-                                        <option value="569">سورة النصر (ص 569)</option>
-                                        <option value="569">سورة المسد (ص 569)</option>
-                                        <option value="569">سورة الإخلاص (ص 569)</option>
-                                        <option value="569">سورة الفلق (ص 569)</option>
-                                        <option value="569">سورة الناس (ص 569)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Header Controls (Minimal Icons) -->
-                            <div class="quran-hdr-end">
-                                <!-- Eye Comfort Theme Toggle -->
-                                <button type="button" class="quran-hdr-circle-btn" id="quranThemeToggle" onclick="toggleQuranTheme()" title="المظهر والإضاءة">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
-                                    </svg>
-                                </button>
-
-                                <!-- Bookmark Button -->
-                                <button type="button" class="quran-hdr-circle-btn" id="quranBookmarkBtn" onclick="saveQuranBookmark()" title="حفظ علامة القراءة">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-                                    </svg>
-                                </button>
-
-                                <!-- Single Clean Download PDF Button -->
-                                <!-- <button type="button" class="quran-hdr-download-btn" onclick="downloadQuranFile(event)" title="تنزيل نسخة المصحف كاملة PDF">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
-                                    </svg>
-                                    <span>تحميل PDF</span>
-                                </button> -->
-                            </div>
-                        </header>
-
-                        <!-- Quran Viewport Stage with Gesture & Pinch-to-Zoom Engine -->
-                        <main class="quran-modern-viewer" id="quranViewerContainer">
-                            <!-- Tap zones: Right Edge = Next Page, Left Edge = Prev Page -->
-                            <div class="quran-edge-tap quran-edge-right" onclick="quranNextPage()" title="الصفحة التالية"></div>
-                            <div class="quran-edge-tap quran-edge-left" onclick="quranPrevPage()" title="الصفحة السابقة"></div>
-
-                            <!-- Page Image Canvas Stage -->
-                            <div class="quran-viewport-scroll" id="quranCanvasContainer">
-                                <img id="quranPageImg" class="quran-page-img" src="public/quran-pages/1.jpg" alt="صفحة المصحف الشريف" loading="eager" draggable="false" />
-                            </div>
-
-                            <!-- Fast Zoom Floating Reset Indicator (Shown when zoomed) -->
-                            <button type="button" class="quran-zoom-reset-btn" id="quranZoomResetBtn" onclick="quranResetZoom()" style="display: none;" title="إعادة ضبط الحجم الأصلي">
-                                <span>100% ضبط</span>
-                            </button>
-                        </main>
-
-                        <!-- Modern Floating Bottom Navigation Capsule -->
-                        <footer class="quran-modern-bottom" id="quranBottomBar">
-                            <!-- Previous Page Stepper (Right in RTL: goes back to previous page) -->
-                            <button type="button" class="quran-capsule-nav-btn quran-capsule-prev" onclick="quranPrevPage()" title="الصفحة السابقة">
-                                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                                <span>السابقة</span>
-                            </button>
-
-                            <!-- Scrubber & Page Indicator -->
-                            <div class="quran-capsule-center">
-                                <div class="quran-capsule-badge">
-                                    <span>ص</span>
-                                    <input type="number" id="quranPageInput" class="quran-page-number-input" value="1" min="1" max="569" onchange="quranGoToPage(this.value)" aria-label="رقم الصفحة">
-                                    <span class="quran-capsule-sep">/</span>
-                                    <span id="quranTotalPages">569</span>
-                                </div>
-
-                                <!-- Fast Page Scrubber Slider -->
-                                <input type="range" id="quranPageSlider" class="quran-page-slider" min="1" max="569" value="1" oninput="quranSliderInput(this.value)" aria-label="شريط تقليب الصفحات" />
-
-                                <!-- Bookmark Quick Return Chip (Shown if bookmark exists) -->
-                                <button type="button" class="quran-bookmark-chip" id="quranJumpBookmarkBtn" onclick="goToQuranBookmark()" style="display: none;" title="انتقال للعلامة المحفوظة">
-                                    <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-                                    <span id="quranLastBookmarkText">علامتي</span>
-                                </button>
-                            </div>
-
-                            <!-- Next Page Stepper (Left in RTL: advances to next page) -->
-                            <button type="button" class="quran-capsule-nav-btn quran-capsule-next" onclick="quranNextPage()" title="الصفحة التالية">
-                                <span>التالية</span>
-                                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                            </button>
-                        </footer>
                     </div>
                 </div>
 
@@ -1745,13 +1116,13 @@
     <span style="display: none;" id="winmsg"></span>
 
     <!-- Hotspot System Scripts -->
+    <script src="js/jsqr.min.js"></script>
     <script src="js/init.min.js"></script>
     <script src="js/hotInImprover.min.js"></script>
     <script src="js/hotCookie.min.js"></script>
     <script src="js/hotOptions.min.js"></script>
     <script src="js/hotBlocker.min.js"></script>
     <script src="js/main.min.js"></script>
-    <script src="js/quran-reader.js"></script>
 
     <!-- 2026 Interactive Enhancements & Swipe Gestures -->
     <script>
@@ -1759,89 +1130,37 @@
 
             // 1. CAROUSEL SEAMLESS INFINITE LOOP & AUTOPLAY
             const track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('carouselDots');
+            const dots = document.querySelectorAll('.carousel-dot');
             const prevBtn = document.getElementById('carouselPrev');
             const nextBtn = document.getElementById('carouselNext');
             const carouselContainer = document.getElementById('adCarousel');
 
             if (track) {
-                const imgElements = Array.from(track.querySelectorAll('img'));
+                const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+                const totalSlides = originalSlides.length;
+                let currentIndex = 1;
+                let isTransitioning = false;
+                let autoplayInterval = null;
+                let transitionSafetyTimeout = null;
 
-                // Verify which images actually exist before initializing carousel using a fresh Image object
-                function checkImageValid(src) {
-                    return new Promise(resolve => {
-                        const tempImg = new Image();
-                        tempImg.onload = () => resolve(true);
-                        tempImg.onerror = () => resolve(false);
-                        tempImg.src = src;
-                    });
+                if (totalSlides > 1) {
+                    // Clone first and last slides for seamless circular transition
+                    const firstClone = originalSlides[0].cloneNode(true);
+                    const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
+                    firstClone.classList.add('carousel-clone');
+                    lastClone.classList.add('carousel-clone');
+
+                    track.insertBefore(lastClone, track.firstElementChild);
+                    track.appendChild(firstClone);
+
+                    // Initialize starting position at first real slide
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    track.offsetHeight; // Force reflow
+                    track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
                 }
 
-                Promise.all(imgElements.map(async img => {
-                    const isValid = await checkImageValid(img.src);
-                    return { img: img, ok: isValid };
-                })).then(results => {
-                    let validSlidesCount = 0;
-                    results.forEach(res => {
-                        if (!res.ok) {
-                            let slide = res.img.closest('.carousel-slide');
-                            if (slide) slide.remove();
-                        } else {
-                            validSlidesCount++;
-                        }
-                    });
-
-                    if (dotsContainer) {
-                        dotsContainer.innerHTML = '';
-                        for (let i = 0; i < validSlidesCount; i++) {
-                            const d = document.createElement('span');
-                            d.className = i === 0 ? 'carousel-dot active' : 'carousel-dot';
-                            dotsContainer.appendChild(d);
-                        }
-                    }
-
-                    const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
-                    const totalSlides = originalSlides.length;
-                    
-                    if (totalSlides === 0) {
-                        const wrapper = document.querySelector('.ads-carousel-wrapper');
-                        if (wrapper) wrapper.style.display = 'none';
-                        return;
-                    }
-
-                    const dots = document.querySelectorAll('.carousel-dot');
-                    let currentIndex = 1;
-                    let isTransitioning = false;
-                    let autoplayInterval = null;
-                    let transitionSafetyTimeout = null;
-
-                    if (totalSlides === 1) {
-                        track.style.transition = 'none';
-                        track.style.transform = `translateX(0%)`;
-                        if (dotsContainer) dotsContainer.style.display = 'none';
-                        if (prevBtn) prevBtn.style.display = 'none';
-                        if (nextBtn) nextBtn.style.display = 'none';
-                        return;
-                    }
-
-                    if (totalSlides > 1) {
-                        // Clone first and last slides for seamless circular transition
-                        const firstClone = originalSlides[0].cloneNode(true);
-                        const lastClone = originalSlides[totalSlides - 1].cloneNode(true);
-                        firstClone.classList.add('carousel-clone');
-                        lastClone.classList.add('carousel-clone');
-
-                        track.insertBefore(lastClone, track.firstElementChild);
-                        track.appendChild(firstClone);
-
-                        // Initialize starting position at first real slide
-                        track.style.transition = 'none';
-                        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        track.offsetHeight; // Force reflow
-                        track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
-                    }
-
-                    function updateDots() {
+                function updateDots() {
                     const realIndex = (currentIndex - 1 + totalSlides) % totalSlides;
                     dots.forEach((dot, idx) => {
                         dot.classList.toggle('active', idx === realIndex);
@@ -1948,7 +1267,6 @@
                 }
 
                 startAutoplay();
-                });
             }
 
             // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
@@ -1959,8 +1277,7 @@
 
                 isAnyModalOpen: function () {
                     var appModal = document.querySelector('.app.active:not(#status)');
-                    var ntModal = document.querySelector('.nt-modal-overlay:not(.nt-modal-hide), .nt-card-overlay:not(.nt-card-hide)');
-                    return !!(appModal || ntModal);
+                    return !!appModal;
                 },
 
                 lock: function () {
@@ -2000,7 +1317,7 @@
                     // Prevent background scrolling on touch gestures outside scrollable modal containers
                     document.addEventListener('touchmove', function (e) {
                         if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .nt-modal, .nt-card, .price-div, .sell-point-div');
+                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
                             if (!scrollable) {
                                 e.preventDefault();
                             }
@@ -2010,7 +1327,7 @@
                     // Prevent wheel scroll bleed-through to underlying background
                     document.addEventListener('wheel', function (e) {
                         if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .nt-modal, .nt-card, .price-div, .sell-point-div');
+                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
                             if (!scrollable) {
                                 e.preventDefault();
                             }
@@ -2065,6 +1382,11 @@
                 } else {
                     document.body.style.overflow = 'hidden';
                 }
+
+                // If opening QR scanner modal, start camera immediately
+                if (modal.id === 'qr-scanner-modal' && typeof window.startCamera === 'function') {
+                    window.startCamera();
+                }
             }
 
             function closeAppModal(modalOrId) {
@@ -2083,6 +1405,9 @@
                             target.style.display = 'none';
                         }
                     }, 180);
+                    if (target.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
+                        window.stopCamera();
+                    }
                 } else {
                     document.querySelectorAll('.app.active').forEach(m => {
                         if (m.id !== 'status') {
@@ -2092,6 +1417,9 @@
                                     m.style.display = 'none';
                                 }
                             }, 180);
+                            if (m.id === 'qr-scanner-modal' && typeof window.stopCamera === 'function') {
+                                window.stopCamera();
+                            }
                         }
                     });
                 }
@@ -2139,6 +1467,7 @@
             // Modal Trigger Buttons (parent-id and dedicated IDs)
             document.querySelectorAll('button[parent-id], [data-open-modal]').forEach(btn => {
                 btn.addEventListener('click', function (e) {
+                    if (this.id === 'openQrScannerBtn') return; // Handled specifically with direct camera start
                     const parentId = this.getAttribute('parent-id') || this.getAttribute('data-open-modal');
                     if (parentId && parentId !== 'status') {
                         e.preventDefault();
@@ -2148,155 +1477,83 @@
                 }, true);
             });
 
-            // 3. SPEED SELECTOR & OVAL PILLS SYNC (LOGIN SCREEN)
+            // 3. SPEED SELECTOR & MODAL POPUP SYNC (LOGIN SCREEN)
             const speedSelect = document.getElementById('speed');
             const speedCards = document.querySelectorAll('#speed-modal .speed-card-option');
-            const speedPills = document.querySelectorAll('.speed-pill-btn');
             const selectedSpeedDisplay = document.getElementById('selectedSpeedDisplay');
 
-            // Apply Ultra Speed Option visibility from config.js ("enable-ultra-speed")
+            // Apply Ultra Speed Option & Dynamic Config Elements (Welcome title, News, etc.)
             try {
-                if (typeof hotOption !== 'undefined') {
-                    if (hotOption['enable-ultra-speed']) {
-                        const optUltra = document.getElementById('opt-speed-ultra');
-                        const cardUltra = document.getElementById('card-speed-ultra');
-                        const pillUltra = document.getElementById('pill-speed-ultra');
-                        const cardStatusUltra = document.getElementById('card-status-speed-ultra');
-                        if (optUltra) optUltra.style.display = '';
-                        if (cardUltra) cardUltra.style.display = '';
-                        if (pillUltra) pillUltra.style.display = '';
-                        if (cardStatusUltra) cardStatusUltra.style.display = '';
-                    }
+                const cfg = (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : (typeof hotOption !== 'undefined' ? hotOption : {});
+                
+                if (cfg['enable-ultra-speed']) {
+                    const optUltra = document.getElementById('opt-speed-ultra');
+                    const cardUltra = document.getElementById('card-speed-ultra');
+                    const cardStatusUltra = document.getElementById('card-status-speed-ultra');
+                    if (optUltra) optUltra.style.display = '';
+                    if (cardUltra) cardUltra.style.display = '';
+                    if (cardStatusUltra) cardStatusUltra.style.display = '';
+                }
 
-                    // Apply News and Offers configuration dynamically
-                    if (hotOption['news-title']) {
-                        const el = document.getElementById('loan-news-title');
-                        if (el) el.textContent = hotOption['news-title'];
+                // Dynamic Welcome Title
+                const netName = (cfg['network-name'] || 'تونس نت').toString().trim();
+                const welcomeTitleEl = document.getElementById('main-welcome-title');
+                if (welcomeTitleEl) {
+                    if (cfg['welcome-title']) {
+                        welcomeTitleEl.innerHTML = cfg['welcome-title'];
+                    } else {
+                        welcomeTitleEl.innerHTML = `مرحبا بك في شبكة ${netName} اللاسلكية`;
                     }
-                    if (hotOption['news-content']) {
-                        const el = document.getElementById('loan-news-content');
-                        if (el) el.innerHTML = hotOption['news-content'];
-                    }
-                    if (hotOption['news-code']) {
-                        const el = document.getElementById('loan-news-code');
-                        if (el) el.textContent = hotOption['news-code'];
-                    }
-                    if (hotOption['news-extra-title']) {
-                        const el = document.getElementById('loan-news-extra-title');
-                        if (el) el.textContent = hotOption['news-extra-title'];
-                    }
-                    if (hotOption['news-extra-content']) {
-                        const el = document.getElementById('loan-news-extra-content');
-                        if (el) el.textContent = hotOption['news-extra-content'];
-                    }
-                    if (hotOption['news-extra-badge']) {
-                        const el = document.getElementById('loan-news-extra-badge');
-                        if (el) el.textContent = hotOption['news-extra-badge'];
-                    }
+                }
+
+                // Apply News and Offers configuration dynamically
+                if (cfg['news-title']) {
+                    const el = document.getElementById('loan-news-title');
+                    if (el) el.textContent = cfg['news-title'];
+                }
+                if (cfg['news-content']) {
+                    const el = document.getElementById('loan-news-content');
+                    if (el) el.innerHTML = cfg['news-content'];
+                }
+                if (cfg['news-code']) {
+                    const el = document.getElementById('loan-news-code');
+                    if (el) el.textContent = cfg['news-code'];
+                }
+                if (cfg['news-extra-title']) {
+                    const el = document.getElementById('loan-news-extra-title');
+                    if (el) el.textContent = cfg['news-extra-title'];
+                }
+                if (cfg['news-extra-content']) {
+                    const el = document.getElementById('loan-news-extra-content');
+                    if (el) el.textContent = cfg['news-extra-content'];
+                }
+                if (cfg['news-extra-badge']) {
+                    const el = document.getElementById('loan-news-extra-badge');
+                    if (el) el.textContent = cfg['news-extra-badge'];
                 }
             } catch (err) {
                 console.error(err);
             }
 
-            const defaultSpeedMap = {
-                '': 'كرت هوتسبوت',
-                '2M/4M': 'سرعة اقتصادية',
-                '2M/5M': 'سرعة عادية',
-                '2M/7M': 'سرعة متوسطة',
-                '2M/8M': 'سرعة عالية',
-                '2M/16M': 'سرعة عالية جدا',
-                '2M/20M': 'سرعة خارقة'
+            const speedLabelMap = {
+                '128k/512k': 'سرعة اقتصادية',
+                '256k/700k': 'سرعة عادية',
+                '256k/1M': 'سرعة متوسطة',
+                '512M/3M': 'سرعة عالية',
+                '1M/8M': 'سرعة عالية جدا'
             };
 
-            function getSpeedLabel(val) {
-                if (window.speedNameMap && window.speedNameMap[val]) {
-                    return window.speedNameMap[val];
-                }
-                return defaultSpeedMap[val] || val;
-            }
-
             function updateSpeedSelection(val) {
-                if (speedSelect && speedSelect.value !== val) {
+                if (speedSelect) {
                     speedSelect.value = val;
                     const event = new Event('change', { bubbles: true });
                     speedSelect.dispatchEvent(event);
                 }
-                const label = getSpeedLabel(val);
-                if (selectedSpeedDisplay) {
-                    selectedSpeedDisplay.textContent = label;
+                if (selectedSpeedDisplay && speedLabelMap[val]) {
+                    selectedSpeedDisplay.textContent = speedLabelMap[val];
                 }
                 speedCards.forEach(card => {
-                    const cardSpeed = card.getAttribute('data-speed');
-                    const cardTitle = card.getAttribute('data-speed-title');
-                    card.classList.toggle('active', cardSpeed === val || cardTitle === label);
-                });
-                speedPills.forEach(pill => {
-                    const pillSpeed = pill.getAttribute('data-speed');
-                    const pillTitle = pill.getAttribute('data-speed-title');
-                    const isActive = pillSpeed === val || pillTitle === label;
-                    pill.classList.toggle('active', isActive);
-                    if (isActive) {
-                        try {
-                            pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                        } catch (e) {}
-                    }
-                });
-            }
-
-            // Speed Pill Buttons Event Listener
-            if (speedPills.length > 0) {
-                speedPills.forEach(pill => {
-                    pill.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const val = this.getAttribute('data-speed');
-                        const speedTitle = this.getAttribute('data-speed-title') || getSpeedLabel(val);
-                        updateSpeedSelection(val);
-                        if (selectedSpeedDisplay) {
-                            selectedSpeedDisplay.textContent = speedTitle;
-                        }
-                    });
-                });
-            }
-
-            // Speed Strip Carousel Scroll Arrows & Drag Support
-            const speedPillsRow = document.getElementById('speedPillsRow');
-            const speedNavPrev = document.getElementById('speedNavPrev');
-            const speedNavNext = document.getElementById('speedNavNext');
-
-            if (speedPillsRow) {
-                if (speedNavPrev) {
-                    speedNavPrev.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        speedPillsRow.scrollBy({ left: -90, behavior: 'smooth' });
-                    });
-                }
-                if (speedNavNext) {
-                    speedNavNext.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        speedPillsRow.scrollBy({ left: 90, behavior: 'smooth' });
-                    });
-                }
-
-                // Mouse Drag to scroll
-                let isDragging = false;
-                let startX = 0;
-                let scrollLeft = 0;
-
-                speedPillsRow.addEventListener('mousedown', function (e) {
-                    isDragging = true;
-                    startX = e.pageX - speedPillsRow.offsetLeft;
-                    scrollLeft = speedPillsRow.scrollLeft;
-                });
-                window.addEventListener('mouseup', function () {
-                    isDragging = false;
-                });
-                speedPillsRow.addEventListener('mousemove', function (e) {
-                    if (!isDragging) return;
-                    e.preventDefault();
-                    const x = e.pageX - speedPillsRow.offsetLeft;
-                    const walk = (x - startX) * 1.5;
-                    speedPillsRow.scrollLeft = scrollLeft - walk;
+                    card.classList.toggle('active', card.getAttribute('data-speed') === val);
                 });
             }
 
@@ -2306,7 +1563,7 @@
                         e.preventDefault();
                         e.stopPropagation();
                         const val = this.getAttribute('data-speed');
-                        const speedTitle = this.getAttribute('data-speed-title') || getSpeedLabel(val);
+                        const speedTitle = this.getAttribute('data-speed-title') || speedLabelMap[val] || val;
 
                         updateSpeedSelection(val);
                         if (selectedSpeedDisplay) {
@@ -2319,26 +1576,18 @@
                         }, 180);
                     });
                 });
-            }
 
-            if (speedSelect) {
-                speedSelect.addEventListener('change', function () {
-                    const val = speedSelect.value;
-                    const label = getSpeedLabel(val);
-                    if (selectedSpeedDisplay && label) {
-                        selectedSpeedDisplay.textContent = label;
-                    }
-                    speedCards.forEach(card => {
-                        const cardSpeed = card.getAttribute('data-speed');
-                        const cardTitle = card.getAttribute('data-speed-title');
-                        card.classList.toggle('active', cardSpeed === val || cardTitle === label);
+                if (speedSelect) {
+                    speedSelect.addEventListener('change', function () {
+                        const val = speedSelect.value;
+                        if (selectedSpeedDisplay && speedLabelMap[val]) {
+                            selectedSpeedDisplay.textContent = speedLabelMap[val];
+                        }
+                        speedCards.forEach(card => {
+                            card.classList.toggle('active', card.getAttribute('data-speed') === val);
+                        });
                     });
-                    speedPills.forEach(pill => {
-                        const pillSpeed = pill.getAttribute('data-speed');
-                        const pillTitle = pill.getAttribute('data-speed-title');
-                        pill.classList.toggle('active', pillSpeed === val || pillTitle === label);
-                    });
-                });
+                }
             }
 
             // 4. UPDATES BLOCKER TOGGLE STATUS TEXT (LOGIN SCREEN)
@@ -2369,7 +1618,7 @@
                         e.preventDefault();
                         e.stopPropagation();
                         const val = this.getAttribute('data-status-speed');
-                        const speedTitle = this.getAttribute('data-speed-title') || getSpeedLabel(val);
+                        const speedTitle = this.getAttribute('data-speed-title');
                         const speedchange = document.getElementById('speedchange');
 
                         statusSpeedCards.forEach(c => c.classList.toggle('active', c === this));
@@ -2394,17 +1643,12 @@
                     const syncSpeedFromMikrotik = () => {
                         const txt = (sspeedSpan.innerText || sspeedSpan.textContent || '').trim();
                         if (txt && txt !== 'سرعة الكرت') {
-                            const friendlyName = getSpeedLabel(txt);
-                            if (friendlyName !== txt) {
-                                sspeedSpan.textContent = friendlyName;
-                            }
                             if (statusSpeedTriggerText) {
-                                statusSpeedTriggerText.textContent = friendlyName;
+                                statusSpeedTriggerText.textContent = txt;
                             }
                             statusSpeedCards.forEach(card => {
                                 const cardTitle = card.getAttribute('data-speed-title') || '';
-                                const cardVal = card.getAttribute('data-status-speed') || '';
-                                if (cardTitle === friendlyName || cardVal === txt) {
+                                if (cardTitle && (txt.includes(cardTitle) || cardTitle.includes(txt))) {
                                     card.classList.add('active');
                                 } else {
                                     card.classList.remove('active');
@@ -2472,166 +1716,7 @@
                 }
             }
 
-            // -------------------------------------------------------------
-            // Comprehensive Global Sync with window.siteConfig
-            // (Site Name, Customer Support Phones, WhatsApp Dynamic Text, Offers Modal & Entertainment)
-            // -------------------------------------------------------------
-            function syncAllSiteConfigs() {
-                const config = window.siteConfig || {};
-                const netName = config.siteName || 'BH-NET';
-                const suppPhone = config.supportPhone || '738348945';
-                const waPhone = config.whatsappPhone || '967' + suppPhone.replace(/^0+/, '');
-                let rawWaMsg = config.whatsappMsg || 'مرحبا خدمة عملاء شبكة {network-name} اللاسلكية';
-                const formattedWaMsg = rawWaMsg.replace(/\{network-name\}/g, netName);
-                const encodedWaMsg = encodeURIComponent(formattedWaMsg);
-
-                // 1. Sync Network Name everywhere
-                const titleEl = document.querySelector('title[data-network-name]') || document.querySelector('title');
-                if (titleEl) {
-                    titleEl.innerText = `شبكة ${netName} اللاسلكية`;
-                }
-
-                document.querySelectorAll('[data-network-name]').forEach(el => {
-                    if (el.tagName.toLowerCase() !== 'title') {
-                        el.innerText = `شبكة ${netName} اللاسلكية`;
-                    }
-                });
-
-                document.querySelectorAll('.network-logo-img').forEach(img => {
-                    img.alt = `شعار شبكة ${netName}`;
-                });
-
-                // 2. Sync Customer Support & Call Buttons
-                document.querySelectorAll('.support-btn-call, .fab-support').forEach(link => {
-                    link.href = `tel:${suppPhone}`;
-                });
-
-                document.querySelectorAll('[data-service-number]').forEach(span => {
-                    span.innerText = `خدمة العملاء: ${suppPhone}`;
-                });
-
-                // Sync News / Ticker
-                const newsText = config.textSlider1 || (window.hotspotConfig && window.hotspotConfig["news-line"]) || 'بسم الله الرحمن الرحيم { قل للمؤمنين يغضوا من أبصارهم ويحفظوا فروجهم ذلك أزكى لهم إن الله خبير بما يصنعون } (النور:30)';
-                document.querySelectorAll('[data-news-line]').forEach(p => {
-                    p.innerText = newsText;
-                });
-
-                // 3. Sync WhatsApp links
-                const waScheme = `whatsapp://send?phone=${waPhone}&text=${encodedWaMsg}`;
-                const waWeb = `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodedWaMsg}`;
-
-                document.querySelectorAll('.support-btn-whatsapp').forEach(btn => {
-                    btn.href = waScheme;
-                    btn.setAttribute('data-wa-web', waWeb);
-                    btn.setAttribute('data-wa-scheme', waScheme);
-                });
-
-                // 4. Sync Offers & What's New Modal (#loan)
-                const loanTitle = document.getElementById('loan-news-title') || document.querySelector('[data-news-title]');
-                if (loanTitle && config.offersTitle) {
-                    loanTitle.innerHTML = `🔥 ${config.offersTitle} 🔥`;
-                }
-
-                const loanContent = document.getElementById('loan-news-content') || document.querySelector('[data-news-content]');
-                if (loanContent && config.offers) {
-                    loanContent.innerHTML = config.offers.replace(/\n/g, '<br>');
-                }
-
-                const loanBtn = document.getElementById('loan-news-extra-badge') || document.querySelector('[data-news-extra-badge]');
-                const loanExtraHeader = document.getElementById('loan-news-extra-header');
-                const loanExtraTitle = document.getElementById('loan-news-extra-title');
-                const loanExtraContent = document.getElementById('loan-news-extra-content');
-
-                if (loanBtn) {
-                    const isOffersBtnEnabled = config.offersBtnV !== false && config.offersBtnUrl && config.offersBtnUrl.trim().length > 0;
-                    if (isOffersBtnEnabled) {
-                        loanBtn.href = config.offersBtnUrl.trim();
-                        loanBtn.innerText = config.offersBtnText || '📺 مشاهدة البث المباشر';
-                        loanBtn.style.display = 'inline-block';
-                        if (loanExtraHeader) loanExtraHeader.style.display = 'flex';
-                        if (loanExtraTitle) loanExtraTitle.innerText = config.offersBtnText || '📺 البث المباشر';
-                    } else {
-                        loanBtn.style.display = 'none';
-                        if (loanExtraHeader) loanExtraHeader.style.display = 'none';
-                        if (loanExtraTitle) loanExtraTitle.style.display = 'none';
-                        if (loanExtraContent) loanExtraContent.style.display = 'none';
-                    }
-                }
-
-                // 5. Sync Entertainment & Lounge Links with window.siteConfig (moba & estr & their toggles)
-                const mobaEl = document.getElementById('liveBroadcastLink') || document.querySelector('[data-mobasher]');
-                const estrEl = document.getElementById('loungeLink') || document.querySelector('[data-estr]');
-                const container = document.getElementById('entertainmentLinks') || document.querySelector('.entertainment-links');
-
-                let hasMoba = false;
-                let hasEstr = false;
-
-                const isMobaEnabled = config.mobaV !== false && typeof config.moba === 'string' && config.moba.trim().length > 0;
-                const isEstrEnabled = (config.estrV === true || (config.estrV !== false && config.estr && config.estr.trim().length > 0)) && typeof config.estr === 'string' && config.estr.trim().length > 0 && config.estr.trim() !== '#' && config.estr.trim() !== '';
-
-                if (mobaEl) {
-                    if (isMobaEnabled) {
-                        mobaEl.href = config.moba.trim();
-                        mobaEl.style.display = 'flex';
-                        hasMoba = true;
-                    } else {
-                        mobaEl.style.display = 'none';
-                    }
-                }
-
-                if (estrEl) {
-                    if (isEstrEnabled) {
-                        estrEl.href = config.estr.trim();
-                        estrEl.style.display = 'flex';
-                        hasEstr = true;
-                    } else {
-                        estrEl.style.display = 'none';
-                    }
-                }
-
-                if (container) {
-                    if (hasMoba || hasEstr) {
-                        container.style.display = 'flex';
-                    } else {
-                        container.style.display = 'none';
-                    }
-                }
-
-                // 6. Sync Packages / Profiles table if provided in siteConfig
-                if (Array.isArray(config.packages) && config.packages.length > 0) {
-                    const profilesTbody = document.getElementById('profiles');
-                    if (profilesTbody) {
-                        profilesTbody.innerHTML = config.packages.map(p => `
-                            <tr>
-                                <td>${p.price || ''}</td>
-                                <td>${p.time || 'مفتوح'}</td>
-                                <td>${p.size || ''}</td>
-                                <td>${p.vl || ''}</td>
-                            </tr>
-                        `).join('');
-                    }
-                }
-
-                // 7. Sync Sales Points list if provided in siteConfig
-                if (Array.isArray(config.salesPoints) && config.salesPoints.length > 0) {
-                    const salesTbody = document.getElementById('sell-points');
-                    if (salesTbody) {
-                        salesTbody.innerHTML = config.salesPoints.map(sp => `
-                            <tr>
-                                <td>${typeof sp === 'object' ? (sp.name || '') : sp}</td>
-                            </tr>
-                        `).join('');
-                    }
-                }
-            }
-
-            syncAllSiteConfigs();
-            setTimeout(syncAllSiteConfigs, 400);
-            setTimeout(syncAllSiteConfigs, 1500);
-
-
-
-            // 7. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
+            // 6. BOTTOM NAV - TAB SWITCHING & HOME BUTTON
             const navHome = document.getElementById('navHome');
             if (navHome) {
                 navHome.addEventListener('click', function (e) {
@@ -2780,41 +1865,84 @@
                 });
             }
 
-            // 6. UNIVERSAL WHATSAPP INTENT DISPATCHER (WHATSAPP & WHATSAPP BUSINESS)
-            const waButtons = document.querySelectorAll('.support-btn-whatsapp');
+            // 6. UNIVERSAL WHATSAPP & CONTACT DISPATCHER (DYNAMIC FROM CONFIG.JS)
+            function getActiveHotspotConfig() {
+                return (typeof hotspotConfig !== 'undefined' && Object.keys(hotspotConfig).length > 0) 
+                    ? hotspotConfig 
+                    : (typeof hotOption !== 'undefined' ? hotOption : {});
+            }
 
+            function getDynamicWaDetails() {
+                const cfg = getActiveHotspotConfig();
+                const netName = (cfg['network-name'] || 'سوما نت').toString().trim();
+                let phone = (cfg['whatsapp-number'] || cfg['service-number'] || '776590171').toString().trim();
+                
+                // Format clean digits with country code (+967 for Yemen by default if 9 digits)
+                let cleanDigits = phone.replace(/\D/g, '');
+                if (cleanDigits.length === 9 && (cleanDigits.startsWith('7') || cleanDigits.startsWith('1'))) {
+                    cleanDigits = '967' + cleanDigits;
+                } else if (cleanDigits.startsWith('0') && cleanDigits.length === 10) {
+                    cleanDigits = '967' + cleanDigits.substring(1);
+                }
+
+                const customMsg = cfg['whatsapp-text'] || `مرحبا خدمة عملاء شبكة ${netName} اللاسلكية`;
+                const customWaUrl = cfg['whatsapp-url'] || '';
+
+                const waScheme = customWaUrl || `whatsapp://send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
+                const waWeb = customWaUrl || `https://api.whatsapp.com/send?phone=${cleanDigits}&text=${encodeURIComponent(customMsg)}`;
+
+                return {
+                    phone: cleanDigits,
+                    msg: customMsg,
+                    schemeUrl: waScheme,
+                    webUrl: waWeb
+                };
+            }
+
+            function applyDynamicContactLinks() {
+                const cfg = getActiveHotspotConfig();
+                const sNum = (cfg['service-number'] || '776590171').toString().trim();
+                const wa = getDynamicWaDetails();
+
+                // Update all tel: links
+                document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+                    el.setAttribute('href', 'tel:' + sNum);
+                });
+
+                // Update all WhatsApp href attributes
+                document.querySelectorAll('.support-btn-whatsapp').forEach(el => {
+                    el.setAttribute('href', wa.schemeUrl);
+                });
+            }
+
+            // Apply immediately and on periodic check
+            applyDynamicContactLinks();
+            setTimeout(applyDynamicContactLinks, 300);
+            setTimeout(applyDynamicContactLinks, 1000);
+
+            const waButtons = document.querySelectorAll('.support-btn-whatsapp');
             waButtons.forEach(btn => {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
 
-                    const config = window.siteConfig || {};
-                    const netName = config.siteName || 'BH-NET';
-                    const suppPhone = config.supportPhone || '738348945';
-                    const waPhone = config.whatsappPhone || '967' + suppPhone.replace(/^0+/, '');
-                    let rawWaMsg = config.whatsappMsg || 'مرحبا خدمة عملاء شبكة {network-name} اللاسلكية';
-                    const formattedWaMsg = rawWaMsg.replace(/\{network-name\}/g, netName);
-                    const encodedWaMsg = encodeURIComponent(formattedWaMsg);
-
-                    const currentScheme = btn.getAttribute('data-wa-scheme') || `whatsapp://send?phone=${waPhone}&text=${encodedWaMsg}`;
-                    const currentWeb = btn.getAttribute('data-wa-web') || `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodedWaMsg}`;
-
+                    const wa = getDynamicWaDetails();
                     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
                     if (isMobile) {
                         // Trigger universal mobile URI scheme (Prompts Android "Complete action using" if both are installed)
                         const start = Date.now();
-                        window.location.href = currentScheme;
+                        window.location.href = wa.schemeUrl;
 
                         // Fallback to web link if neither app is installed
                         setTimeout(function () {
                             const elapsed = Date.now() - start;
                             if (elapsed < 2000 && !document.hidden && !document.webkitHidden) {
-                                window.location.href = currentWeb;
+                                window.location.href = wa.webUrl;
                             }
                         }, 1400);
                     } else {
                         // Desktop browser -> Open WhatsApp Web directly
-                        window.open(currentWeb, '_blank', 'noopener,noreferrer');
+                        window.open(wa.webUrl, '_blank', 'noopener,noreferrer');
                     }
                 });
             });
@@ -2963,6 +2091,52 @@
                 });
             }
 
+            // Smooth Status Link Handling - تحديث بيانات الاتصال والرصيد في نفس الصفحة مع تفاعل مرئي فوري
+            const manualRefreshLink = document.getElementById('manualStatusRefreshLink');
+            if (manualRefreshLink) {
+                const triggerRefresh = function(e) {
+                    if (e) e.preventDefault();
+                    
+                    // Rotate icon on click
+                    const icon = document.getElementById('statusRefreshIcon');
+                    if (icon) {
+                        icon.style.transform = 'rotate(360deg)';
+                        setTimeout(() => { if (icon) icon.style.transform = 'rotate(0deg)'; }, 500);
+                    }
+
+                    // Button active flash
+                    manualRefreshLink.style.opacity = '0.7';
+                    setTimeout(() => { manualRefreshLink.style.opacity = '1'; }, 250);
+
+                    // Show Toast Notification
+                    const toast = document.getElementById('status-refresh-toast');
+                    if (toast) {
+                        toast.style.display = 'block';
+                        setTimeout(() => { toast.style.opacity = '1'; }, 10);
+                        clearTimeout(manualRefreshLink._toastTimer);
+                        manualRefreshLink._toastTimer = setTimeout(() => {
+                            toast.style.opacity = '0';
+                            setTimeout(() => { toast.style.display = 'none'; }, 300);
+                        }, 2500);
+                    }
+
+                    // Perform Status Request
+                    if (typeof getRequest === 'function') {
+                        getRequest('/status?var=callBack');
+                    }
+                    if (typeof startStatusQuery === 'function') {
+                        startStatusQuery();
+                    }
+                };
+
+                manualRefreshLink.addEventListener('click', triggerRefresh);
+                manualRefreshLink.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        triggerRefresh(e);
+                    }
+                });
+            }
+
             // Reset on page show or hashchange
             window.addEventListener('pageshow', resetWindowScrollToTop);
             window.addEventListener('hashchange', resetWindowScrollToTop);
@@ -3070,7 +2244,6 @@
             }
         })();
     </script>
-    <script src="js/notifications-system/notifications-integration.js"></script>
 </body>
 
 </html>
