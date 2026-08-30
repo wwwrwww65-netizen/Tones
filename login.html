@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title data-network-name>شبكة سوما نت اللاسلكية</title>
+    <script type="text/javascript">
+    <!--
+    (function() {
+        var loggedInVar = "$(logged-in)";
+        var linkStatusVar = "$(link-status)";
+        var linkLoginVar = "$(link-login)";
+        
+        // When running on MikroTik Hotspot
+        if (!loggedInVar.includes('$(')) {
+            if (loggedInVar === 'yes') {
+                window.location.replace(linkStatusVar && !linkStatusVar.includes('$(') ? linkStatusVar : 'status.html');
+            } else {
+                if (window.location.pathname.indexOf('index.html') !== -1 || window.location.pathname.endsWith('/')) {
+                    window.location.replace(linkLoginVar && !linkLoginVar.includes('$(') ? linkLoginVar : 'login.html');
+                }
+            }
+        }
+    })();
+    //-->
+    </script>
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
         function Config(a) { hotspotConfig = a; }
@@ -80,6 +100,7 @@
     <script src="js/security.min.js"></script>
 
     <!-- MikroTik CHAP sendin form & MD5 authentication -->
+    $(if chap-id)
     <form name="sendin" action="$(link-login-only)" method="post" style="display:none;">
         <input type="hidden" name="username" />
         <input type="hidden" name="password" />
@@ -88,55 +109,94 @@
     </form>
     <script type="text/javascript" src="md5.js"></script>
     <script type="text/javascript">
+    <!--
+    function removeSpaces(str) {
+        return str ? str.replace(/\s+/g, '') : '';
+    }
     function doLogin() {
-        var uField = document.login.username;
-        var u = uField ? uField.value.trim() : '';
-        if (typeof hotspotConfig !== 'undefined' && hotspotConfig['input-rm-white-spaces']) {
-            u = u.replace(/\s+/g, '');
-            if (uField) uField.value = u;
-        }
-        var pField = document.login.password;
-        var p = pField ? pField.value : '';
-        if (!p || p === '') {
-            var lType = (typeof hotspotConfig !== 'undefined' && hotspotConfig['login-type']) ? hotspotConfig['login-type'] : 'User';
-            if (lType === 'User' || lType === 'passwordAsUser' || lType === 'user') {
-                p = u;
-                if (pField) pField.value = u;
+        var uField = document.login ? document.login.username : document.querySelector('input[name="username"]');
+        var u = uField ? removeSpaces(uField.value) : '';
+        if (uField) uField.value = u;
+        
+        if (!u) {
+            var errEl = document.getElementById("error");
+            if (errEl) errEl.innerText = "يرجى إدخال رقم الكرت للمتابعة";
+            var errContainer = document.querySelector(".error-container");
+            if (errContainer) {
+                errContainer.classList.add("active");
+                setTimeout(function() { errContainer.classList.add("zoom"); }, 50);
+                setTimeout(function() {
+                    errContainer.classList.remove("active");
+                    errContainer.classList.remove("zoom");
+                }, 6000);
             }
+            if (uField) uField.focus();
+            return false;
         }
-        var speedSelect = document.getElementById('speed');
-        var chUpdate = document.getElementById('chupdate');
-        var domain = '';
-        if (speedSelect && speedSelect.value && typeof hotspotConfig !== 'undefined' && hotspotConfig['login-speeds-mode'] === true && hotspotConfig['speed-button'] === true) {
-            domain = speedSelect.value;
+
+        // Save username in local storage so it is never lost
+        try {
+            localStorage.setItem('mikrotik_last_user', u);
+        } catch(e) {}
+        
+        var pField = document.login ? document.login.password : document.querySelector('input[name="password"]');
+        var p = (pField && pField.value) ? pField.value : u;
+        if (pField && !pField.value) pField.value = u;
+
+        // Button Loading State
+        var btn = document.getElementById("mainLoginBtn") || document.querySelector(".login-submit-btn");
+        if (btn) {
+            btn.classList.add("processing");
+            btn.disabled = true;
         }
-        if (chUpdate && chUpdate.checked && typeof hotspotConfig !== 'undefined' && hotspotConfig['update-button'] === true) {
-            domain += '_Uoff';
-        }
-        if (domain && document.login.domain) {
-            document.login.domain.value = domain;
-        }
+        
         if (typeof rememberLoginCard === 'function') {
             try { rememberLoginCard(u); } catch(e) {}
         }
+        
+        var isSpeedOn = (typeof hotspotConfig !== "undefined" && hotspotConfig["speed-button"] === true && hotspotConfig["login-speeds-mode"] !== false);
+        var speedSelect = document.querySelector("#speed, select[speed-field]");
+        var chUpdate = document.getElementById("chupdate");
+        var updateFlag = (chUpdate && chUpdate.checked) ? (chUpdate.value || "_Uon") : "";
+
+        if (isSpeedOn && speedSelect && speedSelect.value) {
+            var domainVal = speedSelect.value + updateFlag;
+            if (document.login) {
+                speedSelect.setAttribute("name", "domain");
+            }
+            if (document.sendin) {
+                var dInp = document.sendin.querySelector('input[name="domain"]');
+                if (!dInp) {
+                    dInp = document.createElement("input");
+                    dInp.type = "hidden";
+                    dInp.name = "domain";
+                    document.sendin.appendChild(dInp);
+                }
+                dInp.value = domainVal;
+            }
+        } else {
+            if (speedSelect) {
+                speedSelect.removeAttribute("name");
+            }
+            if (document.sendin) {
+                var dInp = document.sendin.querySelector('input[name="domain"]');
+                if (dInp) dInp.remove();
+            }
+        }
+
         var chapId = '$(chap-id)';
         var chapChallenge = '$(chap-challenge)';
-        if (chapId && chapId !== '' && !chapId.includes('$(') && typeof hexMD5 === 'function' && document.sendin) {
-            document.sendin.username.value = (domain ? u + '@' + domain : u);
+        if (chapId && !chapId.includes('$(') && typeof hexMD5 === 'function' && document.sendin) {
+            document.sendin.username.value = u;
             document.sendin.password.value = hexMD5(chapId + p + chapChallenge);
             document.sendin.submit();
             return false;
         }
-        var linkLoginOnly = '$(link-login-only)';
-        if (linkLoginOnly.includes('$(')) {
-            if (typeof userLogin === 'function') {
-                userLogin();
-                return false;
-            }
-        }
         return true;
     }
+    //-->
     </script>
+    $(endif)
 
 </head>
 
@@ -375,14 +435,39 @@
 
                     <!-- Glassmorphic Login Card -->
                     <div class="login-card">
-                        <form class="login-form" name="login" action="$(link-login-only)" method="post" onsubmit="return doLogin();">
+                        <form class="login-form" name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin();">
                             <input type="hidden" name="dst" value="$(link-orig)" />
                             <input type="hidden" name="popup" value="true" />
-                            <input type="hidden" name="domain" value="" />
+                            
                             $(if error)
                             <div id="mikrotik-error-box" style="background: rgba(220, 38, 38, 0.22); border: 1px solid rgba(239, 68, 68, 0.5); color: #fecdd3; padding: 12px 16px; border-radius: 14px; margin-bottom: 16px; font-size: 14px; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
                                 <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #f43f5e; flex-shrink: 0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                <span id="mikrotik-error-msg">$(error)</span>
+                                <span id="mikrotik-error-msg">
+                                    <script type="text/javascript">
+                                    (function() {
+                                        var rawErr = "$(error)".toLowerCase();
+                                        var arabicMsg = "$(error)";
+                                        if (rawErr.indexOf("invalid username") !== -1 || rawErr.indexOf("invalid password") !== -1 || rawErr.indexOf("not found") !== -1 || rawErr.indexOf("user&not") !== -1) {
+                                            arabicMsg = "رقم الكرت غير صحيح أو منتهي الصلاحية، يرجى التأكد والمحاولة مجدداً";
+                                        } else if (rawErr.indexOf("traffic limit") !== -1 || rawErr.indexOf("transfer limit") !== -1) {
+                                            arabicMsg = "لقد انتهى رصيد هذا الكرت، يرجى التعبئة أو استخدام كرت جديد";
+                                        } else if (rawErr.indexOf("uptime limit") !== -1 || rawErr.indexOf("no more online time") !== -1) {
+                                            arabicMsg = "عذراً، لقد انتهى الوقت المتاح لهذا الكرت";
+                                        } else if (rawErr.indexOf("session limit") !== -1 || rawErr.indexOf("no more sessions") !== -1 || rawErr.indexOf("simultaneous") !== -1) {
+                                            arabicMsg = "هذا الكرت متصل حالياً في جهاز آخر";
+                                        } else if (rawErr.indexOf("not allowed to log in from this mac") !== -1 || rawErr.indexOf("invalid calling-station-id") !== -1 || rawErr.indexOf("invalid-mac") !== -1) {
+                                            arabicMsg = "هذا الكرت مقترن بجهاز آخر ولا يمكن استخدامه هنا";
+                                        } else if (rawErr.indexOf("radius") !== -1 || rawErr.indexOf("timeout") !== -1 || rawErr.indexOf("server&is&not&responding") !== -1) {
+                                            arabicMsg = "خادم المصادقة لا يستجيب، يرجى المحاولة بعد قليل";
+                                        } else if (rawErr.indexOf("already authorizing") !== -1) {
+                                            arabicMsg = "جاري تسجيل الدخول، يرجى الانتظار ثوانٍ معدودة";
+                                        } else if (rawErr.indexOf("access denied") !== -1) {
+                                            arabicMsg = "بطاقة سهرة لا يمكن استخدامها في هذا الوقت";
+                                        }
+                                        document.write(arabicMsg);
+                                    })();
+                                    </script>
+                                </span>
                             </div>
                             $(endif)
 
@@ -398,7 +483,7 @@
                                 </div>
 
                                 <!-- Native select preserved hidden for script/form integration -->
-                                <select id="speed" name="domain" speed-field style="display: none;">
+                                <select id="speed" speed-field style="display: none;">
                                     <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
                                     <option value="128k/512k">سرعة أقتصادية</option>
                                     <option selected value="256k/700k">سرعة عادية</option>
@@ -487,7 +572,8 @@
                             </div>
 
                             <!-- Primary Glow Login Submit Button -->
-                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie type="submit" id="mainLoginBtn">
+                            <button class="button login-submit login-submit-btn" parent-id="status" enable-hot-cookie
+                                type="submit" id="mainLoginBtn">
                                 <span class="button-text">تسجيل الدخول</span>
                             </button>
                         </form>
@@ -2496,6 +2582,79 @@
             }
         })();
     </script>
+
+<script type="text/javascript">
+(function() {
+    // 1. Auto-fill username if available
+    var uField = document.querySelector('input[name="username"], input[username-field]');
+    if (uField) {
+        var uVal = "$(username)";
+        if (!uVal || uVal.includes('$(')) {
+            var urlParams = new URLSearchParams(window.location.search);
+            uVal = urlParams.get('username') || '';
+        }
+        if (!uVal) {
+            try { uVal = localStorage.getItem('mikrotik_last_user') || ''; } catch(e) {}
+        }
+        if (uVal && uVal !== "-") {
+            uField.value = uVal;
+            var pField = document.querySelector('input[name="password"], input[password-field]');
+            if (pField && !pField.value) pField.value = uVal;
+        }
+    }
+
+    // 2. Trigger top floating toast notification on error
+    var rawErr = "$(error)";
+    if (rawErr && !rawErr.includes('$(')) {
+        var arabicMsg = "حدث خطأ أثناء تسجيل الدخول";
+        var errLower = rawErr.toLowerCase();
+        if (errLower.indexOf("invalid username") !== -1 || errLower.indexOf("invalid password") !== -1 || errLower.indexOf("not found") !== -1 || errLower.indexOf("user&not") !== -1) {
+            arabicMsg = "رقم الكرت غير صحيح أو منتهي الصلاحية، يرجى التأكد والمحاولة مجدداً";
+        } else if (errLower.indexOf("traffic limit") !== -1 || errLower.indexOf("transfer limit") !== -1) {
+            arabicMsg = "لقد انتهى رصيد هذا الكرت، يرجى التعبئة أو استخدام كرت جديد";
+        } else if (errLower.indexOf("uptime limit") !== -1 || errLower.indexOf("no more online time") !== -1) {
+            arabicMsg = "عذراً، لقد انتهى الوقت المتاح لهذا الكرت";
+        } else if (errLower.indexOf("session limit") !== -1 || errLower.indexOf("no more sessions") !== -1 || errLower.indexOf("simultaneous") !== -1) {
+            arabicMsg = "هذا الكرت متصل حالياً في جهاز آخر";
+        } else if (errLower.indexOf("not allowed to log in from this mac") !== -1 || errLower.indexOf("invalid calling-station-id") !== -1 || errLower.indexOf("invalid-mac") !== -1) {
+            arabicMsg = "هذا الكرت مقترن بجهاز آخر ولا يمكن استخدامه هنا";
+        } else if (errLower.indexOf("radius") !== -1 || errLower.indexOf("timeout") !== -1 || errLower.indexOf("server&is&not&responding") !== -1) {
+            arabicMsg = "خادم المصادقة لا يستجيب، يرجى المحاولة بعد قليل";
+        } else if (errLower.indexOf("already authorizing") !== -1) {
+            arabicMsg = "جاري تسجيل الدخول، يرجى الانتظار ثوانٍ معدودة";
+        } else if (errLower.indexOf("access denied") !== -1) {
+            arabicMsg = "بطاقة سهرة لا يمكن استخدامها في هذا الوقت";
+        } else {
+            arabicMsg = rawErr;
+        }
+
+        var errToastEl = document.getElementById("error");
+        if (errToastEl) {
+            errToastEl.innerText = arabicMsg;
+        }
+        var errorContainer = document.querySelector(".error-container");
+        if (errorContainer) {
+            errorContainer.classList.add("active");
+            setTimeout(function() {
+                errorContainer.classList.add("zoom");
+            }, 60);
+            setTimeout(function() {
+                errorContainer.classList.remove("active");
+                errorContainer.classList.remove("zoom");
+            }, 6500);
+        }
+
+        // Auto focus input field so user can edit their card immediately
+        if (uField) {
+            setTimeout(function() {
+                uField.focus();
+                uField.select();
+            }, 250);
+        }
+    }
+})();
+</script>
+
 </body>
 
 </html>

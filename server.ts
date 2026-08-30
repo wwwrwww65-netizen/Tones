@@ -50,10 +50,21 @@ function getUptimeString(startTime: number): string {
 }
 
 // MikroTik Hotspot /login endpoint
-app.get(['/login', '/login.html'], (req, res) => {
+app.all(['/login', '/login.html'], (req, res) => {
   const isCallBack = req.query.var === 'callBack';
-  const username = req.query.username as string;
-  const domain = (req.query.domain as string) || '256k/700k';
+  const username = (req.body?.username || req.query.username) as string;
+  const domain = ((req.body?.domain || req.query.domain) as string) || '256k/700k';
+
+  if (req.method === 'POST') {
+    if (username) {
+      sessionState.isLoggedIn = true;
+      sessionState.username = username;
+      sessionState.speed = domain.split('_')[0] || '256k/700k';
+      sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
+      sessionState.startTime = Date.now();
+    }
+    return res.redirect('/alogin.html');
+  }
 
   if (isCallBack) {
     if (username) {
@@ -101,7 +112,10 @@ app.get(['/login', '/login.html'], (req, res) => {
   }
 
   // Regular direct request
-  res.sendFile(path.join(__dirname, 'index.html'));
+  if (sessionState.isLoggedIn) {
+    return res.sendFile(path.join(__dirname, 'status.html'));
+  }
+  res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 // MikroTik Hotspot /status endpoint
@@ -130,7 +144,18 @@ app.get(['/status', '/status.html'], (req, res) => {
   }
 
   // Direct page request
-  res.sendFile(path.join(__dirname, 'index.html'));
+  if (!sessionState.isLoggedIn) {
+    return res.redirect('/login.html');
+  }
+  res.sendFile(path.join(__dirname, 'status.html'));
+});
+
+// MikroTik Hotspot /redirect and /rlogin endpoints
+app.get(['/redirect', '/redirect.html', '/rlogin', '/rlogin.html'], (req, res) => {
+  if (sessionState.isLoggedIn) {
+    return res.redirect('/status.html');
+  }
+  res.redirect('/login.html');
 });
 
 // MikroTik Hotspot /alogin endpoint
@@ -157,11 +182,11 @@ app.get(['/alogin', '/alogin.html'], (req, res) => {
       action: 'onLoggedIn',
     });
   }
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'alogin.html'));
 });
 
 // MikroTik Hotspot /logout endpoint
-app.get(['/logout', '/logout.html'], (req, res) => {
+app.all(['/logout', '/logout.html'], (req, res) => {
   sessionState.isLoggedIn = false;
   const isCallBack = req.query.var === 'callBack';
 
@@ -172,7 +197,7 @@ app.get(['/logout', '/logout.html'], (req, res) => {
     });
   }
 
-  res.redirect('/');
+  res.sendFile(path.join(__dirname, 'logout.html'));
 });
 
 // Serve static assets from project root and specific subfolders

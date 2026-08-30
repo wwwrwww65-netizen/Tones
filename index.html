@@ -4,6 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title data-network-name>شبكة سوما نت اللاسلكية</title>
+    <script type="text/javascript">
+    <!--
+    (function() {
+        var loggedInVar = "$(logged-in)";
+        var linkStatusVar = "$(link-status)";
+        var linkLoginVar = "$(link-login)";
+        
+        // When running on MikroTik Hotspot
+        if (!loggedInVar.includes('$(')) {
+            if (loggedInVar === 'yes') {
+                window.location.replace(linkStatusVar && !linkStatusVar.includes('$(') ? linkStatusVar : 'status.html');
+            } else {
+                if (window.location.pathname.indexOf('index.html') !== -1 || window.location.pathname.endsWith('/')) {
+                    window.location.replace(linkLoginVar && !linkLoginVar.includes('$(') ? linkLoginVar : 'login.html');
+                }
+            }
+        }
+    })();
+    //-->
+    </script>
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
         function Config(a) { hotspotConfig = a; }
@@ -329,7 +349,7 @@
                                 </div>
 
                                 <!-- Native select preserved hidden for script/form integration -->
-                                <select id="speed" name="domain" speed-field style="display: none;">
+                                <select id="speed" speed-field style="display: none;">
                                     <option value="" disabled hidden>أختيار سرعة الإنترنت</option>
                                     <option value="128k/512k">سرعة أقتصادية</option>
                                     <option selected value="256k/700k">سرعة عادية</option>
