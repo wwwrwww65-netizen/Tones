@@ -123,12 +123,12 @@ app.get("/preview/:page", (req, res) => {
   return res.redirect("/login");
 });
 
-// Root dispatcher
+// Root dispatcher (Instant direct response for instantaneous refresh)
 app.get(["/", "/index"], (req, res) => {
   if (sessionState.isLoggedIn) {
-    return res.redirect("/status");
+    return res.sendFile(path.resolve(__dirname, "status.html"));
   }
-  return res.redirect("/login");
+  return res.sendFile(path.resolve(__dirname, "login.html"));
 });
 
 // MikroTik Hotspot /login endpoint

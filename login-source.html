@@ -6,9 +6,59 @@
     <title data-network-name>شبكة سوما نت اللاسلكية</title>
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
-        function Config(a) { hotspotConfig = a; }
+        function applyEarlyConfigRules(cfg) {
+            if (!cfg || typeof cfg !== 'object') return;
+            var hideRules = [];
+            for (var key in cfg) {
+                if (cfg[key] === false) {
+                    hideRules.push('[data-' + key + ']');
+                }
+            }
+            if (cfg['speed-button'] === false || cfg['login-speeds-mode'] === false) {
+                hideRules.push('[data-speed-button]', '.speed-selector-group', '#speed-modal', '.speed-cards-list', '[parent-id="speed-modal"]');
+            }
+            if (cfg['update-button'] === false) {
+                hideRules.push('[data-update-button]', '.toggle-container-modern');
+            }
+            if (cfg['price-button'] === false) {
+                hideRules.push('[data-price-button]', '.price-icon', '[parent-id="price"]', '#price');
+            }
+            if (cfg['sell-point-button'] === false) {
+                hideRules.push('[data-sell-point-button]', '.sellpoint', '[parent-id="sell-point"]', '#sell-point');
+            }
+            if (cfg['loan-button'] === false) {
+                hideRules.push('[data-loan-button]', '[parent-id="loan"]', '#loan', '#btn-whats-new');
+            }
+            if (cfg['show-date-field'] === false) {
+                hideRules.push('[data-date-field]', '[hot-date]', '[hot-hijri-date]');
+            }
+            if (cfg['app-store-status-button'] === false) {
+                hideRules.push('[data-app-store-button]', '[data-app-store-status-button]', '#store');
+            }
+
+            var existingStyle = document.getElementById('early-config-hide-style');
+            if (hideRules.length > 0) {
+                if (!existingStyle) {
+                    existingStyle = document.createElement('style');
+                    existingStyle.id = 'early-config-hide-style';
+                    document.head.appendChild(existingStyle);
+                }
+                existingStyle.textContent = hideRules.join(', ') + ' { display: none !important; }';
+            } else if (existingStyle) {
+                existingStyle.remove();
+            }
+        }
+        function Config(a) { 
+            hotspotConfig = a; 
+            applyEarlyConfigRules(a);
+        }
     </script>
     <script src="config/config.js"></script>
+    <script>
+        if (typeof hotspotConfig !== 'undefined') {
+            applyEarlyConfigRules(hotspotConfig);
+        }
+    </script>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -264,26 +314,25 @@
                         <div class="carousel-container" id="adCarousel">
                             <div class="carousel-track" id="carouselTrack">
                                 <div class="carousel-slide">
-                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high"
-                                        decoding="async">
+                                    <img class="im1" src="adimg/1.jpg" alt="إعلان 1" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
+                                    <img class="im2" src="adimg/2.jpg" alt="إعلان 2" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3" loading="lazy" decoding="async">
+                                    <img class="im3" src="adimg/3.jpg" alt="إعلان 3" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4" loading="lazy" decoding="async">
+                                    <img class="im4" src="adimg/4.jpg" alt="إعلان 4" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5" loading="lazy" decoding="async">
+                                    <img class="im5" src="adimg/5.jpg" alt="إعلان 5" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6" loading="lazy" decoding="async">
+                                    <img class="im6" src="adimg/6.jpg" alt="إعلان 6" loading="eager" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7" loading="lazy" decoding="async">
+                                    <img class="im7" src="adimg/7.jpg" alt="إعلان 7" loading="eager" decoding="async">
                                 </div>
                             </div>
                             <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="السابق">❮</button>
@@ -1119,11 +1168,14 @@
                 const carouselWrapper = document.querySelector('.ads-carousel-wrapper');
 
                 if (!track || !carouselContainer) return;
+                if (carouselContainer.dataset.initialized === 'true') return;
+                carouselContainer.dataset.initialized = 'true';
 
                 let autoplayInterval = null;
                 let isTransitioning = false;
                 let currentIndex = 1;
                 let totalSlides = 0;
+                let refreshTimeout = null;
 
                 function refreshCarousel() {
                     if (autoplayInterval) {
@@ -1131,14 +1183,14 @@
                         autoplayInterval = null;
                     }
 
-                    // Remove any existing clone slides before recalculating
+                    // Remove existing clone slides
                     const existingClones = track.querySelectorAll('.carousel-clone');
                     existingClones.forEach(c => c.remove());
 
                     // Get all real slides
                     const realSlides = Array.from(track.querySelectorAll('.carousel-slide:not(.carousel-clone)'));
                     
-                    // Filter out any slides with failed images or marked as broken
+                    // Filter out any slides marked explicitly as broken
                     const validSlides = realSlides.filter(slide => {
                         const img = slide.querySelector('img');
                         return img && !slide.dataset.broken && img.getAttribute('src');
@@ -1153,7 +1205,7 @@
 
                     if (carouselWrapper) carouselWrapper.style.display = '';
 
-                    // Build / update dots
+                    // Build dots
                     if (dotsContainer) {
                         dotsContainer.innerHTML = '';
                         if (totalSlides > 1) {
@@ -1174,7 +1226,7 @@
                         }
                     }
 
-                    // Single Image -> Static view without navigation
+                    // Single Image -> Static display
                     if (totalSlides === 1) {
                         if (prevBtn) prevBtn.style.display = 'none';
                         if (nextBtn) nextBtn.style.display = 'none';
@@ -1183,7 +1235,7 @@
                         return;
                     }
 
-                    // Multiple Images (2 to 7) -> Seamless infinite circular loop
+                    // Multiple Images -> Infinite looping with clones
                     if (prevBtn) prevBtn.style.display = '';
                     if (nextBtn) nextBtn.style.display = '';
 
@@ -1198,7 +1250,7 @@
                     currentIndex = 1;
                     track.style.transition = 'none';
                     track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    track.offsetHeight; // Force reflow
+                    void track.offsetHeight; // Force reflow
                     track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
 
                     updateDots();
@@ -1239,12 +1291,12 @@
                         track.style.transition = 'none';
                         currentIndex = 1;
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        track.offsetHeight;
+                        void track.offsetHeight;
                     } else if (currentIndex === 0) {
                         track.style.transition = 'none';
                         currentIndex = totalSlides;
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                        track.offsetHeight;
+                        void track.offsetHeight;
                     }
                     isTransitioning = false;
                 }
@@ -1281,7 +1333,7 @@
                 if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); startAutoplay(); };
                 if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); startAutoplay(); };
 
-                // Handle image error and missing image fallback
+                // Handle image error safely with debounced refresh
                 const allImgs = track.querySelectorAll('.carousel-slide img');
                 allImgs.forEach(img => {
                     function handleImgError() {
@@ -1289,40 +1341,35 @@
                         if (slide && !slide.dataset.broken) {
                             slide.dataset.broken = 'true';
                             slide.remove();
-                            refreshCarousel();
+                            if (refreshTimeout) clearTimeout(refreshTimeout);
+                            refreshTimeout = setTimeout(refreshCarousel, 60);
                         }
                     }
 
                     img.addEventListener('error', handleImgError);
-                    img.addEventListener('load', function() {
-                        if (this.naturalWidth === 0) {
-                            handleImgError();
-                        }
-                    });
-
-                    // Check if already completed and broken at initialization
-                    if (img.complete && img.naturalWidth === 0) {
-                        handleImgError();
-                    }
                 });
 
-                // Touch Swipe Gestures for Mobile
+                // Touch & Swipe Gestures
                 let touchStartX = 0;
                 let touchEndX = 0;
 
                 carouselContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
+                    if (e.changedTouches && e.changedTouches[0]) {
+                        touchStartX = e.changedTouches[0].screenX;
+                    }
                     stopAutoplay();
                 }, { passive: true });
 
                 carouselContainer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    const diff = touchEndX - touchStartX;
-                    if (Math.abs(diff) > 40) {
-                        if (diff > 0) {
-                            prevSlide();
-                        } else {
-                            nextSlide();
+                    if (e.changedTouches && e.changedTouches[0]) {
+                        touchEndX = e.changedTouches[0].screenX;
+                        const diff = touchEndX - touchStartX;
+                        if (Math.abs(diff) > 35) {
+                            if (diff > 0) {
+                                prevSlide();
+                            } else {
+                                nextSlide();
+                            }
                         }
                     }
                     startAutoplay();
@@ -1332,7 +1379,12 @@
                 refreshCarousel();
             }
 
-            initBannerCarousel();
+            if (document.readyState !== 'loading') {
+                initBannerCarousel();
+            } else {
+                document.addEventListener('DOMContentLoaded', initBannerCarousel);
+            }
+            window.addEventListener('load', initBannerCarousel);
 
             // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
             window.animating = false;

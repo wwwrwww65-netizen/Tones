@@ -234,6 +234,8 @@ const loginAutoFillAndToastScript = `
 loginHtml = loginHtml.replace('</body>', loginAutoFillAndToastScript + '\n</body>');
 
 fs.writeFileSync('login.html', loginHtml, 'utf8');
+try { fs.writeFileSync('soma/login.html', loginHtml, 'utf8'); } catch(e) {}
+try { fs.writeFileSync('soma/lv/login.html', loginHtml, 'utf8'); } catch(e) {}
 console.log('Successfully generated login.html (size:', loginHtml.length, ')');
 
 // =========================================================================
@@ -326,6 +328,8 @@ const statusTimeFormatScript = `
 statusHtml = statusHtml.replace('</body>', statusTimeFormatScript + '\n</body>');
 
 fs.writeFileSync('status.html', statusHtml, 'utf8');
+try { fs.writeFileSync('soma/status.html', statusHtml, 'utf8'); } catch(e) {}
+try { fs.writeFileSync('soma/lv/status.html', statusHtml, 'utf8'); } catch(e) {}
 console.log('Successfully generated status.html (size:', statusHtml.length, ')');
 
 // =========================================================================
@@ -354,9 +358,59 @@ $(if http-header == "Location")$(link-${config.targetLink})$(endif)
     
     <script>
         var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
-        function Config(a) { hotspotConfig = a; }
+        function applyEarlyConfigRules(cfg) {
+            if (!cfg || typeof cfg !== 'object') return;
+            var hideRules = [];
+            for (var key in cfg) {
+                if (cfg[key] === false) {
+                    hideRules.push('[data-' + key + ']');
+                }
+            }
+            if (cfg['speed-button'] === false || cfg['login-speeds-mode'] === false) {
+                hideRules.push('[data-speed-button]', '.speed-selector-group', '#speed-modal', '.speed-cards-list', '[parent-id="speed-modal"]');
+            }
+            if (cfg['update-button'] === false) {
+                hideRules.push('[data-update-button]', '.toggle-container-modern');
+            }
+            if (cfg['price-button'] === false) {
+                hideRules.push('[data-price-button]', '.price-icon', '[parent-id="price"]', '#price');
+            }
+            if (cfg['sell-point-button'] === false) {
+                hideRules.push('[data-sell-point-button]', '.sellpoint', '[parent-id="sell-point"]', '#sell-point');
+            }
+            if (cfg['loan-button'] === false) {
+                hideRules.push('[data-loan-button]', '[parent-id="loan"]', '#loan', '#btn-whats-new');
+            }
+            if (cfg['show-date-field'] === false) {
+                hideRules.push('[data-date-field]', '[hot-date]', '[hot-hijri-date]');
+            }
+            if (cfg['app-store-status-button'] === false) {
+                hideRules.push('[data-app-store-button]', '[data-app-store-status-button]', '#store');
+            }
+
+            var existingStyle = document.getElementById('early-config-hide-style');
+            if (hideRules.length > 0) {
+                if (!existingStyle) {
+                    existingStyle = document.createElement('style');
+                    existingStyle.id = 'early-config-hide-style';
+                    document.head.appendChild(existingStyle);
+                }
+                existingStyle.textContent = hideRules.join(', ') + ' { display: none !important; }';
+            } else if (existingStyle) {
+                existingStyle.remove();
+            }
+        }
+        function Config(a) { 
+            hotspotConfig = a; 
+            applyEarlyConfigRules(a);
+        }
     </script>
     <script src="config/config.js"></script>
+    <script>
+        if (typeof hotspotConfig !== 'undefined') {
+            applyEarlyConfigRules(hotspotConfig);
+        }
+    </script>
 
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
