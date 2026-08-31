@@ -330,8 +330,11 @@ console.log('Successfully generated status.html (size:', statusHtml.length, ')')
 
 // =========================================================================
 
-// 3. GENERATE redirect.html
-// 3. GENERATE redirect.html, alogin.html, logout.html, etc. WITH ROYAL LIGHT NAVY THEME
+// =========================================================================
+// 3. GENERATE redirect.html, alogin.html, logout.html, rlogin.html, rstatus.html, radvert.html, error.html
+// WITH THE EXACT LIGHT NAVY & CORAL GLASSMORPHISM DESIGN MATCHING login.html & status.html
+// =========================================================================
+
 function getPageHtml(config) {
   return `$(if http-status == 302)${config.httpStatusText}$(endif)
 $(if http-header == "Location")$(link-${config.targetLink})$(endif)
@@ -343,243 +346,168 @@ $(if http-header == "Location")$(link-${config.targetLink})$(endif)
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="expires" content="-1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#1a2b4c">
-    <title data-network-name>${config.title} | شبكة سوما نت</title>
+    <title data-network-name>${config.title} | شبكة سوما نت اللاسلكية</title>
     
+    <script>
+        var hotspotConfig = (typeof hotspotConfig !== "undefined" && Object.keys(hotspotConfig).length > 0) ? hotspotConfig : {};
+        function Config(a) { hotspotConfig = a; }
+    </script>
+    <script src="config/config.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="fonts/Almarai.css">
+    <link rel="stylesheet" href="css/fontello.min.css">
+    <!-- Master Colors & Theme Configuration -->
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/style.min.css">
+    <!-- Announcements System CSS -->
+    <link rel="stylesheet" href="css/announcements-style.css">
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Almarai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
         }
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            background: #1a2b4c;
-            background: linear-gradient(150deg, #2a4365 0%, #1a2b4c 45%, #0f172a 100%);
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-        .ambient-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.45;
-            animation: orbFloat 14s infinite ease-in-out alternate;
-        }
-        .orb-1 { width: 280px; height: 280px; background: #3b82f6; top: -50px; left: -50px; }
-        .orb-2 { width: 320px; height: 320px; background: #FF7F50; bottom: -60px; right: -60px; animation-duration: 18s; }
-        .orb-3 { width: 200px; height: 200px; background: #60a5fa; top: 40%; right: 15%; opacity: 0.3; }
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(25px, 20px) scale(1.08); }
-            100% { transform: translate(-20px, 35px) scale(0.95); }
-        }
-        .redirect-wrapper {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 440px;
-            padding: 20px;
-            margin: auto;
-        }
-        .transition-card {
-            background: rgba(26, 43, 76, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 127, 80, 0.4);
-            border-radius: 28px;
-            padding: 36px 24px 30px;
-            text-align: center;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 35px rgba(255, 127, 80, 0.2);
-            animation: cardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(24px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .brand-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 127, 80, 0.3);
-            border-radius: 30px;
-            padding: 6px 16px;
-            margin-bottom: 22px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #FFA07A;
-        }
-        .brand-pill svg { width: 16px; height: 16px; fill: #FF7F50; }
-        .status-icon-box {
-            width: 88px;
-            height: 88px;
-            border-radius: 50%;
-            background: ${config.iconBg};
-            border: 2px solid ${config.iconBorder};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            position: relative;
-            box-shadow: 0 0 30px ${config.iconGlow};
-            animation: pulseGlow 2.5s infinite ease-in-out;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px ${config.iconGlow}; transform: scale(1); }
-            50% { box-shadow: 0 0 35px ${config.iconGlow}; transform: scale(1.04); }
-        }
-        .status-icon-box svg { width: 44px; height: 44px; fill: ${config.iconFill}; }
-        .main-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #FFFFFF;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-        .sub-desc {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #E2E8F0;
-            margin-bottom: 24px;
-            padding: 0 10px;
-        }
-        .progress-box {
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(255, 127, 80, 0.25);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 22px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .progress-status-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #FFA07A;
-            font-weight: 700;
-        }
-        .spinner-mini {
-            width: 18px;
-            height: 18px;
-            border: 2.5px solid rgba(255, 127, 80, 0.25);
-            border-top-color: #FF7F50;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .progress-track {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-        .progress-fill {
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #FFA07A 0%, #FF7F50 50%, #FF4500 100%);
-            border-radius: 10px;
-            animation: fillBar ${config.animationDuration || "1.2s"} cubic-bezier(0.1, 0.7, 0.1, 1) forwards;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         @keyframes fillBar {
             0% { width: 0%; }
             100% { width: 100%; }
         }
-        .action-link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #FFA07A 0%, #FF7F50 50%, #FF4500 100%);
-            border: none;
-            border-radius: 16px;
-            color: #0B1120;
-            font-size: 15px;
-            font-weight: 800;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 127, 80, 0.35);
-            transition: all 0.25s ease;
-        }
-        .action-link-btn:hover, .action-link-btn:active {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(255, 127, 80, 0.5);
-        }
-        .action-link-btn svg { width: 18px; height: 18px; fill: #0B1120; }
-        .footer-note {
-            margin-top: 14px;
-            font-size: 12px;
-            color: rgba(226, 232, 240, 0.65);
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
     </style>
 </head>
-<body>
-    <div class="ambient-mesh">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+<body translate="no">
+
+    <!-- Floating SVG Vector Icons Layer (Exact match to login.html & status.html) -->
+    <ul class="floating-icons">
+        <!-- 1. Wifi Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z" /></svg></li>
+        <!-- 2. Royal Star Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 1.5l3.09 6.26L22 8.77l-5 4.87 1.18 6.88L12 17.27l-6.18 3.25L7 13.64 2 8.77l6.91-1.01L12 1.5z" /></svg></li>
+        <!-- 3. Sparkle Diamond Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" /></svg></li>
+        <!-- 4. Global Network Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" /></svg></li>
+        <!-- 5. Modern Gem Diamond Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6zM5.3 5h13.4l1.5 3H3.8l1.5-3zm6.7 13.5L5.4 10h13.2L12 18.5z" /></svg></li>
+        <!-- 6. Wifi High Wave Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z" /></svg></li>
+        <!-- 7. High-Speed Lightning Bolt Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z" /></svg></li>
+        <!-- 8. Four Point Star Burst Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 0l2.6 8.4L23 11l-8.4 2.6L12 22l-2.6-8.4L1 11l8.4-2.6L12 0z" /></svg></li>
+        <!-- 9. Wifi Strong Signal Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z" /></svg></li>
+        <!-- 10. Royal Star Outline Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg></li>
+        <!-- 11. Diamond Sparkle Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" /></svg></li>
+        <!-- 12. Wifi Full Wave Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M12 3C6.95 3 2.38 5.05 0 8.41L1.44 9.9C3.47 6.94 7.47 5 12 5c4.53 0 8.53 1.94 10.56 4.9L24 8.41C21.62 5.05 17.05 3 12 3zm0 4c-3.73 0-7.04 1.54-9.4 4l1.45 1.45C5.7 10.82 8.65 9.5 12 9.5c3.35 0 6.3 1.32 8.35 3.35L21.8 11.4C19.44 8.94 16.13 7 12 7zm0 4c-2.4 0-4.57 1-6.14 2.6L12 21l6.14-7.4A8.52 8.52 0 0 0 12 11z" /></svg></li>
+        <!-- 13. Fast Flash Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z" /></svg></li>
+        <!-- 14. Crown Star Gem Icon -->
+        <li><svg viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 12L22 9l-3-6z" /></svg></li>
+    </ul>
+
+    <!-- Ambient Mesh Background (Light Navy Spatial Theme) -->
+    <div class="screen-background">
+        <span class="screen-background-shape screen-background-shape1"></span>
+        <span class="screen-background-shape screen-background-shape2"></span>
+        <span class="screen-background-shape screen-background-shape3"></span>
+        <span class="screen-background-shape screen-background-shape4"></span>
+        <span class="screen-background-shape screen-background-shape5"></span>
+        <span class="screen-background-shape screen-background-shape6"></span>
+        <span class="screen-background-shape screen-background-shape7"></span>
+        <span class="screen-background-shape screen-background-shape8"></span>
     </div>
-    <div class="redirect-wrapper">
-        <div class="transition-card">
-            <div class="brand-pill">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 2.9a13.9 13.9 0 0 1 9.35 3.65L12 19.89 2.65 10.55A13.9 13.9 0 0 1 12 6.9z"/>
-                </svg>
-                <span data-network-name>شبكة سوما نت اللاسلكية</span>
-            </div>
-            <div class="status-icon-box">${config.iconSvg}</div>
-            <h1 class="main-title">${config.title}</h1>
-            <p class="sub-desc">${config.description}</p>
-            <div class="progress-box">
-                <div class="progress-status-row">
-                    <span>${config.progressLabel}</span>
-                    <div class="spinner-mini"></div>
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen-content">
+
+                <!-- Top Modern Header Matching login.html & status.html -->
+                <header class="top-header">
+                    <div class="network-brand">
+                        <div class="brand-icon-wrap" aria-label="رمز الواي فاي">
+                            <svg class="wifi-animated-icon" viewBox="0 0 24 24">
+                                <path class="wifi-sig wifi-sig-3" d="M12 3C7.2 3 2.8 4.9 0 7.9l1.8 1.9C4.3 7.3 8 5.6 12 5.6s7.7 1.7 10.2 4.2L24 7.9C21.2 4.9 16.8 3 12 3z" />
+                                <path class="wifi-sig wifi-sig-2" d="M12 7.5c-3.6 0-6.9 1.4-9.3 3.8l1.8 1.9c2-2 4.7-3.1 7.5-3.1s5.5 1.1 7.5 3.1l1.8-1.9c-2.4-2.4-5.7-3.8-9.3-3.8z" />
+                                <path class="wifi-sig wifi-sig-1" d="M12 12c-2.4 0-4.6 1-6.2 2.6l1.8 1.9C8.8 15.3 10.3 14.6 12 14.6s3.2 0.7 4.4 1.9l1.8-1.9C16.6 13 14.4 12 12 12z" />
+                                <circle class="wifi-sig wifi-sig-dot" cx="12" cy="19.5" r="1.8" />
+                            </svg>
+                        </div>
+                        <div class="brand-info">
+                            <span class="brand-name" data-network-name>سوما نت</span>
+                            <span class="brand-status">جاري التحويل التلقائي...</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Modern Ticker Bar -->
+                <section class="section" style="margin-top: 4px; margin-bottom: 12px;">
+                    <div class="ticker-container">
+                        <div class="ticker-content-track">
+                            <p class="marquee" data-news-line>مرحباً بكم في شبكة سوما نت اللاسلكية - سرعات فائقة وباقات متميزة</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Glassmorphic Transition Card (Identical Structure to login.html / status.html cards) -->
+                <div class="login-card" style="text-align: center; padding: 26px 20px 22px;">
+                    
+                    <!-- Status Live Pulse Badge -->
+                    <div style="margin: 0 auto 16px; width: fit-content; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(255, 127, 80, 0.12); border: 1px solid rgba(255, 127, 80, 0.4); border-radius: 9999px; color: #FFA07A; font-size: 0.82rem; font-weight: 700; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                        <span style="display: flex; align-items: center; justify-content: center; width: 8px; height: 8px; position: relative;">
+                            <span style="position: absolute; width: 100%; height: 100%; border-radius: 50%; background: #FF7F50; opacity: 0.75; animation: pulseDot 1.5s infinite;"></span>
+                            <span style="width: 6px; height: 6px; border-radius: 50%; background: #FF7F50;"></span>
+                        </span>
+                        <span>${config.badgeText}</span>
+                    </div>
+
+                    <!-- Glowing Center Icon Box -->
+                    <div style="width: 78px; height: 78px; border-radius: 50%; background: ${config.iconBg}; border: 2px solid ${config.iconBorder}; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 26px ${config.iconGlow}; animation: pulseGlow 2.5s infinite ease-in-out;">
+                        ${config.iconSvg}
+                    </div>
+
+                    <h1 class="main-title" style="font-size: 1.28rem; font-weight: 900; color: #FFFFFF; margin-bottom: 6px; text-shadow: 0 2px 6px rgba(0,0,0,0.6);">${config.title}</h1>
+                    <p style="font-size: 0.88rem; line-height: 1.6; color: #E2E8F0; margin-bottom: 20px; padding: 0 8px;">${config.description}</p>
+
+                    <!-- Progress Status & Track -->
+                    <div style="background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255, 127, 80, 0.3); border-radius: 14px; padding: 12px 14px; margin-bottom: 18px; text-align: right;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: #FFA07A; margin-bottom: 8px;">
+                            <span>${config.progressLabel}</span>
+                            <div style="width: 16px; height: 16px; border: 2.5px solid rgba(255, 127, 80, 0.25); border-top-color: #FF7F50; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+                        </div>
+                        <div style="width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 99px; overflow: hidden; position: relative;">
+                            <div style="position: absolute; top: 0; right: 0; height: 100%; width: 0%; background: linear-gradient(90deg, #FFA07A 0%, #FF7F50 50%, #FF4500 100%); border-radius: 99px; animation: fillBar ${config.animationDuration || "0.8s"} cubic-bezier(0.1, 0.7, 0.1, 1) forwards;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Action Button (Exact match to .points-register-btn) -->
+                    <a href="$(link-${config.targetLink})" id="directRedirectBtn" class="points-register-btn" style="text-decoration: none; margin-bottom: 8px;">
+                        <span class="button-text">${config.buttonText}</span>
+                        <svg viewBox="0 0 24 24" class="points-btn-icon" style="width: 18px; height: 18px; fill: #0B1120;">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+
+                    <p style="font-size: 0.76rem; color: rgba(226, 232, 240, 0.65); margin-top: 10px;">سيتم التحويل فوراً وبشكل تلقائي دون الحاجة للنقر</p>
                 </div>
-                <div class="progress-track">
-                    <div class="progress-fill"></div>
-                </div>
+
             </div>
-            <a href="$(link-${config.targetLink})" id="directRedirectBtn" class="action-link-btn">
-                <span>${config.buttonText}</span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                </svg>
-            </a>
-            <p class="footer-note">سيتم التحويل فوراً بشكل تلقائي دون الحاجة للنقر</p>
         </div>
     </div>
+
     <script type="text/javascript">
     (function() {
         var target = "$(link-${config.targetLink})";
@@ -606,14 +534,14 @@ const logoutConfig = {
   defaultTarget: "login.html",
   refreshTime: "0",
   title: "تم تسجيل الخروج بنجاح",
+  badgeText: "تم إنهاء الجلسة بنجاح",
   description: "شكراً لاستخدامك شبكتنا. جاري تحويلك تلقائياً وبشكل فوري إلى صفحة تسجيل الدخول...",
   progressLabel: "جاري التحويل التلقائي لصفحة الدخول...",
   buttonText: "الدخول إلى الشبكة الآن",
   iconBg: "linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(185, 28, 28, 0.45) 100%)",
   iconBorder: "rgba(239, 68, 68, 0.65)",
   iconGlow: "rgba(239, 68, 68, 0.4)",
-  iconFill: "#FF7F50",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #FF7F50;"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: `
@@ -632,15 +560,15 @@ const aloginConfig = {
   targetLink: "status",
   defaultTarget: "status.html",
   refreshTime: "0",
-  title: "تم تسجيل الدخول بنجاح",
-  description: "أهلاً بك في شبكة سوما نت اللاسلكية! تم الاتصال بنجاح وجاري نقلك لصفحة الحالة...",
+  title: "تم تسجيل الدخول بنجاح!",
+  badgeText: "متصل بالإنترنت الآن",
+  description: "أهلاً بك في شبكة سوما نت اللاسلكية! تم الاتصال بنجاح وجاري نقلك لصفحة الحالة والرصيد...",
   progressLabel: "جاري فتح لوحة البيانات والحالة...",
   buttonText: "الانتقال إلى صفحة الحالة",
   iconBg: "linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.45) 100%)",
   iconBorder: "rgba(16, 185, 129, 0.65)",
   iconGlow: "rgba(16, 185, 129, 0.4)",
-  iconFill: "#10b981",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #10b981;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: ""
@@ -652,14 +580,14 @@ const redirectConfig = {
   defaultTarget: "status.html",
   refreshTime: "0",
   title: "جاري التحويل والاتصال",
-  description: "تم توجيهك بنجاح، جاري تحويلك تلقائياً إلى صفحتك المطلوبة...",
+  badgeText: "توجيه تلقائي نشط",
+  description: "تم توجيه اتصالك بنجاح، جاري تحويلك تلقائياً وبسرعة إلى صفحتك المطلوبة...",
   progressLabel: "جاري الاتصال والتوجيه التلقائي...",
   buttonText: "متابعة التصفح",
   iconBg: "linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(29, 78, 216, 0.45) 100%)",
   iconBorder: "rgba(59, 130, 246, 0.65)",
   iconGlow: "rgba(59, 130, 246, 0.4)",
-  iconFill: "#60a5fa",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #60a5fa;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: ""
@@ -671,14 +599,14 @@ const rloginConfig = {
   defaultTarget: "login.html",
   refreshTime: "0",
   title: "تسجيل الدخول إلى الشبكة",
+  badgeText: "مطلوب تسجيل الدخول",
   description: "يرجى تسجيل الدخول للاتصال بالإنترنت، جاري نقلك لصفحة إدخال الكرت...",
   progressLabel: "جاري الانتقال لصفحة تسجيل الدخول...",
   buttonText: "تسجيل الدخول الآن",
   iconBg: "linear-gradient(135deg, rgba(255, 127, 80, 0.25) 0%, rgba(255, 69, 0, 0.45) 100%)",
   iconBorder: "rgba(255, 127, 80, 0.65)",
   iconGlow: "rgba(255, 127, 80, 0.4)",
-  iconFill: "#FF7F50",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #FF7F50;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: ""
@@ -690,14 +618,14 @@ const rstatusConfig = {
   defaultTarget: "status.html",
   refreshTime: "0",
   title: "صفحة الحالة والرصيد",
+  badgeText: "الجلسة نشطة ومستمرة",
   description: "أنت متصل بالفعل بالإنترنت، جاري نقلك إلى لوحة بياناتك...",
   progressLabel: "جاري الانتقال إلى لوحة الحالة...",
   buttonText: "عرض بيانات الاستهلاك",
   iconBg: "linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(29, 78, 216, 0.45) 100%)",
   iconBorder: "rgba(59, 130, 246, 0.65)",
   iconGlow: "rgba(59, 130, 246, 0.4)",
-  iconFill: "#60a5fa",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #60a5fa;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: ""
@@ -708,15 +636,34 @@ const radvertConfig = {
   targetLink: "orig",
   defaultTarget: "status.html",
   refreshTime: "0",
-  title: "جاري توجيهك...",
+  title: "جاري إتمام التوجيه...",
+  badgeText: "توجيه تصفح الإنترنت",
   description: "جاري إتمام التحويل للرابط المطلوب تلقائياً...",
   progressLabel: "جاري التحويل...",
   buttonText: "متابعة التصفح",
   iconBg: "linear-gradient(135deg, rgba(255, 127, 80, 0.25) 0%, rgba(255, 69, 0, 0.45) 100%)",
   iconBorder: "rgba(255, 127, 80, 0.65)",
   iconGlow: "rgba(255, 127, 80, 0.4)",
-  iconFill: "#FF7F50",
-  iconSvg: `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #FF7F50;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`,
+  animationDuration: "0.8s",
+  jsDelay: 100,
+  extraScript: ""
+};
+
+const errorConfig = {
+  httpStatusText: "Hotspot login error",
+  targetLink: "login",
+  defaultTarget: "login.html",
+  refreshTime: "0",
+  title: "تنبيه في الاتصال",
+  badgeText: "حالة المصادقة",
+  description: "$(error)",
+  progressLabel: "جاري العودة لصفحة تسجيل الدخول...",
+  buttonText: "العودة لتسجيل الدخول",
+  iconBg: "linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(225, 29, 72, 0.45) 100%)",
+  iconBorder: "rgba(244, 63, 94, 0.65)",
+  iconGlow: "rgba(244, 63, 94, 0.4)",
+  iconSvg: `<svg viewBox="0 0 24 24" style="width: 38px; height: 38px; fill: #f43f5e;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>`,
   animationDuration: "0.8s",
   jsDelay: 100,
   extraScript: ""
@@ -728,6 +675,7 @@ const redirectHtml = getPageHtml(redirectConfig);
 const rloginHtml = getPageHtml(rloginConfig);
 const rstatusHtml = getPageHtml(rstatusConfig);
 const radvertHtml = getPageHtml(radvertConfig);
+const errorHtml = getPageHtml(errorConfig);
 
 fs.writeFileSync("redirect.html", redirectHtml, "utf8");
 fs.writeFileSync("rlogin.html", rloginHtml, "utf8");
@@ -735,6 +683,7 @@ fs.writeFileSync("rstatus.html", rstatusHtml, "utf8");
 fs.writeFileSync("alogin.html", aloginHtml, "utf8");
 fs.writeFileSync("logout.html", logoutHtml, "utf8");
 fs.writeFileSync("radvert.html", radvertHtml, "utf8");
+fs.writeFileSync("error.html", errorHtml, "utf8");
 
 fs.writeFileSync("soma/redirect.html", redirectHtml, "utf8");
 fs.writeFileSync("soma/rlogin.html", rloginHtml, "utf8");
@@ -742,10 +691,14 @@ fs.writeFileSync("soma/rstatus.html", rstatusHtml, "utf8");
 fs.writeFileSync("soma/alogin.html", aloginHtml, "utf8");
 fs.writeFileSync("soma/logout.html", logoutHtml, "utf8");
 fs.writeFileSync("soma/radvert.html", radvertHtml, "utf8");
+fs.writeFileSync("soma/error.html", errorHtml, "utf8");
 
 fs.writeFileSync("soma/lv/redirect.html", redirectHtml, "utf8");
+fs.writeFileSync("soma/lv/rlogin.html", rloginHtml, "utf8");
+fs.writeFileSync("soma/lv/rstatus.html", rstatusHtml, "utf8");
 fs.writeFileSync("soma/lv/alogin.html", aloginHtml, "utf8");
 fs.writeFileSync("soma/lv/logout.html", logoutHtml, "utf8");
 fs.writeFileSync("soma/lv/radvert.html", radvertHtml, "utf8");
+fs.writeFileSync("soma/lv/error.html", errorHtml, "utf8");
 
 console.log("Updated build-templates.cjs successfully");

@@ -14,6 +14,43 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Internal AI Studio Control Plane endpoint for IDE file operations
+app.all(["/__aistudio_internal_control_plane/fs/read*", "/__aistudio_internal_control_plane/*"], (req, res, next) => {
+  if (!req.originalUrl.includes("fs/read")) {
+    return next();
+  }
+  try {
+    const rawPath = String(req.query.path || req.path.replace(/.*fs\/read\/?/, "") || "");
+    const cleanPath = decodeURIComponent(rawPath).replace(/^\/+/, "");
+    
+    const searchDirs = [
+      process.cwd(),
+      path.join(process.cwd(), "soma"),
+      path.join(process.cwd(), "soma", "lv"),
+      __dirname
+    ];
+
+    if (cleanPath) {
+      for (const dir of searchDirs) {
+        const candidate1 = path.resolve(dir, cleanPath);
+        if (fs.existsSync(candidate1) && fs.statSync(candidate1).isFile()) {
+          return res.status(200).type("text/plain; charset=utf-8").send(fs.readFileSync(candidate1, "utf8"));
+        }
+        const candidate2 = path.resolve(dir, path.basename(cleanPath));
+        if (fs.existsSync(candidate2) && fs.statSync(candidate2).isFile()) {
+          return res.status(200).type("text/plain; charset=utf-8").send(fs.readFileSync(candidate2, "utf8"));
+        }
+      }
+    }
+    return res.status(200).type("text/plain; charset=utf-8").send("");
+  } catch (err: any) {
+    return res.status(200).type("text/plain; charset=utf-8").send("");
+  }
+});
+
+
+
+
 // In-memory simulation state for MikroTik Hotspot session
 let sessionState = {
   isLoggedIn: false,
@@ -50,7 +87,8 @@ function getUptimeString(startTime: number): string {
   return `${seconds}s`;
 }
 
-// 1. Static Assets & File Serving (MUST BE BEFORE REDIRECT HANDLERS so IDE & direct file requests load correctly)
+// 1. Static Assets & File Serving (MUST BE FIRST so IDE, direct file requests, and assets load directly without 302 redirects)
+app.use(express.static(__dirname));
 app.use("/fonts", express.static(path.join(__dirname, "fonts")));
 app.use("/adimg", express.static(path.join(__dirname, "adimg")));
 app.use("/img", express.static(path.join(__dirname, "img")));
@@ -61,11 +99,28 @@ app.use("/2024", express.static(path.join(__dirname, "2024")));
 
 // Serve all static html files directly when requested as .html files
 app.get("*.html", (req, res, next) => {
-  const requestedFile = path.join(__dirname, req.path);
-  if (fs.existsSync(requestedFile)) {
-    return res.sendFile(requestedFile);
+  const cleanPath = req.path.replace(/^\/+/, "");
+  const searchCandidates = [
+    path.resolve(__dirname, cleanPath),
+    path.resolve(__dirname, "soma", cleanPath),
+    path.resolve(__dirname, "soma", "lv", cleanPath)
+  ];
+  for (const f of searchCandidates) {
+    if (fs.existsSync(f) && fs.statSync(f).isFile()) {
+      return res.sendFile(f);
+    }
   }
   next();
+});
+
+// Direct Preview Routes for Hotspot Transition Pages
+app.get("/preview/:page", (req, res) => {
+  const pageName = `${req.params.page.replace(/\.html$/, "")}.html`;
+  const filePath = path.resolve(__dirname, pageName);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    return res.sendFile(filePath);
+  }
+  return res.redirect("/login");
 });
 
 // Root dispatcher
@@ -228,6 +283,9 @@ app.use(express.static(__dirname));
 
 // Fallback route
 app.get("*", (req, res) => {
+  if (req.path.endsWith(".css") || req.path.endsWith(".js")) {
+    return res.status(404).send("File not found");
+  }
   if (sessionState.isLoggedIn) {
     return res.redirect("/status");
   }
