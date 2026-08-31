@@ -3092,7 +3092,7 @@ body:has(#status.active) #login {
 }
 
 /* ==========================================================================
-   FLOATING PARTICLES / ICONS BACKGROUND (ULTRA-SMOOTH GPU HARDWARE ACCELERATED)
+   FLOATING PARTICLES / ICONS BACKGROUND (RADIANT GLASS & GPU ACCELERATED)
    ========================================================================== */
 
 /* إعدادات الحاوية لتبقى ثابتة تماماً في الخلفية معزولة عن التمرير */
@@ -3104,7 +3104,7 @@ body:has(#status.active) #login {
     bottom: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* خلف كل العناصر لعدم إرهاق كرت الشاشة أثناء التمرير */
+    z-index: 1 !important; /* تطفو خلف البطاقات الزجاجية والمحتوى لتشع من خلالها بانسيابية */
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -3139,60 +3139,68 @@ body:has(#status.active) #login {
 }
 
 .floating-icons li svg {
-    width: 24px;
-    height: 24px;
-    fill: #ffffff;
-    filter: none !important;
+    display: block;
+    fill: currentColor;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 
-/* توزيع الأيقونات في أماكن مختلفة وبسرعات وأحجام مختلفة بلون أبيض شفاف وناعم */
-.floating-icons li:nth-child(1)  { left: 6%;  animation-duration: 14s; -webkit-animation-duration: 14s; animation-delay: 0s;   color: rgba(255, 255, 255, 0.22); }
+/* توزيع الأيقونات بأماكن وسرعات متوازنة بلون أبيض شفاف واضح مع إشعاع ناعم */
+.floating-icons li:nth-child(1)  { left: 4%;  animation-duration: 14s; animation-delay: 0s;   color: rgba(255, 255, 255, 0.46); }
 .floating-icons li:nth-child(1) svg { width: 26px; height: 26px; }
 
-.floating-icons li:nth-child(2)  { left: 18%; animation-duration: 18s; -webkit-animation-duration: 18s; animation-delay: 3s;  color: rgba(255, 255, 255, 0.18); }
+.floating-icons li:nth-child(2)  { left: 16%; animation-duration: 18s; animation-delay: 3s;   color: rgba(255, 255, 255, 0.40); }
 .floating-icons li:nth-child(2) svg { width: 22px; height: 22px; }
 
-.floating-icons li:nth-child(3)  { left: 32%; animation-duration: 16s; -webkit-animation-duration: 16s; animation-delay: 1.5s; color: rgba(255, 255, 255, 0.24); }
+.floating-icons li:nth-child(3)  { left: 28%; animation-duration: 15s; animation-delay: 1.5s; color: rgba(255, 255, 255, 0.48); }
 .floating-icons li:nth-child(3) svg { width: 24px; height: 24px; }
 
-.floating-icons li:nth-child(4)  { left: 48%; animation-duration: 20s; -webkit-animation-duration: 20s; animation-delay: 5s;   color: rgba(255, 255, 255, 0.20); }
+.floating-icons li:nth-child(4)  { left: 42%; animation-duration: 20s; animation-delay: 5s;   color: rgba(255, 255, 255, 0.42); }
 .floating-icons li:nth-child(4) svg { width: 24px; height: 24px; }
 
-.floating-icons li:nth-child(5)  { left: 62%; animation-duration: 15s; -webkit-animation-duration: 15s; animation-delay: 2s;   color: rgba(255, 255, 255, 0.22); }
+.floating-icons li:nth-child(5)  { left: 56%; animation-duration: 16s; animation-delay: 2s;   color: rgba(255, 255, 255, 0.46); }
 .floating-icons li:nth-child(5) svg { width: 26px; height: 26px; }
 
-.floating-icons li:nth-child(6)  { left: 76%; animation-duration: 22s; -webkit-animation-duration: 22s; animation-delay: 6s;   color: rgba(255, 255, 255, 0.18); }
+.floating-icons li:nth-child(6)  { left: 70%; animation-duration: 22s; animation-delay: 6.5s; color: rgba(255, 255, 255, 0.40); }
 .floating-icons li:nth-child(6) svg { width: 28px; height: 28px; }
 
-.floating-icons li:nth-child(7)  { left: 88%; animation-duration: 17s; -webkit-animation-duration: 17s; animation-delay: 4s;   color: rgba(255, 255, 255, 0.24); }
-.floating-icons li:nth-child(7) svg { width: 22px; height: 22px; }
+.floating-icons li:nth-child(7)  { left: 84%; animation-duration: 17s; animation-delay: 4s;   color: rgba(255, 255, 255, 0.48); }
+.floating-icons li:nth-child(7) svg { width: 24px; height: 24px; }
 
-.floating-icons li:nth-child(8)  { left: 24%; animation-duration: 19s; -webkit-animation-duration: 19s; animation-delay: 7s;   color: rgba(255, 255, 255, 0.20); }
-.floating-icons li:nth-child(8) svg { width: 24px; height: 24px; }
+.floating-icons li:nth-child(8)  { left: 93%; animation-duration: 19s; animation-delay: 7s;   color: rgba(255, 255, 255, 0.42); }
+.floating-icons li:nth-child(8) svg { width: 22px; height: 22px; }
 
-.floating-icons li:nth-child(9),
-.floating-icons li:nth-child(10),
-.floating-icons li:nth-child(11),
-.floating-icons li:nth-child(12),
-.floating-icons li:nth-child(13),
-.floating-icons li:nth-child(14) {
-    display: none !important;
-}
+.floating-icons li:nth-child(9)  { left: 10%; animation-duration: 16s; animation-delay: 8.5s; color: rgba(255, 255, 255, 0.44); }
+.floating-icons li:nth-child(9) svg { width: 24px; height: 24px; }
 
-/* حركة ثلاثية الأبعاد سلسة ومستقرة بدون قفز أو لاغ عند التمرير */
+.floating-icons li:nth-child(10) { left: 22%; animation-duration: 21s; animation-delay: 10.5s; color: rgba(255, 255, 255, 0.40); }
+.floating-icons li:nth-child(10) svg { width: 22px; height: 22px; }
+
+.floating-icons li:nth-child(11) { left: 36%; animation-duration: 15s; animation-delay: 9s;   color: rgba(255, 255, 255, 0.48); }
+.floating-icons li:nth-child(11) svg { width: 24px; height: 24px; }
+
+.floating-icons li:nth-child(12) { left: 50%; animation-duration: 23s; animation-delay: 11.5s; color: rgba(255, 255, 255, 0.42); }
+.floating-icons li:nth-child(12) svg { width: 26px; height: 26px; }
+
+.floating-icons li:nth-child(13) { left: 64%; animation-duration: 18s; animation-delay: 8s;   color: rgba(255, 255, 255, 0.44); }
+.floating-icons li:nth-child(13) svg { width: 22px; height: 22px; }
+
+.floating-icons li:nth-child(14) { left: 78%; animation-duration: 19s; animation-delay: 12s;  color: rgba(255, 255, 255, 0.40); }
+.floating-icons li:nth-child(14) svg { width: 24px; height: 24px; }
+
+/* حركة صعود هادئة وسلسة بالكامل مع إشعاع زجاجي متوازن */
 @keyframes floatUp {
     0% {
         transform: translate3d(0, 0, 0);
         opacity: 0;
     }
-    10% {
-        opacity: 0.35;
+    12% {
+        opacity: 0.60;
     }
     85% {
-        opacity: 0.30;
+        opacity: 0.55;
     }
     100% {
-        transform: translate3d(0, -1100px, 0);
+        transform: translate3d(0, calc(-100vh - 80px), 0);
         opacity: 0;
     }
 }
@@ -3202,14 +3210,14 @@ body:has(#status.active) #login {
         -webkit-transform: translate3d(0, 0, 0);
         opacity: 0;
     }
-    10% {
-        opacity: 0.35;
+    12% {
+        opacity: 0.60;
     }
     85% {
-        opacity: 0.30;
+        opacity: 0.55;
     }
     100% {
-        -webkit-transform: translate3d(0, -1100px, 0);
+        -webkit-transform: translate3d(0, calc(-100vh - 80px), 0);
         opacity: 0;
     }
 }

@@ -1,5 +1,102 @@
 # توثيق وتفاصيل المشروع - شبكة سوما نت اللاسلكية (MikroTik Hotspot Portal)
 
+## 📌 ملفات التحويل السريع للمايكروتك (Background Redirect Templates)
+
+فيما يلي الأكواد الجاهزة لملفات التحويل الخاصة بالمايكروتك، يمكنك نسخها وإنشاؤها مباشرة أو استخدامها في راوترك:
+
+### 1) كود ملف `rstatus.html` (للتحويل الفوري إلى صفحة الحالة عند الاتصال):
+```html
+$(if http-status == 302)Hotspot redirect$(endif)$(if http-header == "Location")$(link-status)$(endif)<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>...</title>
+<meta http-equiv="refresh" content="0; url=$(link-status)">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<style>html, body { background-color: #18060c !important; margin: 0; padding: 0; overflow: hidden; }</style>
+<script type="text/javascript">
+(function() {
+    var target = '$(link-status)';
+    if (!target || target.includes('$(')) target = 'status.html';
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body style="background-color: #18060c; margin: 0; padding: 0;"></body>
+</html>
+```
+
+---
+
+### 2) كود ملف `rlogin.html` (للتحويل الفوري إلى صفحة تسجيل الدخول):
+```html
+$(if http-status == 302)Hotspot login required$(endif)$(if http-header == "Location")$(link-login)$(endif)<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>...</title>
+<meta http-equiv="refresh" content="0; url=$(link-login)">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<style>html, body { background-color: #18060c !important; margin: 0; padding: 0; overflow: hidden; }</style>
+<script type="text/javascript">
+(function() {
+    var target = '$(link-login)';
+    if (!target || target.includes('$(')) target = 'login.html';
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body style="background-color: #18060c; margin: 0; padding: 0;"></body>
+</html>
+```
+
+---
+
+### 3) كود ملف `index.html` (الموجه التلقائي حسب حالة الاتصال):
+```html
+$(if logged-in == 'yes')$(if http-status == 302)Hotspot redirect$(endif)$(if http-header == "Location")$(link-status)$(endif)<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>...</title>
+<meta http-equiv="refresh" content="0; url=$(link-status)">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<style>html, body { background-color: #18060c !important; margin: 0; padding: 0; overflow: hidden; }</style>
+<script type="text/javascript">
+(function() {
+    var target = '$(link-status)';
+    if (!target || target.includes('$(')) target = 'status.html';
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body style="background-color: #18060c; margin: 0; padding: 0;"></body>
+</html>$(else)$(if http-status == 302)Hotspot login required$(endif)$(if http-header == "Location")$(link-login)$(endif)<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>...</title>
+<meta http-equiv="refresh" content="0; url=$(link-login)">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<style>html, body { background-color: #18060c !important; margin: 0; padding: 0; overflow: hidden; }</style>
+<script type="text/javascript">
+(function() {
+    var target = '$(link-login)';
+    if (!target || target.includes('$(')) target = 'login.html';
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body style="background-color: #18060c; margin: 0; padding: 0;"></body>
+</html>$(endif)
+```
+
+---
+
 هذا الملف يوضح بالتفصيل كافة التغييرات والملفات التي تمت إضافتها، والملفات الأصلية التي تم الإبقاء عليها كما هي من مستودع Git الأصلي (`wwwrwww65-netizen/Microtik`)، مع توضيح الأسباب التقنية والأكواد لكل ملف.
 
 ---

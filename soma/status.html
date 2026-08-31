@@ -930,7 +930,7 @@
 
                         <!-- Session Action Controls with Direct MikroTik Logout & Disconnect Forms -->
                         <div class="status-actions-row" style="display: flex; gap: 10px; width: 100%; margin-top: 14px;">
-                            <form action="$(link-logout)" name="logout" method="post" onSubmit="try { localStorage.removeItem('mikrotik_last_user'); } catch(e) {}" style="flex: 1; margin: 0;">
+                            <form action="$(link-logout)" name="logout" method="post" onSubmit="if(this.action.includes('$(')) this.action='/logout'; try { localStorage.removeItem('mikrotik_last_user'); } catch(e) {}" style="flex: 1; margin: 0;">
                                 <input type="hidden" name="erase-cookie" value="on" />
                                 <button class="btn-danger-glass" type="submit" style="width: 100%;">
                                     <svg viewBox="0 0 24 24" class="action-btn-icon">
@@ -939,7 +939,7 @@
                                     <span>تسجيل الخروج</span>
                                 </button>
                             </form>
-                            <form action="$(link-logout)" name="disconnect" method="post" onSubmit="try { localStorage.setItem('mikrotik_last_user', '$(username)'); } catch(e) {}" style="flex: 1; margin: 0;">
+                            <form action="$(link-logout)" name="disconnect" method="post" onSubmit="if(this.action.includes('$(')) this.action='/logout'; try { localStorage.setItem('mikrotik_last_user', '$(username)'); } catch(e) {}" style="flex: 1; margin: 0;">
                                 <button class="btn-secondary-glass" type="submit" style="width: 100%;">
                                     <svg viewBox="0 0 24 24" class="action-btn-icon">
                                         <path d="M16.01 7L16 3h-2v4h-4V3H8v4h-.01C6.89 7 6 7.89 6 8.98v5.52L9.5 18v3h5v-3l3.5-3.51V9c0-1.1-.9-2-1.99-2z" />

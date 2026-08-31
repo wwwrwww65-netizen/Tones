@@ -1,7 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'fs';
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,15 +17,15 @@ app.use(express.urlencoded({ extended: true }));
 // In-memory simulation state for MikroTik Hotspot session
 let sessionState = {
   isLoggedIn: false,
-  username: 'USER-1234',
-  speed: '256k/700k',
-  updateOption: '_Uon',
+  username: "USER-1234",
+  speed: "256k/700k",
+  updateOption: "_Uon",
   bytesIn: 14680064,
   bytesOut: 58720256,
   remainBytes: 536870912,
   startTime: Date.now(),
-  ip: '192.168.88.25',
-  mac: '64:6E:97:A1:B2:C3',
+  ip: "192.168.88.25",
+  mac: "64:6E:97:A1:B2:C3",
 };
 
 // Periodic simulated traffic increments if logged in
@@ -49,84 +50,105 @@ function getUptimeString(startTime: number): string {
   return `${seconds}s`;
 }
 
-// MikroTik Hotspot /login endpoint
-app.all(['/login', '/login.html'], (req, res) => {
-  const isCallBack = req.query.var === 'callBack';
-  const username = (req.body?.username || req.query.username) as string;
-  const domain = ((req.body?.domain || req.query.domain) as string) || '256k/700k';
+// 1. Static Assets & File Serving (MUST BE BEFORE REDIRECT HANDLERS so IDE & direct file requests load correctly)
+app.use("/fonts", express.static(path.join(__dirname, "fonts")));
+app.use("/adimg", express.static(path.join(__dirname, "adimg")));
+app.use("/img", express.static(path.join(__dirname, "img")));
+app.use("/css", express.static(path.join(__dirname, "css")));
+app.use("/js", express.static(path.join(__dirname, "js")));
+app.use("/config", express.static(path.join(__dirname, "config")));
+app.use("/2024", express.static(path.join(__dirname, "2024")));
 
-  if (req.method === 'POST') {
+// Serve all static html files directly when requested as .html files
+app.get("*.html", (req, res, next) => {
+  const requestedFile = path.join(__dirname, req.path);
+  if (fs.existsSync(requestedFile)) {
+    return res.sendFile(requestedFile);
+  }
+  next();
+});
+
+// Root dispatcher
+app.get(["/", "/index"], (req, res) => {
+  if (sessionState.isLoggedIn) {
+    return res.redirect("/status");
+  }
+  return res.redirect("/login");
+});
+
+// MikroTik Hotspot /login endpoint
+app.all("/login", (req, res) => {
+  const isCallBack = req.query.var === "callBack";
+  const usernameParam = (req.body?.username || req.query.username) as string;
+  const username = usernameParam ? usernameParam.trim() : "";
+  const domain = ((req.body?.domain || req.query.domain) as string) || "256k/700k";
+
+  if (req.method === "POST") {
     if (username) {
       sessionState.isLoggedIn = true;
       sessionState.username = username;
-      sessionState.speed = domain.split('_')[0] || '256k/700k';
-      sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
+      sessionState.speed = domain.split("_")[0] || "256k/700k";
+      sessionState.updateOption = domain.includes("_Uoff") ? "_Uoff" : "_Uon";
       sessionState.startTime = Date.now();
     }
-    return res.redirect('/alogin.html');
+    return res.redirect("/status");
   }
 
   if (isCallBack) {
     if (username) {
-      // User is logging in
       sessionState.isLoggedIn = true;
       sessionState.username = username;
-      sessionState.speed = domain.split('_')[0] || '256k/700k';
-      sessionState.updateOption = domain.includes('_Uoff') ? '_Uoff' : '_Uon';
+      sessionState.speed = domain.split("_")[0] || "256k/700k";
+      sessionState.updateOption = domain.includes("_Uoff") ? "_Uoff" : "_Uon";
       sessionState.startTime = Date.now();
-
       return res.json({
-        logged_in: 'yes',
+        logged_in: "yes",
         username: sessionState.username,
         mac: sessionState.mac,
-        link_login_only: '/login',
+        link_login_only: "/login",
         sspeed: `${sessionState.speed}_`,
         update: sessionState.updateOption,
         ip: sessionState.ip,
         bytes_in: String(sessionState.bytesIn),
         bytes_out: String(sessionState.bytesOut),
         remain_bytes_total: String(sessionState.remainBytes),
-        session_time_left: '4h30m',
+        session_time_left: "4h30m",
         uptime: getUptimeString(sessionState.startTime),
-        session_time_left_secs: '16200',
-        uptime_secs: '300',
-        trial: 'no',
-        login_by: 'username',
-        action: 'onLoggedIn',
+        session_time_left_secs: "16200",
+        uptime_secs: "300",
+        trial: "no",
+        login_by: "username",
+        action: "onLoggedIn",
       });
     }
 
-    // Initial check (before login submitted)
     return res.json({
-      logged_in: sessionState.isLoggedIn ? 'yes' : 'no',
-      link_login_only: '/login',
-      link_logout: '/logout',
-      link_status: '/status',
-      nas_id: 'SomaNet-MikroTik',
+      logged_in: sessionState.isLoggedIn ? "yes" : "no",
+      link_login_only: "/login",
+      link_logout: "/logout",
+      link_status: "/status",
+      nas_id: "SomaNet-MikroTik",
       ip: sessionState.ip,
       mac: sessionState.mac,
-      trial: 'no',
-      username: sessionState.isLoggedIn ? sessionState.username : '',
-      action: 'onLoginStart',
+      trial: "no",
+      username: sessionState.isLoggedIn ? sessionState.username : "",
+      action: "onLoginStart",
     });
   }
 
-  // Regular direct request
   if (sessionState.isLoggedIn) {
-    return res.sendFile(path.join(__dirname, 'status.html'));
+    return res.redirect("/status");
   }
-  res.sendFile(path.join(__dirname, 'login.html'));
+  res.sendFile(path.join(__dirname, "login.html"));
 });
 
 // MikroTik Hotspot /status endpoint
-app.get(['/status', '/status.html'], (req, res) => {
-  const isCallBack = req.query.var === 'callBack';
-
+app.all("/status", (req, res) => {
+  const isCallBack = req.query.var === "callBack";
   if (isCallBack) {
     const rawToken = `m056fd9fdfdsffsdffdfd1697455${sessionState.username}dsfd6571fgfgfgfgdf53sdfdsfgsd14`;
-
     return res.json({
-      logged_in: sessionState.isLoggedIn ? 'yes' : 'no',
+      logged_in: sessionState.isLoggedIn ? "yes" : "no",
       mac: sessionState.mac,
       sspeed: `${sessionState.speed}_`,
       update: sessionState.updateOption,
@@ -134,95 +156,84 @@ app.get(['/status', '/status.html'], (req, res) => {
       bytes_in: String(sessionState.bytesIn),
       bytes_out: String(sessionState.bytesOut),
       remain_bytes_total: String(sessionState.remainBytes),
-      session_time_left: '4h15m',
+      session_time_left: "4h15m",
       uptime: getUptimeString(sessionState.startTime),
       bytesm: rawToken,
-      trial: 'no',
+      trial: "no",
       username: sessionState.username,
-      action: 'onStatusQuery',
+      action: "onStatusQuery",
     });
   }
 
-  // Direct page request
   if (!sessionState.isLoggedIn) {
-    return res.redirect('/login.html');
+    return res.redirect("/login");
   }
-  res.sendFile(path.join(__dirname, 'status.html'));
+  res.sendFile(path.join(__dirname, "status.html"));
 });
 
 // MikroTik Hotspot /redirect and /rlogin endpoints
-app.get(['/redirect', '/redirect.html', '/rlogin', '/rlogin.html'], (req, res) => {
+app.all(["/redirect", "/rlogin", "/rstatus", "/radvert"], (req, res) => {
   if (sessionState.isLoggedIn) {
-    return res.redirect('/status.html');
+    return res.redirect("/status");
   }
-  res.redirect('/login.html');
+  res.redirect("/login");
 });
 
 // MikroTik Hotspot /alogin endpoint
-app.get(['/alogin', '/alogin.html'], (req, res) => {
-  const isCallBack = req.query.var === 'callBack';
+app.all("/alogin", (req, res) => {
+  const isCallBack = req.query.var === "callBack";
   if (isCallBack) {
     return res.json({
-      logged_in: sessionState.isLoggedIn ? 'yes' : 'no',
+      logged_in: sessionState.isLoggedIn ? "yes" : "no",
       username: sessionState.username,
       mac: sessionState.mac,
-      link_login_only: '/login',
+      link_login_only: "/login",
       sspeed: `${sessionState.speed}_`,
       update: sessionState.updateOption,
       ip: sessionState.ip,
       bytes_in: String(sessionState.bytesIn),
       bytes_out: String(sessionState.bytesOut),
       remain_bytes_total: String(sessionState.remainBytes),
-      session_time_left: '4h30m',
+      session_time_left: "4h30m",
       uptime: getUptimeString(sessionState.startTime),
-      session_time_left_secs: '16200',
-      uptime_secs: '300',
-      trial: 'no',
-      login_by: 'username',
-      action: 'onLoggedIn',
+      session_time_left_secs: "16200",
+      uptime_secs: "300",
+      trial: "no",
+      login_by: "username",
+      action: "onLoggedIn",
     });
   }
-  res.sendFile(path.join(__dirname, 'alogin.html'));
+  return res.redirect(sessionState.isLoggedIn ? "/status" : "/login");
 });
 
 // MikroTik Hotspot /logout endpoint
-app.all(['/logout', '/logout.html'], (req, res) => {
+app.all(["/logout", "/$(link-logout)", "/%24(link-logout)", "*/link-logout*"], (req, res) => {
   sessionState.isLoggedIn = false;
-  const isCallBack = req.query.var === 'callBack';
-
+  const isCallBack = req.query.var === "callBack";
   if (isCallBack) {
     return res.json({
-      logged_in: 'no',
-      action: 'onLoggedOut',
+      logged_in: "no",
+      action: "onLoggedOut",
     });
   }
-
-  res.sendFile(path.join(__dirname, 'logout.html'));
-});
-
-// Root and index conditional dispatcher
-app.get(['/', '/index', '/index.html'], (req, res) => {
-  if (sessionState.isLoggedIn) {
-    return res.redirect('/status.html');
+  const savedUser = (req.query?.username || req.body?.username) as string;
+  if (savedUser && savedUser !== "-") {
+    return res.redirect(`/login?username=${encodeURIComponent(savedUser)}`);
   }
-  return res.redirect('/login.html');
+  res.redirect("/login");
 });
 
-// Serve static assets from project root and specific subfolders
-app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
-app.use('/adimg', express.static(path.join(__dirname, 'adimg')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/config', express.static(path.join(__dirname, 'config')));
-app.use('/2024', express.static(path.join(__dirname, '2024')));
+// Serve root static directory
 app.use(express.static(__dirname));
 
-// Fallback route to index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Fallback route
+app.get("*", (req, res) => {
+  if (sessionState.isLoggedIn) {
+    return res.redirect("/status");
+  }
+  return res.redirect("/login");
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`[Hotspot Server] Running on http://0.0.0.0:${PORT}`);
 });

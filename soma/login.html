@@ -147,6 +147,7 @@
             }
         }
 
+        // Native seamless submit to MikroTik (matching standard reliable Hotspot flow)
         return true;
     }
     //-->
@@ -391,39 +392,45 @@
                     <div class="login-card">
                         <form class="login-form" name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin();">
                             <input type="hidden" name="dst" value="$(link-orig)" />
-                            <input type="hidden" name="popup" value="true" />
+                            <input type="hidden" name="popup" value="false" />
                             
-                            $(if error)
-                            <div id="mikrotik-error-box" style="background: rgba(220, 38, 38, 0.22); border: 1px solid rgba(239, 68, 68, 0.5); color: #fecdd3; padding: 12px 16px; border-radius: 14px; margin-bottom: 16px; font-size: 14px; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <div id="mikrotik-error-box" style="display: none; background: rgba(220, 38, 38, 0.22); border: 1px solid rgba(239, 68, 68, 0.5); color: #fecdd3; padding: 12px 16px; border-radius: 14px; margin-bottom: 16px; font-size: 14px; font-weight: 700; text-align: center; align-items: center; justify-content: center; gap: 8px;">
                                 <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #f43f5e; flex-shrink: 0;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                <span id="mikrotik-error-msg">
-                                    <script type="text/javascript">
-                                    (function() {
-                                        var rawErr = "$(error)".toLowerCase();
-                                        var arabicMsg = "$(error)";
-                                        if (rawErr.indexOf("invalid username") !== -1 || rawErr.indexOf("invalid password") !== -1 || rawErr.indexOf("not found") !== -1 || rawErr.indexOf("user&not") !== -1) {
-                                            arabicMsg = "رقم الكرت غير صحيح أو منتهي الصلاحية، يرجى التأكد والمحاولة مجدداً";
-                                        } else if (rawErr.indexOf("traffic limit") !== -1 || rawErr.indexOf("transfer limit") !== -1) {
-                                            arabicMsg = "لقد انتهى رصيد هذا الكرت، يرجى التعبئة أو استخدام كرت جديد";
-                                        } else if (rawErr.indexOf("uptime limit") !== -1 || rawErr.indexOf("no more online time") !== -1) {
-                                            arabicMsg = "عذراً، لقد انتهى الوقت المتاح لهذا الكرت";
-                                        } else if (rawErr.indexOf("session limit") !== -1 || rawErr.indexOf("no more sessions") !== -1 || rawErr.indexOf("simultaneous") !== -1) {
-                                            arabicMsg = "هذا الكرت متصل حالياً في جهاز آخر";
-                                        } else if (rawErr.indexOf("not allowed to log in from this mac") !== -1 || rawErr.indexOf("invalid calling-station-id") !== -1 || rawErr.indexOf("invalid-mac") !== -1) {
-                                            arabicMsg = "هذا الكرت مقترن بجهاز آخر ولا يمكن استخدامه هنا";
-                                        } else if (rawErr.indexOf("radius") !== -1 || rawErr.indexOf("timeout") !== -1 || rawErr.indexOf("server&is&not&responding") !== -1) {
-                                            arabicMsg = "خادم المصادقة لا يستجيب، يرجى المحاولة بعد قليل";
-                                        } else if (rawErr.indexOf("already authorizing") !== -1) {
-                                            arabicMsg = "جاري تسجيل الدخول، يرجى الانتظار ثوانٍ معدودة";
-                                        } else if (rawErr.indexOf("access denied") !== -1) {
-                                            arabicMsg = "بطاقة سهرة لا يمكن استخدامها في هذا الوقت";
-                                        }
-                                        document.write(arabicMsg);
-                                    })();
-                                    </script>
-                                </span>
+                                <span id="mikrotik-error-msg"></span>
                             </div>
-                            $(endif)
+                            <script type="text/javascript">
+                            (function() {
+                                var rawErr = "$(error)";
+                                if (!rawErr || rawErr.trim() === "" || rawErr.indexOf("$(") !== -1 || rawErr === "none") {
+                                    return;
+                                }
+                                var errLower = rawErr.toLowerCase();
+                                var arabicMsg = rawErr;
+                                if (errLower.indexOf("invalid username") !== -1 || errLower.indexOf("invalid password") !== -1 || errLower.indexOf("not found") !== -1 || errLower.indexOf("user&not") !== -1) {
+                                    arabicMsg = "رقم الكرت غير صحيح أو منتهي الصلاحية، يرجى التأكد والمحاولة مجدداً";
+                                } else if (errLower.indexOf("traffic limit") !== -1 || errLower.indexOf("transfer limit") !== -1) {
+                                    arabicMsg = "لقد انتهى رصيد هذا الكرت، يرجى التعبئة أو استخدام كرت جديد";
+                                } else if (errLower.indexOf("uptime limit") !== -1 || errLower.indexOf("no more online time") !== -1) {
+                                    arabicMsg = "عذراً، لقد انتهى الوقت المتاح لهذا الكرت";
+                                } else if (errLower.indexOf("session limit") !== -1 || errLower.indexOf("no more sessions") !== -1 || errLower.indexOf("simultaneous") !== -1) {
+                                    arabicMsg = "هذا الكرت متصل حالياً في جهاز آخر";
+                                } else if (errLower.indexOf("not allowed to log in from this mac") !== -1 || errLower.indexOf("invalid calling-station-id") !== -1 || errLower.indexOf("invalid-mac") !== -1) {
+                                    arabicMsg = "هذا الكرت مقترن بجهاز آخر ولا يمكن استخدامه هنا";
+                                } else if (errLower.indexOf("radius") !== -1 || errLower.indexOf("timeout") !== -1 || errLower.indexOf("server&is&not&responding") !== -1) {
+                                    arabicMsg = "خادم المصادقة لا يستجيب، يرجى المحاولة بعد قليل";
+                                } else if (errLower.indexOf("already authorizing") !== -1) {
+                                    arabicMsg = "جاري تسجيل الدخول، يرجى الانتظار ثوانٍ معدودة";
+                                } else if (errLower.indexOf("access denied") !== -1) {
+                                    arabicMsg = "بطاقة سهرة لا يمكن استخدامها في هذا الوقت";
+                                }
+                                var box = document.getElementById("mikrotik-error-box");
+                                var msg = document.getElementById("mikrotik-error-msg");
+                                if (box && msg) {
+                                    msg.textContent = arabicMsg;
+                                    box.style.display = "flex";
+                                }
+                            })();
+                            </script>
 
                             <!-- Speed Selector Group (Modern Button Trigger) -->
                             <div class="speed-selector-group" data-speed-button style="margin-bottom: 14px;">
