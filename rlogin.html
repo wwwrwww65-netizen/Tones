@@ -1,0 +1,19 @@
+$(if http-status == 302)Hotspot login required$(endif)$(if http-header == "Location")$(link-login)$(endif)<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<title>...</title>
+<meta http-equiv="refresh" content="0; url=$(link-login)">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<style>html, body { background-color: #18060c !important; margin: 0; padding: 0; overflow: hidden; }</style>
+<script type="text/javascript">
+(function() {
+    var target = '$(link-login)';
+    if (!target || target.includes('$(')) target = 'login.html';
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body style="background-color: #18060c; margin: 0; padding: 0;"></body>
+</html>

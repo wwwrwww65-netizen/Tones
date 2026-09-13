@@ -1281,17 +1281,29 @@
                 if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); startAutoplay(); };
                 if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); startAutoplay(); };
 
-                // Handle image error fallback: if an image doesn't exist (e.g. 404), remove its slide
+                // Handle image error and missing image fallback
                 const allImgs = track.querySelectorAll('.carousel-slide img');
                 allImgs.forEach(img => {
-                    img.addEventListener('error', function () {
-                        const slide = this.closest('.carousel-slide');
-                        if (slide) {
+                    function handleImgError() {
+                        const slide = img.closest('.carousel-slide');
+                        if (slide && !slide.dataset.broken) {
                             slide.dataset.broken = 'true';
                             slide.remove();
                             refreshCarousel();
                         }
+                    }
+
+                    img.addEventListener('error', handleImgError);
+                    img.addEventListener('load', function() {
+                        if (this.naturalWidth === 0) {
+                            handleImgError();
+                        }
                     });
+
+                    // Check if already completed and broken at initialization
+                    if (img.complete && img.naturalWidth === 0) {
+                        handleImgError();
+                    }
                 });
 
                 // Touch Swipe Gestures for Mobile
