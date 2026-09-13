@@ -1418,6 +1418,8 @@
                 refreshCarousel();
             }
 
+            window.initBannerCarousel = initBannerCarousel;
+
             if (document.readyState !== 'loading') {
                 initBannerCarousel();
             } else {
@@ -1470,27 +1472,7 @@
 
                 init: function () {
                     var self = this;
-                    // Prevent background scrolling on touch gestures outside scrollable modal containers
-                    document.addEventListener('touchmove', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
-                    // Prevent wheel scroll bleed-through to underlying background
-                    document.addEventListener('wheel', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
-                    // Auto-sync observer to maintain accurate state
+                    // Auto-sync observer to maintain accurate lock state
                     try {
                         var observer = new MutationObserver(function () {
                             var anyOpen = self.isAnyModalOpen();

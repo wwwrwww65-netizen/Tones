@@ -1527,6 +1527,8 @@
                 refreshCarousel();
             }
 
+            window.initBannerCarousel = initBannerCarousel;
+
             if (document.readyState !== 'loading') {
                 initBannerCarousel();
             } else {
@@ -1579,27 +1581,7 @@
 
                 init: function () {
                     var self = this;
-                    // Prevent background scrolling on touch gestures outside scrollable modal containers
-                    document.addEventListener('touchmove', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
-                    // Prevent wheel scroll bleed-through to underlying background
-                    document.addEventListener('wheel', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
-                    // Auto-sync observer to maintain accurate state
+                    // Auto-sync observer to maintain accurate lock state
                     try {
                         var observer = new MutationObserver(function () {
                             var anyOpen = self.isAnyModalOpen();
@@ -2687,16 +2669,20 @@
         if (errToastEl) {
             errToastEl.innerText = arabicMsg;
         }
-        var errorContainer = document.querySelector(".error-container");
-        if (errorContainer) {
-            errorContainer.classList.add("active");
-            setTimeout(function() {
-                errorContainer.classList.add("zoom");
-            }, 60);
-            setTimeout(function() {
-                errorContainer.classList.remove("active");
-                errorContainer.classList.remove("zoom");
-            }, 6500);
+        if (typeof showErrorPopup === "function") {
+            showErrorPopup(4000);
+        } else {
+            var errorContainer = document.querySelector(".error-container");
+            if (errorContainer) {
+                errorContainer.classList.add("active");
+                setTimeout(function() {
+                    errorContainer.classList.add("zoom");
+                }, 60);
+                setTimeout(function() {
+                    errorContainer.classList.remove("active");
+                    errorContainer.classList.remove("zoom");
+                }, 4000);
+            }
         }
 
         // Auto focus input field so user can edit their card immediately

@@ -2267,8 +2267,7 @@ html.modal-scroll-locked,
 body.modal-scroll-locked {
   overflow: hidden !important;
   height: 100% !important;
-  touch-action: none;
-  -webkit-overflow-scrolling: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .app {
@@ -2278,28 +2277,32 @@ body.modal-scroll-locked {
   z-index: 300; /* أعلى دائماً من الشريط السفلي */
   width: 100vw;
   height: 100vh;
-  background: rgba(15, 23, 42, 0.65); /* غطاء شفاف يظهر محتوى الصفحة الأصلي بوضوح مع التغبيش العصري */
-  backdrop-filter: blur(6px); /* تأثير تمويه وتغبيش إضافي على كامل الشاشة */
-  -webkit-backdrop-filter: blur(6px);
-  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.70); /* غطاء شفاف يظهر محتوى الصفحة الأصلي بوضوح مع التغبيش العصري */
+  backdrop-filter: blur(8px); /* تأثير تمويه وتغبيش إضافي على كامل الشاشة */
+  -webkit-backdrop-filter: blur(8px);
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
   overscroll-behavior: contain !important;
-  touch-action: pan-y;
-  padding: 14px 14px 85px 14px; /* مساحة أمان مريحة تمنع أي تداخل مع الشريط السفلي */
+  touch-action: pan-y !important;
+  padding: 16px 12px 95px 12px; /* مساحة أمان مريحة تمنع أي تداخل مع الشريط السفلي */
+  box-sizing: border-box;
 }
 
 .app.active {
   display: flex !important;
-  align-items: center !important; /* تظهر في منتصف الصفحة عمودياً */
-  justify-content: center !important; /* تظهر في منتصف الصفحة أفقياً */
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important; /* يسمح بالتمرير الكامل بدون حجب أي جزء علوي أو سفلي */
   animation: fadeInBackdrop 0.25s ease forwards;
   overscroll-behavior: contain !important;
+  min-height: 100%;
 }
 
 .loyalty-modal.active,
 .nt-modal-overlay,
 .nt-card-overlay {
   overscroll-behavior: contain !important;
-  touch-action: pan-y;
+  touch-action: pan-y !important;
 }
 
 @keyframes fadeInBackdrop {
@@ -2319,7 +2322,7 @@ body.modal-scroll-locked {
 .modal-sheet-card {
   width: 100%;
   max-width: 450px;
-  margin: auto;
+  margin: auto 0; /* تتوسط عمودياً إذا كانت قصيرة، وتتمرر بسلاسة إذا كانت طويلة */
   background: var(--modal-card-gradient, linear-gradient(165deg, #1e3a8a 0%, #172554 50%, #0f172a 100%));
   border: 1.5px solid var(--modal-border, rgba(255, 127, 80, 0.5));
   border-radius: var(--radius-xl);
@@ -2327,8 +2330,26 @@ body.modal-scroll-locked {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px var(--modal-shadow-glow, rgba(255, 127, 80, 0.25));
   position: relative;
   animation: zoomModalCenter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  max-height: 84vh;
-  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y !important;
+}
+
+.modal-sheet-card::-webkit-scrollbar {
+  width: 5px;
+  display: block;
+}
+
+.modal-sheet-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.modal-sheet-card::-webkit-scrollbar-thumb {
+  background: var(--accent-coral, #FF7F50);
+  border-radius: 4px;
 }
 
 .modal-sheet-card.compact-speed-card {
@@ -2571,11 +2592,12 @@ tbody td:last-child {
   position: static !important;
   width: 100% !important;
   height: auto !important;
-  min-height: 100% !important;
+  min-height: auto !important;
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  padding: 0 0 95px 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
   z-index: 10 !important;
   overflow-y: visible !important;
   touch-action: pan-y !important;
@@ -2612,7 +2634,7 @@ tbody td:last-child {
   -webkit-backdrop-filter: blur(20px) !important;
   box-shadow: var(--shadow-lg), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
   animation: none !important;
-  margin: 0 0 16px 0 !important;
+  margin: 0 !important;
 }
 
 /* When #status (Status dashboard screen) is active, ensure #login is hidden */
@@ -3180,6 +3202,13 @@ body:has(#status.active) #login {
   left: 0;
   height: 3px;
   background: var(--coral-gradient);
+  width: 0%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.error-container.active .error::after {
+  opacity: 1;
   animation: toastTimer 4s linear forwards;
 }
 

@@ -257,61 +257,88 @@
 
 
                     <!-- Main Welcome Title (يتغير تلقائياً حسب اسم الشبكة أو النص الترحيبي في config.js) -->
-                    <h1 id="main-welcome-title" data-welcome-title data-network-name>مرحبا بكم في شبكة سوما نت</h1>
+                    <h1 id="main-welcome-title" data-welcome-title data-network-name>مرحبا بكم في شبكة برق نت</h1>
 
-                    <!-- 2026 Swipeable Touch Carousel (With 3D Legacy compatibility) -->
+                    <!-- 2026 Swipeable Touch Carousel - FULLY AUTO-DETECT (just add/remove files in adimg/) -->
                     <div class="ads-carousel-wrapper">
                         <div class="carousel-container" id="adCarousel">
                             <div class="carousel-track" id="carouselTrack">
-                                <div class="carousel-slide">
-                                    <img class="im1" src="./adimg/1.jpg" alt="إعلان 1" fetchpriority="high"
-                                        decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im2" src="./adimg/2.jpg" alt="إعلان 2" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im3" src="./adimg/3.jpg" alt="إعلان 3" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im4" src="./adimg/4.jpg" alt="إعلان 4" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im5" src="./adimg/5.jpg" alt="إعلان 5" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im6" src="./adimg/6.jpg" alt="إعلان 6" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img class="im7" src="./adimg/7.jpg" alt="إعلان 7" loading="lazy" decoding="async">
-                                </div>
+                                <!-- Slides auto-detected from adimg/ folder -->
                             </div>
                             <button class="carousel-nav-btn prev" id="carouselPrev" aria-label="السابق">❮</button>
                             <button class="carousel-nav-btn next" id="carouselNext" aria-label="التالي">❯</button>
                         </div>
-                        <div class="carousel-dots" id="carouselDots">
-                            <span class="carousel-dot active"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                            <span class="carousel-dot"></span>
-                        </div>
+                        <div class="carousel-dots" id="carouselDots"></div>
 
                         <!-- Preserving legacy .ads .box for any legacy script checks -->
                         <div class="ads" style="display: none;">
-                            <div class="box">
-                                <span style="--i:1"><img class="im1" src="./adimg/1.jpg"></span>
-                                <span style="--i:2"><img class="im2" src="./adimg/2.jpg"></span>
-                                <span style="--i:3"><img class="im3" src="./adimg/3.jpg"></span>
-                                <span style="--i:4"><img class="im4" src="./adimg/4.jpg"></span>
-                                <span style="--i:5"><img class="im5" src="./adimg/5.jpg"></span>
-                                <span style="--i:6"><img class="im6" src="./adimg/6.jpg"></span>
-                                <span style="--i:7"><img class="im7" src="./adimg/7.jpg"></span>
-                            </div>
+                            <div class="box" id="legacyAdsBox"></div>
                         </div>
                     </div>
+                    <script>
+                    (function() {
+                        window.autoDetectAdImages = function() {
+                            var MAX_PROBE = 20;
+                            var track = document.getElementById('carouselTrack');
+                            var legacyBox = document.getElementById('legacyAdsBox');
+                            if (!track) return;
+
+                            var loaded = [];
+                            var done = 0;
+
+                            function onAllDone() {
+                                loaded.sort(function(a, b) { return a.index - b.index; });
+                                track.innerHTML = '';
+                                if (legacyBox) legacyBox.innerHTML = '';
+
+                                loaded.forEach(function(item, i) {
+                                    var slide = document.createElement('div');
+                                    slide.className = 'carousel-slide';
+                                    var img = document.createElement('img');
+                                    img.src = item.src;
+                                    img.alt = 'إعلان ' + (i + 1);
+                                    img.loading = i === 0 ? 'eager' : 'lazy';
+                                    img.decoding = 'async';
+                                    slide.appendChild(img);
+                                    track.appendChild(slide);
+
+                                    if (legacyBox) {
+                                        var span = document.createElement('span');
+                                        span.style.setProperty('--i', i + 1);
+                                        var legImg = document.createElement('img');
+                                        legImg.src = item.src;
+                                        span.appendChild(legImg);
+                                        legacyBox.appendChild(span);
+                                    }
+                                });
+
+                                if (typeof window.initBannerCarousel === 'function') {
+                                    window.initBannerCarousel();
+                                }
+                            }
+
+                            for (var n = 1; n <= MAX_PROBE; n++) {
+                                (function(idx) {
+                                    var src = 'adimg/' + idx + '.jpg?v=' + new Date().getTime();
+                                    var probe = new Image();
+                                    probe.onload = function() {
+                                        if (probe.naturalWidth > 10 || probe.width > 10) {
+                                            loaded.push({ index: idx, src: src });
+                                        }
+                                        done++;
+                                        if (done === MAX_PROBE) onAllDone();
+                                    };
+                                    probe.onerror = function() {
+                                        done++;
+                                        if (done === MAX_PROBE) onAllDone();
+                                    };
+                                    probe.src = src;
+                                })(n);
+                            }
+                        };
+                        window.autoDetectAdImages();
+                    })();
+                    </script>
 
                     <!-- Glassmorphic Login Card -->
                     <div class="login-card">
@@ -1120,6 +1147,14 @@
 
                 if (!track || !carouselContainer) return;
 
+                if (carouselContainer.dataset.initialized === 'true') {
+                    if (typeof carouselContainer.refreshCarousel === 'function') {
+                        carouselContainer.refreshCarousel();
+                    }
+                    return;
+                }
+                carouselContainer.dataset.initialized = 'true';
+
                 let autoplayInterval = null;
                 let isTransitioning = false;
                 let currentIndex = 1;
@@ -1328,10 +1363,13 @@
                     startAutoplay();
                 }, { passive: true });
 
+                carouselContainer.refreshCarousel = refreshCarousel;
+
                 // Initial run
                 refreshCarousel();
             }
 
+            window.initBannerCarousel = initBannerCarousel;
             initBannerCarousel();
 
             // 2. UNIVERSAL MODAL CONTROLLER & POPUP SCROLL LOCK MANAGER
@@ -1379,26 +1417,6 @@
 
                 init: function () {
                     var self = this;
-                    // Prevent background scrolling on touch gestures outside scrollable modal containers
-                    document.addEventListener('touchmove', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
-                    // Prevent wheel scroll bleed-through to underlying background
-                    document.addEventListener('wheel', function (e) {
-                        if (document.body.classList.contains('modal-scroll-locked')) {
-                            var scrollable = e.target.closest('.modal-sheet-card, .price-div, .sell-point-div, .loan-body');
-                            if (!scrollable) {
-                                e.preventDefault();
-                            }
-                        }
-                    }, { passive: false });
-
                     // Auto-sync observer to maintain accurate state
                     try {
                         var observer = new MutationObserver(function () {
